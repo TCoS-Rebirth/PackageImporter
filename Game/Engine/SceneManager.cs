@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class SceneManager : Info
     {
         
@@ -35,16 +45,16 @@ namespace Engine
         public bool bCinematicView;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SceneManager")]
-        public string PlayerScriptTag = string.Empty;
+        public NameProperty PlayerScriptTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SceneManager")]
-        public string NextSceneTag = string.Empty;
+        public NameProperty NextSceneTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SceneManager")]
-        public string EventStart = string.Empty;
+        public NameProperty EventStart;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SceneManager")]
-        public string EventEnd = string.Empty;
+        public NameProperty EventEnd;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SceneManager")]
         public bool bHideHUD;

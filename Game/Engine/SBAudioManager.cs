@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class SBAudioManager : SBPackageResource
+    
+    
+    public class SBAudioManager : UObject
     {
         
         public const float SBMIN_ALLOWED_VOLUME = 0.001F;
@@ -153,7 +162,7 @@ namespace Engine
         public struct SBExemptFromFade
         {
             
-            public string ActorTagName;
+            public NameProperty ActorTagName;
             
             public bool TimerActive;
             
@@ -215,7 +224,7 @@ namespace Engine
             
             public int Handle;
             
-            public string TrackOwnerTag;
+            public NameProperty TrackOwnerTag;
             
             public int Id;
             

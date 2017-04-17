@@ -9,13 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class SBAudioPlayer : SBAudio_Base
     {
         
@@ -151,7 +160,7 @@ namespace SBGamePlay
         public struct SBExcludedAudio
         {
             
-            public string ActorName;
+            public NameProperty ActorName;
             
             public byte AudioType;
             

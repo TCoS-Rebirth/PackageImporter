@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class DS_Quest_GameInfo : Deadspell_GameInfo
     {
         
@@ -22,7 +32,7 @@ namespace SBGame
         public List<QuestEvent> QuestEvents = new List<QuestEvent>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="QuestEvents")]
-        public string QuestStartEvent = string.Empty;
+        public NameProperty QuestStartEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="QuestEvents")]
         public string StartPortalNavigationTag = string.Empty;
@@ -58,7 +68,7 @@ namespace SBGame
         public struct QuestEvent
         {
             
-            public string Event;
+            public NameProperty Event;
             
             public float Duration;
             

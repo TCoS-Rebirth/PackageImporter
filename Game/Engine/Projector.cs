@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class Projector : Actor
     {
         
@@ -73,7 +84,7 @@ namespace Engine
         public bool bProjectOnParallelBSP;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Projector")]
-        public string ProjectTag = string.Empty;
+        public NameProperty ProjectTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Projector")]
         public bool bDynamicAttach;

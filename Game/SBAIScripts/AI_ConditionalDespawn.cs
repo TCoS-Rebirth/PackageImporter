@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBAIScripts
 {
-
-
+    
+    
     public class AI_ConditionalDespawn : AIRegistered
     {
         
@@ -33,7 +42,7 @@ namespace SBAIScripts
         public bool TriggerAble;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string DespawnTag = string.Empty;
+        public NameProperty DespawnTag;
         
         public AI_ConditionalDespawn()
         {

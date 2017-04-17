@@ -8,20 +8,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class LadderVolume : PhysicsVolume
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="LadderVolume")]
-        public string ClimbingAnimation = string.Empty;
+        public NameProperty ClimbingAnimation;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="LadderVolume")]
-        public string TopAnimation = string.Empty;
+        public NameProperty TopAnimation;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="LadderVolume")]
         public Rotator WallDir;

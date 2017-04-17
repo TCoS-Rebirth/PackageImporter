@@ -8,16 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
 using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class Game_InstanceInfo : SBPackageResource
+    
+    
+    public class Game_InstanceInfo : UObject
     {
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
@@ -50,7 +58,7 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]
-        public string mEffectsTag = string.Empty;
+        public NameProperty mEffectsTag;
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

@@ -8,14 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class Sound : SBPackageResource
+    
+    
+    public class Sound : UObject
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Sound")]
@@ -26,7 +36,7 @@ namespace Engine
         public byte[] Data = new byte[0];
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string FileType = string.Empty;
+        public NameProperty FileType;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public string fileName = string.Empty;

@@ -8,17 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class AnimNotify_FSkill : AnimNotify
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_FSkill")]
-        public string KeyFrameName = string.Empty;
+        public NameProperty KeyFrameName;
         
         public AnimNotify_FSkill()
         {

@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class PlayInfo : SBPackageResource
+    
+    
+    public class PlayInfo : UObject
     {
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
@@ -146,7 +155,7 @@ return B;
 }
 final function Dump(optional string Group) {
 local int i;
-Log("** Dumping settings array for PlayInfo UObject '"
+Log("** Dumping settings array for PlayInfo object '"
 $ string(Name)
 $ "' **");
 Log("** Classes:" @ string(InfoClasses.Length));                            

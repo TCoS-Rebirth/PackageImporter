@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class Loot_Transaction : SBPackageResource
+    
+    
+    public class Loot_Transaction : UObject
     {
         
         public const float MINIMUM_TIMER_VALUE = 0.5F;

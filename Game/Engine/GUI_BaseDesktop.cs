@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class GUI_BaseDesktop : Interaction
     {
         
@@ -473,7 +484,7 @@ event SaveOpenWindows();
 event HideAllWindows();
 event OnLogin();
 event PreLogin();
-event UpdateStdWindow(int windowType,optional int intParam,optional UObject objParam,optional string stringParam,optional int intParam2);
+event UpdateStdWindow(int windowType,optional int intParam,optional Object objParam,optional string stringParam,optional int intParam2);
 event int ShowStdWindow(int wndType,int flags);
 function ShowWindow(int windowHandle,int flags);
 function bool IsStdWindowVisible(int windowID);

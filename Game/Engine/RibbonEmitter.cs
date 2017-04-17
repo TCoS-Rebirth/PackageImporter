@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class RibbonEmitter : ParticleEmitter
     {
         
@@ -64,10 +74,10 @@ namespace Engine
         public Vector EndBoneOffset;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="RibbonBones")]
-        public string BoneNameStart = string.Empty;
+        public NameProperty BoneNameStart;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="RibbonBones")]
-        public string BoneNameEnd = string.Empty;
+        public NameProperty BoneNameEnd;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Ribbon")]
         public List<RibbonPoint> RibbonPoints = new List<RibbonPoint>();

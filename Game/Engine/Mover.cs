@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class Mover : Actor
     {
         
@@ -103,10 +113,10 @@ namespace Engine
         public bool bIsLeader;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Mover")]
-        public string PlayerBumpEvent = string.Empty;
+        public NameProperty PlayerBumpEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Mover")]
-        public string BumpEvent = string.Empty;
+        public NameProperty BumpEvent;
         
         public Actor SavedTrigger;
         
@@ -120,7 +130,7 @@ namespace Engine
         public Mover Follower;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="ReturnGroup")]
-        public string ReturnGroup = string.Empty;
+        public NameProperty ReturnGroup;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Mover")]
         public float DelayTime;
@@ -150,19 +160,19 @@ namespace Engine
         public Sound LoopSound;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="MoverEvents")]
-        public string OpeningEvent = string.Empty;
+        public NameProperty OpeningEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="MoverEvents")]
-        public string OpenedEvent = string.Empty;
+        public NameProperty OpenedEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="MoverEvents")]
-        public string ClosingEvent = string.Empty;
+        public NameProperty ClosingEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="MoverEvents")]
-        public string ClosedEvent = string.Empty;
+        public NameProperty ClosedEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="MoverEvents")]
-        public string LoopEvent = string.Empty;
+        public NameProperty LoopEvent;
         
         [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=24)]
         public Vector[] KeyPos = new Vector[0];
@@ -216,13 +226,13 @@ namespace Engine
         public List<AntiPortalActor> AntiPortals = new List<AntiPortalActor>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Mover")]
-        public string AntiPortalTag = string.Empty;
+        public NameProperty AntiPortalTag;
         
         public bool bResetting;
         
         public bool BACKUP_bHidden;
         
-        public string Backup_InitialState = string.Empty;
+        public NameProperty Backup_InitialState;
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

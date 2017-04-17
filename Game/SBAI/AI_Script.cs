@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBAI
 {
-
-
+    
+    
     public class AI_Script : Annotation_Script
     {
         
@@ -460,7 +469,7 @@ if (aEmote > 0) {
 aPawn.Emotes.sv_PlayContentEmote(aEmote);                                 
 }
 }
-function LocalizedChat(Game_AIController aGame_AIController,LocalizedString aText,optional UObject aTopic,optional UObject aTarget) {
+function LocalizedChat(Game_AIController aGame_AIController,LocalizedString aText,optional Object aTopic,optional Object aTarget) {
 local Game_NPCPawn npcPawn;
 local Game_Pawn pawnTarget;
 local int topicId;

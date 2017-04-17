@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class BaseGUIController : Interaction
     {
         
@@ -33,7 +44,7 @@ namespace Engine
     }
 }
 /*
-function HandleEvent(int eventID,Object Source,optional UObject context);
+function HandleEvent(int eventID,Object Source,optional Object context);
 event SetRequiredGameResolution(string GameRes);
 event bool NeedsMenuResolution();
 event InitializeController();
@@ -60,7 +71,7 @@ simulated event CloseWindow(int windowID,optional bool bCanceled);
 simulated event InternalFocusChanged(int windowID);
 simulated event FocusWindow(int windowID);
 simulated event EnableWindow(int windowID,bool newState);
-simulated event SendWindowMessage(Object aSender,int windowID,optional int intParam,optional UObject objParam,optional string stringParam);
-simulated event UpdateWindow(int windowID,optional int intParam,optional UObject objParam,optional string stringParam);
-simulated event int OpenWindow(string windowName,optional int intParam,optional UObject objParam,optional string stringParam);
+simulated event SendWindowMessage(Object aSender,int windowID,optional int intParam,optional Object objParam,optional string stringParam);
+simulated event UpdateWindow(int windowID,optional int intParam,optional Object objParam,optional string stringParam);
+simulated event int OpenWindow(string windowName,optional int intParam,optional Object objParam,optional string stringParam);
 */

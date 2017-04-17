@@ -8,17 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class AnimNotify_Trigger : AnimNotify_Scripted
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Trigger")]
-        public string EventName = string.Empty;
+        public NameProperty EventName;
         
         public AnimNotify_Trigger()
         {

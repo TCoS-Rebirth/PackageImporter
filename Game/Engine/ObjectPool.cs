@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class ObjectPool : SBPackageResource
+    
+    
+    public class ObjectPool : UObject
     {
         
         public List<UObject> Objects = new List<UObject>();
@@ -36,8 +45,8 @@ simulated function FreeObject(Object Obj) {
 Objects.Length = Objects.Length + 1;                                        
 Objects[Objects.Length - 1] = Obj;                                          
 }
-simulated function UObject AllocateObject(class<Object> ObjectClass) {
-local UObject Result;
+simulated function Object AllocateObject(class<Object> ObjectClass) {
+local Object Result;
 local int ObjectIndex;
 ObjectIndex = 0;                                                            
 while (ObjectIndex < Objects.Length) {                                      

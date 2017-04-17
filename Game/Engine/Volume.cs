@@ -8,19 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class Volume : Brush
     {
         
         public Actor AssociatedActor;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Volume")]
-        public string AssociatedActorTag = string.Empty;
+        public NameProperty AssociatedActorTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Volume")]
         public int LocationPriority;

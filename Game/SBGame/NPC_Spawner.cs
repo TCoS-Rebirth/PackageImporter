@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class NPC_Spawner : NPC_Habitat
     {
         
@@ -38,11 +47,11 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Policy")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string EventOnWiped = string.Empty;
+        public NameProperty EventOnWiped;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Policy")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string EventOnSpawn = string.Empty;
+        public NameProperty EventOnSpawn;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
         public List<NPC_AI> Scripts = new List<NPC_AI>();

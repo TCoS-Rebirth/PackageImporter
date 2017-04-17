@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class UObject
+    
+    
+    public class UObject: SBPackageResource
     {
         
         public const float Pi = 3.141593F;
@@ -92,19 +101,19 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public int ObjectFlags;
+
+        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Object")]
+        //[TCosReborn.Framework.Attributes.FieldConstAttribute()]
+        //protected NameProperty name;
+
+        //[TCosReborn.Framework.Attributes.FieldConstAttribute()]
+        //[TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Object")]
+        //public SerializableTypeProxy Class;
         
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Object")]
-        [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string Name = string.Empty;
-        
-        [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Object")]
-        public SerializableTypeProxy Class;
-        
-        public UObject()
+        public UObject ()
         {
         }
-        
+       
     }
 
     public struct DatabaseRow
@@ -216,7 +225,7 @@ namespace Engine
     public struct Scale
     {
 
-        public Vector Scaling;
+        public Vector scale;
 
         public float SheerRate;
 
@@ -303,6 +312,23 @@ namespace Engine
         public int C;
 
         public int D;
+    }
+
+    public class NameProperty
+    {
+        public readonly string Value;
+        public NameProperty(string value)
+        {
+            Value = value;
+        }
+        public static implicit operator string(NameProperty value)
+        {
+            return value.ToString();
+        }
+        public static implicit operator NameProperty(string value)
+        {
+            return new NameProperty(value);
+        }
     }
 
     public enum EDetailMode
@@ -442,7 +468,7 @@ outCurrent = aTarget + (outCurrent - aTarget) * 0.01000000 ** (aDeltaTime / aTim
 final native function UCASSERT(bool aExpression,string aDescription);
 final native function BREAKPOINT();
 final native function GetReferencers(Object aTarget,out array<Object> outReferencers);
-final native(197) iterator function AllObjects(class<Object> aBaseClass,out UObject outObj);
+final native(197) iterator function AllObjects(class<Object> aBaseClass,out Object outObj);
 event EndState();
 event BeginState();
 final native function bool PlatformIs64Bit();
@@ -461,7 +487,7 @@ final native(536) function SaveConfig();
 native function bool IsEditor();
 native function bool IsClient();
 native function bool IsServer();
-native function UObject Clone(optional bool aCloneSubObjects);
+native function Object Clone(optional bool aCloneSubObjects);
 native function int GetAddress(optional out int outTopPart,optional out int outLowPart);
 native function SetNameProperty(int aIndex,name aValue);
 native function name GetNameProperty(int aIndex);
@@ -470,7 +496,7 @@ native function Rotator GetRotatorProperty(int aIndex);
 native function SetVectorProperty(int aIndex,Vector aValue);
 native function Vector GetVectorProperty(int aIndex);
 native function SetObjectProperty(int aIndex,Object aValue);
-native function UObject GetObjectProperty(int aIndex);
+native function Object GetObjectProperty(int aIndex);
 native function SetStringProperty(int aIndex,string aValue);
 native function string GetStringProperty(int aIndex);
 native function SetByteProperty(int aIndex,byte aValue);
@@ -488,8 +514,8 @@ return GetPropertyType(aIndex,outFlags);
 native function int GetClassPropertyCount(optional int aRequiredFlags);
 final native function bool SetAllPropertyTexts(string aString);
 final native function string GetAllPropertyTexts();
-final static native function UObject FindObject(string aObjectName,class<Object> aObjectClass);
-final static native function UObject DynamicLoadObject(string aObjectName,class<Object> aObjectClass,optional bool aMayFail);
+final static native function Object FindObject(string aObjectName,class<Object> aObjectClass);
+final static native function Object DynamicLoadObject(string aObjectName,class<Object> aObjectClass,optional bool aMayFail);
 final static native function name GetEnum(Object aE,coerce int aI);
 final native function bool SetPropertyText(string aPropName,string aPropValue);
 final native function string GetPropertyText(string aPropName);

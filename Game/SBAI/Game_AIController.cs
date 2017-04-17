@@ -9,16 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBAI
 {
-
-
+    
+    
     public class Game_AIController : Game_NPCController
     {
         
@@ -75,7 +81,7 @@ namespace SBAI
         [TCosReborn.Framework.Attributes.FieldConfigAttribute()]
         public bool bProfileMovementModes;
         
-        public List<Object> mPausers = new List<Object>();
+        public List<UObject> mPausers = new List<UObject>();
         
         public Game_Pawn mLastAttackPawn;
         
@@ -96,7 +102,7 @@ namespace SBAI
             
             public float Timeout;
             
-            public string Tag;
+            public NameProperty Tag;
         }
     }
 }
@@ -104,7 +110,7 @@ namespace SBAI
 function bool HasMetaController(NPC_AI aController) {
 return mMetaControl.HasMetaController(aController);                         
 }
-native function bool MetaControllerMessage(byte aMessage,optional Actor aCollaborator,optional name aTag,optional UObject aContext,optional float aValue,optional Vector aLocation);
+native function bool MetaControllerMessage(byte aMessage,optional Actor aCollaborator,optional name aTag,optional Object aContext,optional float aValue,optional Vector aLocation);
 native function RemoveMetaController(AI_MetaController aMetaController);
 native function AI_MetaController AddMetaController(AI_MetaController aMetaController);
 native function bool IsAIPausedBy(Object aPauser);

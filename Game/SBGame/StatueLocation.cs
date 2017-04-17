@@ -9,17 +9,27 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class StatueLocation : Actor
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Statue")]
-        public string LocationTag = string.Empty;
+        public NameProperty LocationTag;
         
         public StatueLocation()
         {

@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class Quest_Set : SBPackageResource
+    
+    
+    public class Quest_Set : UObject
     {
         
         public List<Quest_Type> mQuests = new List<Quest_Type>();

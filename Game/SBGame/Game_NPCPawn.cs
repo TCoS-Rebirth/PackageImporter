@@ -9,13 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class Game_NPCPawn : Game_TransientPawn
     {
         
@@ -391,7 +400,7 @@ protected native function sv2rel_Chat_CallStub();
 event sv2rel_Chat(int aLocalizedStringID,int aSubjectId,int aTargetId,Game_Pawn aTarget) {
 local string Text;
 local export editinline Content_Type Subject;
-local UObject Target;
+local Object Target;
 local string Chat;
 local Game_PlayerPawn Player;
 if (aLocalizedStringID != 0) {                                              
@@ -497,7 +506,7 @@ NPCType.Shop.sv_EnterShop(aPlayerPawn,aOption);
 }
 }
 function RadialMenuSelect(Pawn aPlayerPawn,byte aMainOption,byte aSubOption) {
-local UObject castFFS;
+local Object castFFS;
 Super.RadialMenuSelect(aPlayerPawn,aMainOption,aSubOption);                 
 if (aMainOption == Class'Game_RadialMenuOptions'.0) {                       
 if (aSubOption == Class'Game_RadialMenuOptions'.10

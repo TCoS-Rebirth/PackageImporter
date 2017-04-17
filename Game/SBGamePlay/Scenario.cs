@@ -9,14 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class Scenario : Content_Type
     {
         
@@ -32,7 +40,7 @@ namespace SBGamePlay
         public List<Content_Requirement> Requirements = new List<Content_Requirement>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Scenario")]
-        public List<string> ParticipantTags = new List<string>();
+        public List<NameProperty> ParticipantTags = new List<NameProperty>();
         
         public Scenario()
         {

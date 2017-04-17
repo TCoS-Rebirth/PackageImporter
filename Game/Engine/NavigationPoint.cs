@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class NavigationPoint : Actor
     {
         
@@ -101,11 +111,11 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="NavigationPoint")]
         [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
-        public string[] ProscribedPaths = new string[0];
+        public NameProperty[] ProscribedPaths = new NameProperty[0];
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="NavigationPoint")]
         [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
-        public string[] ForcedPaths = new string[0];
+        public NameProperty[] ForcedPaths = new NameProperty[0];
         
         public int visitedWeight;
         

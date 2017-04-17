@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class AnimNotify_Effect : AnimNotify
     {
         
@@ -23,7 +33,7 @@ namespace Engine
         public SerializableTypeProxy EffectClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
-        public string Bone = string.Empty;
+        public NameProperty Bone;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
         public Vector OffsetLocation;
@@ -35,7 +45,7 @@ namespace Engine
         public bool Attach;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
-        public string Tag = string.Empty;
+        public NameProperty Tag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
         public float DrawScale;

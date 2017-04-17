@@ -25,7 +25,7 @@ namespace Engine
 {
     
     
-    public class Package : SBPackageResource
+    public class Package : UObject
     {
         
         public Package()

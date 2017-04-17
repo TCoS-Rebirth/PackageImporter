@@ -8,19 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class EV_UntriggerEvent : Content_Event
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Action")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string EventTag = string.Empty;
+        public NameProperty EventTag;
         
         public EV_UntriggerEvent()
         {

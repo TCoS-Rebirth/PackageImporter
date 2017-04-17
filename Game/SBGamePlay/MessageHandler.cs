@@ -8,16 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
-    public class MessageHandler : SBPackageResource
+    
+    
+    public class MessageHandler : UObject
     {
         
         public const int HANDLER_NOT_FOUND = -1;

@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class xEmitter : Actor
     {
         
@@ -59,10 +70,10 @@ namespace Engine
         public float mRegenDist;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PclEmitter")]
-        public string mSourceActor = string.Empty;
+        public NameProperty mSourceActor;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PclEmitter")]
-        public string mChildName = string.Empty;
+        public NameProperty mChildName;
         
         public xEmitter mChildEmitter;
         

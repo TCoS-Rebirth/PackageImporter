@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class QT_UseAt : Quest_Target
     {
         
@@ -24,7 +33,7 @@ namespace SBGamePlay
         public Item_Type Item;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Use")]
-        public string UseLocationTag = string.Empty;
+        public NameProperty UseLocationTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Use")]
         public LocalizedString LocationDescription;

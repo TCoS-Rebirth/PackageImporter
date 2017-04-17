@@ -8,14 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBBase
 {
-
-
-    public class SBDBSync : SBPackageResource
+    
+    
+    public class SBDBSync : UObject
     {
         
         public SBDBSync()
@@ -38,7 +48,7 @@ static native function int GetFameLevelCount();
 static native function int GetHighestFameLevel();
 static native function int GetLowestFameLevel();
 static native function string GetDescription(int Id,optional int language_id);
-static native function UObject GetResourceObject(int resource_id);
+static native function Object GetResourceObject(int resource_id);
 static native function int CreateResourceId(string PathName);
 static native function string GetPathName(int resource_id);
 static native function int GetResourceId(string PathName);

@@ -5,52 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using TCosReborn.Application;
 using TCosReborn.Framework.Common;
-using TCosReborn.Framework.PackageExtractor;
 using TCosReborn.Framework.Utility;
 
-namespace TCosReborn.Application
+namespace TCosReborn.Framework.PackageExtractor
 {
     class PackageDeserializer
     {
-
-        [StructLayout(LayoutKind.Sequential, Size = 44, Pack = 1)]
-        struct GlobalHeader
-        {
-            public uint Signature;
-            public short FileVersion;
-            public short LicenseeMode;
-            public uint PackageFlags;
-            public uint NameCount;
-            public uint NameOffset;
-            public uint ExportCount;
-            public uint ExportOffset;
-            public uint ImportCount;
-            public uint ImportOffset;
-            public uint HeritageCount;
-            public uint HeritageOffset;
-        }
-
-        struct ImportEntry
-        {
-            public int ClassPackageName;
-            public int ClassName;
-            public int PackageReference;
-            public int ObjectName;
-        }
-
-        struct ExportEntry
-        {
-            public int ClassReference;
-            public int SuperReference;
-            public int PackageReference;
-            public int ObjectName;
-            public int ObjectFlags;
-            public int SerialSize;
-            public int SerialOffset;
-            public SBObject Obj;
-        }
-
         GlobalHeader Header;
 
         public string[] NameTable { get; set; }
@@ -87,11 +49,6 @@ namespace TCosReborn.Application
             return "null";
         }
 
-        public void Log(string msg, int importance)
-        {
-            Logger.Log(msg);
-        }
-
         public SBResourcePackage DeserializePackage(string filePath)
         {
             var fileReader = new SBFileReader(filePath);
@@ -111,7 +68,7 @@ namespace TCosReborn.Application
                 var name = Encoding.ASCII.GetString(stringArray).Replace("\0", string.Empty);
                 NameTable[k] = name;
             }
-            Log(string.Format("NameTable: {0} names read", NameTable.Length), 0);
+            //Log(string.Format("NameTable: {0} names read", NameTable.Length), 0);
 
             #endregion
 
@@ -131,7 +88,7 @@ namespace TCosReborn.Application
 
                 ImportTable[k] = entry;
             }
-            Log(string.Format("ImportTable: {0} imports read", ImportTable.Length), 0);
+            //Log(string.Format("ImportTable: {0} imports read", ImportTable.Length), 0);
 
             #endregion
 
@@ -158,7 +115,7 @@ namespace TCosReborn.Application
                 }
                 ExportTable[k] = entry;
             }
-            Log(string.Format("ExportTable: {0} exports read", ExportTable.Length), 0);
+            //Log(string.Format("ExportTable: {0} exports read", ExportTable.Length), 0);
 
             #endregion
 
@@ -168,7 +125,7 @@ namespace TCosReborn.Application
 
             exportedObjects.Clear();
 
-            Log("Reading objects", 0);
+            //Log("Reading objects", 0);
             for (var i = 0; i < ExportTable.Length; i++)
             {
                 var entry = ExportTable[i];
@@ -178,7 +135,7 @@ namespace TCosReborn.Application
                     exportedObjects.Add(obj);
                 }
             }
-            Log(string.Format("{0} Objects read", exportedObjects.Count), 0);
+            Logger.LogOk(string.Format("{0} Objects read", exportedObjects.Count));
 
             #endregion
 
@@ -233,7 +190,7 @@ namespace TCosReborn.Application
                 }
             }
 
-            var realType = ReflectionHelper.GetTypeFromName(activeObject.ClassName);
+            var realType = ReflectionHelper.GetTypeFromName(activeObject.ClassName, activeObject);
             ReflectionHelper.ReflectedRessourceType rType;
             if (realType != null && ReflectionHelper.TryGetTypeInfo(realType, out rType))
             {
@@ -243,7 +200,6 @@ namespace TCosReborn.Application
             if (realObject == null)
             {
                 Logger.LogError("Could not create instance from class name: " + activeObject.ClassName);
-                Console.ReadKey();
                 return null;
             }
             realObject.ReferenceObjectName = activeObject.Name;
@@ -343,25 +299,37 @@ namespace TCosReborn.Application
                     //Log("Encountered unknown class while reading properties", 1);
                     break;
             }
+            if (activeObject.Class != null && activeObject.Class.Name != "null")
+            {
+                Logger.LogWarning("!Wow, a class was read!");
+                Console.ReadKey();
+            }
             return realObject;
         }
 
         void ReadProperties(SBFileReader fileReader, SBPackageResource activeObject, ExportEntry entry, bool showAncestors)
         {
             //.::Loop through all the properties of the current object::.
+            var props = new List<SBProperty>();
             var returnBytesRead = 0;
             do
             {
+                if (activeObject.GetType() == typeof(Engine.DefaultPhysicsVolume) && props.Count == 6)
+                {
+                    //var nextBytes = fileReader.ReadByte();
+                    //var nextnextByte = fileReader.ReadByte();
+                    //var nameI = FindReferenceName(nextnextByte);
+                    bool testBreakHere = true;
+                }
                 var activeProperty = ReadProperty(activeObject, fileReader, ref returnBytesRead);
                 if (activeProperty == null)
                 {
+                    if (returnBytesRead < entry.SerialSize)
+                    {
+                        bool debugBreak = true;
+                    }
                     break;
                 }
-                //int fixedSize;
-                //if (activeProperty.IsPartOfFixedArray && PackageTypeHelper.GetFixedArraySize(activeObject.ClassName, activeProperty.Name, out fixedSize))
-                //{
-                //    bool breakHere = true;
-                //}
                 var bytesRead = ReadPropertyValue(activeObject, fileReader, activeProperty, showAncestors);
                 returnBytesRead += bytesRead;
                 bool success;
@@ -371,7 +339,7 @@ namespace TCosReborn.Application
                 {
                     try
                     {
-                        //activeObject.Properties.Add(key, activeProperty);
+                        props.Add(activeProperty);
                         success = true;
                     }
                     catch (ArgumentException)
@@ -384,9 +352,8 @@ namespace TCosReborn.Application
             } while (fileReader.Position < entry.SerialOffset + entry.SerialSize);
             if (returnBytesRead < entry.SerialSize)
             {
-                bool breakHere = true;
-                Console.WriteLine("skipping problematic entry");
                 var diff = entry.SerialSize - returnBytesRead;
+                Logger.LogError("read size mismatch ("+diff+") for "+activeObject);
                 fileReader.Seek(diff, SeekOrigin.Current);
             }
         }
@@ -400,16 +367,10 @@ namespace TCosReborn.Application
             try
             {
                 activeProperty.Name = NameTable[propertyNameIndex].Replace("\0", string.Empty);
-                if (activeProperty.Name.StartsWith("KeyPos", StringComparison.OrdinalIgnoreCase) && activeObject.ReferenceObjectName.StartsWith("Mover50", StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.Log("fixme");
-                }
-                //activeProperty.Name = FindReferenceName(propertyNameIndex).Replace("\0", string.Empty);
             }
             catch (IndexOutOfRangeException)
             {
-                Log("Error: failed to read a Property's name on: " + activeObject.ReferenceObjectName, 2);
-                Console.ReadKey();
+                Logger.LogError("Error: failed to read a Property's name on: " + activeObject.ReferenceObjectName);
                 return null;
             }
 
@@ -442,7 +403,7 @@ namespace TCosReborn.Application
             }
             else if (arrayFlag != 0)
             {
-                int arrayIndex /*= fileReader.ReadByte()*/;
+                int arrayIndex;
                 var b = fileReader.ReadByte();
                 returnBytesRead += 1;
                 if ((b & 0x80) == 0)
@@ -462,7 +423,6 @@ namespace TCosReborn.Application
                         + fileReader.ReadByte();
                     returnBytesRead += 3;
                 }
-                activeProperty.IsPartOfFixedArray = true;
                 activeProperty.ArrayIndex = arrayIndex;
             }
 
@@ -473,8 +433,6 @@ namespace TCosReborn.Application
                 returnBytesRead += readIndexBytes;
                 activeProperty.StructName = NameTable[structNameIndex].Replace("\0", string.Empty);
             }
-            //if (activeProperty.Type != PropertyType.BooleanProperty)
-            //{
             var realSize = 0;
             //Read real size (see doc)
             if (size == 0)
@@ -503,14 +461,7 @@ namespace TCosReborn.Application
                 returnBytesRead += 4;
             }
 
-            activeProperty.Size = realSize.ToString();
             activeProperty.serialSize = realSize;
-            //}
-            //else
-            //{
-            //    activeProperty.Size = "1";
-            //    activeProperty.serialSize = 1;
-            //}
             return activeProperty;
         }
 
@@ -576,7 +527,6 @@ namespace TCosReborn.Application
                     activeProperty.Value = FindReferenceName(objectReference, showAncestors) /*+ " (reference)"*/;
                     localBytesRead += readIndexBytes;
                     break;
-
                 //Structs are a special case
                 case PropertyType.CustomStruct:
                 case PropertyType.StructProperty:
@@ -611,15 +561,19 @@ namespace TCosReborn.Application
                         activeProperty.Value = "Rank: " + fileReader.ReadInt32() + " SlotType: " + fileReader.ReadByte();
                         localBytesRead += 5;
                     }
-                    else if (activeProperty.StructName == "Scale")
-                    {
-                        int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        activeProperty.Value += fileReader.ReadByte();
-                        localBytesRead += 1;
-                    }
+                    //else if (activeProperty.StructName == "Scale")
+                    //{
+                    //    int vBytesRead = 0;
+                    //    var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
+                    //    localBytesRead += vBytesRead;
+                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                    //    vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
+                    //    localBytesRead += vBytesRead;
+                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                    //    vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
+                    //    localBytesRead += vBytesRead;
+                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                    //}
                     else if (activeProperty.StructName == "Box")
                     {
                         int vBytesRead = 0;
@@ -785,48 +739,55 @@ namespace TCosReborn.Application
                             }
                             localBytesRead += ReadPropertyValue(activeObject, fileReader, structProp, showAncestors);
                             activeProperty.Array.Add(structProp.Name, structProp);
-                        } while (structProp != null);
+                        } while (true);
                     }
                     else if (activeProperty.StructName == "PointRegion")
                     {
-                        var objRef = fileReader.ReadIndex(ref readIndexBytes);
-                        activeProperty.Value = FindReferenceName(objRef, showAncestors) /*+ " (reference)"*/;
-                        localBytesRead += readIndexBytes;
-                        fileReader.ReadInt32();
-                        localBytesRead += 4; //iLeaf
-                        fileReader.ReadByte();
-                        localBytesRead += 1; //ZoneNumber
-                    }
-                    else
-                    {
-                        if (activeProperty.StructName.Length > 0)
-                        {
-                            Console.WriteLine("Unhandled custom struct: " + activeProperty.StructName);
-                        }
-                        SBProperty structProp;
+                        SBProperty pStructProp;
                         do
                         {
                             var structBytesRead = 0;
-                            structProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
+                            pStructProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
                             localBytesRead += structBytesRead;
-                            if (structProp == null)
+                            if (pStructProp == null)
                             {
                                 break;
                             }
-                            if (structProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
+                            if (pStructProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
                             {
-                                structProp.StructName = activeProperty.StructName;
+                                pStructProp.StructName = activeProperty.StructName;
                             }
-                            localBytesRead += ReadPropertyValue(activeObject, fileReader, structProp, showAncestors);
-                            activeProperty.Array.Add(structProp.Name, structProp);
-                        } while (structProp != null);
+                            localBytesRead += ReadPropertyValue(activeObject, fileReader, pStructProp, showAncestors);
+                            activeProperty.Array.Add(pStructProp.Name, pStructProp);
+                        } while (true);
+                    }
+                    else
+                    {
+                        //Console.WriteLine("Unhandled custom struct: " + activeProperty.StructName + " trying manual parsing");
+                        SBProperty cStructProp;
+                        do
+                        {
+                            var structBytesRead = 0;
+                            cStructProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
+                            localBytesRead += structBytesRead;
+                            if (cStructProp == null)
+                            {
+                                break;
+                            }
+                            if (cStructProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
+                            {
+                                cStructProp.StructName = activeProperty.StructName;
+                            }
+                            localBytesRead += ReadPropertyValue(activeObject, fileReader, cStructProp, showAncestors);
+                            activeProperty.Array.Add(cStructProp.Name, cStructProp);
+                        } while (true);
                     }
                     break;
                 case PropertyType.ArrayProperty:
                     PropertyType insideType;
                     string insideName;
                     var classToSearch = (activeProperty.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1) ? activeProperty.StructName : string.Format("{0}.{1}", activeObject.GetType().Namespace, activeObject.GetType().Name);
-                    if (ReflectionHelper.ReflectArrayType(classToSearch, activeProperty.Name, out insideType, out insideName))
+                    if (ReflectionHelper.ReflectArrayType(classToSearch, activeProperty.Name, out insideType, out insideName, activeObject))
                     {
                         var arraySize = fileReader.ReadIndex(ref readIndexBytes);
                         localBytesRead += readIndexBytes;
@@ -847,46 +808,44 @@ namespace TCosReborn.Application
                                     insideArrayProp.StructName = insideName;
                                 }
                                 else
-                                {
+                                {  
                                     insideArrayProp.Name = insideName;
                                 }
                             }
                             var currentPropSize = ReadPropertyValue(activeObject, fileReader, insideArrayProp, showAncestors);
                             localBytesRead += currentPropSize;
-                            insideArrayProp.Size = currentPropSize.ToString();
                             activeProperty.Array.Add(i.ToString(), insideArrayProp);
                         }
                         if (localBytesRead < activeProperty.serialSize)
                         {
-                            activeProperty.hasSkippedBytes = true;
+                            Logger.LogError("property size mismatch");
                         }
-                        activeProperty.Size = arraySize.ToString();
                     }
                     else
                     {
-                        Log(string.Format("ArrayDefinition not found for ({2}){0} - {1}, skipping", activeObject.ReferenceObjectName, activeProperty.Name, activeObject.GetType()), 1);
+                        Logger.LogError(string.Format("ArrayDefinition not found for ({2}){0} - {1}, skipping", activeObject.ReferenceObjectName, activeProperty.Name, activeObject.GetType()));
                         fileReader.Seek(activeProperty.serialSize, SeekOrigin.Current);
                     }
                     break;
-                //case PropertyType.FixedArrayProperty:
-                //    SBProperty fixArrayProp = null;
-                //    do
-                //    {
-                //        var structBytesRead = 0;
-                //        fixArrayProp = ReadProperty(activeObject, fileReader, PackageTypeHelper, showAncestors, ref structBytesRead);
-                //        localBytesRead += structBytesRead;
-                //        if (fixArrayProp == null)
-                //        {
-                //            break;
-                //        }
-                //        if (fixArrayProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
-                //        {
-                //            fixArrayProp.StructName = activeProperty.StructName;
-                //        }
-                //        localBytesRead += ReadPropertyValue(activeObject, fileReader, fixArrayProp, PackageTypeHelper, showAncestors);
-                //        activeProperty.Array.Add(fixArrayProp.Name, fixArrayProp);
-                //    } while (fixArrayProp != null);
-                //    break;
+                case PropertyType.FixedArrayProperty:
+                    SBProperty fixArrayProp = null;
+                    do
+                    {
+                        var structBytesRead = 0;
+                        fixArrayProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
+                        localBytesRead += structBytesRead;
+                        if (fixArrayProp == null)
+                        {
+                            break;
+                        }
+                        if (fixArrayProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
+                        {
+                            fixArrayProp.StructName = activeProperty.StructName;
+                        }
+                        localBytesRead += ReadPropertyValue(activeObject, fileReader, fixArrayProp, showAncestors);
+                        activeProperty.Array.Add(fixArrayProp.Name, fixArrayProp);
+                    } while (fixArrayProp != null);
+                    break;
                 default:
                     fileReader.Seek(activeProperty.serialSize, SeekOrigin.Current);
                     break;
@@ -1201,5 +1160,169 @@ namespace TCosReborn.Application
         }
         #endregion
 
+        #region Deserialization Helper Types
+
+        [StructLayout(LayoutKind.Sequential, Size = 44, Pack = 1)]
+        struct GlobalHeader
+        {
+            public uint Signature;
+            public short FileVersion;
+            public short LicenseeMode;
+            public uint PackageFlags;
+            public uint NameCount;
+            public uint NameOffset;
+            public uint ExportCount;
+            public uint ExportOffset;
+            public uint ImportCount;
+            public uint ImportOffset;
+            public uint HeritageCount;
+            public uint HeritageOffset;
+        }
+
+        struct ImportEntry
+        {
+            public int ClassPackageName;
+            public int ClassName;
+            public int PackageReference;
+            public int ObjectName;
+        }
+
+        struct ExportEntry
+        {
+            public int ClassReference;
+            public int SuperReference;
+            public int PackageReference;
+            public int ObjectName;
+            public int ObjectFlags;
+            public int SerialSize;
+            public int SerialOffset;
+            public SBObject Obj;
+        }
+
+        public class SBProperty
+        {
+            public Dictionary<string, SBProperty> Array = new Dictionary<string, SBProperty>(StringComparer.OrdinalIgnoreCase);
+            //If the property is an ArrayProperty, this member is filled //or a struct now
+
+            public int ArrayIndex = -1;
+            public string EnumValueName = "";
+            public bool hasSkippedBytes;
+            public string Name = "";
+            public int serialSize;
+            public string Size = "";
+            public string StructName = "";
+            public PropertyType Type;
+            public string Value = "";
+            public bool IsPartOfFixedArray = false;
+
+            public string ToString(int indentLevel)
+            {
+                var padding = new string(' ', indentLevel);
+                var builder = new StringBuilder();
+                if (Array.Count == 0)
+                {
+                    if (Type == PropertyType.ByteProperty && EnumValueName != "") //then it's most likely an enum, so try parse from overwritten name
+                    {
+                        builder.AppendLine(padding + string.Format("<b>Type:</b> <i>{0}</i>", Name));
+                        builder.AppendLine(padding + string.Format("<b>Value:</b> ({0}) {1}", Value, EnumValueName));
+                    }
+                    else
+                    {
+                        builder.AppendLine(padding + string.Format("<b>Name:</b> <i>{0}</i> ({1})", Name, Type));
+                        if (Type != PropertyType.ArrayProperty)
+                        {
+                            builder.AppendLine(padding + "<b>Value:</b> " + Value);
+                        }
+                        else
+                        {
+                            builder.AppendLine(padding + "<b>Length:</b> 0");
+                        }
+                    }
+                }
+                else
+                {
+                    builder.AppendLine(padding + string.Format("<b>Name:</b> <i>{0}</i> ({1})", Name, Type));
+                }
+                if (ArrayIndex >= 0)
+                    builder.AppendLine(padding + "ArrayIndex: " + ArrayIndex);
+                if (StructName.Length > 0 && Type != PropertyType.ArrayProperty)
+                    builder.AppendLine(padding + "StructName: " + StructName);
+                if (Array.Count > 0)
+                {
+                    builder.AppendLine(padding + "{");
+                    var curIndex = 0;
+                    foreach (var prop in IterateInnerProperties())
+                    {
+                        if (Type == PropertyType.ArrayProperty || Type == PropertyType.FixedArrayProperty)
+                        {
+                            builder.AppendLine(padding + string.Format("[{0}]:", curIndex));
+                        }
+                        builder.Append(prop.ToString(indentLevel + 4));
+                        if (curIndex < Array.Count - 1)
+                        {
+                            builder.AppendLine();
+                        }
+                        curIndex++;
+                    }
+                    builder.AppendLine(padding + "}");
+                }
+                return builder.ToString();
+            }
+
+            public T GetValue<T>() where T : IConvertible
+            {
+                return (T)Convert.ChangeType(Value.Replace("\0", string.Empty), typeof(T));
+            }
+
+            public IEnumerable<SBProperty> IterateInnerProperties()
+            {
+                foreach (var sbp in Array.Values)
+                {
+                    yield return sbp;
+                }
+            }
+        }
+
+        public class SBObject
+        {
+            public SBClass Class;
+            public string ClassName;
+            public List<ObjectFlags> Flags;
+            public string Name;
+            public string Package;
+            public int PackageID = -1;
+            //Name => SBproperty
+            public Dictionary<string, SBProperty> Properties;
+            public int Size;
+            public string SuperClassName;
+
+            public IEnumerable<SBProperty> IterateProperties()
+            {
+                foreach (var sbp in Properties.Values)
+                {
+                    yield return sbp;
+                }
+            }
+        }
+
+        public class SBClass
+        {
+            public SBClass Ancestor;
+            //Name => Value
+            public Dictionary<string, string> Fields;
+
+            //temp
+            public string HexaDump;
+            public string Name;
+
+            public SBClass()
+            {
+                Name = "null";
+                Fields = new Dictionary<string, string>();
+            }
+        }
+
+
+        #endregion
     }
 }

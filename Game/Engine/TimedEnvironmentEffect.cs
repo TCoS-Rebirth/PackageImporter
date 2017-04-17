@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class TimedEnvironmentEffect : EnvironmentEffect
     {
         
@@ -47,11 +57,11 @@ namespace Engine
         public struct EventRange
         {
             
-            public string Event;
+            public NameProperty Event;
             
-            public string InRangeEvent;
+            public NameProperty InRangeEvent;
             
-            public string OutOfRangeEvent;
+            public NameProperty OutOfRangeEvent;
             
             public float RangeBeginTime;
             

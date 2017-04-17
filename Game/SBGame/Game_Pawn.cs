@@ -9,15 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
 using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class Game_Pawn : Base_Pawn
     {
         
@@ -159,7 +166,7 @@ namespace SBGame
         
         public Actor mTargetActor;
         
-        public List<string> InteractionTags = new List<string>();
+        public List<NameProperty> InteractionTags = new List<NameProperty>();
         
         private bool mUseFadeInFadeOut;
         

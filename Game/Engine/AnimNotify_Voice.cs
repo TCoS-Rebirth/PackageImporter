@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class AnimNotify_Voice : AnimNotify
     {
         
@@ -24,7 +35,7 @@ namespace Engine
         public int Radius;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Voice")]
-        public string MeshSoundPropertiesGroup = string.Empty;
+        public NameProperty MeshSoundPropertiesGroup;
         
         public AnimNotify_Voice()
         {

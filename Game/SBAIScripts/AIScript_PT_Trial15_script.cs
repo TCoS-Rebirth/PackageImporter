@@ -10,14 +10,21 @@
 
 using Engine;
 using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBAIScripts
 {
-
-
+    
+    
     public class AIScript_PT_Trial15_script : AI_Script
     {
         
@@ -26,7 +33,7 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trial_Script")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string FinalCompletionTag = string.Empty;
+        public NameProperty FinalCompletionTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trial_Script")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
@@ -34,11 +41,11 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trial_Script")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string FirstCompletionTag = string.Empty;
+        public NameProperty FirstCompletionTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trial_Script")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string TimerFailedEvent = string.Empty;
+        public NameProperty TimerFailedEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trial_Script")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

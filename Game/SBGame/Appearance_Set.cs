@@ -9,15 +9,23 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class Appearance_Set : SBPackageResource
+    
+    
+    public class Appearance_Set : UObject
     {
         
         public List<Mesh> BodySet = new List<Mesh>();

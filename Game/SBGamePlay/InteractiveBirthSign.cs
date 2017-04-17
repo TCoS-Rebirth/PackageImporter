@@ -9,13 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class InteractiveBirthSign : InteractiveLevelElement
     {
         
@@ -25,14 +34,14 @@ namespace SBGamePlay
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="InteractiveBirthSign")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string Spawner_Event = string.Empty;
+        public NameProperty Spawner_Event;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="InteractiveBirthSign")]
-        public string DeactivationEvent = string.Empty;
+        public NameProperty DeactivationEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="InteractiveBirthSign")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string SoundEvent = string.Empty;
+        public NameProperty SoundEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="InteractiveBirthSign")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

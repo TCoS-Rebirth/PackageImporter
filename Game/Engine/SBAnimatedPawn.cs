@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class SBAnimatedPawn : Pawn
     {
         
@@ -75,7 +85,7 @@ namespace Engine
             
             public string meshName;
             
-            public string AttachmentBoneTag;
+            public NameProperty AttachmentBoneTag;
             
             public Vector ScaleFactor;
             
@@ -107,7 +117,7 @@ namespace Engine
         public struct SBAnimationStackEntry
         {
             
-            public string AnimationName;
+            public NameProperty AnimationName;
             
             public List<int> ActionFlags;
             

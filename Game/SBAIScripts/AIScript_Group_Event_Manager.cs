@@ -9,14 +9,23 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
+using Gameplay;
 
 
 namespace SBAIScripts
 {
-
-
+    
+    
     public class AIScript_Group_Event_Manager : AIRegistered
     {
         
@@ -35,8 +44,8 @@ namespace SBAIScripts
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Group_Event_Manager")]
         public bool DespawnOnPlayersExited;
         
-        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Group_Event_Manager")]
-        //public List<ScriptedTrigger> ScriptedTriggersToReset = new List<ScriptedTrigger>();
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Group_Event_Manager")]
+        public List<ScriptedTrigger> ScriptedTriggersToReset = new List<ScriptedTrigger>();
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

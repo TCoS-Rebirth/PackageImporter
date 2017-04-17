@@ -8,17 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class Game_AppearanceListener : SBPackageResource
+    
+    
+    public class Game_AppearanceListener : UObject
     {
         
-        //public delegate<OnAppearanceChanged> OnAppearanceChanged__Delegate;
+        //public delegate<OnAppearanceChanged> @__OnAppearanceChanged__Delegate;
         
         public Game_AppearanceListener()
         {

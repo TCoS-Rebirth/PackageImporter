@@ -8,18 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class Interaction_Event : Interaction_Component
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Interaction_Event")]
-        public string EventTag = string.Empty;
+        public NameProperty EventTag;
         
         public Interaction_Event()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using TCosReborn.Application;
+using TCosReborn.Framework.PackageExtractor;
 using TCosReborn.Framework.Utility;
 
 namespace TCosReborn

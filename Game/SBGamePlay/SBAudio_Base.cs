@@ -9,13 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class SBAudio_Base : Actor
     {
         
@@ -50,7 +59,7 @@ namespace SBGamePlay
         public float CurrentTriggerTimer;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Influences")]
-        public List<string> InfluenceVolumeTags = new List<string>();
+        public List<NameProperty> InfluenceVolumeTags = new List<NameProperty>();
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

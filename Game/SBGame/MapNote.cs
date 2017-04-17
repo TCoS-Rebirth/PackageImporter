@@ -9,14 +9,23 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
-    public class MapNote : SBPackageResource
+    
+    
+    public class MapNote : UObject
     {
         
         public const int MAX_TARGETS_SIZE = 8;

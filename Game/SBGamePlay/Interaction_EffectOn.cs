@@ -8,19 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class Interaction_EffectOn : Interaction_Component
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Interaction_EffectOn")]
-        public string EffectTag = string.Empty;
+        public NameProperty EffectTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Interaction_EffectOn")]
         public List<FSkill_EffectClass_AudioVisual> Effects = new List<FSkill_EffectClass_AudioVisual>();

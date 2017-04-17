@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class ZoneInfo : Info
     {
         
@@ -24,7 +33,7 @@ namespace Engine
         public SkyZoneInfo SkyZone;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="ZoneInfo")]
-        public string ZoneTag = string.Empty;
+        public NameProperty ZoneTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="ZoneInfo")]
         public string LocationName = string.Empty;

@@ -9,17 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
 using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBAI
 {
-
-
+    
+    
     public class TargetComponent : Base_Component
     {
         
@@ -175,7 +180,7 @@ namespace SBAI
             
             public UObject FilterDelegateObject;
             
-            public string FilterDelegateName;
+            public NameProperty FilterDelegateName;
         }
         
         public struct DetectedStruct

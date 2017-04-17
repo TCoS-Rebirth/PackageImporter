@@ -8,15 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
-    public class Actor : SBPackageResource
+    
+    
+    public class Actor : UObject
     {
         
         public const float MINFLOORZ = 0.7F;
@@ -96,11 +105,11 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Display")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string ForcedVisibilityZoneTag = string.Empty;
+        public NameProperty ForcedVisibilityZoneTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Display")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string ForcedLightingZoneTag = string.Empty;
+        public NameProperty ForcedLightingZoneTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Display")]
         public float CullDistance;
@@ -265,7 +274,7 @@ namespace Engine
         public Sound AmbientSound;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string AttachmentBone = string.Empty;
+        public NameProperty AttachmentBone;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LevelInfo Level;
@@ -310,14 +319,14 @@ namespace Engine
         public int IsChainableIndex;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Events")]
-        public string Tag = string.Empty;
+        public NameProperty Tag;
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]
         public List<int> Leaves = new List<int>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Events")]
-        public string Event = string.Empty;
+        public NameProperty Event;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public float TimerCounter;
@@ -330,10 +339,10 @@ namespace Engine
         public float LODBias;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Object")]
-        public string InitialState = string.Empty;
+        public NameProperty InitialState;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Object")]
-        public string Group = string.Empty;
+        public NameProperty Group;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Object")]
         public List<ActorGroup> ActorGroups = new List<ActorGroup>();
@@ -400,7 +409,7 @@ namespace Engine
         public Matrix CachedLocalToWorld;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Movement")]
-        public string AttachTag = string.Empty;
+        public NameProperty AttachTag;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public List<Actor> Attached = new List<Actor>();
@@ -678,7 +687,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Events")]
         [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=8)]
-        public string[] ExcludeTag = new string[0];
+        public NameProperty[] ExcludeTag = new NameProperty[0];
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]
@@ -859,7 +868,7 @@ namespace Engine
         public struct SBSoundGroupParams
         {
             
-            public string PropertyGroupName;
+            public NameProperty PropertyGroupName;
             
             public float RunningTime;
             

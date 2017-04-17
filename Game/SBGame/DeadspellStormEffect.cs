@@ -9,13 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class DeadspellStormEffect : TimedEnvironmentEffect
     {
         
@@ -26,10 +35,10 @@ namespace SBGame
         public int IntroDurationSec;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSIntro")]
-        public string IntroEvent = string.Empty;
+        public NameProperty IntroEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSTrip")]
-        public string StartEvent = string.Empty;
+        public NameProperty StartEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSTrip")]
         public List<DSProgressEvent> TripEvents = new List<DSProgressEvent>();
@@ -41,10 +50,10 @@ namespace SBGame
         public int OutroDurationSec;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSOutro")]
-        public string OutroEvent = string.Empty;
+        public NameProperty OutroEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSMusic")]
-        public string MusicTag = string.Empty;
+        public NameProperty MusicTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DSMusic")]
         public float MusicDelaySec;
@@ -75,7 +84,7 @@ namespace SBGame
             
             public float TimeFraction;
             
-            public string Event;
+            public NameProperty Event;
         }
         
         public enum EDeadSpellPhase

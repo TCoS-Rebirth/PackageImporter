@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class Game_GameMasterUtils : Game_DebugUtils
     {
         
@@ -437,7 +447,7 @@ local Game_Pawn targetPawn;
 local export editinline FSkill_Type Skill;
 local array<FSkill_Type> skillTypes;
 local int i;
-local UObject Obj;
+local Object Obj;
 local int ResourceId;
 local Game_Controller gc;
 if (AuthorizeCommand("CSGiveSkill")) {                                      

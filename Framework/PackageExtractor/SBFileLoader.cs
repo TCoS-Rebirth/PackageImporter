@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using TCosReborn.Application;
 using TCosReborn.Framework.Common;
 
-namespace TCosReborn.Application
+namespace TCosReborn.Framework.PackageExtractor
 {
     class SBFileLoader
     {

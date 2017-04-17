@@ -8,19 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class QT_Interactor : Quest_Target
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Interact")]
-        public string TargetTag = string.Empty;
+        public NameProperty TargetTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Interact")]
         public byte Option;

@@ -8,14 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class QT_Take : Quest_Target
     {
         
@@ -24,7 +33,7 @@ namespace SBGamePlay
         public Content_Inventory Cargo;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Take")]
-        public string SourceTag = string.Empty;
+        public NameProperty SourceTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Take")]
         public LocalizedString SourceDescription;

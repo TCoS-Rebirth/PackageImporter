@@ -60,10 +60,10 @@ namespace SBGame
         public Sound KeySound;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="KeyFrame")]
-        public string KeyTriggerEvent = string.Empty;
+        public NameProperty KeyTriggerEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="KeyFrame")]
-        public string KeyUntriggerEvent = string.Empty;
+        public NameProperty KeyUntriggerEvent;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Sound")]
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
@@ -130,9 +130,9 @@ namespace SBGame
             
             public float Duration;
             
-            public string TriggerEvent;
+            public NameProperty TriggerEvent;
             
-            public string UntriggerEvent;
+            public NameProperty UntriggerEvent;
             
             public Sound Sound;
         }

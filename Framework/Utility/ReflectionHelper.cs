@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Engine;
+using TCosReborn.Framework.Attributes;
 using TCosReborn.Framework.Common;
 using TCosReborn.Framework.PackageExtractor;
 using Console =  System.Console;
@@ -92,14 +93,14 @@ namespace TCosReborn.Framework.Utility
             "Engine.ActionPause",
             "Engine.TerrainSector",
             "Engine.Emitter",
-            "Engine.SBMover",
+            //"Engine.SBMover",
             "Engine.BeamEmitter",
             "Engine.xProcMesh",
             "Engine.xWeatherEffect",
             "Engine.StaticMeshActor",
             "Engine.StaticMeshInstance",
             "Engine.Light",
-            "Engine.LevelInfo", //HACK reenable once fixed
+            //"Engine.LevelInfo", //HACK reenable once fixed
             "Engine.SubActionSceneSpeed",
             "Engine.SBSunlight",
             "Engine.Polys",
@@ -165,11 +166,11 @@ namespace TCosReborn.Framework.Utility
             return false;
         }
 
-        public static bool ReflectArrayType(string className, string propertyName, out PropertyType pType, out string insideName)
+        public static bool ReflectArrayType(string className, string propertyName, out PropertyType pType, out string insideName, object parentObject = null)
         {
-            className = className.Replace("\0", String.Empty);
-            propertyName = propertyName.Replace("\0", String.Empty);
-            var classType = GetTypeFromName(className);
+            className = className.Replace("\0", string.Empty);
+            propertyName = propertyName.Replace("\0", string.Empty);
+            var classType = GetTypeFromName(className, parentObject);
             insideName = "";
             if (classType != null)
             {
@@ -199,6 +200,13 @@ namespace TCosReborn.Framework.Utility
             return false;
         }
 
+        public static PropertyType GetUPropertyType(Type type)
+        {
+            PropertyType t;
+            string insideName;
+            return FindInnerType(type, out t, out insideName) ? t : PropertyType.UnknownProperty;
+        }
+
         static bool FindInnerType(Type t, out PropertyType pType, out string insideName)
         {
             insideName = "";
@@ -209,7 +217,7 @@ namespace TCosReborn.Framework.Utility
                     pType = PropertyType.StringProperty;
                     return true;
                 }
-                if (t.IsSubclassOf(typeof(Object)))
+                if (t.IsSubclassOf(typeof(object)))
                 {
                     pType = PropertyType.ObjectProperty;
                     insideName = t.Name;
@@ -221,9 +229,21 @@ namespace TCosReborn.Framework.Utility
                     insideName = t.Name;
                     return true;
                 }
-                pType = PropertyType.CustomStruct;
+                if (t == typeof(NameProperty))
+                {
+                    pType = PropertyType.NameProperty;
+                    insideName = t.Name;
+                    return true;
+                }
+                if (t == typeof(SBResourcePackage))
+                {
+                    pType = PropertyType.ObjectProperty;
+                    insideName = t.Name;
+                    return true;
+                }
+                pType = PropertyType.UnknownProperty; //customStruct?
                 insideName = t.Name;
-                return true;
+                return false;
             }
             if (t == typeof(int))
             {
@@ -271,9 +291,32 @@ namespace TCosReborn.Framework.Utility
             return false;
         }
 
-        public static Type GetTypeFromName(string typeName)
+        public static bool GetFixedArraySize(string className, string propertyName, out int size)
         {
-            //if (!typeName.StartsWith("TCoSReborn", StringComparison.OrdinalIgnoreCase))
+            className = className.Replace("\0", string.Empty);
+            propertyName = propertyName.Replace("\0", string.Empty);
+            var classType = GetTypeFromName(className);
+            if (classType != null)
+            {
+                var fields = classType.GetFields(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public);
+                for (var i = 0; i < fields.Length; i++)
+                {
+                    if (!fields[i].Name.Equals(propertyName)) continue;
+                    var attributes = fields[i].GetCustomAttributes(typeof(ArraySizeForExtractionAttribute), false);
+                    if (attributes.Length > 0)
+                    {
+                        size = (attributes[0] as ArraySizeForExtractionAttribute).Size;
+                        return true;
+                    }
+                }
+            }
+            size = 0;
+            return false;
+        }
+
+        public static Type GetTypeFromName(string typeName, object parentObject = null)
+        {
+            //if (typeName.StartsWith("TCoSReborn", StringComparison.OrdinalIgnoreCase))
             //{
             //    typeName = string.Format("TCoSReborn.{0}", typeName);
             //}
@@ -286,6 +329,18 @@ namespace TCosReborn.Framework.Utility
             {
                 CacheAssemblyTypes();
             }
+            if (parentObject != null)
+            {
+                var exportedTypes = parentObject.GetType().GetNestedTypes(BindingFlags.Instance|BindingFlags.FlattenHierarchy|BindingFlags.NonPublic|BindingFlags.Public);
+                for (var i = 0; i < exportedTypes.Length; i++)
+                {
+                    if (exportedTypes[i].Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) ||
+                        exportedTypes[i].FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return exportedTypes[i];
+                    }
+                }
+            }
             foreach (var type in cachedTypes)
             {
                 if (type.Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) || type.FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
@@ -293,21 +348,20 @@ namespace TCosReborn.Framework.Utility
                     return type;
                 }
             }
-
             return null;
         }
 
         static Type CheckReturnHardcodedReplacement(string lookupName)
         {
             if (lookupName.Equals("Core.Package", StringComparison.OrdinalIgnoreCase)) return typeof(SBResourcePackage);
-            if (lookupName.Equals("Vector", StringComparison.OrdinalIgnoreCase)) return typeof(Vector3);
             return null;
         }
 
         static void CacheAssemblyTypes()
         {
+            var types = Assembly.GetEntryAssembly().GetTypes();
             cachedTypes.Clear();
-            cachedTypes.AddRange(Assembly.GetEntryAssembly().GetTypes());
+            cachedTypes.AddRange(types);
         }
         #endregion
     }

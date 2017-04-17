@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class QT_Challenge : Quest_Target
     {
         
@@ -22,10 +32,10 @@ namespace SBGamePlay
         public int TargetWorld;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Challenge")]
-        public string CompletionTag = string.Empty;
+        public NameProperty CompletionTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Challenge")]
-        public string FailureTag = string.Empty;
+        public NameProperty FailureTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Challenge")]
         public Item_Type Pass;

@@ -8,12 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class Game_PlayerSkills : Game_Skills
     {
         
@@ -103,7 +114,7 @@ cl_StartSkillTracers(LastSkill.Skill,Item_Type(Class'SBDBSync'.GetResourceObject
 }
 final native function LoadTokens();
 final function cl_SetSkills(array<int> aCharacterSkills,array<int> aSkilldeckSkills) {
-local UObject skillResource;
+local Object skillResource;
 local int i;
 CharacterSkills.Length = aCharacterSkills.Length;                           
 i = 0;                                                                      

@@ -9,12 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class FSkill_Event : Content_Type
     {
         
@@ -204,7 +214,7 @@ namespace SBGame
 }
 /*
 native function bool IsOriginalEvent();
-native function UObject Clone(optional bool aCloneSubObjects);
+native function Object Clone(optional bool aCloneSubObjects);
 final native event bool NeedsCloningAlways();
 final native event bool NeedsServerSideExecution();
 final native event bool NeedsClientReplication();

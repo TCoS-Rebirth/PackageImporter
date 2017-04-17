@@ -8,19 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGamePlay
 {
-
-
+    
+    
     public class Req_GameActorEnabled : Content_Requirement
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Requirement")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        public string Tag = string.Empty;
+        public NameProperty Tag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Requirement")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

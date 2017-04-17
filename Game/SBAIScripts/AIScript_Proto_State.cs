@@ -10,13 +10,21 @@
 
 using Engine;
 using SBAI;
+using SBAIScripts;
+using SBBase;
 using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBAIScripts
 {
-
-
+    
+    
     public class AIScript_Proto_State : AI_Script
     {
         
@@ -67,7 +75,7 @@ GotoState('ResetState');
 UnTrigger(Other,EventInstigator);                                       
 }
 event bool OnTimerEnded(Game_AIController aController,Actor aInstigator,name aTag) {
-local UObject gimmeName;
+local Object gimmeName;
 gimmeName = Skill;                                                      
 Debug("Timer" @ string(aTag) @ "ended");                                
 if (aInstigator == self && aController == mController
@@ -87,7 +95,7 @@ function EndState() {
 StopTimer(mController,name(Skill.GetName()));                           
 }
 function BeginState() {
-local UObject gimmeName;
+local Object gimmeName;
 gimmeName = Skill;                                                      
 Debug("Skilling for" @ string(Skill.CooldownTime));                     
 PerformSkill(mController,Skill,Target.Location);                        

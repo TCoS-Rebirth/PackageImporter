@@ -8,17 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class SBDecoration : Actor
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SBDecoration")]
-        public string Animation = string.Empty;
+        public NameProperty Animation;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SBDecoration")]
         public float speed;

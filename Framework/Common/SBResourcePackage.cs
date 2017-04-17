@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using TCosReborn.Application;
 using TCosReborn.Framework.Attributes;
 
 namespace TCosReborn.Framework.Common
@@ -42,7 +44,7 @@ namespace TCosReborn.Framework.Common
             {
                 if (allObjects[i] == null)
                 {
-                    Debug.LogError("packageobject is null in: " + ReferencePackageName + "(index: " + i + " )");
+                    Logger.LogError("packageobject is null in: " + ReferencePackageName + "(index: " + i + " )");
                     throw new NullReferenceException();
                 }
                 if (allObjects[i].ReferenceObjectName.Equals(objectName, StringComparison.OrdinalIgnoreCase) &
@@ -62,7 +64,7 @@ namespace TCosReborn.Framework.Common
             {
                 if (allObjects[i] == null)
                 {
-                    Debug.LogError("packageobject is null in: " + ReferencePackageName + "(index: " + i + " )");
+                    Logger.LogError("packageobject is null in: " + ReferencePackageName + "(index: " + i + " )");
                     throw new NullReferenceException();
                 }
                 if (allObjects[i].ReferenceObjectName.Equals(objectName, StringComparison.OrdinalIgnoreCase) &

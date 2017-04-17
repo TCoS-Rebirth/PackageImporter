@@ -8,13 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class Pawn : Actor
     {
         
@@ -178,7 +188,7 @@ namespace Engine
         public float MaxDesiredSpeed;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
-        public string AIScriptTag = string.Empty;
+        public NameProperty AIScriptTag;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
         public float HearingThreshold;
@@ -351,9 +361,9 @@ namespace Engine
         
         public LadderVolume OnLadder;
         
-        public string LandMovementState = string.Empty;
+        public NameProperty LandMovementState;
         
-        public string WaterMovementState = string.Empty;
+        public NameProperty WaterMovementState;
         
         public PlayerStart LastStartSpot;
         
@@ -467,7 +477,7 @@ namespace Engine
         public struct HitFXData
         {
             
-            public string Bone;
+            public NameProperty Bone;
             
             public SerializableTypeProxy damtype;
             

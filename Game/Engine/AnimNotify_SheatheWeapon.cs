@@ -8,17 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace Engine
 {
-
-
+    
+    
     public class AnimNotify_SheatheWeapon : AnimNotify
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_SheatheWeapon")]
-        public string NotifyName = string.Empty;
+        public NameProperty NotifyName;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_SheatheWeapon")]
         public byte WeaponFlag;

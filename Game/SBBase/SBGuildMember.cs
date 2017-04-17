@@ -8,14 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TCosReborn.Framework.Common;
 
 
 namespace SBBase
 {
-
-
-    public class SBGuildMember : SBPackageResource
+    
+    
+    public class SBGuildMember : UObject
     {
         
         public int CharacterID;

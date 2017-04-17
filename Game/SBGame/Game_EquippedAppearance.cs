@@ -9,12 +9,22 @@
 //------------------------------------------------------------------------------
 
 using Engine;
+using SBAI;
+using SBAIScripts;
+using SBBase;
+using SBGame;
+using SBGamePlay;
+using SBMiniGames;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TCosReborn.Framework.Common;
 
 
 namespace SBGame
 {
-
-
+    
+    
     public class Game_EquippedAppearance : Game_Appearance
     {
         
@@ -154,7 +164,7 @@ namespace SBGame
 /*
 protected native function string cl_GetPartName(byte aPart);
 native function Texture GetBodyPalette();
-native function UObject GetAppearanceResource(byte aPartType,int aIndex);
+native function Object GetAppearanceResource(byte aPartType,int aIndex);
 native function bool Compatible(Appearance_Base Base,bool IsCharacterCreation);
 native event CheckCompatibility(bool IsCharacterCreation);
 native function SetRandom(int aMeshMaterialBits,int aColorBits,bool aFullRandomColors,bool IsCharacterCreation,optional bool LockGloves,optional bool LockGauntlets,optional bool LockShoulderArmour,optional bool LockArmTattoos);
@@ -197,7 +207,7 @@ local int maxIndex;
 local int i;
 local int j;
 local Appearance_Base appBase;
-local UObject Obj;
+local Object Obj;
 local byte val;
 Super.app(A);                                                               
 cl_ConsoleMessage("----------------------------");                          
