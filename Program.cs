@@ -27,11 +27,13 @@ namespace TCosReborn
                 Logger.LogError("Error loading packages");
                 Exit(1);
             }
-            if (!loader.LoadMaps())
-            {
-                Logger.LogError("Error loading maps");
-                Exit(1);
-            }
+            //if (!loader.LoadMaps())
+            //{
+            //    Logger.LogError("Error loading maps");
+            //    Exit(1);
+            //}
+            Logger.LogOk("Packages read");
+            Exit();
         }
 
         static void Exit(int errorCode = 0)

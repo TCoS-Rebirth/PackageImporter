@@ -284,7 +284,7 @@ namespace TCosReborn.Framework.Utility
             if (t.IsValueType & !t.IsPrimitive & !t.IsEnum)
             {
                 insideName = t.Name;
-                pType = PropertyType.CustomStruct;
+                pType = PropertyType.StructProperty;
                 return true;
             }
             pType = PropertyType.UnknownProperty;

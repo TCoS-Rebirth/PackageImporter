@@ -18,6 +18,5 @@
         StrProperty,
         MapProperty,
         FixedArrayProperty,
-        CustomStruct
     }
 }

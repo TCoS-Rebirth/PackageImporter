@@ -32,7 +32,7 @@ namespace TCosReborn.Framework.PackageExtractor
                     if (ancestors != "null")
                         result = ancestors + "." + result;
                 }
-                return result.Replace("\0", string.Empty);
+                return result;
             }
             if (reference < 0)
             {
@@ -44,7 +44,7 @@ namespace TCosReborn.Framework.PackageExtractor
                         result = ancestors + "." + result;
                 }
 
-                return result.Replace("\0", string.Empty);
+                return result;
             }
             return "null";
         }
@@ -72,7 +72,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
             #endregion
 
-            //------------- READ IMPORT TABLE -----------------------------
+            //------------------ READ IMPORT TABLE ---------------------------
 
             #region ImportTable
 
@@ -92,7 +92,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
             #endregion
 
-            //----------- READ EXPORT TABLE ------------------------
+            //------------------- READ EXPORT TABLE --------------------------
 
             #region ExportTable
 
@@ -139,46 +139,35 @@ namespace TCosReborn.Framework.PackageExtractor
 
             #endregion
 
+            //------------------- ASSEMBLE PACKAGE ----------------------------
+
             var pkg = new SBResourcePackage
             {
                 ReferencePackageName = Path.GetFileNameWithoutExtension(filePath),
                 exports = exportedObjects
             };
-            //pkg
             return pkg;
         }
 
-        SBPackageResource ReadObject(SBFileReader fileReader, ExportEntry entry, bool showAncestors = true)
+        SBPackageResource ReadObject(SBFileReader fileReader, ExportEntry entry)
         {
             var activeObject = new SBObject
             {
                 Class = new SBClass(),
-                Name = NameTable[entry.ObjectName].Replace("\0", string.Empty),
+                Name = NameTable[entry.ObjectName],
                 Flags = new List<ObjectFlags>(),
                 Properties = new Dictionary<string, SBProperty>(StringComparer.OrdinalIgnoreCase),
-                ClassName = FindReferenceName(entry.ClassReference, showAncestors).Replace("\0", string.Empty),
-                Package = FindReferenceName(entry.PackageReference, showAncestors),
+                ClassName = FindReferenceName(entry.ClassReference).Replace("\0", string.Empty),
+                Package = FindReferenceName(entry.PackageReference),
                 Size = entry.SerialSize,
-                SuperClassName = FindReferenceName(entry.SuperReference, showAncestors),
+                SuperClassName = FindReferenceName(entry.SuperReference),
                 PackageID = entry.PackageReference
             };
-
-            SBPackageResource realObject = null;
-
-            var hasExecutionStack = false;
-
-            //Detect stack
-            if ((entry.ObjectFlags & (int)ObjectFlags.RF_HasStack) != 0)
-            {
-                hasExecutionStack = true;
-                activeObject.Flags.Add(ObjectFlags.RF_HasStack);
-            }
 
             //Currently we cannot read null class
             if (entry.SerialSize <= 0 || activeObject.ClassName == "null") return null;
 
-            //Read UObject data if present
-
+            //Read Object data if present
             fileReader.Seek(entry.SerialOffset, SeekOrigin.Begin);
 
             foreach (var s in ReflectionHelper.skippableObjects)
@@ -192,6 +181,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
             var realType = ReflectionHelper.GetTypeFromName(activeObject.ClassName, activeObject);
             ReflectionHelper.ReflectedRessourceType rType;
+            SBPackageResource realObject = null;
             if (realType != null && ReflectionHelper.TryGetTypeInfo(realType, out rType))
             {
                 realObject = rType.CreateInstance();
@@ -204,7 +194,13 @@ namespace TCosReborn.Framework.PackageExtractor
             }
             realObject.ReferenceObjectName = activeObject.Name;
 
-            //If UObject has a stack, read it but do nothing with it
+            //If Object has a stack, read it but do nothing with it
+            var hasExecutionStack = false;
+            if ((entry.ObjectFlags & (int)ObjectFlags.RF_HasStack) != 0)
+            {
+                hasExecutionStack = true;
+                activeObject.Flags.Add(ObjectFlags.RF_HasStack);
+            }
             if (hasExecutionStack)
             {
                 var stateFrameNode = fileReader.ReadIndex();
@@ -217,12 +213,10 @@ namespace TCosReborn.Framework.PackageExtractor
                 }
             }
 
-            ReadProperties(fileReader, realObject, entry, showAncestors);
+            ReadProperties(fileReader, realObject, entry);
 
             //Try to read class
-
             string className;
-
             if (activeObject.ClassName.Contains("("))
             {
                 className = activeObject.ClassName.Substring(0, activeObject.ClassName.IndexOf("(", StringComparison.Ordinal) - 1).Trim();
@@ -231,7 +225,6 @@ namespace TCosReborn.Framework.PackageExtractor
             {
                 className = activeObject.ClassName;
             }
-
             switch (className)
             {
                 case "Const":
@@ -307,66 +300,43 @@ namespace TCosReborn.Framework.PackageExtractor
             return realObject;
         }
 
-        void ReadProperties(SBFileReader fileReader, SBPackageResource activeObject, ExportEntry entry, bool showAncestors)
+        /// <summary>
+        /// Read all of <paramref name="activeObject"/>'s properties
+        /// </summary>
+        void ReadProperties(SBFileReader fileReader, SBPackageResource activeObject, ExportEntry entry)
         {
-            //.::Loop through all the properties of the current object::.
+            var allPropsSize = 0;
             var props = new List<SBProperty>();
-            var returnBytesRead = 0;
             do
             {
-                if (activeObject.GetType() == typeof(Engine.DefaultPhysicsVolume) && props.Count == 6)
-                {
-                    //var nextBytes = fileReader.ReadByte();
-                    //var nextnextByte = fileReader.ReadByte();
-                    //var nameI = FindReferenceName(nextnextByte);
-                    bool testBreakHere = true;
-                }
-                var activeProperty = ReadProperty(activeObject, fileReader, ref returnBytesRead);
+                var propBytesRead = 0;
+                var activeProperty = ReadProperty(activeObject, fileReader, out propBytesRead);
+                allPropsSize += propBytesRead;
                 if (activeProperty == null)
                 {
-                    if (returnBytesRead < entry.SerialSize)
-                    {
-                        bool debugBreak = true;
-                    }
                     break;
                 }
-                var bytesRead = ReadPropertyValue(activeObject, fileReader, activeProperty, showAncestors);
-                returnBytesRead += bytesRead;
-                bool success;
-                var key = activeProperty.Name;
-                var cpt = 0;
-                do
-                {
-                    try
-                    {
-                        props.Add(activeProperty);
-                        success = true;
-                    }
-                    catch (ArgumentException)
-                    {
-                        success = false;
-                        key = key + cpt;
-                        ++cpt;
-                    }
-                } while (!success);
+                var bytesRead = ReadPropertyValue(activeObject, fileReader, activeProperty);
+                allPropsSize += bytesRead;
+                props.Add(activeProperty);     
             } while (fileReader.Position < entry.SerialOffset + entry.SerialSize);
-            if (returnBytesRead < entry.SerialSize)
+            if (allPropsSize != entry.SerialSize)
             {
-                var diff = entry.SerialSize - returnBytesRead;
-                Logger.LogError("read size mismatch ("+diff+") for "+activeObject);
+                var diff = entry.SerialSize - allPropsSize;
+                Logger.LogError("(ReadProperties) read size mismatch ("+diff+") for "+activeObject);
                 fileReader.Seek(diff, SeekOrigin.Current);
             }
         }
 
-        SBProperty ReadProperty(SBPackageResource activeObject, SBFileReader fileReader, ref int returnBytesRead, PropertyType overrideType = PropertyType.UnknownProperty)
+        SBProperty ReadProperty(SBPackageResource activeObject, SBFileReader fileReader, out int returnBytesRead)
         {
             var readIndexBytes = 0;
             var activeProperty = new SBProperty();
-            var propertyNameIndex = fileReader.ReadIndex(ref readIndexBytes);
-            returnBytesRead += readIndexBytes;
+            var propertyNameIndex = fileReader.ReadIndex(out readIndexBytes);
+            returnBytesRead = readIndexBytes;
             try
             {
-                activeProperty.Name = NameTable[propertyNameIndex].Replace("\0", string.Empty);
+                activeProperty.Name = NameTable[propertyNameIndex];
             }
             catch (IndexOutOfRangeException)
             {
@@ -387,14 +357,7 @@ namespace TCosReborn.Framework.PackageExtractor
             var size = (byte)((infoByte & 0x70) >> 4);
             var arrayFlag = (byte)(infoByte & 0x80);
 
-            if (overrideType != PropertyType.UnknownProperty)
-            {
-                activeProperty.Type = overrideType;
-            }
-            else
-            {
-                activeProperty.Type = (PropertyType)type;
-            }
+            activeProperty.Type = (PropertyType)type;
 
             //Display value if not array flag but boolean value
             if (activeProperty.Type == PropertyType.BooleanProperty)
@@ -429,12 +392,12 @@ namespace TCosReborn.Framework.PackageExtractor
             //If type = struct, you have to read its name (but not always)
             if (activeProperty.Type == PropertyType.StructProperty)
             {
-                var structNameIndex = fileReader.ReadIndex(ref readIndexBytes);
+                var structNameIndex = fileReader.ReadIndex(out readIndexBytes);
                 returnBytesRead += readIndexBytes;
-                activeProperty.StructName = NameTable[structNameIndex].Replace("\0", string.Empty);
+                activeProperty.StructName = NameTable[structNameIndex];
             }
             var realSize = 0;
-            //Read real size (see doc)
+            //Read real size
             if (size == 0)
                 realSize = 1;
             else if (size == 1)
@@ -460,131 +423,117 @@ namespace TCosReborn.Framework.PackageExtractor
                 realSize = fileReader.ReadInt32();
                 returnBytesRead += 4;
             }
-
-            activeProperty.serialSize = realSize;
+            activeProperty.SerialSize = realSize;
             return activeProperty;
         }
 
-        int ReadPropertyValue(SBPackageResource activeObject, SBFileReader fileReader, SBProperty activeProperty, bool showAncestors)
+        int ReadPropertyValue(SBPackageResource activeObject, SBFileReader fileReader, SBProperty activeProperty)
         {
-            var localBytesRead = 0;
-            //Handle specific properties
+            var propertyValueByteCount = 0;
             var readIndexBytes = 0;
-
             switch (activeProperty.Type)
             {
                 case PropertyType.ByteProperty:
                     activeProperty.Value = fileReader.ReadByte().ToString();
-                    //try parsing enum from custom definition
-                    var enums = Assembly.GetAssembly(typeof(LocalizedString)).GetTypes().Where(t => t.IsEnum && t.IsPublic).ToList();
-                    foreach (var et in enums)
-                    {
-                        if (et.Name.Equals(activeProperty.Name, StringComparison.OrdinalIgnoreCase))
-                        {
-                            var nameIndexer = activeProperty.GetValue<int>();
-                            var value = (Enum)Enum.ToObject(et, nameIndexer);
-                            activeProperty.EnumValueName = value.ToString();
-                            break;
-                        }
-                    }
-                    //
-                    localBytesRead += 1;
+                    propertyValueByteCount += 1;
                     break;
 
                 case PropertyType.IntegerProperty:
                     activeProperty.Value = fileReader.ReadInt32().ToString();
-                    localBytesRead += 4;
+                    propertyValueByteCount += 4;
                     break;
 
                 case PropertyType.FloatProperty:
                     activeProperty.Value = fileReader.ReadFloat().ToString();
-                    localBytesRead += 4;
+                    propertyValueByteCount += 4;
                     break;
 
                 case PropertyType.NameProperty:
-                    activeProperty.Value = NameTable[fileReader.ReadIndex(ref readIndexBytes)].Replace("\0", string.Empty);
-                    localBytesRead += readIndexBytes;
+                    activeProperty.Value = NameTable[fileReader.ReadIndex(out readIndexBytes)];
+                    propertyValueByteCount += readIndexBytes;
                     break;
+                #region unused cases 0
                 case PropertyType.VectorProperty:
                     activeProperty.Value = fileReader.ReadFloat() + "," + fileReader.ReadFloat() + "," + fileReader.ReadFloat();
-                    localBytesRead += 12;
+                    propertyValueByteCount += 12;
                     break;
                 case PropertyType.RotatorProperty:
                     activeProperty.Value = fileReader.ReadInt32() + "," + fileReader.ReadInt32() + "," + fileReader.ReadInt32();
-                    localBytesRead += 12;
+                    propertyValueByteCount += 12;
                     break;
+                #endregion
                 case PropertyType.StrProperty:
-                    var stringSize = fileReader.ReadIndex(ref readIndexBytes);
-                    localBytesRead += readIndexBytes;
+                    var stringSize = fileReader.ReadIndex(out readIndexBytes);
+                    propertyValueByteCount += readIndexBytes;
                     var stringBytes = fileReader.ReadBytes(stringSize);
                     var stringValue = Encoding.ASCII.GetString(stringBytes).Replace("\0", string.Empty);
                     activeProperty.Value = stringValue;
-                    localBytesRead += stringSize;
+                    propertyValueByteCount += stringSize;
                     break;
 
                 case PropertyType.ObjectProperty:
-                    var objectReference = fileReader.ReadIndex(ref readIndexBytes);
-                    activeProperty.Value = FindReferenceName(objectReference, showAncestors) /*+ " (reference)"*/;
-                    localBytesRead += readIndexBytes;
+                    var objectReference = fileReader.ReadIndex(out readIndexBytes);
+                    activeProperty.Value = FindReferenceName(objectReference) /*+ " (reference)"*/;
+                    propertyValueByteCount += readIndexBytes;
                     break;
                 //Structs are a special case
-                case PropertyType.CustomStruct:
                 case PropertyType.StructProperty:
                     if (activeProperty.StructName == "Vector")
                     {
                         activeProperty.Value = fileReader.ReadFloat() + "," + fileReader.ReadFloat() + "," + fileReader.ReadFloat();
-                        localBytesRead += 12;
+                        propertyValueByteCount += 12;
                     }
                     else if (activeProperty.StructName == "Rotator")
                     {
                         activeProperty.Value = fileReader.ReadInt32() + "," + fileReader.ReadInt32() + "," + fileReader.ReadInt32();
-                        localBytesRead += 12;
+                        propertyValueByteCount += 12;
                     }
                     else if (activeProperty.StructName == "Color")
                     {
                         activeProperty.Value = "(R=" + fileReader.ReadByte() + "; G=" + fileReader.ReadByte() + "; B=" + fileReader.ReadByte() + "; A=" +
                                                fileReader.ReadByte() + ")";
-                        localBytesRead += 4;
-                    }
-                    else if (activeProperty.StructName == "LightHSB")
-                    {
-                        activeProperty.Value = "(H=" + fileReader.ReadByte() + "; S=" + fileReader.ReadByte() + "; B=" + fileReader.ReadByte() + ")";
-                        localBytesRead += 3;
+                        propertyValueByteCount += 4;
                     }
                     else if (activeProperty.StructName == "LocalizedString")
                     {
                         activeProperty.Value = fileReader.ReadInt32().ToString();
-                        localBytesRead += 4;
+                        propertyValueByteCount += 4;
+                    }
+                    #region unused cases 1
+                    else if (activeProperty.StructName == "LightHSB")
+                    {
+                        activeProperty.Value = "(H=" + fileReader.ReadByte() + "; S=" + fileReader.ReadByte() + "; B=" + fileReader.ReadByte() + ")";
+                        propertyValueByteCount += 3;
                     }
                     else if (activeProperty.StructName == "Slot")
                     {
                         activeProperty.Value = "Rank: " + fileReader.ReadInt32() + " SlotType: " + fileReader.ReadByte();
-                        localBytesRead += 5;
+                        propertyValueByteCount += 5;
                     }
-                    //else if (activeProperty.StructName == "Scale")
-                    //{
-                    //    int vBytesRead = 0;
-                    //    var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                    //    localBytesRead += vBytesRead;
-                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                    //    vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                    //    localBytesRead += vBytesRead;
-                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                    //    vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                    //    localBytesRead += vBytesRead;
-                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                    //}
+                    else if (activeProperty.StructName == "Scale")
+                    {
+                        int vBytesRead = 0;
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                    }
                     else if (activeProperty.StructName == "Box")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                         activeProperty.Value += fileReader.ReadByte();
-                        localBytesRead += 1;
+                        propertyValueByteCount += 1;
                     }
                     else if (activeProperty.StructName == "FloatBox")
                     {
@@ -592,7 +541,7 @@ namespace TCosReborn.Framework.PackageExtractor
                         {
                             fileReader.ReadFloat();
                         }
-                        localBytesRead += 16;
+                        propertyValueByteCount += 16;
                     }
                     else if (activeProperty.StructName == "IntBox")
                     {
@@ -600,35 +549,35 @@ namespace TCosReborn.Framework.PackageExtractor
                         {
                             fileReader.ReadFloat();
                         }
-                        localBytesRead += 16;
+                        propertyValueByteCount += 16;
                     }
                     else if (activeProperty.StructName == "Plane")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                         fileReader.ReadFloat();
-                        localBytesRead += 4;
+                        propertyValueByteCount += 4;
                     }
                     else if (activeProperty.StructName == "Range")
                     {
                         fileReader.ReadFloat();
                         fileReader.ReadFloat();
-                        localBytesRead += 8;
+                        propertyValueByteCount += 8;
                     }
                     else if (activeProperty.StructName == "RangeVector")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                     }
                     else if (activeProperty.StructName == "Quat")
                     {
@@ -636,67 +585,67 @@ namespace TCosReborn.Framework.PackageExtractor
                         {
                             fileReader.ReadFloat();
                         }
-                        localBytesRead += 16;
+                        propertyValueByteCount += 16;
                     }
                     else if (activeProperty.StructName == "Coords")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                     }
                     else if (activeProperty.StructName == "CompressedPosition")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                     }
                     else if (activeProperty.StructName == "Matrix")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                     }
                     else if (activeProperty.StructName == "BoundingVolume")
                     {
                         int vBytesRead = 0;
-                        var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                         activeProperty.Value += fileReader.ReadByte();
-                        localBytesRead += 1;
-                        vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                        localBytesRead += vBytesRead;
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
+                        propertyValueByteCount += 1;
+                        vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
                     }
                     else if (activeProperty.StructName == "Guid")
                     {
@@ -704,31 +653,31 @@ namespace TCosReborn.Framework.PackageExtractor
                         {
                             fileReader.ReadInt32();
                         }
-                        localBytesRead += 16;
+                        propertyValueByteCount += 16;
                     }
                     else if (activeProperty.StructName == "InterpCurvePoint")
                     {
                         fileReader.ReadFloat();
                         fileReader.ReadFloat();
-                        localBytesRead += 8;
+                        propertyValueByteCount += 8;
                     }
-                    //else if (activeProperty.StructName == "RangedSpawn")
-                    //{
-                    //    fileReader.ReadFloat();
-                    //    localBytesRead += 4;
-                    //    int vBytesRead = 0;
-                    //    var vecProp = ReadProperty(activeObject, fileReader, ref vBytesRead);
-                    //    localBytesRead += vBytesRead;
-                    //    localBytesRead += ReadPropertyValue(activeObject, fileReader, vecProp, false);
-                    //}
+                    else if (activeProperty.StructName == "RangedSpawn")
+                    {
+                        fileReader.ReadFloat();
+                        propertyValueByteCount += 4;
+                        int vBytesRead = 0;
+                        var vecProp = ReadProperty(activeObject, fileReader, out vBytesRead);
+                        propertyValueByteCount += vBytesRead;
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, vecProp);
+                    }
                     else if (activeProperty.StructName == "InterpCurve")
                     {
                         SBProperty structProp; //correct? not sure
                         do
                         {
                             var structBytesRead = 0;
-                            structProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
-                            localBytesRead += structBytesRead;
+                            structProp = ReadProperty(activeObject, fileReader, out structBytesRead);
+                            propertyValueByteCount += structBytesRead;
                             if (structProp == null)
                             {
                                 break;
@@ -737,7 +686,7 @@ namespace TCosReborn.Framework.PackageExtractor
                             {
                                 structProp.StructName = activeProperty.StructName;
                             }
-                            localBytesRead += ReadPropertyValue(activeObject, fileReader, structProp, showAncestors);
+                            propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, structProp);
                             activeProperty.Array.Add(structProp.Name, structProp);
                         } while (true);
                     }
@@ -747,8 +696,8 @@ namespace TCosReborn.Framework.PackageExtractor
                         do
                         {
                             var structBytesRead = 0;
-                            pStructProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
-                            localBytesRead += structBytesRead;
+                            pStructProp = ReadProperty(activeObject, fileReader, out structBytesRead);
+                            propertyValueByteCount += structBytesRead;
                             if (pStructProp == null)
                             {
                                 break;
@@ -757,19 +706,18 @@ namespace TCosReborn.Framework.PackageExtractor
                             {
                                 pStructProp.StructName = activeProperty.StructName;
                             }
-                            localBytesRead += ReadPropertyValue(activeObject, fileReader, pStructProp, showAncestors);
+                            propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, pStructProp);
                             activeProperty.Array.Add(pStructProp.Name, pStructProp);
                         } while (true);
                     }
+                    #endregion
                     else
                     {
-                        //Console.WriteLine("Unhandled custom struct: " + activeProperty.StructName + " trying manual parsing");
-                        SBProperty cStructProp;
-                        do
+                        while (true)
                         {
                             var structBytesRead = 0;
-                            cStructProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
-                            localBytesRead += structBytesRead;
+                            var cStructProp = ReadProperty(activeObject, fileReader, out structBytesRead);
+                            propertyValueByteCount += structBytesRead;
                             if (cStructProp == null)
                             {
                                 break;
@@ -778,62 +726,48 @@ namespace TCosReborn.Framework.PackageExtractor
                             {
                                 cStructProp.StructName = activeProperty.StructName;
                             }
-                            localBytesRead += ReadPropertyValue(activeObject, fileReader, cStructProp, showAncestors);
+                            propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, cStructProp);
                             activeProperty.Array.Add(cStructProp.Name, cStructProp);
-                        } while (true);
+                        }
                     }
                     break;
                 case PropertyType.ArrayProperty:
-                    PropertyType insideType;
-                    string insideName;
-                    var classToSearch = (activeProperty.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1) ? activeProperty.StructName : string.Format("{0}.{1}", activeObject.GetType().Namespace, activeObject.GetType().Name);
-                    if (ReflectionHelper.ReflectArrayType(classToSearch, activeProperty.Name, out insideType, out insideName, activeObject))
+                    var classToSearch = activeProperty.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1 ? activeProperty.StructName : string.Format("{0}.{1}", activeObject.GetType().Namespace, activeObject.GetType().Name);
+                    PropertyType arrayType;
+                    string structName;
+                    if (ReflectionHelper.ReflectArrayType(classToSearch, activeProperty.Name, out arrayType, out structName, activeObject))
                     {
-                        var arraySize = fileReader.ReadIndex(ref readIndexBytes);
-                        localBytesRead += readIndexBytes;
+                        var arraySize = fileReader.ReadIndex(out readIndexBytes);
+                        propertyValueByteCount += readIndexBytes;
                         for (var i = 0; i < arraySize; i++)
                         {
-                            var propBytesRead = 0;
-                            SBProperty insideArrayProp;
-                            if (insideType == PropertyType.StructProperty)
+                            var insideArrayProp = new SBProperty { Type = arrayType };
+                            if (arrayType == PropertyType.StructProperty)
                             {
-                                insideArrayProp = ReadProperty(activeObject, fileReader, ref propBytesRead, insideType);
-                                localBytesRead += propBytesRead;
+                                insideArrayProp.StructName = structName;
                             }
-                            else
-                            {
-                                insideArrayProp = new SBProperty { Type = insideType };
-                                if (insideType == PropertyType.CustomStruct)
-                                {
-                                    insideArrayProp.StructName = insideName;
-                                }
-                                else
-                                {  
-                                    insideArrayProp.Name = insideName;
-                                }
-                            }
-                            var currentPropSize = ReadPropertyValue(activeObject, fileReader, insideArrayProp, showAncestors);
-                            localBytesRead += currentPropSize;
+                            var currentPropSize = ReadPropertyValue(activeObject, fileReader, insideArrayProp);
+                            propertyValueByteCount += currentPropSize;
                             activeProperty.Array.Add(i.ToString(), insideArrayProp);
                         }
-                        if (localBytesRead < activeProperty.serialSize)
+                        if (propertyValueByteCount != activeProperty.SerialSize)
                         {
-                            Logger.LogError("property size mismatch");
+                            Logger.LogError("array property size mismatch");
                         }
                     }
                     else
                     {
                         Logger.LogError(string.Format("ArrayDefinition not found for ({2}){0} - {1}, skipping", activeObject.ReferenceObjectName, activeProperty.Name, activeObject.GetType()));
-                        fileReader.Seek(activeProperty.serialSize, SeekOrigin.Current);
+                        fileReader.Seek(activeProperty.SerialSize, SeekOrigin.Current);
                     }
                     break;
+                #region unused cases 2
                 case PropertyType.FixedArrayProperty:
-                    SBProperty fixArrayProp = null;
-                    do
+                    while(true)
                     {
                         var structBytesRead = 0;
-                        fixArrayProp = ReadProperty(activeObject, fileReader, ref structBytesRead);
-                        localBytesRead += structBytesRead;
+                        var fixArrayProp = ReadProperty(activeObject, fileReader, out structBytesRead);
+                        propertyValueByteCount += structBytesRead;
                         if (fixArrayProp == null)
                         {
                             break;
@@ -842,15 +776,26 @@ namespace TCosReborn.Framework.PackageExtractor
                         {
                             fixArrayProp.StructName = activeProperty.StructName;
                         }
-                        localBytesRead += ReadPropertyValue(activeObject, fileReader, fixArrayProp, showAncestors);
+                        propertyValueByteCount += ReadPropertyValue(activeObject, fileReader, fixArrayProp);
                         activeProperty.Array.Add(fixArrayProp.Name, fixArrayProp);
-                    } while (fixArrayProp != null);
+                    }
                     break;
+                    case PropertyType.MapProperty:
+                        Logger.LogWarning("MapProperty, not handled");
+                        break;
+                    case PropertyType.ClassProperty:
+                        Logger.LogWarning("ClassProperty, not handled");
+                        break;
+                #endregion
                 default:
-                    fileReader.Seek(activeProperty.serialSize, SeekOrigin.Current);
+                    fileReader.Seek(activeProperty.SerialSize, SeekOrigin.Current);
                     break;
             }
-            return localBytesRead;
+            if (propertyValueByteCount != activeProperty.SerialSize && activeProperty.SerialSize != 0) //TODO: 0 if passed as part of array -> pass correct size
+            {
+                Logger.LogWarning(string.Format("Read size mismatch: {0} for {1} ({2}/{3})", Mathf.Abs(activeProperty.SerialSize - propertyValueByteCount), activeObject.ReferenceObjectName, activeProperty.Name, activeProperty.StructName));
+            }
+            return propertyValueByteCount;
         }
 
         #region Unreal Specific
@@ -887,7 +832,7 @@ namespace TCosReborn.Framework.PackageExtractor
             enumClass.Fields.Add("ArraySize", arraySize.ToString());
             for (var i = 0; i < arraySize; ++i)
             {
-                enumClass.Fields.Add("ElementName" + i, NameTable[reader.ReadIndex()].Replace("\0", string.Empty));
+                enumClass.Fields.Add("ElementName" + i, NameTable[reader.ReadIndex()]);
             }
 
             return enumClass;
@@ -906,7 +851,7 @@ namespace TCosReborn.Framework.PackageExtractor
             property.Fields.Add("ArrayDimension", arrayDimension.ToString());
             property.Fields.Add("ElementSize", elementSize.ToString());
             property.Fields.Add("PropertyFlags", propertyFlags.ToString());
-            property.Fields.Add("Category", NameTable[category].Replace("\0", string.Empty));
+            property.Fields.Add("Category", NameTable[category]);
             if ((propertyFlags & (int)PropertyFlags.CPF_Net) != 0)
             {
                 int replicationOffset = reader.ReadInt16();
@@ -988,7 +933,7 @@ namespace TCosReborn.Framework.PackageExtractor
             classProperty.Ancestor = ReadPropertyClass(reader);
 
             var mclass = reader.ReadIndex();
-            classProperty.Fields.Add("Class", NameTable[mclass].Replace("\0", string.Empty));
+            classProperty.Fields.Add("Class", NameTable[mclass]);
 
             return classProperty;
         }
@@ -1077,7 +1022,7 @@ namespace TCosReborn.Framework.PackageExtractor
                 reader.ReadBytes(scriptSize);
             structClass.Fields.Add("ScriptText", FindReferenceName(scriptText));
             structClass.Fields.Add("Children", FindReferenceName(children));
-            structClass.Fields.Add("FriendlyName", NameTable[friendlyName].Replace("\0", string.Empty));
+            structClass.Fields.Add("FriendlyName", NameTable[friendlyName]);
             structClass.Fields.Add("Line", line.ToString());
             structClass.Fields.Add("TextPos", textPos.ToString());
             structClass.Fields.Add("ScriptSize", scriptSize.ToString());
@@ -1154,7 +1099,7 @@ namespace TCosReborn.Framework.PackageExtractor
             nullClass.Fields.Add("Dependencies Count", dependencies_count.ToString());
             nullClass.Fields.Add("Package Imports Count", packageImports_count.ToString());
             nullClass.Fields.Add("Class Within", FindReferenceName(classWithin));
-            nullClass.Fields.Add("Class Config Name", NameTable[classConfigName].Replace("\0", string.Empty));
+            nullClass.Fields.Add("Class Config Name", NameTable[classConfigName]);
 
             return nullClass;
         }
@@ -1208,8 +1153,8 @@ namespace TCosReborn.Framework.PackageExtractor
             public string EnumValueName = "";
             public bool hasSkippedBytes;
             public string Name = "";
-            public int serialSize;
-            public string Size = "";
+            public int SerialSize;
+            public int SerialSizeWithoutPropInfo;
             public string StructName = "";
             public PropertyType Type;
             public string Value = "";

@@ -95,12 +95,12 @@ namespace TCosReborn.Framework.PackageExtractor
         {
             var dummy = 0; //this var is not used
 
-            var index = ReadIndex(ref dummy);
+            var index = ReadIndex(out dummy);
 
             return index;
         }
 
-        public int ReadIndex(ref int indexSize)
+        public int ReadIndex(out int indexSize)
         {
             var isNegative = false;
             var firstByte = ReadByte();
