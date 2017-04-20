@@ -30,10 +30,10 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Information")]
         public byte QuestArea;
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Information")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Information")]
         public LocalizedString Name;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Information")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Summary;

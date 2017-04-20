@@ -60,6 +60,7 @@ namespace TCosReborn.Framework.PackageExtractor
             if (!IsDataFolder(dataFilePath)) return false;
             Logger.Log("Loading packages..");
             var packageFilePaths = GetPackageFiles();
+            List<PackageDeserializer.LinkerLink> links = new List<PackageDeserializer.LinkerLink>();
             for (var i = 0; i < packageFilePaths.Count; i++)
             {
                 var fileName = Path.GetFileNameWithoutExtension(packageFilePaths[i]);
@@ -69,9 +70,11 @@ namespace TCosReborn.Framework.PackageExtractor
                     return false;
                 }
                 Logger.Log("Loading: " + fileName);
-                var pkg = new PackageDeserializer().DeserializePackage(packageFilePaths[i]);
-                loadedPackages.Add(fileName, pkg);
+                links.AddRange(new PackageDeserializer().DeserializePackage(packageFilePaths[i]));
+                //loadedPackages.Add(fileName, pkg);
             }
+            //resolver.Resolve(loadedPackages);
+            GameplayPackageResolver.Resolve(SBPackageResources.ObjectsByName, links);
             return true;
         }
 
@@ -95,8 +98,8 @@ namespace TCosReborn.Framework.PackageExtractor
                     return false;
                 }
                 Logger.Log("Loading: " + fileName);
-                var pkg = new PackageDeserializer().DeserializePackage(mapFilePaths[i]);
-                loadedMaps.Add(fileName, pkg);
+                new PackageDeserializer().DeserializePackage(mapFilePaths[i]);
+                //loadedMaps.Add(fileName, pkg);
             }
             return true;
         }

@@ -91,11 +91,11 @@ namespace SBGame
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public Texture Logo;
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Description")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Description")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Name;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Description")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Description;

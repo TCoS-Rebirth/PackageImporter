@@ -15,7 +15,6 @@ namespace TCosReborn
 
         static void InitRessources(string[] args)
         {
-            ReflectionHelper.Initialize();
             if (args.Length == 0)
             {
                 Logger.LogWarning("Specify the game data directory as argument");

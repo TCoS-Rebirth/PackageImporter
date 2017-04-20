@@ -27,10 +27,10 @@ namespace SBGame
     
     public class Quest_Chain : Content_Type
     {
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Chain")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Chain")]
         public LocalizedString Name;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Chain")]
         public byte QuestArea;
         

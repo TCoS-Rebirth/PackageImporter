@@ -29,9 +29,9 @@ namespace SBGame
     {
         
         public int MemberHandle;
-        
+
         public string Name = string.Empty;
-        
+
         public bool IsFeminine;
         
         public int Archetype;

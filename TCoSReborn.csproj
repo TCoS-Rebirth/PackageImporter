@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Logger.cs" />
+    <Compile Include="Framework\Common\SBPackageResources.cs" />
+    <Compile Include="Framework\PackageExtractor\PackageImportResolver.cs" />
     <Compile Include="Framework\PackageExtractor\SBFileLoader.cs" />
     <Compile Include="Framework\PackageExtractor\PackageDeserializer.cs" />
     <Compile Include="Framework\Attributes\PackageExtractorAttributes.cs" />
@@ -71,9 +73,7 @@
     <Compile Include="Framework\Common\LevelProgression.cs" />
     <Compile Include="Framework\Common\LocalizedString.cs" />
     <Compile Include="Framework\Common\SBLocalizedStrings.cs" />
-    <Compile Include="Framework\Common\SBMapObjectPackage.cs" />
     <Compile Include="Framework\Common\SBPackageResource.cs" />
-    <Compile Include="Framework\Common\SBPackageResourceReference.cs" />
     <Compile Include="Framework\Common\SBResourcePackage.cs" />
     <Compile Include="Framework\Common\SerializableTypeProxy.cs" />
     <Compile Include="Framework\Common\Tuple.cs" />

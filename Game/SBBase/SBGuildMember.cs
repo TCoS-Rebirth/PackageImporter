@@ -33,9 +33,9 @@ namespace SBBase
         public int ClassType;
         
         public int Level;
-        
+
         public string Name = string.Empty;
-        
+
         public int Location;
         
         public int RankLevel;

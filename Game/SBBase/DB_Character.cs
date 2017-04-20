@@ -49,9 +49,9 @@ namespace SBBase
         public int FactionId;
         
         public int LastUsedTimestamp;
-        
+
         public string Name = string.Empty;
-        
+
         public DB_Character()
         {
         }

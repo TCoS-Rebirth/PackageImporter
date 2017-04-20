@@ -30,7 +30,7 @@ namespace SBBase
         
         public int MemberHandle;
         
-        public string Name = string.Empty;
+        //public string Name = string.Empty;
         
         public float Health;
         

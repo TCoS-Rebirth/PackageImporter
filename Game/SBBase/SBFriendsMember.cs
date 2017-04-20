@@ -27,9 +27,9 @@ namespace SBBase
     
     public class SBFriendsMember : UObject
     {
-        
+
         public string Name = string.Empty;
-        
+
         public int Flag;
         
         public int CharacterID;

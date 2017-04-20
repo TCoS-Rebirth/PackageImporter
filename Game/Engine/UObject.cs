@@ -102,14 +102,14 @@ namespace Engine
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public int ObjectFlags;
 
-        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Object")]
-        //[TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        //protected NameProperty name;
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Object")]
+        [TCosReborn.Framework.Attributes.FieldConstAttribute()]
+        protected NameProperty Name;
 
         //[TCosReborn.Framework.Attributes.FieldConstAttribute()]
         //[TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Object")]
         //public SerializableTypeProxy Class;
-        
+
         public UObject ()
         {
         }
@@ -144,6 +144,8 @@ namespace Engine
         public int Yaw;
 
         public int Roll;
+
+        public Rotator(int pitch, int yaw, int roll) { Pitch = pitch;Yaw = yaw;Roll = roll; }
     }
 
     public struct InterpCurvePoint
@@ -168,6 +170,8 @@ namespace Engine
         public float Y;
 
         public float Z;
+
+        public Vector(float x, float y, float z) { X = x;Y = y;Z = z; }
     }
 
     public struct Box
@@ -220,6 +224,8 @@ namespace Engine
         public byte R;
 
         public byte A;
+
+        public Color (byte r, byte g, byte b, byte a) { R = r;G = g;B = b;A = a; }
     }
 
     public struct Scale

@@ -28,8 +28,8 @@ namespace SBGame
     public class Appearance_Base : UObject
     {
         
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base")]
-        public LocalizedString Name;
+        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base")]
+        //public LocalizedString Name;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base")]
         public LocalizedString Description;

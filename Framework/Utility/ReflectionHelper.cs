@@ -13,74 +13,6 @@ namespace TCosReborn.Framework.Utility
 {
     static class ReflectionHelper
     {
-
-        static readonly Dictionary<Type, ReflectedRessourceType> ressourceTypes = new Dictionary<Type, ReflectedRessourceType>();
-
-        public static void Initialize()
-        {
-            LoadRessourceTypeCache();
-        }
-
-        public static bool TryGetTypeInfo(Type type, out ReflectedRessourceType reflectedRessource)
-        {
-            return ressourceTypes.TryGetValue(type, out reflectedRessource);
-        }
-
-        static void LoadRessourceTypeCache()
-        {
-            ressourceTypes.Clear();
-            var inheritedTypes =
-                Assembly.GetAssembly(typeof(SBPackageResource))
-                    .GetTypes()
-                    .Where(type => type.IsSubclassOf(typeof(SBPackageResource)) && !type.IsAbstract && type.IsClass);
-            foreach (var type in inheritedTypes)
-            {
-                var ctr = type.GetConstructor(Type.EmptyTypes);
-                if (ctr != null)
-                {
-                    var compiledCtr = Expression.Lambda<Func<object>>(Expression.New(ctr)).Compile();
-                    var reflectedFields = type.GetFields(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                    var fields = new Dictionary<string, FieldInfo>();
-                    for (var i = 0; i < reflectedFields.Length; i++)
-                    {
-                        if (fields.ContainsKey(reflectedFields[i].Name.ToLower()))
-                        {
-                            Console.WriteLine("Field duplicate!: " + type.Name + " (" + reflectedFields[i].Name + ")");
-                            Console.ReadKey();
-                        }
-                        else
-                        {
-                            fields.Add(reflectedFields[i].Name.ToLower(), reflectedFields[i]);
-                        }
-                    }
-                    var rpr = new ReflectedRessourceType(compiledCtr, fields);
-                    ressourceTypes.Add(type, rpr);
-                }
-            }
-        }
-
-        public class ReflectedRessourceType
-        {
-            readonly Func<object> cachedConstructor;
-            readonly Dictionary<string, FieldInfo> fields;
-
-            public ReflectedRessourceType(Func<object> ctr, Dictionary<string, FieldInfo> fields)
-            {
-                cachedConstructor = ctr;
-                this.fields = fields;
-            }
-
-            public SBPackageResource CreateInstance()
-            {
-                return cachedConstructor() as SBPackageResource;
-            }
-
-            public bool GetFieldInfo(string fieldname, out FieldInfo field)
-            {
-                return fields.TryGetValue(fieldname.ToLower(), out field);
-            }
-        }
-
         #region PackageTypeReflection
 
         static readonly List<Type> cachedTypes = new List<Type>();
@@ -166,6 +98,45 @@ namespace TCosReborn.Framework.Utility
             return false;
         }
 
+        public static PropertyType GetArrayType(object parentObject, string propertyName, out Type arrayType, out Type arrayContentType)
+        {
+            if (parentObject == null)
+            {
+                arrayType = null;
+                arrayContentType = null;
+                return PropertyType.UnknownProperty;
+            }
+            var field = parentObject.GetType().GetField(propertyName, BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.FlattenHierarchy|BindingFlags.IgnoreCase);
+            if (field == null)
+            {
+                arrayType = null;
+                arrayContentType = null;
+                return PropertyType.UnknownProperty;
+            }
+            if (field.FieldType.IsArray)
+            {
+                arrayType = field.FieldType;
+                arrayContentType = arrayType.GetElementType();
+                return GetUPropertyType(arrayContentType);
+            }
+            else if (field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                arrayType = field.FieldType;
+                arrayContentType = arrayType.GetGenericArguments()[0];
+                return GetUPropertyType(arrayContentType);
+            }
+            arrayType = null;
+            arrayContentType = null;
+            return PropertyType.UnknownProperty;
+        }
+
+        static PropertyType GetUPropertyType(Type type)
+        {
+            PropertyType t;
+            string insideName;
+            return FindInnerType(type, out t, out insideName) ? t : PropertyType.UnknownProperty;
+        }
+
         public static bool ReflectArrayType(string className, string propertyName, out PropertyType pType, out string insideName, object parentObject = null)
         {
             className = className.Replace("\0", string.Empty);
@@ -198,13 +169,6 @@ namespace TCosReborn.Framework.Utility
             }
             pType = PropertyType.UnknownProperty;
             return false;
-        }
-
-        public static PropertyType GetUPropertyType(Type type)
-        {
-            PropertyType t;
-            string insideName;
-            return FindInnerType(type, out t, out insideName) ? t : PropertyType.UnknownProperty;
         }
 
         static bool FindInnerType(Type t, out PropertyType pType, out string insideName)
@@ -316,10 +280,6 @@ namespace TCosReborn.Framework.Utility
 
         public static Type GetTypeFromName(string typeName, object parentObject = null)
         {
-            //if (typeName.StartsWith("TCoSReborn", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    typeName = string.Format("TCoSReborn.{0}", typeName);
-            //}
             var hardCodedReplacement = CheckReturnHardcodedReplacement(typeName);
             if (hardCodedReplacement != null)
             {
@@ -345,6 +305,7 @@ namespace TCosReborn.Framework.Utility
             {
                 if (type.Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) || type.FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
                 {
+                    if (type.IsNested && parentObject != null && parentObject.GetType().Namespace != type.Namespace) continue;
                     return type;
                 }
             }

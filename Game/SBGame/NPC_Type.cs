@@ -39,6 +39,9 @@ namespace SBGame
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Basics")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString ShortName;
+
+        //Custom addition
+        public LocalizedString Name;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Basics")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

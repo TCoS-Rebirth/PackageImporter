@@ -231,10 +231,10 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Local")]
         public Range AutoResetTimeRange;
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Local")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Local")]
         public string Name = string.Empty;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Local")]
         public byte DetailMode;
         

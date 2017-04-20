@@ -91,15 +91,15 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="General")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        private int BuyPriceValue;
+        protected int BuyPriceValue;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="General")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        private int SellPriceValue;
+        protected int SellPriceValue;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="General")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        private int RecyclePriceValue;
+        protected int RecyclePriceValue;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="General")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
@@ -107,11 +107,11 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public List<Content_Requirement> Requirements = new List<Content_Requirement>();
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Info")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Info")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Name;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Info")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Description;

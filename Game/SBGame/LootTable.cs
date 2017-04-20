@@ -29,10 +29,10 @@ namespace SBGame
     {
         
         public List<LootEntry> Entries = new List<LootEntry>();
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="LootTable")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "LootTable")]
         public string Name = string.Empty;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="LootTable")]
         public byte TableType;
         

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using TCosReborn.Framework.Internal;
+using TCosReborn.Framework.Common;
 
-namespace TCosReborn.Framework.Common
+namespace Engine
 {
     [Serializable, TypeConverter(typeof(LocalizedStringConverter))]
     public class LocalizedString

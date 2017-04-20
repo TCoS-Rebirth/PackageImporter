@@ -47,11 +47,11 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public List<FSkill_Event_Duff_CondEv> ConditionalEvents = new List<FSkill_Event_Duff_CondEv>();
-        
-        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Duff")]
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "Duff")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public LocalizedString Name;
-        
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Duff")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
