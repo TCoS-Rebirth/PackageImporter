@@ -65,7 +65,6 @@
     <Compile Include="Framework\Attributes\PackageExtractorAttributes.cs" />
     <Compile Include="Framework\Attributes\ReadOnlyAttribute.cs" />
     <Compile Include="Framework\Attributes\SerializeField.cs" />
-    <Compile Include="Framework\Common\MonoBehaviour.cs" />
     <Compile Include="Framework\Common\Enums.cs" />
     <Compile Include="Framework\Internal\AlphaNumComparer.cs" />
     <Compile Include="Framework\Internal\LocalizedStringConverter.cs" />

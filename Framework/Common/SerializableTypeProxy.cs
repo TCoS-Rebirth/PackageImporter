@@ -18,6 +18,11 @@ namespace TCosReborn.Framework.Common
             assemblyQualifiedName = type.AssemblyQualifiedName;
         }
 
+        SerializableTypeProxy()
+        {
+
+        }
+
         public SerializableTypeProxy(string typeName)
         {
             if (typeName.Contains("."))
@@ -28,9 +33,29 @@ namespace TCosReborn.Framework.Common
             name = typeName;
         }
 
+
+        public static implicit operator string(SerializableTypeProxy value)
+        {
+            return value.assemblyQualifiedName;
+        }
+        public static implicit operator SerializableTypeProxy(string value)
+        {
+            return new SerializableTypeProxy() { name = value, assemblyQualifiedName = value };
+        }
+
+        public static implicit operator Type(SerializableTypeProxy value)
+        {
+            return value.RetrieveType();
+        }
+
+        public static implicit operator SerializableTypeProxy(Type value)
+        {
+            return new SerializableTypeProxy(value);
+        }
+
         public Type RetrieveType()
         {
-            return Type.GetType(string.IsNullOrEmpty(assemblyQualifiedName) ? name : assemblyQualifiedName);
+            return Type.GetType(assemblyQualifiedName);
         }
 
         public bool IsValid()

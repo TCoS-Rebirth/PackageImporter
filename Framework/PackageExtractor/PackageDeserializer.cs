@@ -23,6 +23,16 @@ namespace TCosReborn.Framework.PackageExtractor
 
         string PackageName = string.Empty;
 
+        /// <summary>
+        /// Object may be imported by other package files
+        /// </summary>
+        const uint RF_Public = 0x00000004;
+
+        bool HasRFPublicFlag(uint flags)
+        {
+            return (RF_Public & flags) == RF_Public;
+        }
+
         List<LinkerLink> LinkerLinks = new List<LinkerLink>();
 
         enum ReferenceType
@@ -36,7 +46,7 @@ namespace TCosReborn.Framework.PackageExtractor
         {
             if (reference > 0)
             {
-                var result = NameTable[ExportTable[reference - 1].ObjectName];
+                var result = GetName(ExportTable[reference - 1].ObjectNameReference);
                 if (showAncestors)
                 {
                     var ancestors = FindReferenceName(ExportTable[reference - 1].PackageReference);
@@ -47,15 +57,27 @@ namespace TCosReborn.Framework.PackageExtractor
             }
             if (reference < 0)
             {
-                var result = NameTable[ImportTable[-reference - 1].ObjectReference];
+                var result = GetName(ImportTable[-reference - 1].ObjectReference);
                 if (showAncestors)
                 {
                     var ancestors = FindReferenceName(ImportTable[-reference - 1].PackageReference);
                     if (ancestors != "null")
                         result = ancestors + "." + result;
                 }
-
                 return result;
+            }
+            return "null";
+        }
+
+        public string FindAbsoluteObjectReference(int reference)
+        {
+            if(reference > 0)
+            {
+                return ExportTable[reference - 1].AbsoluteObjectReference;
+            }
+            if (reference < 0)
+            {
+                return ImportTable[-reference - 1].AbsoluteObjectReference;
             }
             return "null";
         }
@@ -70,6 +92,16 @@ namespace TCosReborn.Framework.PackageExtractor
         ImportEntry GetImportEntry(int reference)
         {
             return ImportTable[-reference - 1];
+        }
+
+        ExportEntry GetExportEntry(int reference)
+        {
+            return ExportTable[reference - 1];
+        }
+
+        NameProperty GetName(int reference)
+        {
+            return NameTable[reference];
         }
 
         public List<LinkerLink> DeserializePackage(string filePath)
@@ -104,14 +136,13 @@ namespace TCosReborn.Framework.PackageExtractor
             fileReader.Seek(Header.ImportOffset, SeekOrigin.Begin);
             for (uint k = 0; k < Header.ImportCount; ++k)
             {
-                ImportEntry entry = new ImportEntry();
-                entry.ClassPackageReference = fileReader.ReadIndex();
-                entry.ClassPackageName = NameTable[entry.ClassPackageReference];
-                entry.ClassReference = fileReader.ReadIndex();
-                entry.ClassName = NameTable[entry.ClassReference];
-                entry.PackageReference = fileReader.ReadInt32();
-                entry.ObjectReference = fileReader.ReadIndex();
-                entry.ObjectName = NameTable[entry.ObjectReference];
+                ImportEntry entry = new ImportEntry()
+                {
+                    ClassPackageReference = fileReader.ReadIndex(),
+                    ClassReference = fileReader.ReadIndex(),
+                    PackageReference = fileReader.ReadInt32(),
+                    ObjectReference = fileReader.ReadIndex()
+                };
                 ImportTable[k] = entry;
             }
             //Log(string.Format("ImportTable: {0} imports read", ImportTable.Length), 0);
@@ -131,7 +162,7 @@ namespace TCosReborn.Framework.PackageExtractor
                     ClassReference = fileReader.ReadIndex(),
                     SuperReference = fileReader.ReadIndex(),
                     PackageReference = fileReader.ReadInt32(),
-                    ObjectName = fileReader.ReadIndex(),
+                    ObjectNameReference = fileReader.ReadIndex(),
                     ObjectFlags = fileReader.ReadInt32(),
                     SerialSize = fileReader.ReadIndex()
                 };
@@ -145,11 +176,34 @@ namespace TCosReborn.Framework.PackageExtractor
 
             #endregion
 
-            //------------------- ADD Import Package Refs --------------------
+            //------------------- Resolve Import & Export references to readable names--------------------
 
+            const string NULL = "null";
             for (int i = 0; i < ImportTable.Length; i++)
             {
-                ImportTable[i].PackageName = FindReferenceName(ImportTable[i].PackageReference);
+                ImportTable[i].ObjectPackageName = FindReferenceName(ImportTable[i].PackageReference);
+                ImportTable[i].ClassPackageName = GetName(ImportTable[i].ClassPackageReference);
+                ImportTable[i].ClassName = GetName(ImportTable[i].ClassReference);
+                ImportTable[i].ObjectName = GetName(ImportTable[i].ObjectReference);
+
+                var objFormatted = (ImportTable[i].ObjectPackageName != NULL ? ImportTable[i].ObjectPackageName : "") + (ImportTable[i].ObjectName != NULL ? (ImportTable[i].ObjectPackageName!=NULL?".":"") + ImportTable[i].ObjectName : "");
+                var classFormatted = (ImportTable[i].ClassPackageName != NULL ? ImportTable[i].ClassPackageName : "") + (ImportTable[i].ClassName != NULL ? (ImportTable[i].ClassPackageName!=NULL?".":"") + ImportTable[i].ClassName : "");
+                var canBeSkipped = ReflectionHelper.CanBeSkipped(classFormatted);
+                ImportTable[i].AbsoluteObjectReference = canBeSkipped?"null":objFormatted;
+                ImportTable[i].AbsoluteObjectTypeReference = classFormatted;
+            }
+
+            for (int i = 0; i < ExportTable.Length; i++)
+            {
+                ExportTable[i].ClassName = FindReferenceName(ExportTable[i].ClassReference);
+                ExportTable[i].ClassParentName = FindReferenceName(ExportTable[i].SuperReference);
+                ExportTable[i].ObjectPackageName = FindReferenceName(ExportTable[i].PackageReference);
+                ExportTable[i].ObjectName = GetName(ExportTable[i].ObjectNameReference);
+
+                var objFormatted = (ExportTable[i].ObjectPackageName != NULL ? ExportTable[i].ObjectPackageName : "") + (ExportTable[i].ObjectName != NULL ? (ExportTable[i].ObjectPackageName!=NULL?".":"") + ExportTable[i].ObjectName : "");
+                var classFormatted = (ExportTable[i].ClassParentName != NULL ? ExportTable[i].ClassParentName : "") + (ExportTable[i].ClassName != NULL ? (ExportTable[i].ClassParentName!=NULL?".":"") + ExportTable[i].ClassName : "");
+                ExportTable[i].AbsoluteObjectReference = string.Format("{0}.{1}", PackageName, objFormatted);
+                ExportTable[i].AbsoluteObjectTypeReference = classFormatted;
             }
 
             //--------------- READ ALL OBJECTS EXPORTED -----------------------
@@ -165,59 +219,35 @@ namespace TCosReborn.Framework.PackageExtractor
                 var activeObject = new SBObject
                 {
                     Class = new SBClass(),
-                    Name = NameTable[entry.ObjectName],
                     Flags = new List<ObjectFlags>(),
-                    ClassName = FindReferenceName(entry.ClassReference).Replace("\0", string.Empty),
-                    Package = FindReferenceName(entry.PackageReference),
-                    Size = entry.SerialSize,
-                    SuperClassName = FindReferenceName(entry.SuperReference),
-                    PackageID = entry.PackageReference
+                    SuperClassName = entry.ClassParentName/*FindReferenceName(entry.SuperReference)*/,
+                    ClassName = entry.ClassName/*FindReferenceName(entry.ClassReference).Replace("\0", string.Empty)*/,
+                    PackageName = entry.ObjectPackageName/*FindReferenceName(entry.PackageReference)*/,
+                    ObjectName = entry.ObjectName/*GetName(entry.ObjectNameReference)*/,
+                    ObjectSize = entry.SerialSize,
                 };
-                var objFullPath = "";
-                var refType = GetRefType(entry.PackageReference);
-                if (refType == ReferenceType.Export)
-                {
-                    var objPkg = activeObject.Package;
-                    //if (objPkg.Equals("null"))
-                    //{
-                    //    objFullPath = string.Format("{0}.{1}", pkgName, activeObject.Name);
-                    //}
-                    //else
-                    //{
-                        objFullPath = string.Format("{0}.{1}.{2}", PackageName, activeObject.Package, activeObject.Name);
-                    //}
-                }
-                else if (refType == ReferenceType.Null)
-                {
-                    objFullPath = string.Format("{0}.{1}", PackageName, activeObject.Name);
-                }
-                else
-                {
-                    objFullPath = string.Format("{0}.{1}", activeObject.Package, activeObject.Name);
-                }
                 var obj = ReadObject(activeObject, fileReader, entry);
                 if (obj != null)
                 {
-                    if (SBPackageResources.ObjectsByName.ContainsKey(objFullPath))
+                    try
                     {
-                        Logger.LogError("Duplicate object: " + objFullPath);
-                    }
-                    else
+                        SBPackageResources.ObjectsByName.Add(entry.AbsoluteObjectReference, obj);
+                    }catch(Exception e)
                     {
-                        if (objFullPath.Contains("null"))
-                        {
-                            Logger.LogError("null in path");
-                        }
-                        else
-                        {
-                            SBPackageResources.ObjectsByName.Add(objFullPath, obj);
-                        }
+                        Logger.LogError(e.Message+" ("+entry.AbsoluteObjectReference+")");
                     }
                 }
             }
             Logger.LogOk(string.Format("{0} Objects read", ExportTable.Length));
             Logger.Log(string.Format("{0} references to link", LinkerLinks.Count));
 
+            var sb = new StringBuilder();
+            for (int i = 0; i < LinkerLinks.Count; i++)
+            {
+                sb.AppendLine("Link: " + LinkerLinks[i].AbsoluteObjectReference);
+            }
+
+            File.WriteAllText(@"C:\Tables\" + PackageName + "_Links.txt", sb.ToString());
             #endregion
 
             return LinkerLinks;
@@ -253,8 +283,8 @@ namespace TCosReborn.Framework.PackageExtractor
                 Logger.LogError("Could not create instance from class name: " + activeObject.ClassName);
                 return null;
             }
-            realObject.ReferenceObjectName = activeObject.Name;
-            realObject.ReferencePackageName = activeObject.Package;
+            realObject.ReferenceObjectName = activeObject.ObjectName;
+            realObject.ReferencePackageName = activeObject.PackageName;
 
             //If Object has a stack, read it but do nothing with it
             var hasExecutionStack = false;
@@ -408,17 +438,10 @@ namespace TCosReborn.Framework.PackageExtractor
                         var link = propValue as LinkerLink;
                         if (link != null)
                         {
-                            if (link.importInfo != null && ReflectionHelper.CanBeSkipped(string.Format("{0}.{1}", link.importInfo.ClassPackageName, link.importInfo.ClassName)))
-                            {
-
-                            }
-                            else
-                            {
-                                link.fieldReference = field;
-                                link.targetReference = activeObject;
-                                link.Link = (obj) => { link.fieldReference.SetValue(link.targetReference, obj); };
-                                LinkerLinks.Add(link);
-                            }
+                            link.fieldReference = field;
+                            link.targetReference = activeObject;
+                            link.Link = (obj) => { link.fieldReference.SetValue(link.targetReference, obj); };
+                            LinkerLinks.Add(link);
                         }
                         else
                         {
@@ -451,7 +474,7 @@ namespace TCosReborn.Framework.PackageExtractor
             returnBytesRead = readIndexBytes;
             try
             {
-                activeProperty.Name = NameTable[propertyNameIndex];
+                activeProperty.Name = GetName(propertyNameIndex);
             }
             catch (IndexOutOfRangeException)
             {
@@ -509,7 +532,7 @@ namespace TCosReborn.Framework.PackageExtractor
             {
                 var structNameIndex = fileReader.ReadIndex(out readIndexBytes);
                 returnBytesRead += readIndexBytes;
-                activeProperty.StructName = NameTable[structNameIndex];
+                activeProperty.StructName = GetName(structNameIndex);
             }
             var realSize = 0;
             //Read real size
@@ -560,7 +583,7 @@ namespace TCosReborn.Framework.PackageExtractor
                     propValueBytesRead = 4;
                     return fileReader.ReadFloat();
                 case PropertyType.NameProperty:
-                    return new NameProperty(NameTable[fileReader.ReadIndex(out propValueBytesRead)]);
+                    return GetName(fileReader.ReadIndex(out propValueBytesRead));
                 case PropertyType.StrProperty:
                     var stringSize = fileReader.ReadIndex(out readIndexBytes);
                     propValueBytesRead = readIndexBytes;
@@ -570,23 +593,30 @@ namespace TCosReborn.Framework.PackageExtractor
                     return stringValue;
                 case PropertyType.ObjectProperty:
                     var objectReference = fileReader.ReadIndex(out readIndexBytes);
-                    var obj = FindReferenceName(objectReference, false);
-                    if (!obj.Equals("null", StringComparison.OrdinalIgnoreCase) && !obj.Equals("DRFORTHEWIN", StringComparison.OrdinalIgnoreCase))
+                    propValueBytesRead = readIndexBytes;
+                    var obj = FindAbsoluteObjectReference(objectReference);
+                    bool isClass = false;
+                    if (!obj.Equals("null", StringComparison.OrdinalIgnoreCase))
                     {
-                        propValueBytesRead = readIndexBytes;
-                        if (GetRefType(objectReference) == ReferenceType.Import)
+                        var splits = obj.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (objectReference < 0)
                         {
-                            var importEntry = GetImportEntry(objectReference);
-                            return new LinkerLink(obj, null, importEntry) { SelfPackageName = PackageName };
-
+                            var importRef = ImportTable[-objectReference - 1];
+                            if (importRef.AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase))
+                            {
+                                isClass = true;
+                            }
                         }
-                        return new LinkerLink(obj, null) { SelfPackageName = PackageName };
+                        else
+                        {
+                            var exportRef = ExportTable[objectReference - 1];
+                        }
+                        return new LinkerLink(obj, null) { IsTypeReference = isClass };
                     }
                     else
                     {
                         obj = null;
                     }
-                    propValueBytesRead = readIndexBytes;
                     return obj; //TODO: handle as reference in receiver
                 case PropertyType.StructProperty:
                     if (activeProperty.StructName == "Vector")
@@ -809,7 +839,7 @@ namespace TCosReborn.Framework.PackageExtractor
             enumClass.Fields.Add("ArraySize", arraySize.ToString());
             for (var i = 0; i < arraySize; ++i)
             {
-                enumClass.Fields.Add("ElementName" + i, NameTable[reader.ReadIndex()]);
+                enumClass.Fields.Add("ElementName" + i, GetName(reader.ReadIndex()));
             }
 
             return enumClass;
@@ -828,7 +858,7 @@ namespace TCosReborn.Framework.PackageExtractor
             property.Fields.Add("ArrayDimension", arrayDimension.ToString());
             property.Fields.Add("ElementSize", elementSize.ToString());
             property.Fields.Add("PropertyFlags", propertyFlags.ToString());
-            property.Fields.Add("Category", NameTable[category]);
+            property.Fields.Add("Category", GetName(category));
             if ((propertyFlags & (int)PropertyFlags.CPF_Net) != 0)
             {
                 int replicationOffset = reader.ReadInt16();
@@ -910,7 +940,7 @@ namespace TCosReborn.Framework.PackageExtractor
             classProperty.Ancestor = ReadPropertyClass(reader);
 
             var mclass = reader.ReadIndex();
-            classProperty.Fields.Add("Class", NameTable[mclass]);
+            classProperty.Fields.Add("Class", GetName(mclass));
 
             return classProperty;
         }
@@ -999,7 +1029,7 @@ namespace TCosReborn.Framework.PackageExtractor
                 reader.ReadBytes(scriptSize);
             structClass.Fields.Add("ScriptText", FindReferenceName(scriptText));
             structClass.Fields.Add("Children", FindReferenceName(children));
-            structClass.Fields.Add("FriendlyName", NameTable[friendlyName]);
+            structClass.Fields.Add("FriendlyName", GetName(friendlyName));
             structClass.Fields.Add("Line", line.ToString());
             structClass.Fields.Add("TextPos", textPos.ToString());
             structClass.Fields.Add("ScriptSize", scriptSize.ToString());
@@ -1076,7 +1106,7 @@ namespace TCosReborn.Framework.PackageExtractor
             nullClass.Fields.Add("Dependencies Count", dependencies_count.ToString());
             nullClass.Fields.Add("Package Imports Count", packageImports_count.ToString());
             nullClass.Fields.Add("Class Within", FindReferenceName(classWithin));
-            nullClass.Fields.Add("Class Config Name", NameTable[classConfigName]);
+            nullClass.Fields.Add("Class Config Name", GetName(classConfigName));
 
             return nullClass;
         }
@@ -1091,27 +1121,22 @@ namespace TCosReborn.Framework.PackageExtractor
             public Array arrayReference;
             public IList listReference;
             public int indexReference;
-            public string ObjName;
+            public string AbsoluteObjectReference;
             public Action<object> Link;
             public bool HasImportInfo;
-            public ImportEntry importInfo;
-            public string PackageRefName;
+            public bool IsTypeReference;
 
-            public string SelfPackageName;
-
-            public LinkerLink(string objectName, Action<object> link)
+            public LinkerLink(string objectRef, Action<object> link)
             {
-                ObjName = objectName;
+                AbsoluteObjectReference = objectRef;
                 Link = link;
                 HasImportInfo = false;
             }
 
-            public LinkerLink(string objName, Action<object> link, ImportEntry importEntry)
+            public LinkerLink(string objectRef, Action<object> link, string objRef)
             {
-                ObjName = objName;
+                AbsoluteObjectReference = objectRef;
                 Link = link;
-                importInfo = importEntry;
-                PackageRefName = importEntry.PackageName;
                 HasImportInfo = true;
             }
         }
@@ -1135,25 +1160,91 @@ namespace TCosReborn.Framework.PackageExtractor
 
         public class ImportEntry
         {
+            public Type ObjectType;
+            /// <summary>
+            /// [NameTableIndex] Package (namespace) in which the type/class of the object is defined
+            /// </summary>
             public int ClassPackageReference;
-            public string ClassPackageName;
+            /// <summary>
+            /// [NameTableIndex] type/class of the object 
+            /// </summary>
             public int ClassReference;
-            public string ClassName;
+            /// <summary>
+            /// [ObjectReference] Package file where the object resides in
+            /// </summary>
             public int PackageReference;
-            public string PackageName;
+            /// <summary>
+            /// [NameTableIndex] name of the object
+            /// </summary>
             public int ObjectReference;
+            
+
+            /// <summary>
+            /// Namespace (package) of imported object type/class
+            /// </summary>
+            public string ClassPackageName;
+            /// <summary>
+            /// Type/class of imported object
+            /// </summary>
+            public string ClassName;
+
+            /// <summary>
+            /// Package of imported object
+            /// </summary>
+            public string ObjectPackageName;
+            /// <summary>
+            /// Name of imported object
+            /// </summary>
             public string ObjectName;
+
+            public string AbsoluteObjectReference;
+            public string AbsoluteObjectTypeReference;
         }
 
         struct ExportEntry
         {
-            public int ClassReference;
-            public int SuperReference;
-            public int PackageReference;
-            public int ObjectName;
+
+            public Type ObjectType;
+            /// <summary>
+            /// [ObjectReference] class of the object
+            /// </summary>
+            public int ClassReference;      
+            /// <summary>
+            /// [ObjectReference] object parent
+            /// </summary>
+            public int SuperReference;  
+            /// <summary>
+            /// [ObjectReference] internal package/group of the object
+            /// </summary>
+            public int PackageReference;      
+            /// <summary>
+            /// [NameTableIndex] name of the object
+            /// </summary>
+            public int ObjectNameReference;
+
             public int ObjectFlags;
             public int SerialSize;
             public int SerialOffset;
+
+            /// <summary>
+            /// Type of the exported object (can be imported or exported)
+            /// </summary>
+            public string ClassName;
+            /// <summary>
+            /// 'Parent' Type of the exported object
+            /// </summary>
+            public string ClassParentName;
+            /// <summary>
+            /// Namespace (Package) of the object
+            /// </summary>
+            public string ObjectPackageName;
+            /// <summary>
+            /// Name of exported object
+            /// </summary>
+            public string ObjectName;
+
+            public string AbsoluteObjectReference;
+            public string AbsoluteObjectTypeReference;
         }
 
         public class SBProperty
@@ -1172,12 +1263,14 @@ namespace TCosReborn.Framework.PackageExtractor
         public class SBObject
         {
             public SBClass Class;
+            /// <summary>
+            /// Type of the object
+            /// </summary>
             public string ClassName;
             public List<ObjectFlags> Flags;
-            public string Name;
-            public string Package;
-            public int PackageID = -1;
-            public int Size;
+            public string ObjectName;
+            public string PackageName;
+            public int ObjectSize;
             public string SuperClassName;
         }
 

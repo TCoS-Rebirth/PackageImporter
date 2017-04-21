@@ -335,6 +335,11 @@ namespace Engine
         {
             return new NameProperty(value);
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 
     public enum EDetailMode

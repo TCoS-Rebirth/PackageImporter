@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TCosReborn.Application;
+using TCosReborn.Framework.Utility;
 
 namespace TCosReborn.Framework.PackageExtractor
 {
@@ -13,27 +14,21 @@ namespace TCosReborn.Framework.PackageExtractor
             {
                 var link = queue.Dequeue();
                 object imported;
-                if (packages.TryGetValue(string.Format("{0}.{1}", link.SelfPackageName,link.ObjName), out imported))
+                if (packages.TryGetValue(link.AbsoluteObjectReference, out imported))
                 {
                     link.Link(imported);
-                    Logger.LogOk("Reference found");
-                }
-                else if (packages.TryGetValue(string.Format("{0}.{1}.{2}", link.SelfPackageName, link.PackageRefName, link.ObjName), out imported))
-                {
-                    link.Link(imported);
-                    Logger.LogOk("Reference found");
                 }
                 else
                 {
-                    if (packages.TryGetValue(string.Format("{0}.{1}", link.PackageRefName, link.ObjName), out imported))
+                    if (link.IsTypeReference)
                     {
-                        link.Link(imported);
-                        Logger.LogOk("Reference found");
+                        var type = ReflectionHelper.GetTypeFromName(link.AbsoluteObjectReference);
+                        if (type != null)
+                        {
+                            link.Link(type);
+                        }
                     }
-                    else
-                    {
-                        Logger.LogError("Reference not found: " + link.ObjName);
-                    }
+                    Logger.LogError("Could not link imported object: " + link.AbsoluteObjectReference);
                 }
             }
         }
