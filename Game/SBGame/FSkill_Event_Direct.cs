@@ -54,19 +54,19 @@ namespace SBGame
         public FSkill_EffectClass_DirectHeal Heal;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=3)]
-        public FSkill_EffectClass_DirectState[] _State = new FSkill_EffectClass_DirectState[0];
+        //[TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=3)]
+        public FSkill_EffectClass_DirectState/*[]*/ _State/* = new FSkill_EffectClass_DirectState[0]*/;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public FSkill_EffectClass_DirectDrain Drain;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
-        public FSkill_Event_Duff[] Buff = new FSkill_Event_Duff[0];
+        //[TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
+        public FSkill_Event_Duff/*[]*/ Buff/* = new FSkill_Event_Duff[0]*/;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
-        [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
-        public FSkill_Event_Duff[] Debuff = new FSkill_Event_Duff[0];
+        //[TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=4)]
+        public FSkill_Event_Duff/*[]*/ Debuff/* = new FSkill_Event_Duff[0]*/;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public FSkill_EffectClass_DirectTeleport Teleport;
