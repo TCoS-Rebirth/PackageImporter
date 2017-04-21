@@ -10,6 +10,7 @@ using TCosReborn.Framework.Common;
 using TCosReborn.Framework.Utility;
 using Engine;
 using System.Runtime.Serialization;
+using TCosReborn.Framework.Attributes;
 
 namespace TCosReborn.Framework.PackageExtractor
 {
@@ -432,23 +433,27 @@ namespace TCosReborn.Framework.PackageExtractor
                         throw new Exception(string.Format("Field: {0} doesn't exist for: {1}", activeProperty.Name, activeObject.ReferenceObjectName));
                     }else
                     {
-                        var link = propValue as LinkerLink;
-                        if (link != null)
+                        var ignoreExtractionAttribute = field.GetCustomAttribute<IgnoreFieldExtractionAttribute>();
+                        if (ignoreExtractionAttribute == null)
                         {
-                            link.fieldReference = field;
-                            link.targetReference = activeObject;
-                            link.Link = (obj) => { link.fieldReference.SetValue(link.targetReference, obj); };
-                            LinkerLinks.Add(link);
-                        }
-                        else
-                        {
-                            try
+                            var link = propValue as LinkerLink;
+                            if (link != null)
                             {
-                                field.SetValue(activeObject, propValue);
+                                link.fieldReference = field;
+                                link.targetReference = activeObject;
+                                link.Link = (obj) => { link.fieldReference.SetValue(link.targetReference, obj); };
+                                LinkerLinks.Add(link);
                             }
-                            catch (Exception)
+                            else
                             {
-                                throw;
+                                try
+                                {
+                                    field.SetValue(activeObject, propValue);
+                                }
+                                catch (Exception)
+                                {
+                                    throw;
+                                }
                             }
                         }
                     }
@@ -599,7 +604,7 @@ namespace TCosReborn.Framework.PackageExtractor
                         if (objectReference < 0)
                         {
                             var importRef = ImportTable[-objectReference - 1];
-                            if (importRef.IsClassType/*AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase)*/)
+                            if (importRef.IsClassType)
                             {
                                 isClass = true;
                             }
@@ -607,12 +612,12 @@ namespace TCosReborn.Framework.PackageExtractor
                         else
                         {
                             var exportRef = ExportTable[objectReference - 1];
-                            if (exportRef.IsClassType/*AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase)*/)
+                            if (exportRef.IsClassType)
                             {
                                 isClass = true;
                             }
                         }
-                        return new LinkerLink(obj, null) { IsTypeReference = isClass };
+                        return new LinkerLink(obj, null) { IsTypeReference = isClass, indexReference = activeProperty.ArrayIndex };
                     }
                     else
                     {
@@ -1292,7 +1297,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
         public class SBProperty
         {
-            public int ArrayIndex = -1;
+            public int ArrayIndex = 0;
             public string EnumValueName = "";
             public string Name = "";
             public int SerialSize;
@@ -1300,7 +1305,6 @@ namespace TCosReborn.Framework.PackageExtractor
             public PropertyType Type;
             public bool boolValue = false;
             public string Value = "";
-            public bool IsPartOfFixedArray = false;
         }
 
         public class SBObject

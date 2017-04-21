@@ -11,7 +11,6 @@ namespace TCosReborn.Framework.PackageExtractor
         {
             Logger.Log("------------linking imports-----------");
             Logger.Log(links.Count + " objects to link");
-            System.Console.ReadKey();
             int unlinked = 0;
             var queue = new Queue<PackageDeserializer.LinkerLink>(links);
             while(queue.Count > 0)
@@ -26,11 +25,36 @@ namespace TCosReborn.Framework.PackageExtractor
                     }
                     catch (System.Exception e)
                     {
-                        //if (!link.AbsoluteObjectReference.StartsWith("ItemsBrokenGP."))
-                        //{
+                        if (link.fieldReference != null && link.fieldReference.FieldType.IsArray && !imported.GetType().IsArray)
+                        {
+                            var arr = link.fieldReference.GetValue(link.targetReference) as System.Array;
+                            if (arr.Length <= link.indexReference)
+                            {
+                                var arrResized = System.Array.CreateInstance(arr.GetType().GetElementType(), link.indexReference + 1);
+                                arr.CopyTo(arrResized, 0);
+                                arr = arrResized;
+                            }
+                            bool success = false;
+                            try
+                            {
+                                arr.SetValue(imported, link.indexReference);
+                                success = true;
+                            }
+                            catch (System.Exception ex)
+                            {
+                                Logger.LogError(ex.Message);
+                                unlinked++;
+                            }
+                            if (success)
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
                             Logger.LogError(e.Message);
-                        unlinked++;
-                        //}
+                            unlinked++;
+                        }
                     }
                 }
                 else
@@ -57,40 +81,11 @@ namespace TCosReborn.Framework.PackageExtractor
                             }
                         }
                     }
-                    Logger.LogError("Could not link imported object: " + link.AbsoluteObjectReference);
+                    Logger.LogError("Could not find imported object: " + link.AbsoluteObjectReference);
                     unlinked++;
                 }
             }
-            Logger.LogWarning(unlinked + " objects could not be linked");
-            System.Console.ReadKey();
+            Logger.LogWarning(unlinked + "imported objects could not be linked");
         }
-
-        //readonly char[] split = { '.' };
-        //void ResolveItem(PackageDeserializer.LinkerLink link, Dictionary<string, SBResourcePackage> packages)
-        //{
-        //    var searchedItem = link.ObjName;
-        //    var parts = searchedItem.Split(split, StringSplitOptions.RemoveEmptyEntries);
-        //    if (parts.Length > 1)
-        //    {
-        //        //Logger.Log("import from pkg or subpkg");
-        //        if (parts[0].Contains("GP"))
-        //        {
-        //            Logger.Log("pkg is external: "+parts[0]);
-        //        }
-        //        else
-        //        {
-        //            Logger.Log("pkg is internal: "+parts[0]);
-        //        }
-        //        //SBResourcePackage pkg;
-        //        //if (!packages.TryGetValue(parts[0], out pkg))
-        //        //{
-        //        //    Logger.LogError(string.Format("Package ({0}) not found for: {1}", parts[0], searchedItem));
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        Logger.Log("import from own pkg level");
-        //    }
-        //}
     }
 }
