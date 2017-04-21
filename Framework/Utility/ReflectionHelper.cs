@@ -27,6 +27,7 @@ namespace TCosReborn.Framework.Utility
             "Engine.TerrainSector",
             "Engine.Emitter",
             "Engine.SkeletalMesh",
+            "Engine.Material",
             //"Engine.SBMover",
             "Engine.BeamEmitter",
             "Engine.xProcMesh",
@@ -190,7 +191,7 @@ namespace TCosReborn.Framework.Utility
                     insideName = t.Name;
                     return true;
                 }
-                if (t == typeof(SerializableTypeProxy))
+                if (t == typeof(System.Type))
                 {
                     pType = PropertyType.ObjectProperty;
                     insideName = t.Name;

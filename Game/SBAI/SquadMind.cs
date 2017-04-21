@@ -36,7 +36,7 @@ namespace SBAI
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="SquadMind")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy LeaderMachineClass;
+        public System.Type LeaderMachineClass;
         
         public SquadMind()
         {

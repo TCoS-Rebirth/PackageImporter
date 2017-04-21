@@ -35,31 +35,31 @@ namespace SBGame
         public const float SERVER_SYNC_TIME = 1F;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_PlayerInput")]
-        public SerializableTypeProxy InputClass;
+        public System.Type InputClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Camera")]
-        public SerializableTypeProxy CameraClass;
+        public System.Type CameraClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_GUI")]
-        public SerializableTypeProxy GUIClass;
+        public System.Type GUIClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Chat")]
-        public SerializableTypeProxy ChatClass;
+        public System.Type ChatClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Travel")]
-        public SerializableTypeProxy TravelClass;
+        public System.Type TravelClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Mail")]
-        public SerializableTypeProxy MailClass;
+        public System.Type MailClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_PlayerFriends")]
-        public SerializableTypeProxy mGroupingFriendsClass;
+        public System.Type mGroupingFriendsClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_PlayerTeams")]
-        public SerializableTypeProxy mGroupingTeamsClass;
+        public System.Type mGroupingTeamsClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_PlayerGuilds")]
-        public SerializableTypeProxy mGroupingGuildsClass;
+        public System.Type mGroupingGuildsClass;
         
         public Game_PlayerInput Input;
         

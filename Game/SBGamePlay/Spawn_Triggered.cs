@@ -60,7 +60,7 @@ namespace SBGamePlay
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy StateMachine;
+        public System.Type StateMachine;
         
         public Spawn_Triggered()
         {

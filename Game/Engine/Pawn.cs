@@ -296,7 +296,7 @@ namespace Engine
         public float LastPainTime;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="DamageType")]
-        public SerializableTypeProxy ReducedDamageType;
+        public System.Type ReducedDamageType;
         
         public float HeadRadius;
         
@@ -351,13 +351,13 @@ namespace Engine
         public Projector Shadow;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy BloodEffect;
+        public System.Type BloodEffect;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy LowGoreBlood;
+        public System.Type LowGoreBlood;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIController")]
-        public SerializableTypeProxy ControllerClass;
+        public System.Type ControllerClass;
         
         public LadderVolume OnLadder;
         
@@ -372,7 +372,7 @@ namespace Engine
         public Vector TakeHitLocation;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="DamageType")]
-        public SerializableTypeProxy HitDamageType;
+        public System.Type HitDamageType;
         
         public Vector TearOffMomentum;
         
@@ -479,7 +479,7 @@ namespace Engine
             
             public NameProperty Bone;
             
-            public SerializableTypeProxy damtype;
+            public System.Type damtype;
             
             public bool bSever;
             

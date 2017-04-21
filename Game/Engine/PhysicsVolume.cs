@@ -47,7 +47,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="DamageType")]
-        public SerializableTypeProxy DamageType;
+        public System.Type DamageType;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         public int Priority;
@@ -65,15 +65,15 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy EntryActor;
+        public System.Type EntryActor;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy ExitActor;
+        public System.Type ExitActor;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy PawnEntryActor;
+        public System.Type PawnEntryActor;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="PhysicsVolume")]
         public float FluidFriction;

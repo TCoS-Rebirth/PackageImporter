@@ -71,7 +71,7 @@ namespace SBAI
         public AIStateMachine mStateMachine;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy mMachineClass;
+        public System.Type mMachineClass;
         
         public byte mTickResult;
         

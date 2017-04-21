@@ -74,7 +74,7 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Banner")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Emitter")]
-        public SerializableTypeProxy EmitterClass;
+        public System.Type EmitterClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Banner")]
         public float BannerTime;

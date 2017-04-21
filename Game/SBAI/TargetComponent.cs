@@ -37,7 +37,7 @@ namespace SBAI
         public Actor TargetActor;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Object")]
-        public SerializableTypeProxy TargetClass;
+        public System.Type TargetClass;
         
         public float TargetRange;
         
@@ -164,7 +164,7 @@ namespace SBAI
             
             public Actor TargetActor;
             
-            public SerializableTypeProxy TargetClass;
+            public System.Type TargetClass;
             
             public float TargetRange;
             

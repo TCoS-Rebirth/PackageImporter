@@ -67,7 +67,7 @@ namespace SBGame
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Emitter")]
-        public SerializableTypeProxy EmitterClass;
+        public System.Type EmitterClass;
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

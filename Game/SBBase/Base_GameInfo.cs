@@ -70,15 +70,15 @@ namespace SBBase
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base_GameInfo")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Base_Controller")]
-        public SerializableTypeProxy mPlayerControllerClass;
+        public System.Type mPlayerControllerClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base_GameInfo")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Base_Controller")]
-        public SerializableTypeProxy mTestBotControllerClass;
+        public System.Type mTestBotControllerClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base_GameInfo")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Base_Controller")]
-        public SerializableTypeProxy mGameMasterControllerClass;
+        public System.Type mGameMasterControllerClass;
         
         public Base_GameInfo()
         {

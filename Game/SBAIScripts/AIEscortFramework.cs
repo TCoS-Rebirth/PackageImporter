@@ -36,7 +36,7 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Escort")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy EscortMachine;
+        public System.Type EscortMachine;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Escort")]
         public bool Invulnerable;

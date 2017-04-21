@@ -30,7 +30,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy EffectClass;
+        public System.Type EffectClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AnimNotify_Effect")]
         public NameProperty Bone;

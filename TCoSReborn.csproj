@@ -68,13 +68,11 @@
     <Compile Include="Framework\Common\Enums.cs" />
     <Compile Include="Framework\Internal\AlphaNumComparer.cs" />
     <Compile Include="Framework\Internal\LocalizedStringConverter.cs" />
-    <Compile Include="Framework\Internal\SerializableTypeProxyConverter.cs" />
     <Compile Include="Framework\Common\LevelProgression.cs" />
     <Compile Include="Framework\Common\LocalizedString.cs" />
     <Compile Include="Framework\Common\SBLocalizedStrings.cs" />
     <Compile Include="Framework\Common\SBPackageResource.cs" />
     <Compile Include="Framework\Common\SBResourcePackage.cs" />
-    <Compile Include="Framework\Common\SerializableTypeProxy.cs" />
     <Compile Include="Framework\Common\Tuple.cs" />
     <Compile Include="Framework\Common\UserAccount.cs" />
     <Compile Include="Framework\Common\UState.cs" />

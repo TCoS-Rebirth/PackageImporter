@@ -75,7 +75,7 @@ namespace SBAI
             
             public NPC_Type Type;
             
-            public SerializableTypeProxy State;
+            public System.Type State;
         }
     }
 }

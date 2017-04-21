@@ -30,7 +30,7 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AI_StateSwitch")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy TriggeredStateMachine;
+        public System.Type TriggeredStateMachine;
         
         public AI_StateSwitch()
         {

@@ -77,7 +77,7 @@ namespace SBAI
             
             public byte mMode;
             
-            public SerializableTypeProxy mState;
+            public System.Type mState;
             
             public float mTimePlanning;
             

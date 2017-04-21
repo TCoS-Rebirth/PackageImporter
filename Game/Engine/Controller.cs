@@ -162,10 +162,10 @@ namespace Engine
         public Vector DirectionHint;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Pawn")]
-        public SerializableTypeProxy PawnClass;
+        public System.Type PawnClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Pawn")]
-        public SerializableTypeProxy PreviousPawnClass;
+        public System.Type PreviousPawnClass;
         
         public float GroundPitchTime;
         

@@ -30,7 +30,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AIScript")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIController")]
-        public SerializableTypeProxy ControllerClass;
+        public System.Type ControllerClass;
         
         public bool bNavigate;
         

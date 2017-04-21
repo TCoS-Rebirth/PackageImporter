@@ -31,7 +31,7 @@ namespace SBAIScripts
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="VhelgarHunter")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy ActiveMachineClass;
+        public System.Type ActiveMachineClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="VhelgarHunter")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

@@ -33,7 +33,7 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="NPC_AI")]
-        public SerializableTypeProxy GroupControllerType;
+        public System.Type GroupControllerType;
         
         public NPC_Group()
         {

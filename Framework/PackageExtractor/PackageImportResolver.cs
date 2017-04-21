@@ -9,6 +9,10 @@ namespace TCosReborn.Framework.PackageExtractor
     {
         public static void Resolve(Dictionary<string, object> packages, List<PackageDeserializer.LinkerLink> links)
         {
+            Logger.Log("------------linking imports-----------");
+            Logger.Log(links.Count + " objects to link");
+            System.Console.ReadKey();
+            int unlinked = 0;
             var queue = new Queue<PackageDeserializer.LinkerLink>(links);
             while(queue.Count > 0)
             {
@@ -16,7 +20,18 @@ namespace TCosReborn.Framework.PackageExtractor
                 object imported;
                 if (packages.TryGetValue(link.AbsoluteObjectReference, out imported))
                 {
-                    link.Link(imported);
+                    try
+                    {
+                        link.Link(imported);
+                    }
+                    catch (System.Exception e)
+                    {
+                        //if (!link.AbsoluteObjectReference.StartsWith("ItemsBrokenGP."))
+                        //{
+                            Logger.LogError(e.Message);
+                        unlinked++;
+                        //}
+                    }
                 }
                 else
                 {
@@ -25,12 +40,29 @@ namespace TCosReborn.Framework.PackageExtractor
                         var type = ReflectionHelper.GetTypeFromName(link.AbsoluteObjectReference);
                         if (type != null)
                         {
-                            link.Link(type);
+                            var success = false;
+                            try
+                            {
+                                link.Link(type);
+                                success = true;
+                            }
+                            catch(System.Exception e)
+                            {
+                                Logger.LogError(e.Message);
+                                unlinked++;
+                            }
+                            if (success)
+                            {
+                                continue;
+                            }
                         }
                     }
                     Logger.LogError("Could not link imported object: " + link.AbsoluteObjectReference);
+                    unlinked++;
                 }
             }
+            Logger.LogWarning(unlinked + " objects could not be linked");
+            System.Console.ReadKey();
         }
 
         //readonly char[] split = { '.' };

@@ -45,7 +45,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy DamageEffect;
+        public System.Type DamageEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         public string DamageWeaponName = string.Empty;
@@ -121,33 +121,33 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy PawnDamageEffect;
+        public System.Type PawnDamageEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Emitter")]
-        public SerializableTypeProxy PawnDamageEmitter;
+        public System.Type PawnDamageEmitter;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         public List<Sound> PawnDamageSounds = new List<Sound>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy LowGoreDamageEffect;
+        public System.Type LowGoreDamageEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Emitter")]
-        public SerializableTypeProxy LowGoreDamageEmitter;
+        public System.Type LowGoreDamageEmitter;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         public List<Sound> LowGoreDamageSounds = new List<Sound>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy LowDetailEffect;
+        public System.Type LowDetailEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Emitter")]
-        public SerializableTypeProxy LowDetailEmitter;
+        public System.Type LowDetailEmitter;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
         public float FlashScale;

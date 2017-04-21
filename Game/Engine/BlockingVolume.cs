@@ -36,7 +36,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="BlockingVolume")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public List<SerializableTypeProxy> BlockedClasses = new List<SerializableTypeProxy>();
+        public List<System.Type> BlockedClasses = new List<System.Type>();
         
         public BlockingVolume()
         {

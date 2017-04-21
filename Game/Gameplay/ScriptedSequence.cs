@@ -7,6 +7,6 @@ namespace Gameplay
     public class ScriptedSequence: AIScript
     {
         public List<ScriptedAction> Actions = new List<ScriptedAction>();
-        public SerializableTypeProxy ScriptedControllerClass;
+        public System.Type ScriptedControllerClass;
     }
 }

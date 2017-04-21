@@ -33,13 +33,13 @@ namespace SBGame
         private int mhastransactionmanager_data;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_DebugUtils")]
-        public SerializableTypeProxy mDebugUtilsClass;
+        public System.Type mDebugUtilsClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_TextParser")]
-        public SerializableTypeProxy TextParserClass;
+        public System.Type TextParserClass;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Conversation")]
-        public SerializableTypeProxy ConversationControlClass;
+        public System.Type ConversationControlClass;
         
         public Game_DebugUtils DebugUtils;
         

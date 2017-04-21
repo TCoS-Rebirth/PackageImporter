@@ -36,7 +36,7 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AIScript_CoA_2_PoochAndTack_Script")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy ActiveStateMachine;
+        public System.Type ActiveStateMachine;
         
         public bool IsActive;
         

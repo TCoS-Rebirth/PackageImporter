@@ -30,7 +30,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Decoration")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy EffectWhenDestroyed;
+        public System.Type EffectWhenDestroyed;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Decoration")]
         public bool bPushable;
@@ -62,7 +62,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Decoration")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Fragment")]
-        public SerializableTypeProxy FragType;
+        public System.Type FragType;
         
         public Vector FragMomentum;
         

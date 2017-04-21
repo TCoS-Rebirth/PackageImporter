@@ -35,7 +35,7 @@ namespace SBAIScripts
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AI_ConditionalDespawn")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIState")]
-        public List<SerializableTypeProxy> ResettingStates = new List<SerializableTypeProxy>();
+        public List<System.Type> ResettingStates = new List<System.Type>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="AI_ConditionalDespawn")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

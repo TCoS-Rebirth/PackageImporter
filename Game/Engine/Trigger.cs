@@ -42,7 +42,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trigger")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy ClassProximityType;
+        public System.Type ClassProximityType;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Trigger")]
         public float RepeatTriggerTime;

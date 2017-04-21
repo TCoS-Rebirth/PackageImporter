@@ -36,7 +36,7 @@ namespace SBBase
         public bool ControllerInitialized;
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Base_Pawn")]
-        public SerializableTypeProxy mPawnClass;
+        public System.Type mPawnClass;
         
         public Base_Controller()
         {

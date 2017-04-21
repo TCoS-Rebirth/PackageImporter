@@ -34,7 +34,7 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_QuestLog")]
-        public SerializableTypeProxy QuestLogClass;
+        public System.Type QuestLogClass;
         
         public Game_QuestLog questLog;
         

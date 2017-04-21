@@ -57,11 +57,11 @@ namespace SBGamePlay
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy StateMachine;
+        public System.Type StateMachine;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="aI")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="NPC_AI")]
-        public SerializableTypeProxy GroupMind;
+        public System.Type GroupMind;
         
         [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         [TCosReborn.Framework.Attributes.FieldTransientAttribute()]

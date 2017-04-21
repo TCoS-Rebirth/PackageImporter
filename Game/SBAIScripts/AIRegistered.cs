@@ -31,7 +31,7 @@ namespace SBAIScripts
         private List<RegisteredAI> Registered = new List<RegisteredAI>();
         
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="RegisteredAI")]
-        public SerializableTypeProxy RegistrationClass;
+        public System.Type RegistrationClass;
         
         public AIRegistered()
         {

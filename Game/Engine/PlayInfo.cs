@@ -33,7 +33,7 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Info")]
-        public List<SerializableTypeProxy> InfoClasses = new List<SerializableTypeProxy>();
+        public List<System.Type> InfoClasses = new List<System.Type>();
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         public List<int> ClassStack = new List<int>();
@@ -53,7 +53,7 @@ namespace Engine
             
             //public Property ThisProp;
             
-            public SerializableTypeProxy ClassFrom;
+            public System.Type ClassFrom;
             
             public string SettingName;
             

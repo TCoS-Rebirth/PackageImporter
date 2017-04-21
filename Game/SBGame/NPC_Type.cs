@@ -168,7 +168,7 @@ namespace SBGame
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Spawning")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_NPCPawn")]
-        public SerializableTypeProxy PawnType;
+        public System.Type PawnType;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Spawning")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

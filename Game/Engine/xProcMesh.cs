@@ -87,11 +87,11 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="xProcMesh")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy HitEffect;
+        public System.Type HitEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="xProcMesh")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Effects")]
-        public SerializableTypeProxy BigHitEffect;
+        public System.Type BigHitEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="xProcMesh")]
         public float BigMomentumThreshold;

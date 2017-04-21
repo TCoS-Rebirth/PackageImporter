@@ -48,7 +48,7 @@ namespace SBAIScripts
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Graidlon_Script")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="AIStateMachine")]
-        public SerializableTypeProxy FightAIStateMachineClass;
+        public System.Type FightAIStateMachineClass;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Graidlon_Script")]
         public NavigationPoint Waitpoint;

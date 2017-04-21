@@ -108,7 +108,7 @@ namespace Engine
 
         //[TCosReborn.Framework.Attributes.FieldConstAttribute()]
         //[TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Object")]
-        //public SerializableTypeProxy Class;
+        //public System.Type Class;
 
         public UObject ()
         {

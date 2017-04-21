@@ -34,55 +34,55 @@ namespace SBGame
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Appearance")]
-        public SerializableTypeProxy BaseAppearanceClass;
+        public System.Type BaseAppearanceClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Character")]
-        public SerializableTypeProxy CharacterClass;
+        public System.Type CharacterClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_CharacterStats")]
-        public SerializableTypeProxy CharacterStatsClass;
+        public System.Type CharacterStatsClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_CombatState")]
-        public SerializableTypeProxy CombatStateClass;
+        public System.Type CombatStateClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_CombatStats")]
-        public SerializableTypeProxy CombatStatsClass;
+        public System.Type CombatStatsClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_ItemManager")]
-        public SerializableTypeProxy ItemManagerClass;
+        public System.Type ItemManagerClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_ShiftableAppearance")]
-        public SerializableTypeProxy ShiftableAppearanceClass;
+        public System.Type ShiftableAppearanceClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Skills")]
-        public SerializableTypeProxy SkillsClass;
+        public System.Type SkillsClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Effects")]
-        public SerializableTypeProxy EffectsClass;
+        public System.Type EffectsClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Emotes")]
-        public SerializableTypeProxy EmotesClass;
+        public System.Type EmotesClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Looting")]
-        public SerializableTypeProxy LootingClass;
+        public System.Type LootingClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_Trading")]
-        public SerializableTypeProxy TradingClass;
+        public System.Type TradingClass;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_BodySlots")]
-        public SerializableTypeProxy BodySlotsClass;
+        public System.Type BodySlotsClass;
         
         public Game_ShiftableAppearance Appearance;
         

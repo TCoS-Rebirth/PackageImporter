@@ -31,7 +31,7 @@ namespace SBGame
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Type")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Game_NPCController")]
-        public SerializableTypeProxy controllerType;
+        public System.Type controllerType;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Policy")]
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

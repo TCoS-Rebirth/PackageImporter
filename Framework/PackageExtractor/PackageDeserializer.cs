@@ -23,6 +23,9 @@ namespace TCosReborn.Framework.PackageExtractor
 
         string PackageName = string.Empty;
 
+        const string NULL = "null";
+        const string NONE = "none";
+
         /// <summary>
         /// Object may be imported by other package files
         /// </summary>
@@ -50,7 +53,7 @@ namespace TCosReborn.Framework.PackageExtractor
                 if (showAncestors)
                 {
                     var ancestors = FindReferenceName(ExportTable[reference - 1].PackageReference);
-                    if (ancestors != "null")
+                    if (ancestors != NULL)
                         result = ancestors + "." + result;
                 }
                 return result;
@@ -61,12 +64,12 @@ namespace TCosReborn.Framework.PackageExtractor
                 if (showAncestors)
                 {
                     var ancestors = FindReferenceName(ImportTable[-reference - 1].PackageReference);
-                    if (ancestors != "null")
+                    if (ancestors != NULL)
                         result = ancestors + "." + result;
                 }
                 return result;
             }
-            return "null";
+            return NULL;
         }
 
         public string FindAbsoluteObjectReference(int reference)
@@ -79,7 +82,7 @@ namespace TCosReborn.Framework.PackageExtractor
             {
                 return ImportTable[-reference - 1].AbsoluteObjectReference;
             }
-            return "null";
+            return NULL;
         }
 
         ReferenceType GetRefType(int reference)
@@ -178,7 +181,6 @@ namespace TCosReborn.Framework.PackageExtractor
 
             //------------------- Resolve Import & Export references to readable names--------------------
 
-            const string NULL = "null";
             for (int i = 0; i < ImportTable.Length; i++)
             {
                 ImportTable[i].ObjectPackageName = FindReferenceName(ImportTable[i].PackageReference);
@@ -188,9 +190,10 @@ namespace TCosReborn.Framework.PackageExtractor
 
                 var objFormatted = (ImportTable[i].ObjectPackageName != NULL ? ImportTable[i].ObjectPackageName : "") + (ImportTable[i].ObjectName != NULL ? (ImportTable[i].ObjectPackageName!=NULL?".":"") + ImportTable[i].ObjectName : "");
                 var classFormatted = (ImportTable[i].ClassPackageName != NULL ? ImportTable[i].ClassPackageName : "") + (ImportTable[i].ClassName != NULL ? (ImportTable[i].ClassPackageName!=NULL?".":"") + ImportTable[i].ClassName : "");
-                var canBeSkipped = ReflectionHelper.CanBeSkipped(classFormatted);
-                ImportTable[i].AbsoluteObjectReference = canBeSkipped?"null":objFormatted;
+                var canBeSkipped = ReflectionHelper.CanBeSkipped(classFormatted) || objFormatted.StartsWith("SBParticles");
+                ImportTable[i].AbsoluteObjectReference = canBeSkipped?NULL:objFormatted;
                 ImportTable[i].AbsoluteObjectTypeReference = classFormatted;
+                ImportTable[i].IsClassType = classFormatted.Equals("Core.Class", StringComparison.OrdinalIgnoreCase);
             }
 
             for (int i = 0; i < ExportTable.Length; i++)
@@ -204,6 +207,7 @@ namespace TCosReborn.Framework.PackageExtractor
                 var classFormatted = (ExportTable[i].ClassParentName != NULL ? ExportTable[i].ClassParentName : "") + (ExportTable[i].ClassName != NULL ? (ExportTable[i].ClassParentName!=NULL?".":"") + ExportTable[i].ClassName : "");
                 ExportTable[i].AbsoluteObjectReference = string.Format("{0}.{1}", PackageName, objFormatted);
                 ExportTable[i].AbsoluteObjectTypeReference = classFormatted;
+                ExportTable[i].IsClassType = classFormatted.Equals("Core.Class", StringComparison.OrdinalIgnoreCase);
             }
 
             //--------------- READ ALL OBJECTS EXPORTED -----------------------
@@ -220,10 +224,10 @@ namespace TCosReborn.Framework.PackageExtractor
                 {
                     Class = new SBClass(),
                     Flags = new List<ObjectFlags>(),
-                    SuperClassName = entry.ClassParentName/*FindReferenceName(entry.SuperReference)*/,
-                    ClassName = entry.ClassName/*FindReferenceName(entry.ClassReference).Replace("\0", string.Empty)*/,
-                    PackageName = entry.ObjectPackageName/*FindReferenceName(entry.PackageReference)*/,
-                    ObjectName = entry.ObjectName/*GetName(entry.ObjectNameReference)*/,
+                    SuperClassName = entry.ClassParentName,
+                    ClassName = entry.ClassName,
+                    PackageName = entry.ObjectPackageName,
+                    ObjectName = entry.ObjectName,
                     ObjectSize = entry.SerialSize,
                 };
                 var obj = ReadObject(activeObject, fileReader, entry);
@@ -241,13 +245,6 @@ namespace TCosReborn.Framework.PackageExtractor
             Logger.LogOk(string.Format("{0} Objects read", ExportTable.Length));
             Logger.Log(string.Format("{0} references to link", LinkerLinks.Count));
 
-            var sb = new StringBuilder();
-            for (int i = 0; i < LinkerLinks.Count; i++)
-            {
-                sb.AppendLine("Link: " + LinkerLinks[i].AbsoluteObjectReference);
-            }
-
-            File.WriteAllText(@"C:\Tables\" + PackageName + "_Links.txt", sb.ToString());
             #endregion
 
             return LinkerLinks;
@@ -257,7 +254,7 @@ namespace TCosReborn.Framework.PackageExtractor
         {            
 
             //Currently we cannot read null class
-            if (entry.SerialSize <= 0 || activeObject.ClassName == "null") return null;
+            if (entry.SerialSize <= 0 || activeObject.ClassName == NULL) return null;
 
             //Read Object data if present
             fileReader.Seek(entry.SerialOffset, SeekOrigin.Begin);
@@ -376,15 +373,15 @@ namespace TCosReborn.Framework.PackageExtractor
                 case "State":
                     activeObject.Class = ReadStateClass(fileReader);
                     break;
-                case "null":
-                case "None":
+                case NULL:
+                case NONE:
                     activeObject.Class = ReadNullClass(fileReader);
                     break;
                 default:
                     //Log("Encountered unknown class while reading properties", 1);
                     break;
             }
-            if (activeObject.Class != null && activeObject.Class.Name != "null")
+            if (activeObject.Class != null && activeObject.Class.Name != NULL)
             {
                 Logger.LogWarning("!Wow, a class was read!");
                 System.Console.ReadKey();
@@ -483,7 +480,7 @@ namespace TCosReborn.Framework.PackageExtractor
             }
 
             //Detect end of property list
-            if (activeProperty.Name == "DRFORTHEWIN" || activeProperty.Name == "None")
+            if (activeProperty.Name == "DRFORTHEWIN" || activeProperty.Name == NONE)
                 return null;
 
             //Read the property info byte
@@ -596,13 +593,13 @@ namespace TCosReborn.Framework.PackageExtractor
                     propValueBytesRead = readIndexBytes;
                     var obj = FindAbsoluteObjectReference(objectReference);
                     bool isClass = false;
-                    if (!obj.Equals("null", StringComparison.OrdinalIgnoreCase))
+                    if (!obj.Equals(NULL, StringComparison.OrdinalIgnoreCase))
                     {
                         var splits = obj.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
                         if (objectReference < 0)
                         {
                             var importRef = ImportTable[-objectReference - 1];
-                            if (importRef.AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase))
+                            if (importRef.IsClassType/*AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase)*/)
                             {
                                 isClass = true;
                             }
@@ -610,6 +607,10 @@ namespace TCosReborn.Framework.PackageExtractor
                         else
                         {
                             var exportRef = ExportTable[objectReference - 1];
+                            if (exportRef.IsClassType/*AbsoluteObjectTypeReference.Equals("Core.Class", StringComparison.OrdinalIgnoreCase)*/)
+                            {
+                                isClass = true;
+                            }
                         }
                         return new LinkerLink(obj, null) { IsTypeReference = isClass };
                     }
@@ -669,8 +670,11 @@ namespace TCosReborn.Framework.PackageExtractor
                                 if (link != null)
                                 {
                                     link.fieldReference = structField;
-                                    link.targetReference = activeObject;
-                                    link.Link = (sObj) => { link.fieldReference.SetValue(link.targetReference, sObj); };
+                                    link.targetReference = realStruct;
+                                    link.Link = (sObj) => 
+                                    {
+                                        link.fieldReference.SetValue(link.targetReference, sObj);
+                                    };
                                     LinkerLinks.Add(link);
                                 }
                                 else
@@ -724,7 +728,10 @@ namespace TCosReborn.Framework.PackageExtractor
                                 {
                                     link.indexReference = i;
                                     link.arrayReference = array;
-                                    link.Link = (aobj) => { link.arrayReference.SetValue(aobj, link.indexReference); };
+                                    link.Link = (aobj) => 
+                                    {
+                                        link.arrayReference.SetValue(aobj, link.indexReference);
+                                    };
                                     LinkerLinks.Add(link);
                                 }
                                 else
@@ -776,7 +783,10 @@ namespace TCosReborn.Framework.PackageExtractor
                                         list.Add(null);
                                         link.indexReference = i;
                                         link.listReference = list;
-                                        link.Link = (aobj) => { link.listReference[link.indexReference] = aobj; };
+                                        link.Link = (aobj) => 
+                                        {
+                                            link.listReference[link.indexReference] = aobj;
+                                        };
                                         LinkerLinks.Add(link);
                                     }
                                     else
@@ -797,6 +807,27 @@ namespace TCosReborn.Framework.PackageExtractor
                             throw new Exception("should not happen");
                         }
                     }
+                case PropertyType.FixedArrayProperty: //the following is wrong and should be fixed
+                    var arrBytesRead = 0;
+                    while (true)
+                    {
+                        var structBytesRead = 0;
+                        var fixArrayProp = ReadProperty(activeObject, fileReader, out structBytesRead);
+                        arrBytesRead += structBytesRead;
+                        if (fixArrayProp == null)
+                        {
+                            break;
+                        }
+                        if (fixArrayProp.Type == PropertyType.ArrayProperty && activeProperty.StructName.Length > 1)
+                        {
+                            fixArrayProp.StructName = activeProperty.StructName;
+                        }
+                        var propBytesRead = 0;
+                        ReadPropertyValue(activeObject, fileReader, fixArrayProp, out propBytesRead);
+                        arrBytesRead += propBytesRead;
+                    }
+                    propValueBytesRead = arrBytesRead;
+                    return null;
                 default:
                     fileReader.Seek(activeProperty.SerialSize, SeekOrigin.Current);
                     Logger.LogError("unhandled switch case: " + activeProperty.Type);
@@ -1081,7 +1112,7 @@ namespace TCosReborn.Framework.PackageExtractor
         SBClass ReadNullClass(SBFileReader reader)
         {
             var nullClass = new SBClass();
-            nullClass.Name = "null";
+            nullClass.Name = NULL;
             nullClass.Ancestor = ReadStateClass(reader);
 
             var classFlags = reader.ReadInt32();
@@ -1160,7 +1191,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
         public class ImportEntry
         {
-            public Type ObjectType;
+            //public Type ObjectType;
             /// <summary>
             /// [NameTableIndex] Package (namespace) in which the type/class of the object is defined
             /// </summary>
@@ -1199,12 +1230,18 @@ namespace TCosReborn.Framework.PackageExtractor
 
             public string AbsoluteObjectReference;
             public string AbsoluteObjectTypeReference;
+            public bool IsClassType;
+
+            public override string ToString()
+            {
+                return string.Format("{0} ({1})", AbsoluteObjectReference, AbsoluteObjectTypeReference);
+            }
         }
 
         struct ExportEntry
         {
 
-            public Type ObjectType;
+            //public Type ObjectType;
             /// <summary>
             /// [ObjectReference] class of the object
             /// </summary>
@@ -1245,6 +1282,12 @@ namespace TCosReborn.Framework.PackageExtractor
 
             public string AbsoluteObjectReference;
             public string AbsoluteObjectTypeReference;
+            public bool IsClassType;
+
+            public override string ToString()
+            {
+                return string.Format("{0} ({1})", AbsoluteObjectReference, AbsoluteObjectTypeReference);
+            }
         }
 
         public class SBProperty
@@ -1284,7 +1327,7 @@ namespace TCosReborn.Framework.PackageExtractor
 
             public SBClass()
             {
-                Name = "null";
+                Name = NULL;
                 Fields = new Dictionary<string, string>();
             }
         }

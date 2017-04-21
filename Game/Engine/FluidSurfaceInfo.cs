@@ -105,14 +105,14 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="FluidSurfaceInfo")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy ShootEffect;
+        public System.Type ShootEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="FluidSurfaceInfo")]
         public bool OrientShootEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="FluidSurfaceInfo")]
         [TCosReborn.Framework.Attributes.TypeProxyDefinition(TypeName="Actor")]
-        public SerializableTypeProxy TouchEffect;
+        public System.Type TouchEffect;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="FluidSurfaceInfo")]
         public bool OrientTouchEffect;
