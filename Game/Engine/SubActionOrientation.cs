@@ -29,7 +29,7 @@ namespace Engine
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Orientation")]
-        public Orientation CamOrientation;
+        public SceneManager.Orientation CamOrientation;
         
         public SubActionOrientation()
         {

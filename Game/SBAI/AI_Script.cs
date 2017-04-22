@@ -60,6 +60,21 @@ namespace SBAI
             
             public int EffectHandle;
         }
+
+        public struct CountEvent
+        {
+
+            public string EnterEvent;
+
+            public string EnterUnEvent;
+
+            public string ExitEvent;
+
+            public string ExitUnEvent;
+
+            public Range CountRange;
+        }
+
     }
 }
 /*

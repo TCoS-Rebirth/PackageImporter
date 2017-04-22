@@ -211,6 +211,7 @@ namespace Engine
     public struct Plane
     {
 
+        public Vector V;
         public float W;
     }
 

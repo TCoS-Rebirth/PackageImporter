@@ -348,6 +348,7 @@ namespace Engine
         public List<ActorGroup> ActorGroups = new List<ActorGroup>();
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public List<Actor> Touching = new List<Actor>();
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
@@ -388,6 +389,7 @@ namespace Engine
         public int JoinedTag;
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]
+        //[TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public PhysicsVolume PhysicsVolume;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Movement")]

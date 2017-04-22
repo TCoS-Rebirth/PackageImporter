@@ -46,102 +46,12 @@ namespace Engine
         public bool Validated;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Material")]
-        public byte SurfaceType;
+        public Actor.ESurfaceTypes SurfaceType;
         
         public int MaterialType;
         
         public Material()
         {
-        }
-        
-        public enum ESurfaceTypes
-        {
-            
-            EST_Default ,
-            
-            EST_Rock ,
-            
-            EST_Dirt ,
-            
-            EST_Metal ,
-            
-            EST_Wood ,
-            
-            EST_Plant ,
-            
-            EST_Flesh ,
-            
-            EST_Ice ,
-            
-            EST_Snow ,
-            
-            EST_Water ,
-            
-            EST_Glass ,
-            
-            EST_CreakyWood ,
-            
-            EST_Grass ,
-            
-            EST_Gravel ,
-            
-            EST_HardRock ,
-            
-            EST_Mud ,
-            
-            EST_Stone ,
-            
-            EST_Hardwood ,
-            
-            EST_WoodRug ,
-            
-            EST_Custom08 ,
-            
-            EST_Custom09 ,
-            
-            EST_Custom10 ,
-            
-            EST_Custom11 ,
-            
-            EST_Custom12 ,
-            
-            EST_Custom13 ,
-            
-            EST_Custom14 ,
-            
-            EST_Custom15 ,
-            
-            EST_Custom16 ,
-            
-            EST_Custom17 ,
-            
-            EST_Custom18 ,
-            
-            EST_Custom19 ,
-            
-            EST_Custom20 ,
-            
-            EST_Custom21 ,
-            
-            EST_Custom22 ,
-            
-            EST_Custom23 ,
-            
-            EST_Custom24 ,
-            
-            EST_Custom25 ,
-            
-            EST_Custom26 ,
-            
-            EST_Custom27 ,
-            
-            EST_Custom28 ,
-            
-            EST_Custom29 ,
-            
-            EST_Custom30 ,
-            
-            EST_Custom31,
         }
     }
 }

@@ -32,32 +32,32 @@ namespace Engine
         {
         }
         
-        public struct Orientation
-        {
+        //public struct Orientation
+        //{
             
-            public byte CamOrientation;
+        //    public byte CamOrientation;
             
-            public Actor LookAt;
+        //    public Actor LookAt;
             
-            public Actor DollyWith;
+        //    public Actor DollyWith;
             
-            public float EaseIntime;
+        //    public float EaseIntime;
             
-            public int bReversePitch;
+        //    public int bReversePitch;
             
-            public int bReverseYaw;
+        //    public int bReverseYaw;
             
-            public int bReverseRoll;
+        //    public int bReverseRoll;
             
-            public int MA;
+        //    public int MA;
             
-            public float PctInStart;
+        //    public float PctInStart;
             
-            public float PctInEnd;
+        //    public float PctInEnd;
             
-            public float PctInDuration;
+        //    public float PctInDuration;
             
-            public Rotator StartingRotation;
-        }
+        //    public Rotator StartingRotation;
+        //}
     }
 }

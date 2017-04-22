@@ -42,19 +42,19 @@ namespace SBAIScripts
         {
         }
         
-        public struct CountEvent
-        {
+        //public struct CountEvent
+        //{
             
-            public string EnterEvent;
+        //    public string EnterEvent;
             
-            public string EnterUnEvent;
+        //    public string EnterUnEvent;
             
-            public string ExitEvent;
+        //    public string ExitEvent;
             
-            public string ExitUnEvent;
+        //    public string ExitUnEvent;
             
-            public Range CountRange;
-        }
+        //    public Range CountRange;
+        //}
     }
 }
 /*

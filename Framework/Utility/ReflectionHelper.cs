@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Engine;
-using TCosReborn.Framework.Attributes;
+using TCosReborn.Application;
 using TCosReborn.Framework.Common;
 using TCosReborn.Framework.PackageExtractor;
-using Console =  System.Console;
 
 namespace TCosReborn.Framework.Utility
 {
@@ -17,7 +14,9 @@ namespace TCosReborn.Framework.Utility
 
         static readonly List<Type> cachedTypes = new List<Type>();
 
-        public static string[] skippableObjects =
+        static readonly Dictionary<string, Type> indexedTypes = new Dictionary<string, Type>();
+
+        static readonly HashSet<string> skippableObjects = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "SBEditor.GraphState",
             "Engine.TerrainInfo",
@@ -28,6 +27,8 @@ namespace TCosReborn.Framework.Utility
             "Engine.Emitter",
             "Engine.SkeletalMesh",
             "Engine.Material",
+            "Engine.TexPanner",
+            "Engine.Combiner",
             //"Engine.SBMover",
             "Engine.BeamEmitter",
             "Engine.xProcMesh",
@@ -35,7 +36,7 @@ namespace TCosReborn.Framework.Utility
             "Engine.StaticMeshActor",
             "Engine.StaticMeshInstance",
             "Engine.Light",
-            //"Engine.LevelInfo", //HACK reenable once fixed
+            //"Engine.LevelInfo",
             "Engine.SubActionSceneSpeed",
             "Engine.SBSunlight",
             "Engine.Polys",
@@ -48,58 +49,44 @@ namespace TCosReborn.Framework.Utility
             "Engine.StaticMesh",
             "Engine.Camera",
             "SBGamePlay.TooltipActor",
-            "Gameplay.WaterVolume",
+            //"Gameplay.WaterVolume",
             "Engine.SBAudioPlayer",
             "SBGamePlay.SBAudioPlayer",
             "SBGamePlay.SBAudioDamper",
-            "SBParticles.TopicFinishEmitter",
-            "SBParticles.Fire_calm_orange_xl_a",
-            "SBParticles.Fire_wild_orange_xl_b",
-            "SBParticles.Fire_calm_orange_s",
-            "SBParticles.Fire_calm_orange_xs",
-            "SBParticles.Fire_wild_orange_xs",
-            "SBParticles.Fire_calm_blue_s",
-            "SBParticles.Fire_calm_orange_l_a",
-            "SBParticles.Fire_wild_orange_s",
-            "SBParticles.Fire_calm_orange_xxl_a",
-            "SBParticles.Fire_calm_orange_m_a",
-            "SBParticles.GreenSmokePuffEmitter",
-            "SBParticles.ExplosionLargeEmitter",
+            //"SBParticles.TopicFinishEmitter",
+            //"SBParticles.Fire_calm_orange_xl_a",
+            //"SBParticles.Fire_wild_orange_xl_b",
+            //"SBParticles.Fire_calm_orange_s",
+            //"SBParticles.Fire_calm_orange_xs",
+            //"SBParticles.Fire_wild_orange_xs",
+            //"SBParticles.Fire_calm_blue_s",
+            //"SBParticles.Fire_calm_orange_l_a",
+            //"SBParticles.Fire_wild_orange_s",
+            //"SBParticles.Fire_calm_orange_xxl_a",
+            //"SBParticles.Fire_calm_orange_m_a",
+            //"SBParticles.GreenSmokePuffEmitter",
+            //"SBParticles.ExplosionLargeEmitter",
             "Engine.AntiPortalActor",
-            "SBParticles.Fire_calm_orange_m_c",
+            //"SBParticles.Fire_calm_orange_m_c",
             "SBGamePlay.SBInfluenceCapsule",
             "SBGamePlay.SBInfluenceSphere",
-            "SBParticles.AshadoriaSpirit_Floating_Emitter",
-            "SBParticles.Fire_calm_yellow_xs",
-            "SBParticles.Fire_calm_yellow_s",
-            "SBParticles.Fire_calm_blue_l_a",
-            "SBParticles.Fire_calm_orange_l_b",
-            "SBParticles.Fire_calm_orange_x_b",
-            "SBParticles.Fire_calm_orange_xl_b",
-            "SBParticles.Fire_calm_orange_m_b",
-            "SBParticles.Fire_calm_orange_xxl_b",
-            "SBParticles.Fire_wild_orange_m_a",
+            //"SBParticles.AshadoriaSpirit_Floating_Emitter",
+            //"SBParticles.Fire_calm_yellow_xs",
+            //"SBParticles.Fire_calm_yellow_s",
+            //"SBParticles.Fire_calm_blue_l_a",
+            //"SBParticles.Fire_calm_orange_l_b",
+            //"SBParticles.Fire_calm_orange_x_b",
+            //"SBParticles.Fire_calm_orange_xl_b",
+            //"SBParticles.Fire_calm_orange_m_b",
+            //"SBParticles.Fire_calm_orange_xxl_b",
+            //"SBParticles.Fire_wild_orange_m_a",
             "Engine.MaterialSwitch",
             "SBGame.DayNightCycleKeyframe"
         };
 
         public static bool CanBeSkipped(string packageTypeName)
         {
-            for (var i = 0; i < skippableObjects.Length; i++)
-            {
-                if (skippableObjects[i].Equals(packageTypeName, StringComparison.OrdinalIgnoreCase)) return true;
-            }
-            return false;
-        }
-
-        public static bool CanBeSkipped(Type type)
-        {
-            var comparableTypeName = string.Format("{0}.{1}", type.Namespace, type.Name);
-            for (var i = 0; i < skippableObjects.Length; i++)
-            {
-                if (skippableObjects[i].Equals(comparableTypeName, StringComparison.OrdinalIgnoreCase)) return true;
-            }
-            return false;
+            return skippableObjects.Contains(packageTypeName);
         }
 
         public static PropertyType GetArrayType(object parentObject, string propertyName, out Type arrayType, out Type arrayContentType)
@@ -139,40 +126,6 @@ namespace TCosReborn.Framework.Utility
             PropertyType t;
             string insideName;
             return FindInnerType(type, out t, out insideName) ? t : PropertyType.UnknownProperty;
-        }
-
-        public static bool ReflectArrayType(string className, string propertyName, out PropertyType pType, out string insideName, object parentObject = null)
-        {
-            className = className.Replace("\0", string.Empty);
-            propertyName = propertyName.Replace("\0", string.Empty);
-            var classType = GetTypeFromName(className, parentObject);
-            insideName = "";
-            if (classType != null)
-            {
-                var fields = classType.GetFields(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public);
-                for (var i = 0; i < fields.Length; i++)
-                {
-                    if (!fields[i].Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase)) continue;
-                    var fType = fields[i].FieldType;
-                    Type insideType = null;
-                    if (fType.IsArray)
-                    {
-                        insideType = fType.GetElementType();
-                    }
-                    else if (fType.GetGenericTypeDefinition() == typeof(List<>))
-                    {
-                        insideType = fType.GetGenericArguments()[0];
-                    }
-                    if (insideType != null)
-                    {
-                        return FindInnerType(insideType, out pType, out insideName);
-                    }
-                    pType = PropertyType.UnknownProperty;
-                    return false;
-                }
-            }
-            pType = PropertyType.UnknownProperty;
-            return false;
         }
 
         static bool FindInnerType(Type t, out PropertyType pType, out string insideName)
@@ -259,29 +212,6 @@ namespace TCosReborn.Framework.Utility
             return false;
         }
 
-        public static bool GetFixedArraySize(string className, string propertyName, out int size)
-        {
-            className = className.Replace("\0", string.Empty);
-            propertyName = propertyName.Replace("\0", string.Empty);
-            var classType = GetTypeFromName(className);
-            if (classType != null)
-            {
-                var fields = classType.GetFields(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public);
-                for (var i = 0; i < fields.Length; i++)
-                {
-                    if (!fields[i].Name.Equals(propertyName)) continue;
-                    var attributes = fields[i].GetCustomAttributes(typeof(ArraySizeForExtractionAttribute), false);
-                    if (attributes.Length > 0)
-                    {
-                        size = (attributes[0] as ArraySizeForExtractionAttribute).Size;
-                        return true;
-                    }
-                }
-            }
-            size = 0;
-            return false;
-        }
-
         public static Type GetTypeFromName(string typeName, object parentObject = null)
         {
             var hardCodedReplacement = CheckReturnHardcodedReplacement(typeName);
@@ -293,23 +223,20 @@ namespace TCosReborn.Framework.Utility
             {
                 CacheAssemblyTypes();
             }
-            if (parentObject != null)
+            Type indexedResult;
+            if (indexedTypes.TryGetValue(typeName, out indexedResult))
             {
-                var exportedTypes = parentObject.GetType().GetNestedTypes(BindingFlags.Instance|BindingFlags.FlattenHierarchy|BindingFlags.NonPublic|BindingFlags.Public);
-                for (var i = 0; i < exportedTypes.Length; i++)
-                {
-                    if (exportedTypes[i].Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) ||
-                        exportedTypes[i].FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return exportedTypes[i];
-                    }
-                }
+                return indexedResult;
             }
             foreach (var type in cachedTypes)
             {
                 if (type.Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) || type.FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (type.IsNested && parentObject != null && parentObject.GetType().Namespace != type.Namespace) continue;
+                    //if (type.IsNested && parentObject != null && parentObject.GetType().Namespace != type.Namespace) continue;
+                    if (!type.IsValueType)
+                    {
+                        bool breakHere = true;
+                    }
                     return type;
                 }
             }
@@ -327,6 +254,11 @@ namespace TCosReborn.Framework.Utility
             var types = Assembly.GetEntryAssembly().GetTypes();
             cachedTypes.Clear();
             cachedTypes.AddRange(types);
+            for (var i = 0; i < types.Length; i++)
+            {
+                var tName = string.Format("{0}.{1}", types[i].Namespace, types[i].Name);
+                indexedTypes[tName] = types[i];
+            }
         }
         #endregion
     }

@@ -72,7 +72,9 @@ namespace SBGame
         {
             
             public Vector Location;
-            
+
+            public float Strength;
+
             public float Size;
         }
     }

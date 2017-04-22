@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Engine;
 
-namespace Game.Gameplay
+namespace Gameplay
 {
-    class RockingSkyZoneInfo: ZoneInfo
+    public class RockingSkyZoneInfo: SkyZoneInfo
     {
     }
 }
