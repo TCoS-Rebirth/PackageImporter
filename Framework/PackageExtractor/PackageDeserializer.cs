@@ -660,34 +660,34 @@ namespace TCosReborn.Framework.PackageExtractor
                             (byte)(1f / 255 * fileReader.ReadFloat()),
                             (byte)(1f / 255 * fileReader.ReadFloat()));
                     }
-                    else if (activeProperty.StructName == "Guid")
-                    {
-                        propValueBytesRead = 16;
-                        return new Engine.Guid {A = fileReader.ReadInt32(), B = fileReader.ReadInt32(), C = fileReader.ReadInt32(), D = fileReader.ReadInt32()};
-                    }
-                    else if (activeProperty.StructName == "Plane")
-                    {
-                        var v = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
-                        propValueBytesRead = 12;
-                        var w = fileReader.ReadFloat();
-                        propValueBytesRead += 4;
-                        return new Plane {V = v, W = w};
-                    }
-                    else if (activeProperty.StructName == "Quat")
-                    {
-                        propValueBytesRead = 16;
-                        return new Quat {X = fileReader.ReadFloat(), Y = fileReader.ReadFloat(), Z = fileReader.ReadFloat(), W = fileReader.ReadFloat()};
-                    }
-                    else if (activeProperty.StructName == "Box")
-                    {
-                        var min = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
-                        propValueBytesRead = 12;
-                        var max = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
-                        propValueBytesRead += 12;
-                        var isValid = fileReader.ReadByte();
-                        propValueBytesRead += 1;
-                        return new Box {IsValid = isValid, Max = max, Min = min};
-                    }
+                    //else if (activeProperty.StructName == "Guid")
+                    //{
+                    //    propValueBytesRead = 16;
+                    //    return new Engine.Guid {A = fileReader.ReadInt32(), B = fileReader.ReadInt32(), C = fileReader.ReadInt32(), D = fileReader.ReadInt32()};
+                    //}
+                    //else if (activeProperty.StructName == "Plane")
+                    //{
+                    //    var v = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
+                    //    propValueBytesRead = 12;
+                    //    var w = fileReader.ReadFloat();
+                    //    propValueBytesRead += 4;
+                    //    return new Plane {V = v, W = w};
+                    //}
+                    //else if (activeProperty.StructName == "Quat")
+                    //{
+                    //    propValueBytesRead = 16;
+                    //    return new Quat {X = fileReader.ReadFloat(), Y = fileReader.ReadFloat(), Z = fileReader.ReadFloat(), W = fileReader.ReadFloat()};
+                    //}
+                    //else if (activeProperty.StructName == "Box")
+                    //{
+                    //    var min = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
+                    //    propValueBytesRead = 12;
+                    //    var max = new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
+                    //    propValueBytesRead += 12;
+                    //    var isValid = fileReader.ReadByte();
+                    //    propValueBytesRead += 1;
+                    //    return new Box {IsValid = isValid, Max = max, Min = min};
+                    //}
                     else if (activeProperty.StructName == "LocalizedString")
                     {
                         propValueBytesRead = 4;

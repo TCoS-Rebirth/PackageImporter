@@ -211,7 +211,12 @@ namespace Engine
     public struct Plane
     {
 
-        public Vector V;
+        public float X;
+
+        public float Y;
+
+        public float Z;
+        //public Vector V;
         public float W;
     }
 
@@ -305,7 +310,9 @@ namespace Engine
 
     public struct BoundingVolume
     {
-
+        public Vector Min;
+        public Vector Max;
+        public byte IsValid;
         public Plane Sphere;
     }
 
