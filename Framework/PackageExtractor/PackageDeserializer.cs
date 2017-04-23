@@ -77,6 +77,11 @@ namespace TCosReborn.Framework.PackageExtractor
             return NameTable[reference];
         }
 
+        bool IsSkippable(FieldInfo field)
+        {
+            return field.GetCustomAttribute<IgnoreFieldExtractionAttribute>() != null;
+        }
+
         public void Load(string filePath, Queue<LinkerLink> linkQueue, Func<Dictionary<string, object>, LinkerLink, bool> linkResolver)
         {
             LinkerLinks = linkQueue;
@@ -268,7 +273,10 @@ namespace TCosReborn.Framework.PackageExtractor
                     fileReader.ReadIndex();
                 }
             }
-
+            if (activeObject.ClassName.EndsWith("TerrainInfo"))
+            {
+                bool breakHere = true;
+            }
             ReadProperties(fileReader, realObject, entry);
 
             //Try to read class
@@ -394,6 +402,7 @@ namespace TCosReborn.Framework.PackageExtractor
                                 if ((allFields[i].FieldType == propValue.GetType()) || (allFields[i].FieldType.IsArray && allFields[i].FieldType.GetElementType() == propValue.GetType()))
                                 {
                                     field = allFields[i];
+                                    break;
                                 }
                             }
                         }
@@ -402,9 +411,8 @@ namespace TCosReborn.Framework.PackageExtractor
                     {
                         throw new Exception(string.Format("Field: {0} doesn't exist for: {1} -> should have type: {2}", activeProperty.Name, activeObject, propValue.GetType()));
                     }
-                    var ignoreExtractionAttribute = field.GetCustomAttribute<IgnoreFieldExtractionAttribute>();
-                    if (ignoreExtractionAttribute == null)
-                    {
+                    //if (!IsSkippable(field))
+                    //{
                         var link = propValue as LinkerLink;
                         if (link != null)
                         {
@@ -450,16 +458,16 @@ namespace TCosReborn.Framework.PackageExtractor
                                 }
                             }
                         }
-                    }
+                    //}
                 }     
             } while (fileReader.Position < entry.SerialOffset + entry.SerialSize);
             if (allPropsSize != entry.SerialSize)
             {
                 var diff = entry.SerialSize - allPropsSize;
-                if (diff > 17) //ignore appended 'Standard' data (not sure if standard, but it's appended to a lot of objects (in map files!)
-                {
-                    Logger.LogWarning(string.Format("{1} has {0} bytes of additional data appended", diff, activeObject.ReferenceObjectName));
-                }
+                //if (diff > 17) //ignore appended 'Standard' data (not sure if standard, but it's appended to a lot of objects (in map files!)
+                //{
+                //    Logger.LogWarning(string.Format("{1} has {0} bytes of additional data appended", diff, activeObject.ReferenceObjectName));
+                //}
                 fileReader.Seek(diff, SeekOrigin.Current);
             }
         }
@@ -505,6 +513,7 @@ namespace TCosReborn.Framework.PackageExtractor
                 returnBytesRead += readIndexBytes;
                 activeProperty.StructName = GetName(structNameIndex);
             }
+
             //Display value if not array flag but boolean value
             if (activeProperty.Type == PropertyType.BooleanProperty)
             {
@@ -514,27 +523,75 @@ namespace TCosReborn.Framework.PackageExtractor
             {
                 if (arrayIndexBit != 0)
                 {
-                    int arrayIndex;
-                    var b = fileReader.ReadByte();
-                    returnBytesRead += 1;
-                    if ((b & arrayIndexMask) == 0)
+
+                    //new (something was wrong with the original method)
+                    if (arrayIndexBit < 128)
                     {
-                        arrayIndex = b;
-                    }
-                    else if ((b & 0xC0) == arrayIndexMask)
-                    {
-                        arrayIndex = ((b & 0x7F) << 8) + fileReader.ReadByte();
-                        returnBytesRead += 1;
+                        activeProperty.ArrayIndex = arrayIndexBit;
                     }
                     else
                     {
-                        arrayIndex = ((b & 0x3F) << 24)
-                                     + (fileReader.ReadByte() << 16)
-                                     + (fileReader.ReadByte() << 8)
-                                     + fileReader.ReadByte();
-                        returnBytesRead += 3;
+                        var b = fileReader.ReadByte() & 0x0C; //not sure if correct, but works
+                        returnBytesRead += 1;
+                        if (b < 128)
+                        {
+                            activeProperty.ArrayIndex = b;
+                        }
+                        else
+                        {
+                            throw new NotImplementedException();
+                        }
                     }
-                    activeProperty.ArrayIndex = arrayIndex;
+                    //new end
+
+                    //int arrayIndex;
+                    //int b = fileReader.ReadByte();
+                    //returnBytesRead += 1;
+
+                    //original
+                    //if ((b & arrayIndexMask) == 0)
+                    //{
+                    //    arrayIndex = b;
+                    //}
+                    //else if ((b & 0xC0) == arrayIndexMask)
+                    //{
+                    //    arrayIndex = ((b & 0x7F) << 8) + fileReader.ReadByte();
+                    //    returnBytesRead += 1;
+                    //}
+                    //else
+                    //{
+                    //    arrayIndex = ((b & 0x3F) << 24)
+                    //                 + (fileReader.ReadByte() << 16)
+                    //                 + (fileReader.ReadByte() << 8)
+                    //                 + fileReader.ReadByte();
+                    //    returnBytesRead += 3;
+                    //}
+                    //activeProperty.ArrayIndex = arrayIndex;
+
+                    //Test 2
+                    //if (b < 128)
+                    //{
+                    //    arrayIndex = b;
+                    //}
+                    //else
+                    //{
+                    //    fileReader.Seek(-1, SeekOrigin.Current);
+                    //    var b2 = fileReader.ReadInt16();
+                    //    returnBytesRead += 1;
+                    //    if (b2 < 16384)
+                    //    {
+                    //        arrayIndex = b2 & 0x7FFF;
+                    //    }
+                    //    else
+                    //    {
+                    //        fileReader.Seek(-2, SeekOrigin.Current);
+                    //        var b4 = fileReader.ReadInt32();
+                    //        returnBytesRead+=2;
+                    //        arrayIndex = b4 & 0x3FFFFFF;
+                    //    }
+                    //}
+                    //activeProperty.ArrayIndex = arrayIndex;
+
                 }
             }
             var realSize = 0;
@@ -721,32 +778,35 @@ namespace TCosReborn.Framework.PackageExtractor
                             {
                                 var structField = realStruct.GetType().GetField(cStructProp.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy|BindingFlags.IgnoreCase);
                                 if (structField == null) throw new Exception("Field does not exist in struct");
-                                var link = structFieldContent as LinkerLink;
-                                if (link != null)
-                                {
-                                    link.fieldReference = structField;
-                                    link.SkipTestClassReference = structField.FieldType.FullName;
-                                    link.targetReference = realStruct;
-                                    link.Link = sObj => 
+                                //if (!IsSkippable(structField))
+                                //{
+                                    var link = structFieldContent as LinkerLink;
+                                    if (link != null)
                                     {
-                                        link.fieldReference.SetValue(link.targetReference, sObj);
-                                    };
-                                    if (!LinkResolver(SBPackageResources.ObjectsByName, link))
-                                    {
-                                        LinkerLinks.Enqueue(link);
+                                        link.fieldReference = structField;
+                                        link.SkipTestClassReference = structField.FieldType.FullName;
+                                        link.targetReference = realStruct;
+                                        link.Link = sObj =>
+                                        {
+                                            link.fieldReference.SetValue(link.targetReference, sObj);
+                                        };
+                                        if (!LinkResolver(SBPackageResources.ObjectsByName, link))
+                                        {
+                                            LinkerLinks.Enqueue(link);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    try
+                                    else
                                     {
-                                        structField.SetValue(realStruct, structFieldContent);
+                                        try
+                                        {
+                                            structField.SetValue(realStruct, structFieldContent);
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Logger.LogError(e.Message);
+                                        }
                                     }
-                                    catch(Exception e)
-                                    {
-                                        Logger.LogError(e.Message);
-                                    }
-                                }
+                                //}
                             }
                         } while (true);
                         propValueBytesRead = structBytesRead;

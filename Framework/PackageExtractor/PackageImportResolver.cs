@@ -24,7 +24,7 @@ namespace TCosReborn.Framework.PackageExtractor
         {
             if (link.SkipTestClassReference.Length > 0 && ReflectionHelper.CanBeSkipped(link.SkipTestClassReference) || link.AbsoluteObjectReference.StartsWith("SBParticles"))
             {
-                //Logger.Log("Skipping: " + link.AbsoluteObjectReference + " as it is: " + link.SkipTestClassReference);
+                Logger.Log("Skipping: " + link.AbsoluteObjectReference + " as it is: " + link.SkipTestClassReference);
                 return true;
             }
             object imported;
@@ -53,11 +53,11 @@ namespace TCosReborn.Framework.PackageExtractor
                         }
                         catch (System.Exception ex)
                         {
-                            Logger.LogWarning(ex.Message);
+                            Logger.LogError(ex.Message);
                             return false;
                         }
                     }
-                    Logger.LogWarning(e.Message);
+                    Logger.LogError(e.Message);
                     return false;
                 }
             }

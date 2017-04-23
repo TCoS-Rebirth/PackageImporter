@@ -27,10 +27,11 @@ namespace Engine
     
     public class StaticMesh : Primitive
     {
-        
-        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="")]
-        //public List<StaticMeshMaterial> Materials = new List<StaticMeshMaterial>();
-        
+
+        [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category = "")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtraction]
+        public List<StaticMeshMaterial> Materials = new List<StaticMeshMaterial>();
+
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="")]
         public bool AutoUnwrap;
         
@@ -48,6 +49,12 @@ namespace Engine
         
         public StaticMesh()
         {
+        }
+
+        public struct StaticMeshMaterial
+        {
+            public bool EnableCollision;
+            public Material Material;
         }
     }
 }

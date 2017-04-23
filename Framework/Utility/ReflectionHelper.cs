@@ -19,36 +19,36 @@ namespace TCosReborn.Framework.Utility
         static readonly HashSet<string> skippableObjects = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "SBEditor.GraphState",
-            "Engine.TerrainInfo",
+            //"Engine.TerrainInfo",
             "Engine.Shader",
-            "Engine.ActionMoveCamera",
-            "Engine.ActionPause",
-            "Engine.TerrainSector",
-            "Engine.Emitter",
-            "Engine.SkeletalMesh",
+            //"Engine.ActionMoveCamera",
+            //"Engine.ActionPause",
+            //"Engine.TerrainSector",
+            //"Engine.Emitter",
+            //"Engine.SkeletalMesh",
             "Engine.Material",
             "Engine.TexPanner",
             "Engine.Combiner",
             //"Engine.SBMover",
-            "Engine.BeamEmitter",
-            "Engine.xProcMesh",
+            //"Engine.BeamEmitter",
+            //"Engine.xProcMesh",
             "Engine.xWeatherEffect",
-            "Engine.StaticMeshActor",
-            "Engine.StaticMeshInstance",
+            //"Engine.StaticMeshActor",
+            //"Engine.StaticMeshInstance",
             "Engine.Light",
             //"Engine.LevelInfo",
-            "Engine.SubActionSceneSpeed",
+            //"Engine.SubActionSceneSpeed",
             "Engine.SBSunlight",
             "Engine.Polys",
-            "Engine.SpriteEmitter",
-            "Engine.MeshEmitter",
+            //"Engine.SpriteEmitter",
+            //"Engine.MeshEmitter",
             "Engine.Projector",
             "Engine.SBProjector",
             "Engine.Texture",
             "Engine.Model",
-            "Engine.StaticMesh",
+            //"Engine.StaticMesh",
             "Engine.Camera",
-            "SBGamePlay.TooltipActor",
+            //"SBGamePlay.TooltipActor",
             //"Gameplay.WaterVolume",
             "Engine.SBAudioPlayer",
             "SBGamePlay.SBAudioPlayer",
@@ -68,8 +68,8 @@ namespace TCosReborn.Framework.Utility
             //"SBParticles.ExplosionLargeEmitter",
             "Engine.AntiPortalActor",
             //"SBParticles.Fire_calm_orange_m_c",
-            "SBGamePlay.SBInfluenceCapsule",
-            "SBGamePlay.SBInfluenceSphere",
+            //"SBGamePlay.SBInfluenceCapsule",
+            //"SBGamePlay.SBInfluenceSphere",
             //"SBParticles.AshadoriaSpirit_Floating_Emitter",
             //"SBParticles.Fire_calm_yellow_xs",
             //"SBParticles.Fire_calm_yellow_s",
@@ -232,11 +232,6 @@ namespace TCosReborn.Framework.Utility
             {
                 if (type.Name.Equals(typeName, StringComparison.OrdinalIgnoreCase) || type.FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase))
                 {
-                    //if (type.IsNested && parentObject != null && parentObject.GetType().Namespace != type.Namespace) continue;
-                    if (!type.IsValueType)
-                    {
-                        bool breakHere = true;
-                    }
                     return type;
                 }
             }

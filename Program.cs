@@ -15,7 +15,7 @@ namespace TCosReborn
 
         static void InitRessources(string[] args)
         {
-            var watch = Stopwatch.StartNew();
+            var start = DateTime.Now;
             if (args.Length == 0)
             {
                 Logger.LogWarning("Specify the game data directory as argument");
@@ -33,8 +33,8 @@ namespace TCosReborn
                 Exit(1);
             }
             Logger.LogOk("All Packages read");
-            watch.Stop();
-            Logger.Log(string.Format("Finished loading in {0} seconds", watch.Elapsed.Seconds));
+            var duration = DateTime.Now - start;
+            Logger.Log(string.Format("Finished loading in {0} seconds", duration.Seconds));
             Exit();
         }
 

@@ -381,8 +381,10 @@
     <Compile Include="Game\Gameplay\LatentScriptedAction.cs" />
     <Compile Include="Game\Gameplay\RockingSkyZoneInfo.cs" />
     <Compile Include="Game\Gameplay\ScriptedAction.cs" />
+    <Compile Include="Game\Gameplay\ScriptedController.cs" />
     <Compile Include="Game\Gameplay\ScriptedSequence.cs" />
     <Compile Include="Game\Gameplay\ScriptedTrigger.cs" />
+    <Compile Include="Game\Gameplay\ScriptedTriggerController.cs" />
     <Compile Include="Game\Gameplay\TriggeredCondition.cs" />
     <Compile Include="Game\Gameplay\TriggerLight.cs" />
     <Compile Include="Game\Gameplay\WaterVolume.cs" />

@@ -44,9 +44,11 @@ namespace Engine
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="TerrainInfo")]
         [TCosReborn.Framework.Attributes.ArraySizeForExtractionAttribute(Size=32)]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtraction]
         public TerrainLayer[] Layers = new TerrainLayer[0];
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="TerrainInfo")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtraction]
         public List<DecorationLayer> DecoLayers = new List<DecorationLayer>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="TerrainInfo")]
