@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using TCosReborn.Application;
 using TCosReborn.Framework.Attributes;
 
 #if UNITY_EDITOR
@@ -10,7 +12,7 @@ namespace TCosReborn.Framework.Common
 {
     public static class LevelProgression
     {
-        [ReadOnly] public static List<ProgressData> progressData = new List<ProgressData>();
+        public static List<ProgressData> ProgressData = new List<ProgressData>();
 
         static List<PePProgress> pepProgressData = new List<PePProgress>
         {
@@ -26,21 +28,21 @@ namespace TCosReborn.Framework.Common
         {
             if (level <= 100 && level >= 1)
             {
-                return progressData[level - 1];
+                return ProgressData[level - 1];
             }
             throw new ArgumentOutOfRangeException("level", "Level must be between 1 and 100");
         }
 
          public static ProgressData GetLevelbyFamepoints(int points)
         {
-            for (var i = 0; i < progressData.Count; i++)
+            for (var i = 0; i < ProgressData.Count; i++)
             {
-                if (progressData[i].requiredFamePoints >= points)
+                if (ProgressData[i].requiredFamePoints >= points)
                 {
-                    return progressData[Math.Max(0, i - 1)];
+                    return ProgressData[Math.Max(0, i - 1)];
                 }
             }
-            return progressData[progressData.Count - 1];
+            return ProgressData[ProgressData.Count - 1];
         }
 
          public static PePProgress GetPepLevelByPePpoints(int points)
@@ -55,86 +57,36 @@ namespace TCosReborn.Framework.Common
             return pepProgressData[pepProgressData.Count - 1];
         }
 
-#if UNITY_EDITOR
-        //[MenuItem("Spellborn/Parse LevelProgression File")]
-        public static void ParseFile()
-        {
-            var path = EditorUtility.OpenFilePanel("Select LevelProgression file", "", "s");
-            if (string.IsNullOrEmpty(path) || !File.Exists(path))
-            {
-                Debug.LogError("Path invalid");
-                return;
-            }
-            var lp = CreateInstance<LevelProgression>();
-            var savePath = EditorUtility.SaveFilePanel("Save parsed file", "", "LevelProgression", "asset");
-            if (string.IsNullOrEmpty(savePath))
-            {
-                Debug.LogError("Save path invalid");
-                return;
-            }
-            if (savePath.StartsWith(Application.dataPath, StringComparison.OrdinalIgnoreCase))
-            {
-                savePath = "Assets" + savePath.Substring(Application.dataPath.Length);
-            }
-            AssetDatabase.CreateAsset(lp, savePath);
-            using (var reader = new BinaryReader(File.OpenRead(path)))
-            {
-                reader.ReadInt32(); //header
-                var count = reader.ReadInt32();
-                for (var i = 0; i < count; i++)
-                {
-                    var pd = new ProgressData
-                    {
-                        level = reader.ReadByte(),
-                        skillTier = reader.ReadByte(),
-                        combatTierRows = reader.ReadByte(),
-                        combatTierColumns = reader.ReadByte(),
-                        totalSkills = reader.ReadByte(),
-                        skillUpgrades = reader.ReadByte(),
-                        statPoints = reader.ReadByte(),
-                        bodySlots = reader.ReadByte(),
-                        decks = reader.ReadByte(),
-                        special = reader.ReadByte(),
-                        requiredFamePoints = reader.ReadInt32(),
-                        killFame = reader.ReadInt32(),
-                        questFame = reader.ReadInt32()
-                    };
-                    lp.progressData.Add(pd);
-                }
-            }
-            EditorUtility.SetDirty(lp);
-        }
-#endif
     }
 
     [Serializable]
     public class ProgressData
     {
-        [ReadOnly] public int bodySlots;
+        public int bodySlots;
 
-        [ReadOnly] public int combatTierColumns;
+        public int combatTierColumns;
 
-        [ReadOnly] public int combatTierRows;
+        public int combatTierRows;
 
-        [ReadOnly] public int decks;
+        public int decks;
 
-        [ReadOnly] public int killFame;
+        public int killFame;
 
-        [ReadOnly] public int level;
+        public int level;
 
-        [ReadOnly] public int questFame;
+        public int questFame;
 
-        [ReadOnly] public int requiredFamePoints;
+        public int requiredFamePoints;
 
-        [ReadOnly] public int skillTier;
+        public int skillTier;
 
-        [ReadOnly] public int skillUpgrades;
+        public int skillUpgrades;
 
-        [ReadOnly] public int special;
+        public int special;
 
-        [ReadOnly] public int statPoints;
+        public int statPoints;
 
-        [ReadOnly] public int totalSkills;
+        public int totalSkills;
     }
 
     [Serializable]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TCosReborn.Application;
 using TCosReborn.Framework.Utility;
 
@@ -7,58 +8,85 @@ namespace TCosReborn.Framework.PackageExtractor
 
     public static class PackageImportResolver
     {
-        public static void Resolve(Dictionary<string, object> packages, Queue<PackageDeserializer.LinkerLink> links)
+        public static readonly Dictionary<string, object> ObjectsByName = new Dictionary<string, object>(System.StringComparer.OrdinalIgnoreCase);
+
+        public static void Resolve(Queue<ImportLink> links)
         {
             Logger.Log("------------linking imports-----------");
             Logger.Log(links.Count + " objects to link");
             int unlinked = 0;
+            int skipped = 0;
             while(links.Count > 0)
             {
                 var link = links.Dequeue();
-                if (!Resolve(packages, link)) unlinked++;               
+                var result = Resolve(link);
+                switch (result)
+                {
+                    case ResolveResult.Skipped:
+                        skipped++;
+                        break;
+                    case ResolveResult.Error:
+                    case ResolveResult.NotFound:
+                        unlinked++;
+                    break;
+                }
             }
+            Logger.Log(skipped + " imported objects were skipped");
             Logger.LogWarning(unlinked + "imported objects could not be linked");
         }
 
-        static bool Resolve(Dictionary<string, object> packages, PackageDeserializer.LinkerLink link)
+        enum ResolveResult
         {
-            if (link.SkipTestClassReference.Length > 0 && ReflectionHelper.CanBeSkipped(link.SkipTestClassReference) || link.AbsoluteObjectReference.StartsWith("SBParticles"))
+            Skipped,
+            NotFound,
+            Error,
+            Success
+        }
+
+        static ResolveResult Resolve(ImportLink link)
+        {
+            if (link.AbsoluteObjectReference.StartsWith("SBParticles"))
             {
-                Logger.Log("Skipping: " + link.AbsoluteObjectReference + " as it is: " + link.SkipTestClassReference);
-                return true;
+                //Logger.Log("Skipping: " + link.AbsoluteObjectReference);
+                return ResolveResult.Skipped;
+            }
+            if (link.AbsoluteObjectReference.StartsWith("GlobalsTX"))
+            {
+                //Logger.Log("Skipping: " + link.AbsoluteObjectReference);
+                return ResolveResult.Skipped;
             }
             object imported;
-            if (packages.TryGetValue(link.AbsoluteObjectReference, out imported))
+            if (ObjectsByName.TryGetValue(link.AbsoluteObjectReference, out imported))
             {
                 try
                 {
                     link.Link(imported);
-                    return true;
+                    return ResolveResult.Success;
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     if (link.fieldReference != null && link.fieldReference.FieldType.IsArray && !imported.GetType().IsArray)
                     {
-                        var arr = link.fieldReference.GetValue(link.targetReference) as System.Array;
+                        var arr = link.fieldReference.GetValue(link.targetReference) as Array;
                         if (arr.Length <= link.indexReference)
                         {
-                            var arrResized = System.Array.CreateInstance(arr.GetType().GetElementType(), link.indexReference + 1);
+                            var arrResized = Array.CreateInstance(arr.GetType().GetElementType(), link.indexReference + 1);
                             arr.CopyTo(arrResized, 0);
                             arr = arrResized;
                         }
                         try
                         {
                             arr.SetValue(imported, link.indexReference);
-                            return true;
+                            return ResolveResult.Success;
                         }
-                        catch (System.Exception ex)
+                        catch (Exception ex)
                         {
                             Logger.LogError(ex.Message);
-                            return false;
+                            return ResolveResult.Error;
                         }
                     }
                     Logger.LogError(e.Message);
-                    return false;
+                    return ResolveResult.Error;
                 }
             }
             if (link.IsTypeReference)
@@ -69,37 +97,37 @@ namespace TCosReborn.Framework.PackageExtractor
                     try
                     {
                         link.Link(type);
-                        return true;
+                        return ResolveResult.Success;
                     }
-                    catch (System.Exception e)
+                    catch (Exception e)
                     {
                         Logger.LogWarning(e.Message);
-                        return false;
+                        return ResolveResult.Error;
                     }
                 }
             }
             Logger.LogError("Could not find imported object: " + link.AbsoluteObjectReference);
-            return false;
+            return ResolveResult.NotFound;
         }
 
-        public static bool ResolveWithoutLogging(Dictionary<string, object> packages, PackageDeserializer.LinkerLink link)
+        public static bool ResolveWithoutLogging(ImportLink link)
         {
             object imported;
-            if (packages.TryGetValue(link.AbsoluteObjectReference, out imported))
+            if (ObjectsByName.TryGetValue(link.AbsoluteObjectReference, out imported))
             {
                 try
                 {
                     link.Link(imported);
                     return true;
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
                     if (link.fieldReference != null && link.fieldReference.FieldType.IsArray && !imported.GetType().IsArray)
                     {
-                        var arr = link.fieldReference.GetValue(link.targetReference) as System.Array;
+                        var arr = link.fieldReference.GetValue(link.targetReference) as Array;
                         if (arr.Length <= link.indexReference)
                         {
-                            var arrResized = System.Array.CreateInstance(arr.GetType().GetElementType(), link.indexReference + 1);
+                            var arrResized = Array.CreateInstance(arr.GetType().GetElementType(), link.indexReference + 1);
                             arr.CopyTo(arrResized, 0);
                             arr = arrResized;
                         }
@@ -108,7 +136,7 @@ namespace TCosReborn.Framework.PackageExtractor
                             arr.SetValue(imported, link.indexReference);
                             return true;
                         }
-                        catch (System.Exception)
+                        catch (Exception)
                         {
                             return false;
                         }
@@ -126,7 +154,7 @@ namespace TCosReborn.Framework.PackageExtractor
                         link.Link(type);
                         return true;
                     }
-                    catch (System.Exception)
+                    catch (Exception)
                     {
                         return false;
                     }

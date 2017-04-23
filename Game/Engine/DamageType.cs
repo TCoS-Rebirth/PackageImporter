@@ -128,6 +128,7 @@ namespace Engine
         public System.Type PawnDamageEmitter;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public List<Sound> PawnDamageSounds = new List<Sound>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
@@ -139,6 +140,7 @@ namespace Engine
         public System.Type LowGoreDamageEmitter;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public List<Sound> LowGoreDamageSounds = new List<Sound>();
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="DamageType")]

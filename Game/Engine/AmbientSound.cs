@@ -29,6 +29,7 @@ namespace Engine
     {
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Sound")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public List<SoundEmitter> SoundEmitters = new List<SoundEmitter>();
         
         public float AmbientVolume;

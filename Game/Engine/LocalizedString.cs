@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using TCosReborn.Framework.Internal;
-using TCosReborn.Framework.Common;
 
 namespace Engine
 {
@@ -18,11 +16,6 @@ namespace Engine
         public LocalizedString(int id)
         {
             this.id = id;
-        }
-
-        public string GetText(SBLocalizedStrings stringsDB, SBLanguage lang)
-        {
-            return stringsDB.GetString(id, lang);
         }
 
         public override string ToString()

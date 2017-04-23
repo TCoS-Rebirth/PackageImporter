@@ -33,6 +33,7 @@ namespace Engine
         public string Package = string.Empty;
         
         [TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Sound")]
+        [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public List<Sound> Sounds = new List<Sound>();
         
         [TCosReborn.Framework.Attributes.FieldConstAttribute()]

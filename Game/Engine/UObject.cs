@@ -18,6 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TCosReborn;
 using TCosReborn.Framework.Common;
 
 

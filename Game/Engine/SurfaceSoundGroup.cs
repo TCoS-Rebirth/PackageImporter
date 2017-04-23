@@ -44,7 +44,8 @@ namespace Engine
         {
             
             public byte MaterialSurfaceType;
-            
+
+            [TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
             public List<Sound> Sounds;
         }
     }

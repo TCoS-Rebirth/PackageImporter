@@ -1,10 +1,8 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using Engine;
-using TCosReborn.Framework.Common;
 
-namespace TCosReborn.Framework.Internal
+namespace Engine
 {
     public class LocalizedStringConverter : TypeConverter
     {
