@@ -4,6 +4,6 @@ namespace TCosReborn.Framework.Common
 {
     public static class SBPackages
     {
-        public static Dictionary<string, SBResourcePackage> Packages = new Dictionary<string, SBResourcePackage>();
+        public static Dictionary<string, SBPackage> Packages = new Dictionary<string, SBPackage>();
     }
 }

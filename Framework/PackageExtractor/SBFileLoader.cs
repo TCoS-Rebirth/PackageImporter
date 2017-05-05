@@ -68,7 +68,7 @@ namespace TCosReborn.Framework.PackageExtractor
                     return false;
                 }
                 Logger.Log("Loading: " + fileName);
-                var package = new SBResourcePackage();
+                var package = new SBPackage();
                 new PackageDeserializer().Load(packageFilePaths[i], pendingImports, package);
                 SBPackages.Packages.Add(fileName, package);
             }
