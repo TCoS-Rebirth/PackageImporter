@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerQuestLog : Game_QuestLog
+    [System.Serializable] public class Game_PlayerQuestLog : Game_QuestLog
     {
         
         public Game_PlayerQuestLog()

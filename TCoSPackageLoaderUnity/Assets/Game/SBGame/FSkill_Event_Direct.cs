@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_Direct : FSkill_Event_Target
+    [System.Serializable] public class FSkill_Event_Direct : FSkill_Event_Target
     {
         
         [FieldCategory(Category="Timing")]

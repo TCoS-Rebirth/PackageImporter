@@ -1,6 +1,6 @@
 ﻿namespace Gameplay
 {
-    public class Action_IFRANDOMPCT : LatentScriptedAction
+    [System.Serializable] public class Action_IFRANDOMPCT : LatentScriptedAction
     {
         public float Probability;
     }

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_Rotate : Interaction_Component
+    [System.Serializable] public class Interaction_Rotate : Interaction_Component
     {
         
         [IgnoreFieldExtraction()]

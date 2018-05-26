@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ProjectorPrimitive : Primitive
+    [System.Serializable] public class ProjectorPrimitive : Primitive
     {
         
         public ProjectorPrimitive()

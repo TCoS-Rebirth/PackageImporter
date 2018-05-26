@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Trigger_Counter : AIScript_Counter
+    [System.Serializable] public class AIScript_Trigger_Counter : AIScript_Counter
     {
         
         public AIScript_Trigger_Counter()

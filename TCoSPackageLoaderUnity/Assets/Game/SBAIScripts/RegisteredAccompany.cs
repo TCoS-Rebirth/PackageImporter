@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredAccompany : RegisteredEscort
+    [System.Serializable] public class RegisteredAccompany : RegisteredEscort
     {
         
         public bool Lost;

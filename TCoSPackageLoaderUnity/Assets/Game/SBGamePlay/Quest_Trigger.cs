@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Quest_Trigger : InsideTrigger
+    [System.Serializable] public class Quest_Trigger : InsideTrigger
     {
         
         public Quest_Trigger()

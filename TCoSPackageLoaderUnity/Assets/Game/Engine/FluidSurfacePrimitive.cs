@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class FluidSurfacePrimitive : Primitive
+    [System.Serializable] public class FluidSurfacePrimitive : Primitive
     {
         
         public FluidSurfacePrimitive()

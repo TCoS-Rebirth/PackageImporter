@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class AccessmapBlock : Volume
+    [System.Serializable] public class AccessmapBlock : Volume
     {
         
         public AccessmapBlock()

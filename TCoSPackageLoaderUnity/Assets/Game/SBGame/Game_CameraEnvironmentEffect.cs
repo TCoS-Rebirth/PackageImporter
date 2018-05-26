@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_CameraEnvironmentEffect : EnvironmentEffect
+    [System.Serializable] public class Game_CameraEnvironmentEffect : EnvironmentEffect
     {
         
         private Game_PlayerController mController;

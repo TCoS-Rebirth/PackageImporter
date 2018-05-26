@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ClientMover : Mover
+    [System.Serializable] public class ClientMover : Mover
     {
         
         public ClientMover()

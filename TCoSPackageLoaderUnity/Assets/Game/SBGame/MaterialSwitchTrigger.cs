@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class MaterialSwitchTrigger : Triggers
+    [System.Serializable] public class MaterialSwitchTrigger : Triggers
     {
         
         [FieldCategory(Category="MaterialSwitchTrigger")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct SpecificMaterial
+        [System.Serializable] public struct SpecificMaterial
         {
             
             public MaterialSwitch SwitchMaterial;

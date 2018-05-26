@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_Tattoo : UObject
+    [System.Serializable] public class Appearance_Tattoo : UObject
     {
         
         [IgnoreFieldExtraction()]

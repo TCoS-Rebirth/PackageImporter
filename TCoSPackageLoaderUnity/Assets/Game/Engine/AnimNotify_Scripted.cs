@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_Scripted : AnimNotify
+    [System.Serializable] public class AnimNotify_Scripted : AnimNotify
     {
         
         public AnimNotify_Scripted()

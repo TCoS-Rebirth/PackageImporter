@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PreviewAppearance : Game_EquippedAppearance
+    [System.Serializable] public class Game_PreviewAppearance : Game_EquippedAppearance
     {
         
         //public delegate<OnCheckPartValidity> @__OnCheckPartValidity__Delegate;

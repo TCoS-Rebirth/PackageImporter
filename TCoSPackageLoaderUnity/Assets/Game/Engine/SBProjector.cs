@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBProjector : Actor
+    [System.Serializable] public class SBProjector : Actor
     {
         
         [FieldCategory(Category="SBProjector")]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBSunlight : Light
+    [System.Serializable] public class SBSunlight : Light
     {
         
         [FieldCategory(Category="SBSunlight")]

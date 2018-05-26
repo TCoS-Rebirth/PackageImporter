@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AICowerState : AIState
+    [System.Serializable] public class AICowerState : AIState
     {
         
         public AICowerState()

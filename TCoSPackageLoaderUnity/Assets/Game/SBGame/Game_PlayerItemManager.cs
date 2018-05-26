@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_PlayerItemManager : Game_ItemManager
+    [System.Serializable] public class Game_PlayerItemManager : Game_ItemManager
     {
         
         public int mCharacterID;
@@ -53,7 +53,7 @@ namespace SBGame
         {
         }
         
-        public struct sv2cl_Item
+        [System.Serializable] public struct sv2cl_Item
         {
             
             public int DBID;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_MatSubAction : AnimNotify
+    [System.Serializable] public class AnimNotify_MatSubAction : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_MatSubAction")]

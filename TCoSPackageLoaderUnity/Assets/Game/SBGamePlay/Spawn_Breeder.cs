@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Breeder : Spawn_Group
+    [System.Serializable] public class Spawn_Breeder : Spawn_Group
     {
         
         public Spawn_Breeder()

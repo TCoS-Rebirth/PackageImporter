@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class MessageHandler : UObject
+    [System.Serializable] public class MessageHandler : UObject
     {
         
         public const int HANDLER_NOT_FOUND = -1;
@@ -38,7 +38,7 @@ namespace SBGamePlay
         {
         }
         
-        public struct CommandHandler
+        [System.Serializable] public struct CommandHandler
         {
             
             public string Command;

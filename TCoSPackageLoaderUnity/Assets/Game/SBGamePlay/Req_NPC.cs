@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Req_NPC : Content_Requirement
+    [System.Serializable] public class Req_NPC : Content_Requirement
     {
         
         public Req_NPC()

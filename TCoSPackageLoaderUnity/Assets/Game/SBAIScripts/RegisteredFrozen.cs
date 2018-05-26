@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredFrozen : RegisteredAI
+    [System.Serializable] public class RegisteredFrozen : RegisteredAI
     {
         
         public bool IsFrozen;

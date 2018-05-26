@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Deployer : Spawn_Group
+    [System.Serializable] public class Spawn_Deployer : Spawn_Group
     {
         
         [FieldCategory(Category="Spawn")]

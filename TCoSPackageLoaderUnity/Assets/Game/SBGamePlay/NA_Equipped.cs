@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NA_Equipped : NA_RaceBodyGender
+    [System.Serializable] public class NA_Equipped : NA_RaceBodyGender
     {
         
         [FieldCategory(Category="Decoration")]

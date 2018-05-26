@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual_WeaponTracer : FSkill_EffectClass_AudioVisual_Emitter
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual_WeaponTracer : FSkill_EffectClass_AudioVisual_Emitter
     {
         
         [FieldCategory(Category="Color")]

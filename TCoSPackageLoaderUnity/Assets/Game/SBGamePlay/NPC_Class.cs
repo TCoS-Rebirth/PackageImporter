@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_Class : NPC_Humanoid
+    [System.Serializable] public class NPC_Class : NPC_Humanoid
     {
         
         [FieldCategory(Category="Sheet")]

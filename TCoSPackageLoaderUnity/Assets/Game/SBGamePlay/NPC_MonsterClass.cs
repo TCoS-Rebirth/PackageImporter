@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_MonsterClass : NPC_Monster
+    [System.Serializable] public class NPC_MonsterClass : NPC_Monster
     {
         
         [FieldCategory(Category="Sheet")]

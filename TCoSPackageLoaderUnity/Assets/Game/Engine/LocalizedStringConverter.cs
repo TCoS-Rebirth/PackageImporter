@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Engine
 {
-    public class LocalizedStringConverter : TypeConverter
+    [System.Serializable] public class LocalizedStringConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {

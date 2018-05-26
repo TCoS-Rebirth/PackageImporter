@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NS_Fixed : NPC_StatTable
+    [System.Serializable] public class NS_Fixed : NPC_StatTable
     {
         
         [FieldCategory(Category="Stats")]

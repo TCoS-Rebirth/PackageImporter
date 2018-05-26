@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_RemoveItem : Content_Event
+    [System.Serializable] public class EV_RemoveItem : Content_Event
     {
         
         [FieldCategory(Category="Action")]

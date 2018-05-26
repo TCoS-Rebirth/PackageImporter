@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_EXA_ConfusingSmoke : AI_Script
+    [System.Serializable] public class AIScript_EXA_ConfusingSmoke : AI_Script
     {
         
         [FieldCategory(Category="EXA_ConfusingSmoke")]
@@ -49,7 +49,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct ConfusedController
+        [System.Serializable] public struct ConfusedController
         {
             
             public float OriginalRange;

@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class Base_Notification : UObject
+    [System.Serializable] public class Base_Notification : UObject
     {
         
         public int mNotificationData;

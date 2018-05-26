@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NG_Hive : NPC_Group
+    [System.Serializable] public class NG_Hive : NPC_Group
     {
         
         public NG_Hive()

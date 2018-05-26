@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_Base : UObject
+    [System.Serializable] public class Appearance_Base : UObject
     {
         
         //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base")]
@@ -144,7 +144,7 @@ namespace SBGame
         {
         }
         
-        public struct Attachment
+        [System.Serializable] public struct Attachment
         {
             
             public string MeshGroup;
@@ -156,7 +156,7 @@ namespace SBGame
             public string AlternativeTexture;
         }
         
-        public struct SubTextureLocation
+        [System.Serializable] public struct SubTextureLocation
         {
             
             public int Angle;

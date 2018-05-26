@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class DecorationList : Keypoint
+    [System.Serializable] public class DecorationList : Keypoint
     {
         
         [FieldCategory(Category="List")]
@@ -34,7 +34,7 @@ namespace Engine
         {
         }
         
-        public struct DecorationType
+        [System.Serializable] public struct DecorationType
         {
             
             public StaticMesh StaticMesh;

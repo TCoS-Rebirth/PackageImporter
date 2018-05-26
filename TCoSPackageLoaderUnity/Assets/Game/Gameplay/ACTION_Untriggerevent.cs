@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class ACTION_Untriggerevent : Action_TRIGGEREVENT
+    [System.Serializable] public class ACTION_Untriggerevent : Action_TRIGGEREVENT
     {
     }
 }

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_ShowTutorial : Interaction_Component
+    [System.Serializable] public class Interaction_ShowTutorial : Interaction_Component
     {
         
         [FieldCategory(Category="Action")]

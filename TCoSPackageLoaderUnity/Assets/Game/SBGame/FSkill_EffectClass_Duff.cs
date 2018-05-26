@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_Duff : FSkill_EffectClass
+    [System.Serializable] public class FSkill_EffectClass_Duff : FSkill_EffectClass
     {
         
         [FieldCategory(Category="XCombo")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct DuffRestoreData
+        [System.Serializable] public struct DuffRestoreData
         {
             
             public Game_Pawn Pawn;

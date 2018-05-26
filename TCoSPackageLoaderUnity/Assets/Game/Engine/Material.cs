@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Material : UObject
+    [System.Serializable] public class Material : UObject
     {
         
         [FieldCategory(Category="Material")]

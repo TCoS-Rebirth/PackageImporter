@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class PlayerStart : SmallNavigationPoint
+    [System.Serializable] public class PlayerStart : SmallNavigationPoint
     {
         
         [FieldCategory(Category="PlayerStart")]

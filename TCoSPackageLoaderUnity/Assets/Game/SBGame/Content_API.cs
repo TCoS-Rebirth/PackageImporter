@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Content_API : UObject
+    [System.Serializable] public class Content_API : UObject
     {
         
         public Content_API()

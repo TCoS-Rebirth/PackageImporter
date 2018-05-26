@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class DS_Quest_GameInfo : Deadspell_GameInfo
+    [System.Serializable] public class DS_Quest_GameInfo : Deadspell_GameInfo
     {
         
         [FieldCategory(Category="QuestEvents")]
@@ -64,7 +64,7 @@ namespace SBGame
         {
         }
         
-        public struct QuestEvent
+        [System.Serializable] public struct QuestEvent
         {
             
             public NameProperty Event;

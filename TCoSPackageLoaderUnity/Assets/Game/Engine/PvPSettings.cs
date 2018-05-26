@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class PvPSettings : UObject
+    [System.Serializable] public class PvPSettings : UObject
     {
         
         [FieldCategory(Category="PvPSettings")]

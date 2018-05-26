@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class WeatherEffect : EnvironmentEffect
+    [System.Serializable] public class WeatherEffect : EnvironmentEffect
     {
         
         public WeatherEffect()

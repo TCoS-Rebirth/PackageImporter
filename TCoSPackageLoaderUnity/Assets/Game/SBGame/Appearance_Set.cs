@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_Set : UObject
+    [System.Serializable] public class Appearance_Set : UObject
     {
         
         public List<Mesh> BodySet = new List<Mesh>();
@@ -105,7 +105,7 @@ namespace SBGame
         {
         }
         
-        public struct BodyFlaps
+        [System.Serializable] public struct BodyFlaps
         {
             
             public SkeletalMesh Foot_l;

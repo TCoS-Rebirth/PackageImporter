@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_SkillDeckTier : UObject
+    [System.Serializable] public class NPC_SkillDeckTier : UObject
     {
         
         [FieldCategory(Category="skillTypes")]

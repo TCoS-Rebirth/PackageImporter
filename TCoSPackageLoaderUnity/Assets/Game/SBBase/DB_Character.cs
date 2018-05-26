@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class DB_Character : Base_DBObject
+    [System.Serializable] public class DB_Character : Base_DBObject
     {
         
         public int Id;

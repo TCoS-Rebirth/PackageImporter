@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredPatrol : RegisteredAI
+    [System.Serializable] public class RegisteredPatrol : RegisteredAI
     {
         
         public Vector HomeLocation;

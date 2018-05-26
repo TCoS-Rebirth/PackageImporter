@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIAlertState : AIState
+    [System.Serializable] public class AIAlertState : AIState
     {
         
         public bool mEnemy;

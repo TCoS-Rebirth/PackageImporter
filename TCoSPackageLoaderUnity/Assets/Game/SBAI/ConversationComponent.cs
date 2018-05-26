@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class ConversationComponent : Game_Conversation
+    [System.Serializable] public class ConversationComponent : Game_Conversation
     {
         
         public bool mEnabled;

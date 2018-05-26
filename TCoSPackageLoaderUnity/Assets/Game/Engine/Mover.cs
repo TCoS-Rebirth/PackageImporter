@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Mover : Actor
+    [System.Serializable] public class Mover : Actor
     {
         
         public const int MOVER_PERSISTENT_SOUND_MASK = 240;

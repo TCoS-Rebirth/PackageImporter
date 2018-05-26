@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Controller : Base_Controller
+    [System.Serializable] public class Game_Controller : Base_Controller
     {
         
         [IgnoreFieldExtraction()]
@@ -90,7 +90,7 @@ namespace SBGame
         {
         }
         
-        public struct DBSkillToken
+        [System.Serializable] public struct DBSkillToken
         {
             
             public int SkillID;

@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBTravel : UObject
+    [System.Serializable] public class SBTravel : UObject
     {
         
         public string Tag = string.Empty;

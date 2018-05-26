@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Interactions : UObject
+    [System.Serializable] public class Interactions : UObject
     {
         
         public Interactions()

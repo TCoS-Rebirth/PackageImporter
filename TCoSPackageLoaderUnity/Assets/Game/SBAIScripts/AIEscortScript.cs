@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIEscortScript : AIEscortFramework
+    [System.Serializable] public class AIEscortScript : AIEscortFramework
     {
         
         [IgnoreFieldExtraction()]

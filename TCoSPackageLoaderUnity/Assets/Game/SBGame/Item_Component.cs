@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Item_Component : UObject
+    [System.Serializable] public class Item_Component : UObject
     {
         
         public Item_Component()

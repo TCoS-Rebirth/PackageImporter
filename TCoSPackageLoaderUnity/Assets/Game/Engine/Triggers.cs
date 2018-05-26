@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Triggers : Actor
+    [System.Serializable] public class Triggers : Actor
     {
         
         public Triggers()

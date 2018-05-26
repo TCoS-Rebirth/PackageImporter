@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QT_Hunt : Quest_Target
+    [System.Serializable] public class QT_Hunt : Quest_Target
     {
         
         [FieldCategory(Category="Hunt")]

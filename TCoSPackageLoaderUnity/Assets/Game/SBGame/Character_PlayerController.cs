@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Character_PlayerController : Game_PlayerController
+    [System.Serializable] public class Character_PlayerController : Game_PlayerController
     {
         
         private Vector mTargetLocation;

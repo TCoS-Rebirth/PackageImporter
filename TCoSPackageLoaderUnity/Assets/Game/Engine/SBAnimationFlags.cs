@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SBAnimationFlags : UObject
+    [System.Serializable] public class SBAnimationFlags : UObject
     {
         
         public SBAnimationFlags()

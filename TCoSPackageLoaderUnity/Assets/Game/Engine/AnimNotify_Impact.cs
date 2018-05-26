@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_Impact : AnimNotify_SBSound
+    [System.Serializable] public class AnimNotify_Impact : AnimNotify_SBSound
     {
         
         public AnimNotify_Impact()

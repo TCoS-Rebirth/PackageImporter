@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionFade : MatSubAction
+    [System.Serializable] public class SubActionFade : MatSubAction
     {
         
         [FieldCategory(Category="Fade")]

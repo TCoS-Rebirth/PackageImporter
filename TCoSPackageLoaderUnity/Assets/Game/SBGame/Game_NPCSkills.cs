@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCSkills : Game_Skills
+    [System.Serializable] public class Game_NPCSkills : Game_Skills
     {
         
         public NPC_SkillDeck CurrentNPCSkillDeck;

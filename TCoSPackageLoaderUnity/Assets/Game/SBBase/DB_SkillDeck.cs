@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class DB_SkillDeck : UObject
+    [System.Serializable] public class DB_SkillDeck : UObject
     {
         
         public int Id;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class ZoneInfo : Info
+    [System.Serializable] public class ZoneInfo : Info
     {
         
         public const float CHECK_MUSIC_PLAYING_TIMER = 1F;

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_Die : Content_Event
+    [System.Serializable] public class EV_Die : Content_Event
     {
         
         public EV_Die()

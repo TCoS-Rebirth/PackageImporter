@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MaterialSequence : Modifier
+    [System.Serializable] public class MaterialSequence : Modifier
     {
         
         [FieldCategory(Category="MaterialSequence")]
@@ -53,7 +53,7 @@ namespace Engine
         {
         }
         
-        public struct MaterialSequenceItem
+        [System.Serializable] public struct MaterialSequenceItem
         {
             
             public Material Material;

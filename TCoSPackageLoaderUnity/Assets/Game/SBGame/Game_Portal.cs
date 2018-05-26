@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Portal : SBPortal
+    [System.Serializable] public class Game_Portal : SBPortal
     {
         
         public Game_Portal()

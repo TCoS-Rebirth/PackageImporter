@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class AccessmapExplorer : Scout
+    [System.Serializable] public class AccessmapExplorer : Scout
     {
         
         public AccessmapExplorer()

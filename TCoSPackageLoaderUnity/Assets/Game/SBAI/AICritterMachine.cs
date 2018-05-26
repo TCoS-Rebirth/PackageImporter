@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AICritterMachine : AIStateMachine
+    [System.Serializable] public class AICritterMachine : AIStateMachine
     {
         
         public AICritterMachine()

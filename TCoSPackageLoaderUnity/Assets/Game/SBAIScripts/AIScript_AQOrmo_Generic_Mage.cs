@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_Generic_Mage : AIRegistered
+    [System.Serializable] public class AIScript_AQOrmo_Generic_Mage : AIRegistered
     {
         
         [FieldCategory(Category="GenericOrmoMage")]

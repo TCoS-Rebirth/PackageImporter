@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CCom_TeamKick : Game_ConsoleCommand
+    [System.Serializable] public class CCom_TeamKick : Game_ConsoleCommand
     {
         
         public CCom_TeamKick()

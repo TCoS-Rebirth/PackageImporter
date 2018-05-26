@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class FluidSurfaceInfo : Info
+    [System.Serializable] public class FluidSurfaceInfo : Info
     {
         
         [FieldCategory(Category="FluidSurfaceInfo")]

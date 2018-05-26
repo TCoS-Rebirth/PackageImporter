@@ -1,6 +1,6 @@
 ﻿namespace Gameplay
 {
-    public class ACTION_WaitForTimer : LatentScriptedAction
+    [System.Serializable] public class ACTION_WaitForTimer : LatentScriptedAction
     {
         public float PauseTime = 0;
 

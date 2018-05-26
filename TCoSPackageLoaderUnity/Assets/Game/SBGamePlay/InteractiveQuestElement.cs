@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveQuestElement : InteractiveLevelElement
+    [System.Serializable] public class InteractiveQuestElement : InteractiveLevelElement
     {
         
         public InteractiveQuestElement()

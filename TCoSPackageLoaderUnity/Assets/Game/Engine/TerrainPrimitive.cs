@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class TerrainPrimitive : Primitive
+    [System.Serializable] public class TerrainPrimitive : Primitive
     {
         
         public TerrainPrimitive()

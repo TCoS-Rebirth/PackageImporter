@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class StaticMesh : Primitive
+    [System.Serializable] public class StaticMesh : Primitive
     {
 
         [FieldCategory(Category = "")]
@@ -50,7 +50,7 @@ namespace Engine
         {
         }
 
-        public struct StaticMeshMaterial
+        [System.Serializable] public struct StaticMeshMaterial
         {
             public bool EnableCollision;
             public Material Material;

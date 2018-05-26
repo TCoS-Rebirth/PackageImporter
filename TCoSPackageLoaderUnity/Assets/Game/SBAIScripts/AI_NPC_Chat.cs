@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_NPC_Chat : AIRegistered
+    [System.Serializable] public class AI_NPC_Chat : AIRegistered
     {
         
         [FieldCategory(Category="Chat")]
@@ -68,7 +68,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct ChatMessage
+        [System.Serializable] public struct ChatMessage
         {
             
             public NPC_Type ChatNPC;

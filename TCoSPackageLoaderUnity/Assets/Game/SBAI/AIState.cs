@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class AIState : UObject
+    [System.Serializable] public class AIState : UObject
     {
         
         public AIState mParent;

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_Quest : Conversation_Topic
+    [System.Serializable] public class CT_Quest : Conversation_Topic
     {
         
         public CT_Quest()

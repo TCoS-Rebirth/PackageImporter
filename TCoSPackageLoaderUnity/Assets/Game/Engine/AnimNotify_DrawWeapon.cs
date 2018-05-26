@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_DrawWeapon : AnimNotify
+    [System.Serializable] public class AnimNotify_DrawWeapon : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_DrawWeapon")]

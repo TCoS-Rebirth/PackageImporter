@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCStats : Game_CharacterStats
+    [System.Serializable] public class Game_NPCStats : Game_CharacterStats
     {
         
         [FieldConst()]

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Interact : AIRegistered
+    [System.Serializable] public class AIScript_Interact : AIRegistered
     {
         
         [FieldCategory(Category="Interact")]

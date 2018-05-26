@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Wildlife : Spawn_Area
+    [System.Serializable] public class Spawn_Wildlife : Spawn_Area
     {
         
         [FieldCategory(Category="Spawn")]

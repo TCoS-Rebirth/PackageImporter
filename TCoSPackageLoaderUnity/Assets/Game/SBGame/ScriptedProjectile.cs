@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class ScriptedProjectile : Game_Actor
+    [System.Serializable] public class ScriptedProjectile : Game_Actor
     {
         
         [FieldCategory(Category="Projectile")]

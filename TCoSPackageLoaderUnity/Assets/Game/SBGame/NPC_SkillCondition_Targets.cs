@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_SkillCondition_Targets : NPC_SkillCondition_Self
+    [System.Serializable] public class NPC_SkillCondition_Targets : NPC_SkillCondition_Self
     {
         
         [FieldCategory(Category="Misc")]

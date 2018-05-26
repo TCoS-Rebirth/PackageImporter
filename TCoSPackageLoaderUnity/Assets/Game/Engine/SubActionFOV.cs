@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionFOV : MatSubAction
+    [System.Serializable] public class SubActionFOV : MatSubAction
     {
         
         [FieldCategory(Category="FOV")]

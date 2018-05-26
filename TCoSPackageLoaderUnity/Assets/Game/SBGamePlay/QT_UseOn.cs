@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QT_UseOn : Quest_Target
+    [System.Serializable] public class QT_UseOn : Quest_Target
     {
         
         [FieldCategory(Category="Use")]

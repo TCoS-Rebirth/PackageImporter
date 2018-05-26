@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionCameraShake : MatSubAction
+    [System.Serializable] public class SubActionCameraShake : MatSubAction
     {
         
         [FieldCategory(Category="Shake")]

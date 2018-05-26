@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_SkillCondition_Self : NPC_SkillCondition
+    [System.Serializable] public class NPC_SkillCondition_Self : NPC_SkillCondition
     {
         
         [FieldCategory(Category="PMC")]

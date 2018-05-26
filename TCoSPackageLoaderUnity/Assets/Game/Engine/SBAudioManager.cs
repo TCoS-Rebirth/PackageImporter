@@ -24,7 +24,7 @@ namespace Engine
 {
 #pragma warning disable 414   
     
-    public class SBAudioManager : UObject
+    [System.Serializable] public class SBAudioManager : UObject
     {
         
         public const float SBMIN_ALLOWED_VOLUME = 0.001F;
@@ -118,7 +118,7 @@ namespace Engine
         {
         }
         
-        public struct FaderInfo
+        [System.Serializable] public struct FaderInfo
         {
             
             public bool GroupFader;
@@ -136,7 +136,7 @@ namespace Engine
             public float FadeInDelay;
         }
         
-        public struct GroupFadeProperties
+        [System.Serializable] public struct GroupFadeProperties
         {
             
             public byte AudioType;
@@ -150,7 +150,7 @@ namespace Engine
             public float FadeInDelay;
         }
         
-        public struct MusicTrackInfo
+        [System.Serializable] public struct MusicTrackInfo
         {
             
             public int MusicHandle;
@@ -158,7 +158,7 @@ namespace Engine
             public List<FaderInfo> ActiveFaders;
         }
         
-        public struct SBExemptFromFade
+        [System.Serializable] public struct SBExemptFromFade
         {
             
             public NameProperty ActorTagName;
@@ -168,7 +168,7 @@ namespace Engine
             public float RemoveExemptionTimer;
         }
         
-        public struct SBAudioTypeParams
+        [System.Serializable] public struct SBAudioTypeParams
         {
             
             public byte AudioType;
@@ -182,7 +182,7 @@ namespace Engine
             public bool Mute;
         }
         
-        public struct SBAudioStream
+        [System.Serializable] public struct SBAudioStream
         {
             
             public byte AudioType;
@@ -218,7 +218,7 @@ namespace Engine
             public bool Looped;
         }
         
-        public struct SBAudioFader
+        [System.Serializable] public struct SBAudioFader
         {
             
             public int Handle;

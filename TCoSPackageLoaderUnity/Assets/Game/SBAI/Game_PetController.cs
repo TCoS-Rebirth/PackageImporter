@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class Game_PetController : Game_AIController
+    [System.Serializable] public class Game_PetController : Game_AIController
     {
         
         public Game_Pawn PetOwner;

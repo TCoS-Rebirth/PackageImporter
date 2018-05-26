@@ -23,7 +23,7 @@ using Framework.Attributes;
 namespace Engine
 { 
     
-    public class ActionMoveCamera : MatAction
+    [System.Serializable] public class ActionMoveCamera : MatAction
     {
         
         [FieldCategory(Category="Path")]

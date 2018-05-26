@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Crowd : Actor
+    [System.Serializable] public class Crowd : Actor
     {
         
         public byte _Level;

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_DAF_Grome : AI_Script
+    [System.Serializable] public class AIScript_DAF_Grome : AI_Script
     {
         
         [FieldCategory(Category="Grome")]
@@ -98,7 +98,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct participant
+        [System.Serializable] public struct participant
         {
             
             public NPC_Type NPCType;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class GameStaticMesh : StaticMeshActor
+    [System.Serializable] public class GameStaticMesh : StaticMeshActor
     {
         
         public GameStaticMesh()

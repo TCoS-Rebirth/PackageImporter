@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveDoor : InteractiveLevelElement
+    [System.Serializable] public class InteractiveDoor : InteractiveLevelElement
     {
         
         [FieldCategory(Category="InteractiveDoor")]

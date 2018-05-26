@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Quest_Reward : Content_Type
+    [System.Serializable] public class Quest_Reward : Content_Type
     {
         
         public Quest_Reward()

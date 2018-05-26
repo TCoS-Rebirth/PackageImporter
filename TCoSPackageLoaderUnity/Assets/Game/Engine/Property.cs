@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Property : Field
+    [System.Serializable] public class Property : Field
     {
         
         public Property()

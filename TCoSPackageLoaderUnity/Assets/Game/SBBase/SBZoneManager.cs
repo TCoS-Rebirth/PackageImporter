@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBZoneManager : SBActor
+    [System.Serializable] public class SBZoneManager : SBActor
     {
         
         public SBZoneManager()

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Item : UObject
+    [System.Serializable] public class Game_Item : UObject
     {
         
         [IgnoreFieldExtraction()]
@@ -95,7 +95,7 @@ namespace SBGame
         {
         }
         
-        public struct ReplicatedItem
+        [System.Serializable] public struct ReplicatedItem
         {
             
             public int DBID;

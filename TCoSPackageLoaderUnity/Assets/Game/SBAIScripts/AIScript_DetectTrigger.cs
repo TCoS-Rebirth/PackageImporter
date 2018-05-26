@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_DetectTrigger : AIRegistered
+    [System.Serializable] public class AIScript_DetectTrigger : AIRegistered
     {
         
         [FieldCategory(Category="DetectTrigger")]

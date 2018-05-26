@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class PathConfigurationActor : Actor
+    [System.Serializable] public class PathConfigurationActor : Actor
     {
         
         [FieldCategory(Category="PathConfigurationActor")]

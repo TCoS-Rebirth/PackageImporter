@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SkinVertexBuffer : RenderResource
+    [System.Serializable] public class SkinVertexBuffer : RenderResource
     {
         
         public SkinVertexBuffer()

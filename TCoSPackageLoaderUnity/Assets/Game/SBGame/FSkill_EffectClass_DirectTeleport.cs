@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_DirectTeleport : FSkill_EffectClass_Direct
+    [System.Serializable] public class FSkill_EffectClass_DirectTeleport : FSkill_EffectClass_Direct
     {
         
         public const int MAX_TELEPORT_RETRIES = 4;

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class QuestChallengeHookTrigger : AI_Script
+    [System.Serializable] public class QuestChallengeHookTrigger : AI_Script
     {
         
         [FieldCategory(Category="QuestChallengeHookTrigger")]

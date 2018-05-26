@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class IndexBuffer : RenderResource
+    [System.Serializable] public class IndexBuffer : RenderResource
     {
         
         public IndexBuffer()

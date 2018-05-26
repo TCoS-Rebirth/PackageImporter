@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Habitat : Actor
+    [System.Serializable] public class NPC_Habitat : Actor
     {
         
         [FieldCategory(Category="aI")]
@@ -55,7 +55,7 @@ namespace SBGame
         {
         }
         
-        public struct WanderObstacle
+        [System.Serializable] public struct WanderObstacle
         {
             
             public Actor Obstacle;
@@ -67,7 +67,7 @@ namespace SBGame
             public float Range;
         }
         
-        public struct WanderSmell
+        [System.Serializable] public struct WanderSmell
         {
             
             public Vector Location;

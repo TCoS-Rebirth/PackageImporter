@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class FSkill_EffectClass_DirectTeleportAI : FSkill_EffectClass_DirectTeleport
+    [System.Serializable] public class FSkill_EffectClass_DirectTeleportAI : FSkill_EffectClass_DirectTeleport
     {
         
         public FSkill_EffectClass_DirectTeleportAI()

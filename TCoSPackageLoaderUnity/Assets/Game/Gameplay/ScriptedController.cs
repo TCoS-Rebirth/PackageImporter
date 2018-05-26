@@ -2,7 +2,7 @@ using Engine;
 
 namespace Gameplay
 {
-    public class ScriptedController : AIController
+    [System.Serializable] public class ScriptedController : AIController
     {
         
     }

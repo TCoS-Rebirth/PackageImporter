@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Help_Article : Content_Type
+    [System.Serializable] public class Help_Article : Content_Type
     {
         
         [FieldCategory(Category="Article")]

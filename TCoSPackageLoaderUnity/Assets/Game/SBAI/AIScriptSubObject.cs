@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class AIScriptSubObject : UObject
+    [System.Serializable] public class AIScriptSubObject : UObject
     {
         
         [IgnoreFieldExtraction()]

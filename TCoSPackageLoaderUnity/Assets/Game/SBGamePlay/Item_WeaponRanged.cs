@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Item_WeaponRanged : Item_Type
+    [System.Serializable] public class Item_WeaponRanged : Item_Type
     {
         
         public Item_WeaponRanged()

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CCom_Help : Game_ConsoleCommand
+    [System.Serializable] public class CCom_Help : Game_ConsoleCommand
     {
         
         public CCom_Help()

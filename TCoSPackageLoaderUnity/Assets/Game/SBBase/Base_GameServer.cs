@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class Base_GameServer : GameEngine
+    [System.Serializable] public class Base_GameServer : GameEngine
     {
         
         public int ServerMode;

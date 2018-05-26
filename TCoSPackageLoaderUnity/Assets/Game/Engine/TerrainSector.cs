@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class TerrainSector : UObject
+    [System.Serializable] public class TerrainSector : UObject
     {
         
         public TerrainSector()

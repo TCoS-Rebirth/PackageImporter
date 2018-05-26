@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_MainWeapon : Appearance_Base
+    [System.Serializable] public class Appearance_MainWeapon : Appearance_Base
     {
         
         [FieldCategory(Category="MainWeapon")]

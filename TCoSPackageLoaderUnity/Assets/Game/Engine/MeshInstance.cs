@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class MeshInstance : Primitive
+    [System.Serializable] public class MeshInstance : Primitive
     {
         
         public MeshInstance()

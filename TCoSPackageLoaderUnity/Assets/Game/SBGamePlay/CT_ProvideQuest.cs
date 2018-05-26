@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_ProvideQuest : CT_Quest
+    [System.Serializable] public class CT_ProvideQuest : CT_Quest
     {
         
         [FieldCategory(Category="CT_ProvideQuest")]

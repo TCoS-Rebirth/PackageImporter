@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class xMaterialController : Actor
+    [System.Serializable] public class xMaterialController : Actor
     {
         
         [FieldCategory(Category="xMaterialController")]

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AISubmergeState : AIIdleState
+    [System.Serializable] public class AISubmergeState : AIIdleState
     {
         
         public float mTimer;

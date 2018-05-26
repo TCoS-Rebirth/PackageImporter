@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Polys : UObject
+    [System.Serializable] public class Polys : UObject
     {
         
         public Polys()

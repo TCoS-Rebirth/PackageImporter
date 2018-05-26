@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Light : Actor
+    [System.Serializable] public class Light : Actor
     {
         
         [FieldCategory(Category="Corona")]

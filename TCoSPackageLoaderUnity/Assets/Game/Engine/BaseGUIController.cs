@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class BaseGUIController : Interaction
+    [System.Serializable] public class BaseGUIController : Interaction
     {
         
         [IgnoreFieldExtraction()]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Controller : Actor
+    [System.Serializable] public class Controller : Actor
     {
         
         public const int LATENT_MOVETOWARD = 503;

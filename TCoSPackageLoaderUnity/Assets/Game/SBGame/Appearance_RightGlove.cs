@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_RightGlove : Appearance_Base
+    [System.Serializable] public class Appearance_RightGlove : Appearance_Base
     {
         
         [FieldCategory(Category="Sections")]

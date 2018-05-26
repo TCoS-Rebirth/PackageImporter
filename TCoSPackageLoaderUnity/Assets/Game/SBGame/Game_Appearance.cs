@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_Appearance : Base_Component
+    [System.Serializable] public class Game_Appearance : Base_Component
     {
         
         public const int RACE_DAEVIE = 1;

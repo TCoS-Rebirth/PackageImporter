@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AICoverState : AICowerState
+    [System.Serializable] public class AICoverState : AICowerState
     {
         
         public AICoverState()

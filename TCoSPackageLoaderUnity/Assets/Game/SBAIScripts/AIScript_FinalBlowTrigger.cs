@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_FinalBlowTrigger : AI_Script
+    [System.Serializable] public class AIScript_FinalBlowTrigger : AI_Script
     {
         
         public bool PendingDeath;

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Looting : Base_Component
+    [System.Serializable] public class Game_Looting : Base_Component
     {
         
         public const int LOOT_ITEM_REJECTED_INVENTORY_FULL = 1;
@@ -47,7 +47,7 @@ namespace SBGame
         {
         }
         
-        public struct LootItem
+        [System.Serializable] public struct LootItem
         {
             
             public Game_Item GameItem;
@@ -55,7 +55,7 @@ namespace SBGame
             public bool Chosen;
         }
         
-        public struct ReplicatedLootItem
+        [System.Serializable] public struct ReplicatedLootItem
         {
             
             public int ResourceId;
@@ -65,7 +65,7 @@ namespace SBGame
             public int Quantity;
         }
         
-        public struct ServerLootInfo
+        [System.Serializable] public struct ServerLootInfo
         {
             
             public Loot_Transaction Transaction;
@@ -73,7 +73,7 @@ namespace SBGame
             public List<ReplicatedLootItem> lootItems;
         }
         
-        public struct ClientLootInfo
+        [System.Serializable] public struct ClientLootInfo
         {
             
             public int TransactionID;

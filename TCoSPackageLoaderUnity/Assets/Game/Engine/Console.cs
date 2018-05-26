@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Console : Interaction
+    [System.Serializable] public class Console : Interaction
     {
         
         [FieldConfig()]

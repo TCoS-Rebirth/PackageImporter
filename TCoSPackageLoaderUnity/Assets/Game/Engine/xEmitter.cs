@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class xEmitter : Actor
+    [System.Serializable] public class xEmitter : Actor
     {
         
         [FieldCategory(Category="PclEmitter")]

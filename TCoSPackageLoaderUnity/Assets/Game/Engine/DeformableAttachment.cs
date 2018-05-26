@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DeformableAttachment : SBAttachment
+    [System.Serializable] public class DeformableAttachment : SBAttachment
     {
         
         public DeformableAttachment()

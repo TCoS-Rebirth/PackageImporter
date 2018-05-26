@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class VolumeTimer : Info
+    [System.Serializable] public class VolumeTimer : Info
     {
         
         public Actor A;

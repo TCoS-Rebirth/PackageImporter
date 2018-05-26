@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CCom_GuildDisband : Game_ConsoleCommand
+    [System.Serializable] public class CCom_GuildDisband : Game_ConsoleCommand
     {
         
         public CCom_GuildDisband()

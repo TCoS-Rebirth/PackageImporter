@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class NullViewport : Viewport
+    [System.Serializable] public class NullViewport : Viewport
     {
         
         public NullViewport()

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerGuilds : Base_Component
+    [System.Serializable] public class Game_PlayerGuilds : Base_Component
     {
         
         public const int GRR_GUILD_TOURNAMENTS_SIGN_UP = 524288;
@@ -110,7 +110,7 @@ namespace SBGame
         {
         }
         
-        public struct ranks
+        [System.Serializable] public struct ranks
         {
             
             public int Level;

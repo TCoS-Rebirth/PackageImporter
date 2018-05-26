@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class ScriptedTriggerController: ScriptedController
+    [System.Serializable] public class ScriptedTriggerController: ScriptedController
     {
         
     }

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_TriggerActions : AIRegistered
+    [System.Serializable] public class AI_TriggerActions : AIRegistered
     {
         
         [FieldCategory(Category="TriggerActions")]

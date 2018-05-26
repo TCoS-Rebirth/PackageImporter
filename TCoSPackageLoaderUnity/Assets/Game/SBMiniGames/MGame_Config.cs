@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
 #pragma warning disable 414   
     
-    public class MGame_Config : UObject
+    [System.Serializable] public class MGame_Config : UObject
     {
         
         public const int MGAME_CONFIG_ENABLED = 1;

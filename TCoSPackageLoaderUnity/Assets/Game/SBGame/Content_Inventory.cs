@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Content_Inventory : Content_API
+    [System.Serializable] public class Content_Inventory : Content_API
     {
         
         [FieldCategory(Category="Items")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct ContentItem
+        [System.Serializable] public struct ContentItem
         {
             
             public Item_Type Item;

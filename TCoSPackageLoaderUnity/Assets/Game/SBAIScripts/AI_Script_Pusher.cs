@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
 #pragma warning disable 414   
     
-    public class AI_Script_Pusher : AIRegistered
+    [System.Serializable] public class AI_Script_Pusher : AIRegistered
     {
         
         [FieldCategory(Category="Scripts_Pusher")]
@@ -51,7 +51,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct PushedScript
+        [System.Serializable] public struct PushedScript
         {
             
             public AI_Script ScriptInstance;

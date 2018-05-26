@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Chat : Base_Component
+    [System.Serializable] public class Game_Chat : Base_Component
     {
         
         public const int MAX_CHAT_MESSAGE_LENGTH = 256;

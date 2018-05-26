@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_Rules : UObject
+    [System.Serializable] public class MGame_Rules : UObject
     {
         
         public int TestRule;

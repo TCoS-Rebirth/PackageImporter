@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AutoDoor : Door
+    [System.Serializable] public class AutoDoor : Door
     {
         
         public AutoDoor()

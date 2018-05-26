@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBPortal : UObject
+    [System.Serializable] public class SBPortal : UObject
     {
         
         public SBWorld TargetWorld;

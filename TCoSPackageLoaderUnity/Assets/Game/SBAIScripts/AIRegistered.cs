@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
 #pragma warning disable 414   
     
-    public class AIRegistered : AI_Script
+    [System.Serializable] public class AIRegistered : AI_Script
     {
         
         private List<RegisteredAI> Registered = new List<RegisteredAI>();

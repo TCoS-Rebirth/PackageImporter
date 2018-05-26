@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Effects : Content_API
+    [System.Serializable] public class NPC_Effects : Content_API
     {
         
         [FieldCategory(Category="NPC_Effects")]

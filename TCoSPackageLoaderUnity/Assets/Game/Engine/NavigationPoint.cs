@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class NavigationPoint : Actor
+    [System.Serializable] public class NavigationPoint : Actor
     {
         
         [IgnoreFieldExtraction()]

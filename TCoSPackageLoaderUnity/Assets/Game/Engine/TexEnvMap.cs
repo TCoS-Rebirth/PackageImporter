@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexEnvMap : TexModifier
+    [System.Serializable] public class TexEnvMap : TexModifier
     {
         
         [FieldCategory(Category="TexEnvMap")]

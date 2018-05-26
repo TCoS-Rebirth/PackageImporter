@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TotA_6_Neighbours : AI_Script
+    [System.Serializable] public class AIScript_TotA_6_Neighbours : AI_Script
     {
         
         [FieldCategory(Category="AIScript_TotA_6_Neighbours")]

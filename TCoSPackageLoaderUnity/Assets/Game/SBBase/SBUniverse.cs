@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBUniverse : UObject
+    [System.Serializable] public class SBUniverse : UObject
     {
         
         [FieldCategory(Category="Universe")]

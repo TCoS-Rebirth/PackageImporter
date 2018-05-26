@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCItemManager : Game_ItemManager
+    [System.Serializable] public class Game_NPCItemManager : Game_ItemManager
     {
         
         public Game_NPCItemManager()

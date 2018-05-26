@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerCombatStats : Game_CombatStats
+    [System.Serializable] public class Game_PlayerCombatStats : Game_CombatStats
     {
         
         public float mPvPTimer;

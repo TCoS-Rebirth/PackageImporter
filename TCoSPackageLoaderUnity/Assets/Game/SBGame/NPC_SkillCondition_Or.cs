@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_SkillCondition_Or : NPC_SkillCondition
+    [System.Serializable] public class NPC_SkillCondition_Or : NPC_SkillCondition
     {
         
         [FieldCategory(Category="Conditions")]

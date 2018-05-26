@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QT_Wait : Quest_Target
+    [System.Serializable] public class QT_Wait : Quest_Target
     {
         
         [FieldCategory(Category="Condition")]

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveHatch : InteractiveLevelElement
+    [System.Serializable] public class InteractiveHatch : InteractiveLevelElement
     {
         
         [FieldCategory(Category="InteractiveHatch")]

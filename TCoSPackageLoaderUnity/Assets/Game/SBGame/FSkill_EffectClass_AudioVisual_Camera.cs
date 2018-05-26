@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual_Camera : FSkill_EffectClass_AudioVisual_LocalView
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual_Camera : FSkill_EffectClass_AudioVisual_LocalView
     {
         
         public FSkill_EffectClass_AudioVisual_Camera()

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_FSkill : AnimNotify
+    [System.Serializable] public class AnimNotify_FSkill : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_FSkill")]

@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredHealthLevel : RegisteredAI
+    [System.Serializable] public class RegisteredHealthLevel : RegisteredAI
     {
         
         public int LastEventNum;

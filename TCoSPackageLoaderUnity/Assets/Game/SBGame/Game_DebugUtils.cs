@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_DebugUtils : Base_Component
+    [System.Serializable] public class Game_DebugUtils : Base_Component
     {
         
         public bool mTestTrace;

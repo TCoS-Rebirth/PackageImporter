@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBMover : Mover
+    [System.Serializable] public class SBMover : Mover
     {
         
         [IgnoreFieldExtraction()]

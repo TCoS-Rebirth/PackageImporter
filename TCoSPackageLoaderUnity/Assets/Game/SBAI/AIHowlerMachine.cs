@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIHowlerMachine : AIStateMachine
+    [System.Serializable] public class AIHowlerMachine : AIStateMachine
     {
         
         public AIHowlerMachine()

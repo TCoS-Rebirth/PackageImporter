@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Item_ArmorLeftShoulder : Item_Type
+    [System.Serializable] public class Item_ArmorLeftShoulder : Item_Type
     {
         
         public Item_ArmorLeftShoulder()

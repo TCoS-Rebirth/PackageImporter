@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_PatrolPoint_ScriptPusher : AI_Script
+    [System.Serializable] public class AIScript_PatrolPoint_ScriptPusher : AI_Script
     {
         
         [FieldCategory(Category="PatrolPoint_ScriptPusher")]
@@ -49,7 +49,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct AttachedPatrolScrtipt
+        [System.Serializable] public struct AttachedPatrolScrtipt
         {
             
             public Game_AIController Controller;

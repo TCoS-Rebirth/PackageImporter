@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_GameMasterController : Game_PlayerController
+    [System.Serializable] public class Game_GameMasterController : Game_PlayerController
     {
         
         public int mAuthorityLevel;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SkyZoneInfo : ZoneInfo
+    [System.Serializable] public class SkyZoneInfo : ZoneInfo
     {
         
         [FieldCategory(Category="DayNightCycle")]

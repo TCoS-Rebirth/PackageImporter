@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class ViewMap_Pawn : Game_Pawn
+    [System.Serializable] public class ViewMap_Pawn : Game_Pawn
     {
         
         public bool GhostMode;

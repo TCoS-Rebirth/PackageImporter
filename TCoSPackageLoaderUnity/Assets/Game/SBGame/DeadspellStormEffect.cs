@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class DeadspellStormEffect : TimedEnvironmentEffect
+    [System.Serializable] public class DeadspellStormEffect : TimedEnvironmentEffect
     {
         
         [FieldCategory(Category="DSIntro")]
@@ -78,7 +78,7 @@ namespace SBGame
         {
         }
         
-        public struct DSProgressEvent
+        [System.Serializable] public struct DSProgressEvent
         {
             
             public float TimeFraction;

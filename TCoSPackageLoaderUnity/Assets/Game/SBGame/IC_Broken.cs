@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class IC_Broken : Item_Component
+    [System.Serializable] public class IC_Broken : Item_Component
     {
         
         public Item_Type Recipe;

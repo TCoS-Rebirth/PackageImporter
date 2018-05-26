@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIPassiveMachine : AIStateMachine
+    [System.Serializable] public class AIPassiveMachine : AIStateMachine
     {
         
         public AIPassiveMachine()

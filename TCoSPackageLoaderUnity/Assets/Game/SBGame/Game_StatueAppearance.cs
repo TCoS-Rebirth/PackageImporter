@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_StatueAppearance : Game_PlayerAppearance
+    [System.Serializable] public class Game_StatueAppearance : Game_PlayerAppearance
     {
         
         public Game_StatueAppearance()

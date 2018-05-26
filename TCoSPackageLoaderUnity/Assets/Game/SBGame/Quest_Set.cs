@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Quest_Set : UObject
+    [System.Serializable] public class Quest_Set : UObject
     {
         
         public List<Quest_Type> mQuests = new List<Quest_Type>();

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class PhysicsVolume : Volume
+    [System.Serializable] public class PhysicsVolume : Volume
     {
         
         [FieldCategory(Category="PhysicsVolume")]

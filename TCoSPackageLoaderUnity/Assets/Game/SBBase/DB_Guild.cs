@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class DB_Guild : Base_DBObject
+    [System.Serializable] public class DB_Guild : Base_DBObject
     {
         
         public int GroupId;

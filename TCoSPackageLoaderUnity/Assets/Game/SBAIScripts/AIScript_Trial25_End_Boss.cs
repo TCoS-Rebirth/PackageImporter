@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Trial25_End_Boss : AI_Script
+    [System.Serializable] public class AIScript_Trial25_End_Boss : AI_Script
     {
         
         [FieldCategory(Category="EndBoss")]

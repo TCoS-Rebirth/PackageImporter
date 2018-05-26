@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class LootTable : Content_Type
+    [System.Serializable] public class LootTable : Content_Type
     {
         
         public List<LootEntry> Entries = new List<LootEntry>();
@@ -51,7 +51,7 @@ namespace SBGame
         {
         }
         
-        public struct DroppedItem
+        [System.Serializable] public struct DroppedItem
         {
             
             public Item_Type Item;
@@ -63,7 +63,7 @@ namespace SBGame
             public int MaxLevel;
         }
         
-        public struct LootEntry
+        [System.Serializable] public struct LootEntry
         {
             
             public Item_Type Item;

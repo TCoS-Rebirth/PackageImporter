@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class AnnotationActor : SBPoint
+    [System.Serializable] public class AnnotationActor : SBPoint
     {
         
         [FieldCategory(Category="Annotation")]

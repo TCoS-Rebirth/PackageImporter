@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveChair : InteractiveLevelElement
+    [System.Serializable] public class InteractiveChair : InteractiveLevelElement
     {
         
         [IgnoreFieldExtraction()]

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Proto_TriggeredSkill : AI_Script
+    [System.Serializable] public class AIScript_Proto_TriggeredSkill : AI_Script
     {
         
         [FieldCategory(Category="AIScript_Proto_TriggeredSkill")]

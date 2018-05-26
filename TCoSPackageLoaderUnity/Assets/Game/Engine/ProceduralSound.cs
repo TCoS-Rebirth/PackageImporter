@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class ProceduralSound : Sound
+    [System.Serializable] public class ProceduralSound : Sound
     {
         
         [FieldCategory(Category="Sound")]

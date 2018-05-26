@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Type : Content_Type
+    [System.Serializable] public class NPC_Type : Content_Type
     {
         
         [FieldCategory(Category="Basics")]

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIBossMachine : AIStateMachine
+    [System.Serializable] public class AIBossMachine : AIStateMachine
     {
         
         public AIBossMachine()

@@ -24,7 +24,7 @@ namespace Engine
 {
 #pragma warning disable 414   
     
-    public class SBShadowMap : UObject
+    [System.Serializable] public class SBShadowMap : UObject
     {
         
         [FieldConst()]

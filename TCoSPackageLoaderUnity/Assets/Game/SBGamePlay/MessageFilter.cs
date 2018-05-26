@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class MessageFilter : UObject
+    [System.Serializable] public class MessageFilter : UObject
     {
         
         public int flags;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TimedEnvironmentEffect : EnvironmentEffect
+    [System.Serializable] public class TimedEnvironmentEffect : EnvironmentEffect
     {
         
         [FieldCategory(Category="Preview")]
@@ -53,7 +53,7 @@ namespace Engine
         {
         }
         
-        public struct EventRange
+        [System.Serializable] public struct EventRange
         {
             
             public NameProperty Event;

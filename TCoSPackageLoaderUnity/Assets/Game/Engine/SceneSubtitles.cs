@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SceneSubtitles : Info
+    [System.Serializable] public class SceneSubtitles : Info
     {
         
         [FieldCategory(Category="SceneSubtitles")]

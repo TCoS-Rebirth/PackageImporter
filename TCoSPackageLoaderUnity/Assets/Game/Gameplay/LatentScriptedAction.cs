@@ -1,6 +1,6 @@
 ﻿namespace Gameplay
 {
-    public class LatentScriptedAction : ScriptedAction
+    [System.Serializable] public class LatentScriptedAction : ScriptedAction
     {
 
     }

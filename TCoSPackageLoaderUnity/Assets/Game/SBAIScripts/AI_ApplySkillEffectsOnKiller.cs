@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_ApplySkillEffectsOnKiller : AIRegistered
+    [System.Serializable] public class AI_ApplySkillEffectsOnKiller : AIRegistered
     {
         
         [FieldCategory(Category="TriggerSkillEffects")]

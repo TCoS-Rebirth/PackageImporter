@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class PlayerController : Controller
+    [System.Serializable] public class PlayerController : Controller
     {
         
         public const int UNREAL_UNIT_PI = 32768;

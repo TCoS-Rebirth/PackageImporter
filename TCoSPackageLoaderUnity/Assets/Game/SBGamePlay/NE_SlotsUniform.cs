@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NE_SlotsUniform : NE_SlotsBase
+    [System.Serializable] public class NE_SlotsUniform : NE_SlotsBase
     {
         
         public NE_SlotsUniform()

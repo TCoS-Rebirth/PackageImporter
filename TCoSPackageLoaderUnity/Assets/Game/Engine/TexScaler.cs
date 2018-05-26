@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexScaler : TexModifier
+    [System.Serializable] public class TexScaler : TexModifier
     {
         
         [IgnoreFieldExtraction()]

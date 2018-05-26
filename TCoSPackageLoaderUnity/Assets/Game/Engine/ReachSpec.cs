@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class ReachSpec : UObject
+    [System.Serializable] public class ReachSpec : UObject
     {
         
         public int Distance;

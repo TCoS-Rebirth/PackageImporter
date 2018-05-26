@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBGuildMember : UObject
+    [System.Serializable] public class SBGuildMember : UObject
     {
         
         public int CharacterID;

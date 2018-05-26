@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class DB_Team : UObject
+    [System.Serializable] public class DB_Team : UObject
     {
         
         public DB_Team()

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_CoA_1_Becks_Script : AI_Script
+    [System.Serializable] public class AIScript_CoA_1_Becks_Script : AI_Script
     {
         
         [FieldCategory(Category="AIScript_CoA_1_Becks_Script")]

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIWakingMachine : AIStateMachine
+    [System.Serializable] public class AIWakingMachine : AIStateMachine
     {
         
         public AIWakingMachine()

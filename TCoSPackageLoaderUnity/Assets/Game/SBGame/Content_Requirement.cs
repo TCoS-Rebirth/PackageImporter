@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Content_Requirement : Content_Type
+    [System.Serializable] public class Content_Requirement : Content_Type
     {
         
         public int ControlLocationX;

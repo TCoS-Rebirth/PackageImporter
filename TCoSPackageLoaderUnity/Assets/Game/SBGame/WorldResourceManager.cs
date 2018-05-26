@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class WorldResourceManager : Actor
+    [System.Serializable] public class WorldResourceManager : Actor
     {
         
         [FieldCategory(Category="WorldResourceManager")]
@@ -45,7 +45,7 @@ namespace SBGame
         {
         }
         
-        public struct RegisteredResource
+        [System.Serializable] public struct RegisteredResource
         {
             
             public WorldResource Resource;

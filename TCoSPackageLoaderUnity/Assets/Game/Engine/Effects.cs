@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Effects : Actor
+    [System.Serializable] public class Effects : Actor
     {
         
         public Effects()

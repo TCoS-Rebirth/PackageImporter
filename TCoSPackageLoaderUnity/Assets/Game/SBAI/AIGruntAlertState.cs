@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIGruntAlertState : AIAlertState
+    [System.Serializable] public class AIGruntAlertState : AIAlertState
     {
         
         public AIGruntAlertState()

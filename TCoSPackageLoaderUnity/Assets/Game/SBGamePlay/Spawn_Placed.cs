@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Placed : Spawn_Triggered
+    [System.Serializable] public class Spawn_Placed : Spawn_Triggered
     {
         
         [FieldCategory(Category="Spawn_Placed")]

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Item_KeepReference : UObject
+    [System.Serializable] public class Item_KeepReference : UObject
     {
         
         public List<Item_Type> AllItems = new List<Item_Type>();

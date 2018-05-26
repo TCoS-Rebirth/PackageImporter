@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_HUD : UObject
+    [System.Serializable] public class Game_HUD : UObject
     {
         
         public Game_HUD()

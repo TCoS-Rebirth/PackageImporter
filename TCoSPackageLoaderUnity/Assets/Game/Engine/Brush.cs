@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Brush : Actor
+    [System.Serializable] public class Brush : Actor
     {
         
         [FieldCategory(Category="Brush")]

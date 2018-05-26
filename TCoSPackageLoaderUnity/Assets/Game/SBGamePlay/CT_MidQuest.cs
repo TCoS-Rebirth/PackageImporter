@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_MidQuest : CT_Quest
+    [System.Serializable] public class CT_MidQuest : CT_Quest
     {
         
         public CT_MidQuest()

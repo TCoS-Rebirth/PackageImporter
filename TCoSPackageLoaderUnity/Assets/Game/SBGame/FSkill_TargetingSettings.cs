@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_TargetingSettings : UObject
+    [System.Serializable] public class FSkill_TargetingSettings : UObject
     {
         
         [FieldCategory(Category="FSkill_TargetingSettings")]

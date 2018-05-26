@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class LevelGrid : UObject
+    [System.Serializable] public class LevelGrid : UObject
     {
         
         public LevelGrid()

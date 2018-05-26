@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIFightState : AIState
+    [System.Serializable] public class AIFightState : AIState
     {
         
         public byte mTerminatingState;

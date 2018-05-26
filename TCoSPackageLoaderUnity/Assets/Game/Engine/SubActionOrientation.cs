@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionOrientation : MatSubAction
+    [System.Serializable] public class SubActionOrientation : MatSubAction
     {
         
         [FieldCategory(Category="Orientation")]

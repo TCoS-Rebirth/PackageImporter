@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class DamageType : Actor
+    [System.Serializable] public class DamageType : Actor
     {
         
         [FieldCategory(Category="DamageType")]

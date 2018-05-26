@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_Duff_DuffEff : UObject
+    [System.Serializable] public class FSkill_Event_Duff_DuffEff : UObject
     {
         
         [FieldConst()]

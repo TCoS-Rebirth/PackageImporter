@@ -2,7 +2,7 @@
 
 namespace Gameplay
 {
-    public class ACTION_WaitForEvent : LatentScriptedAction
+    [System.Serializable] public class ACTION_WaitForEvent : LatentScriptedAction
     {
 
         //TriggeredCondition T;?

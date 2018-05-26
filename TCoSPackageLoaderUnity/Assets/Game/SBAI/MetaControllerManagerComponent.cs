@@ -23,7 +23,7 @@ namespace SBAI
 {
 #pragma warning disable 414   
     
-    public class MetaControllerManagerComponent : Base_Component
+    [System.Serializable] public class MetaControllerManagerComponent : Base_Component
     {
         
         private List<AI_MetaController> mMetaControllers = new List<AI_MetaController>();

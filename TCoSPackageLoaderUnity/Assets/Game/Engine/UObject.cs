@@ -25,7 +25,7 @@ namespace Engine
 {
 #pragma warning disable 414    
     
-    public class UObject: SBPackageResource
+    [System.Serializable] public class UObject: SBPackageResource
     {
         
         public const float Pi = 3.141593F;
@@ -116,13 +116,13 @@ namespace Engine
        
     }
 
-    public struct DatabaseRow
+    [System.Serializable] public struct DatabaseRow
     {
 
         public List<string> Fields;
     }
 
-    public struct TMultiMap
+    [System.Serializable] public struct TMultiMap
     {
 
         public int FArray_Data;
@@ -136,7 +136,7 @@ namespace Engine
         public int TMapBase_HashCount;
     }
 
-    public struct Rotator
+    [System.Serializable] public struct Rotator
     {
 
         public int Pitch;
@@ -148,7 +148,7 @@ namespace Engine
         public Rotator(int pitch, int yaw, int roll) { Pitch = pitch;Yaw = yaw;Roll = roll; }
     }
 
-    public struct InterpCurvePoint
+    [System.Serializable] public struct InterpCurvePoint
     {
 
         public float InVal;
@@ -156,13 +156,13 @@ namespace Engine
         public float OutVal;
     }
 
-    public struct InterpCurve
+    [System.Serializable] public struct InterpCurve
     {
 
         public List<InterpCurvePoint> Points;
     }
 
-    public struct Vector
+    [System.Serializable] public struct Vector
     {
 
         public float X;
@@ -174,7 +174,7 @@ namespace Engine
         public Vector(float x, float y, float z) { X = x;Y = y;Z = z; }
     }
 
-    public struct Box
+    [System.Serializable] public struct Box
     {
 
         public Vector Min;
@@ -184,7 +184,7 @@ namespace Engine
         public byte IsValid;
     }
 
-    public struct FloatBox
+    [System.Serializable] public struct FloatBox
     {
 
         public float X1;
@@ -196,7 +196,7 @@ namespace Engine
         public float Y2;
     }
 
-    public struct IntBox
+    [System.Serializable] public struct IntBox
     {
 
         public int X1;
@@ -208,7 +208,7 @@ namespace Engine
         public int Y2;
     }
 
-    public struct Plane
+    [System.Serializable] public struct Plane
     {
 
         public float X;
@@ -220,7 +220,7 @@ namespace Engine
         public float W;
     }
 
-    public struct Color
+    [System.Serializable] public struct Color
     {
 
         public byte B;
@@ -234,7 +234,7 @@ namespace Engine
         public Color (byte r, byte g, byte b, byte a) { R = r;G = g;B = b;A = a; }
     }
 
-    public struct Scale
+    [System.Serializable] public struct Scale
     {
 
         public Vector scale;
@@ -244,7 +244,7 @@ namespace Engine
         public byte SheerAxis;
     }
 
-    public struct Range
+    [System.Serializable] public struct Range
     {
 
         public float Min;
@@ -252,7 +252,7 @@ namespace Engine
         public float Max;
     }
 
-    public struct RangeVector
+    [System.Serializable] public struct RangeVector
     {
 
         public Range X;
@@ -262,7 +262,7 @@ namespace Engine
         public Range Z;
     }
 
-    public struct Quat
+    [System.Serializable] public struct Quat
     {
 
         public float X;
@@ -274,7 +274,7 @@ namespace Engine
         public float W;
     }
 
-    public struct Coords
+    [System.Serializable] public struct Coords
     {
 
         public Vector Origin;
@@ -286,7 +286,7 @@ namespace Engine
         public Vector ZAxis;
     }
 
-    public struct CompressedPosition
+    [System.Serializable] public struct CompressedPosition
     {
 
         public Vector Location;
@@ -296,7 +296,7 @@ namespace Engine
         public Vector Velocity;
     }
 
-    public struct Matrix
+    [System.Serializable] public struct Matrix
     {
 
         public Plane XPlane;
@@ -308,7 +308,7 @@ namespace Engine
         public Plane WPlane;
     }
 
-    public struct BoundingVolume
+    [System.Serializable] public struct BoundingVolume
     {
         public Vector Min;
         public Vector Max;
@@ -316,7 +316,7 @@ namespace Engine
         public Plane Sphere;
     }
 
-    public struct Guid
+    [System.Serializable] public struct Guid
     {
 
         public int A;
@@ -328,7 +328,7 @@ namespace Engine
         public int D;
     }
 
-    public class NameProperty
+    [System.Serializable] public class NameProperty
     {
         public readonly string Value;
         public NameProperty(string value)

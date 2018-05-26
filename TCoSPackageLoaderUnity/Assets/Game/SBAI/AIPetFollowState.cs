@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIPetFollowState : AIFollowState
+    [System.Serializable] public class AIPetFollowState : AIFollowState
     {
         
         public AIPetFollowState()

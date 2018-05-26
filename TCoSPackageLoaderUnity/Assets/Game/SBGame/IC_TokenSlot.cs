@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_TokenSlot : Item_Component
+    [System.Serializable] public class IC_TokenSlot : Item_Component
     {
         
         [FieldCategory(Category="TokenSlot")]
@@ -35,7 +35,7 @@ namespace SBGame
         {
         }
         
-        public struct TokenSlot
+        [System.Serializable] public struct TokenSlot
         {
             
             public int rank;

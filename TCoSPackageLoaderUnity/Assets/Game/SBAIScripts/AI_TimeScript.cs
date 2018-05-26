@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_TimeScript : AI_Script
+    [System.Serializable] public class AI_TimeScript : AI_Script
     {
         
         [FieldCategory(Category="AI_TimeScript")]

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class ViewMap_GameInfo : Game_GameInfo
+    [System.Serializable] public class ViewMap_GameInfo : Game_GameInfo
     {
         
         public float GameSpeed;

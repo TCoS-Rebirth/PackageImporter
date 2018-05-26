@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class ACTION_Freeze : LatentScriptedAction
+    [System.Serializable] public class ACTION_Freeze : LatentScriptedAction
     {
         public override string ActionString
         {

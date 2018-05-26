@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_Skills : Base_Component
+    [System.Serializable] public class Game_Skills : Base_Component
     {
         
         public const int MAX_TOKEN_SLOTS = 3;
@@ -149,7 +149,7 @@ namespace SBGame
         {
         }
         
-        public struct ReturnReflectData
+        [System.Serializable] public struct ReturnReflectData
         {
             
             public int Id;
@@ -163,7 +163,7 @@ namespace SBGame
             public FSkill_Event Event;
         }
         
-        public struct ShareApplicantData
+        [System.Serializable] public struct ShareApplicantData
         {
             
             public Game_Pawn Target;
@@ -171,7 +171,7 @@ namespace SBGame
             public FSkill_EffectClass_DuffShare effect;
         }
         
-        public struct ShareData
+        [System.Serializable] public struct ShareData
         {
             
             public int Id;
@@ -187,7 +187,7 @@ namespace SBGame
             public FSkill_Event Event;
         }
         
-        public struct AlterEffectData
+        [System.Serializable] public struct AlterEffectData
         {
             
             public int Id;
@@ -201,7 +201,7 @@ namespace SBGame
             public int NumUses;
         }
         
-        public struct DisableSkillUseData
+        [System.Serializable] public struct DisableSkillUseData
         {
             
             public int Id;
@@ -209,7 +209,7 @@ namespace SBGame
             public FSkill_EffectClass_DuffDisableSkillUse effect;
         }
         
-        public struct ImmuneData
+        [System.Serializable] public struct ImmuneData
         {
             
             public int Id;
@@ -217,7 +217,7 @@ namespace SBGame
             public FSkill_EffectClass_DuffImmunity effect;
         }
         
-        public struct ClientDuffStackData
+        [System.Serializable] public struct ClientDuffStackData
         {
             
             public FSkill_Event_Duff OriginalDuff;
@@ -229,7 +229,7 @@ namespace SBGame
             public float Duration;
         }
         
-        public struct TransferDuffStackData
+        [System.Serializable] public struct TransferDuffStackData
         {
             
             public int OriginalDuffID;
@@ -241,7 +241,7 @@ namespace SBGame
             public float Duration;
         }
         
-        public struct DuffStackData
+        [System.Serializable] public struct DuffStackData
         {
             
             public float ApplyTime;
@@ -253,7 +253,7 @@ namespace SBGame
             public int ActualStackCount;
         }
         
-        public struct SpecialDuffEffect
+        [System.Serializable] public struct SpecialDuffEffect
         {
             
             public FSkill_EffectClass_Duff Duff;
@@ -265,7 +265,7 @@ namespace SBGame
             public int Identifier;
         }
         
-        public struct ComboStringData
+        [System.Serializable] public struct ComboStringData
         {
             
             public FSkill_Type Skill;
@@ -273,7 +273,7 @@ namespace SBGame
             public float ApplyTime;
         }
         
-        public struct RunningSkillData
+        [System.Serializable] public struct RunningSkillData
         {
             
             public float StartTime;

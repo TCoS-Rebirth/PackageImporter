@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_ConditionalTouching : AIRegistered
+    [System.Serializable] public class AIScript_ConditionalTouching : AIRegistered
     {
         
         [FieldCategory(Category="ConditionalTouching")]

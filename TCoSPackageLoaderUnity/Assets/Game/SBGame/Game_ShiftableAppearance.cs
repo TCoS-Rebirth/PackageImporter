@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_ShiftableAppearance : Base_Component
+    [System.Serializable] public class Game_ShiftableAppearance : Base_Component
     {
         
         [IgnoreFieldExtraction()]
@@ -45,7 +45,7 @@ namespace SBGame
         {
         }
         
-        public struct PhysicState
+        [System.Serializable] public struct PhysicState
         {
             
             public byte Physics;

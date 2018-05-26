@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SurfaceSoundGroup : Sound
+    [System.Serializable] public class SurfaceSoundGroup : Sound
     {
         
         [FieldCategory(Category="Sound")]
@@ -39,7 +39,7 @@ namespace Engine
         {
         }
         
-        public struct SurfaceSoundSubGroup
+        [System.Serializable] public struct SurfaceSoundSubGroup
         {
             
             public byte MaterialSurfaceType;

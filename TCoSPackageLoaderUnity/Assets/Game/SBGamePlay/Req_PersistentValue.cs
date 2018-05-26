@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Req_PersistentValue : Content_Requirement
+    [System.Serializable] public class Req_PersistentValue : Content_Requirement
     {
         
         public Content_Type context;

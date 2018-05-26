@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Proto_PauseAI : AIRegistered
+    [System.Serializable] public class AIScript_Proto_PauseAI : AIRegistered
     {
         
         public AIScript_Proto_PauseAI()

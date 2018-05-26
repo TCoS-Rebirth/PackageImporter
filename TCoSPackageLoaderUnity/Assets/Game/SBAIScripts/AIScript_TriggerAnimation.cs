@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TriggerAnimation : AIRegistered
+    [System.Serializable] public class AIScript_TriggerAnimation : AIRegistered
     {
         
         [FieldCategory(Category="TriggerAnimation")]
@@ -65,7 +65,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct AnimStruct
+        [System.Serializable] public struct AnimStruct
         {
             
             public byte variation;

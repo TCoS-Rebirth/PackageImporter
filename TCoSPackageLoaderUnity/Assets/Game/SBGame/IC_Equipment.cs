@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class IC_Equipment : IC_Appearance
+    [System.Serializable] public class IC_Equipment : IC_Appearance
     {
         
         public IC_Equipment()

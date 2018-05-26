@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_SBSound : AnimNotify
+    [System.Serializable] public class AnimNotify_SBSound : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_SBSound")]

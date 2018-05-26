@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Trial45_Statue : AI_Script
+    [System.Serializable] public class AIScript_Trial45_Statue : AI_Script
     {
         
         [FieldCategory(Category="Statue")]

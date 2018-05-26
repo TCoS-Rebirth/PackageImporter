@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AntiPortalActor : Actor
+    [System.Serializable] public class AntiPortalActor : Actor
     {
         
         public AntiPortalActor()

@@ -24,7 +24,7 @@ namespace Engine
 {
 #pragma warning disable 414   
     
-    public class SBAnimatedPawn : Pawn
+    [System.Serializable] public class SBAnimatedPawn : Pawn
     {
         
         [IgnoreFieldExtraction()]
@@ -77,7 +77,7 @@ namespace Engine
         {
         }
         
-        public struct SBAttachmentInfo
+        [System.Serializable] public struct SBAttachmentInfo
         {
             
             public string AttachmentName;
@@ -95,7 +95,7 @@ namespace Engine
             public bool IgnoreParentRotation;
         }
         
-        public struct SBAnimationParameters
+        [System.Serializable] public struct SBAnimationParameters
         {
             
             public float BlendFactor;
@@ -113,7 +113,7 @@ namespace Engine
             public bool Reversed;
         }
         
-        public struct SBAnimationStackEntry
+        [System.Serializable] public struct SBAnimationStackEntry
         {
             
             public NameProperty AnimationName;
@@ -133,7 +133,7 @@ namespace Engine
             public bool IgnoreNotifies;
         }
         
-        public struct SBAnimationTypeStack
+        [System.Serializable] public struct SBAnimationTypeStack
         {
             
             public byte AnimType;
@@ -141,7 +141,7 @@ namespace Engine
             public List<SBAnimationStackEntry> AnimationStack;
         }
         
-        public struct SBDirectionFlagSet
+        [System.Serializable] public struct SBDirectionFlagSet
         {
             
             public int directionFlag;

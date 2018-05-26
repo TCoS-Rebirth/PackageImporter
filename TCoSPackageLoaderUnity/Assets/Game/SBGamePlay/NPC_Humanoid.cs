@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_Humanoid : NPC_Type
+    [System.Serializable] public class NPC_Humanoid : NPC_Type
     {
         
         public NPC_Humanoid()

@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414       
     
-    public class FSkill_Event_FX_Advanced : FSkill_Event_FX
+    [System.Serializable] public class FSkill_Event_FX_Advanced : FSkill_Event_FX
     {
         
         [FieldCategory(Category="FX")]
@@ -41,7 +41,7 @@ namespace SBGame
         {
         }
         
-        public struct AdvancedEmitter
+        [System.Serializable] public struct AdvancedEmitter
         {
             
             public FSkill_EffectClass_AudioVisual_Emitter Emitter;

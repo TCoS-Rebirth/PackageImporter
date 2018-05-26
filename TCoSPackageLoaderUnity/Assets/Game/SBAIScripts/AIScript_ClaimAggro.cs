@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_ClaimAggro : AIRegistered
+    [System.Serializable] public class AIScript_ClaimAggro : AIRegistered
     {
         
         [IgnoreFieldExtraction()]

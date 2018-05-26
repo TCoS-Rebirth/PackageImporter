@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_CoA_2_PoochAndTack_Script : AIRegistered
+    [System.Serializable] public class AIScript_CoA_2_PoochAndTack_Script : AIRegistered
     {
         
         [FieldCategory(Category="AIScript_CoA_2_PoochAndTack_Script")]

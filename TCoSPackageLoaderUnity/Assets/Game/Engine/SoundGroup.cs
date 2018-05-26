@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SoundGroup : Sound
+    [System.Serializable] public class SoundGroup : Sound
     {
         
         [IgnoreFieldExtraction()]

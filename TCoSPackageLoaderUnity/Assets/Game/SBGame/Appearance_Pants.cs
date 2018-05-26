@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_Pants : Appearance_Base
+    [System.Serializable] public class Appearance_Pants : Appearance_Base
     {
         
         [FieldCategory(Category="Sections")]

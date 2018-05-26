@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_ActiveTextItem : UObject
+    [System.Serializable] public class Game_ActiveTextItem : UObject
     {
         
         public int Type;

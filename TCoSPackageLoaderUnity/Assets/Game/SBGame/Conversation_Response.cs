@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Conversation_Response : Content_Type
+    [System.Serializable] public class Conversation_Response : Content_Type
     {
         
         [FieldCategory(Category="Text")]

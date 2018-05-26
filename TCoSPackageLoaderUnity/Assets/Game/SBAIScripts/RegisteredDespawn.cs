@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredDespawn : RegisteredAI
+    [System.Serializable] public class RegisteredDespawn : RegisteredAI
     {
         
         public RegisteredDespawn()

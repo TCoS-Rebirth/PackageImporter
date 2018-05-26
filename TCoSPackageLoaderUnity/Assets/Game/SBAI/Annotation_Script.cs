@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class Annotation_Script : AI_MetaController
+    [System.Serializable] public class Annotation_Script : AI_MetaController
     {
         
         public Annotation_Script()

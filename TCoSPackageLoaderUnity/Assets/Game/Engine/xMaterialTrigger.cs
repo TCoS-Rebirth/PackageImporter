@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class xMaterialTrigger : Actor
+    [System.Serializable] public class xMaterialTrigger : Actor
     {
         
         public xMaterialTrigger()

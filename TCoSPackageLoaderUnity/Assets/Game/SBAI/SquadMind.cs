@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class SquadMind : GroupMind
+    [System.Serializable] public class SquadMind : GroupMind
     {
         
         private Game_AIController mLeader;

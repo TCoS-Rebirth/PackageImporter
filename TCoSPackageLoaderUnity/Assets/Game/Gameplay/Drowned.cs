@@ -2,7 +2,7 @@ using Engine;
 
 namespace Gameplay
 {
-    public class Drowned : DamageType
+    [System.Serializable] public class Drowned : DamageType
     {
         
     }

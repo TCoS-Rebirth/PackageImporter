@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionCameraEffect : MatSubAction
+    [System.Serializable] public class SubActionCameraEffect : MatSubAction
     {
         
         [FieldCategory(Category="SubActionCameraEffect")]

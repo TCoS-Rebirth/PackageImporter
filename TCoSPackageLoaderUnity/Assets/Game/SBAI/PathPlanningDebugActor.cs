@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class PathPlanningDebugActor : Actor
+    [System.Serializable] public class PathPlanningDebugActor : Actor
     {
         
         public PathPlanningDebugActor()

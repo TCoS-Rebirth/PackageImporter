@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAppearance_Set : Appearance_Set
+    [System.Serializable] public class SBAppearance_Set : Appearance_Set
     {
         
         public SBAppearance_Set()

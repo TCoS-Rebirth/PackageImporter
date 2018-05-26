@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Level : LevelBase
+    [System.Serializable] public class Level : LevelBase
     {
         
         public Level()

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_Target : FSkill_Event_FX
+    [System.Serializable] public class FSkill_Event_Target : FSkill_Event_FX
     {
         
         [FieldCategory(Category="Target")]

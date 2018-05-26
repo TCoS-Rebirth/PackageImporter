@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBInfluenceVolume : Actor
+    [System.Serializable] public class SBInfluenceVolume : Actor
     {
         
         public const float SBVOLUME_MIN_DIMENSION = 0.0001F;

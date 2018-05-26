@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ObjectPool : UObject
+    [System.Serializable] public class ObjectPool : UObject
     {
         
         public List<UObject> Objects = new List<UObject>();

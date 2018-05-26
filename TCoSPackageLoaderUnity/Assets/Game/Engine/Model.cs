@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Model : Primitive
+    [System.Serializable] public class Model : Primitive
     {
         
         public Model()

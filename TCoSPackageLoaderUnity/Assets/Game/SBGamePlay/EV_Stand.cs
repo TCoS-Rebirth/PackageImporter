@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_Stand : Content_Event
+    [System.Serializable] public class EV_Stand : Content_Event
     {
         
         public EV_Stand()

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MatSubAction : MatObject
+    [System.Serializable] public class MatSubAction : MatObject
     {
         
         [FieldCategory(Category="Time")]

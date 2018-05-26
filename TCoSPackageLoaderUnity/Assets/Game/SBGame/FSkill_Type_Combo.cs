@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Type_Combo : FSkill_Type
+    [System.Serializable] public class FSkill_Type_Combo : FSkill_Type
     {
         
         [FieldCategory(Category="Combo")]

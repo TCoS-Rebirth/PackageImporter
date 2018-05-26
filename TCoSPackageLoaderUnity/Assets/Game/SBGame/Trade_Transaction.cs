@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Trade_Transaction : UObject
+    [System.Serializable] public class Trade_Transaction : UObject
     {
         
         [IgnoreFieldExtraction()]
@@ -61,7 +61,7 @@ namespace SBGame
         {
         }
         
-        public struct ServerTradeItem
+        [System.Serializable] public struct ServerTradeItem
         {
             
             public Game_Item Item;

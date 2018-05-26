@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CCom_Location : Game_ConsoleCommand
+    [System.Serializable] public class CCom_Location : Game_ConsoleCommand
     {
         
         public CCom_Location()

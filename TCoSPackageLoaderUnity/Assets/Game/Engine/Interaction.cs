@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Interaction : Interactions
+    [System.Serializable] public class Interaction : Interactions
     {
         
         public bool bActive;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Sound : UObject
+    [System.Serializable] public class Sound : UObject
     {
         
         [FieldCategory(Category="Sound")]

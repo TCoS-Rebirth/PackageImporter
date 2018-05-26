@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class TriggerableBarrier : Game_Actor
+    [System.Serializable] public class TriggerableBarrier : Game_Actor
     {
         
         [FieldCategory(Category="TriggerableBarrier")]

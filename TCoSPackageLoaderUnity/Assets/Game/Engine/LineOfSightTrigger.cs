@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class LineOfSightTrigger : Triggers
+    [System.Serializable] public class LineOfSightTrigger : Triggers
     {
         
         [FieldCategory(Category="LineOfSightTrigger")]

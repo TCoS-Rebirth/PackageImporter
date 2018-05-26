@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NE_Slots : NE_SlotsBase
+    [System.Serializable] public class NE_Slots : NE_SlotsBase
     {
         
         [FieldCategory(Category="Equipment")]

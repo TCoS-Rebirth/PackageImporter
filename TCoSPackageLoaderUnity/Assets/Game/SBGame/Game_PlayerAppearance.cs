@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerAppearance : Game_EquippedAppearance
+    [System.Serializable] public class Game_PlayerAppearance : Game_EquippedAppearance
     {
         
         private byte mLowestReceivedLOD;

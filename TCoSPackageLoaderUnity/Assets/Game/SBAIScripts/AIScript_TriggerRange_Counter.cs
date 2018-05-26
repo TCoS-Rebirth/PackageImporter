@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TriggerRange_Counter : AI_Script
+    [System.Serializable] public class AIScript_TriggerRange_Counter : AI_Script
     {
         
         [FieldCategory(Category="AIScript_TriggerRange_Counter")]
@@ -41,7 +41,7 @@ namespace SBAIScripts
         {
         }
         
-        //public struct CountEvent
+        //[System.Serializable] public struct CountEvent
         //{
             
         //    public string EnterEvent;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_ModifyMovement : AnimNotify
+    [System.Serializable] public class AnimNotify_ModifyMovement : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_ModifyMovement")]

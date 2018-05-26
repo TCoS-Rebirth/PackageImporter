@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NA_Static : NPC_Appearance
+    [System.Serializable] public class NA_Static : NPC_Appearance
     {
         
         [FieldCategory(Category="NA_Static")]

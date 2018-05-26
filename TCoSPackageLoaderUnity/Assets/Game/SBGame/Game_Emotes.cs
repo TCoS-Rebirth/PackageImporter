@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Emotes : Base_Component
+    [System.Serializable] public class Game_Emotes : Base_Component
     {
         
         public List<Game_Emote> EmoteMappings = new List<Game_Emote>();
@@ -39,7 +39,7 @@ namespace SBGame
         {
         }
         
-        public struct EmoteMapping
+        [System.Serializable] public struct EmoteMapping
         {
             
             public string Command;

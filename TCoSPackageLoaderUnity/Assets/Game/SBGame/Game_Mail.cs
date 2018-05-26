@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Mail : Base_Component
+    [System.Serializable] public class Game_Mail : Base_Component
     {
         
         public const int MAIL_CHECK_TIME = 300;
@@ -70,7 +70,7 @@ namespace SBGame
         {
         }
         
-        public struct MailAttachment
+        [System.Serializable] public struct MailAttachment
         {
             
             public int ItemTypeID;
@@ -82,7 +82,7 @@ namespace SBGame
             public byte Color2;
         }
         
-        public struct MailEntry
+        [System.Serializable] public struct MailEntry
         {
             
             public List<MailAttachment> Attachments;

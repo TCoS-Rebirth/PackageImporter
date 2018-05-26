@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class MapSectionInfo : UObject
+    [System.Serializable] public class MapSectionInfo : UObject
     {
         
         public const int RESOLUTION_MAX_RANGE = 4096;

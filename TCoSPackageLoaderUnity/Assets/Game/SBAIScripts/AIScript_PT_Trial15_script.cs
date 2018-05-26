@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_PT_Trial15_script : AI_Script
+    [System.Serializable] public class AIScript_PT_Trial15_script : AI_Script
     {
         
         [FieldCategory(Category="Trial_Script")]
@@ -84,7 +84,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct BirthSign
+        [System.Serializable] public struct BirthSign
         {
             
             public string ActivateEvent;

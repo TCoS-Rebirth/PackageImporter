@@ -1,6 +1,6 @@
 ﻿namespace Gameplay
 {
-    public class ACTION_GotoAction : LatentScriptedAction
+    [System.Serializable] public class ACTION_GotoAction : LatentScriptedAction
     {
         public int ActionNumber=0;
         public override string ActionString

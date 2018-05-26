@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DamTypeTelefragged : DamageType
+    [System.Serializable] public class DamTypeTelefragged : DamageType
     {
         
         public DamTypeTelefragged()

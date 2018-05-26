@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class MeshAnimation : UObject
+    [System.Serializable] public class MeshAnimation : UObject
     {
         
         public MeshAnimation()

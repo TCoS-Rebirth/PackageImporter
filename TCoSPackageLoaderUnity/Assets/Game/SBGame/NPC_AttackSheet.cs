@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AttackSheet : Content_Type
+    [System.Serializable] public class NPC_AttackSheet : Content_Type
     {
         
         public bool mUseable;

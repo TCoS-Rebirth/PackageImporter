@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Editor_Pawn : Base_Pawn
+    [System.Serializable] public class Editor_Pawn : Base_Pawn
     {
         
         public List<byte> RadialMenuOptions = new List<byte>();

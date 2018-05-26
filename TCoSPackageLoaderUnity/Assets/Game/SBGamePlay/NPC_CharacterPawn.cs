@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_CharacterPawn : Game_NPCPawn
+    [System.Serializable] public class NPC_CharacterPawn : Game_NPCPawn
     {
         
         public NPC_CharacterPawn()

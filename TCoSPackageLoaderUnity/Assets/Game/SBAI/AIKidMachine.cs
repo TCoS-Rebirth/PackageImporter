@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIKidMachine : AIStateMachine
+    [System.Serializable] public class AIKidMachine : AIStateMachine
     {
         
         public AIKidMachine()

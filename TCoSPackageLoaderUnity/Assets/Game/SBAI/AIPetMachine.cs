@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIPetMachine : AIStateMachine
+    [System.Serializable] public class AIPetMachine : AIStateMachine
     {
         
         public AIPetMachine()

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class xWeatherEffect : Actor
+    [System.Serializable] public class xWeatherEffect : Actor
     {
         
         [FieldCategory(Category="xWeatherEffect")]
@@ -126,7 +126,7 @@ namespace Engine
         {
         }
         
-        public struct WeatherPcl
+        [System.Serializable] public struct WeatherPcl
         {
             
             public Vector pos;

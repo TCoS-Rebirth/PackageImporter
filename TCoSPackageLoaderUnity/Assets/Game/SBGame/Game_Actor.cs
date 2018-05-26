@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_Actor : Actor
+    [System.Serializable] public class Game_Actor : Actor
     {
         
         [IgnoreFieldExtraction()]

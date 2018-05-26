@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_Range : FSkill_EffectClass
+    [System.Serializable] public class FSkill_EffectClass_Range : FSkill_EffectClass
     {
         
         public const float MAX_SKILLSIZE = 200F;

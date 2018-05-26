@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_PersistentValue : Content_Event
+    [System.Serializable] public class EV_PersistentValue : Content_Event
     {
         
         public Content_Type context;

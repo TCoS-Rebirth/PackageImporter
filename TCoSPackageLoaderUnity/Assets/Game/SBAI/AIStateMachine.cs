@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIStateMachine : AIState
+    [System.Serializable] public class AIStateMachine : AIState
     {
         
         public AIState mCurrentState;

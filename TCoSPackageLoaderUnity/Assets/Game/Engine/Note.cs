@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Note : Actor
+    [System.Serializable] public class Note : Actor
     {
         
         [FieldCategory(Category="Note")]

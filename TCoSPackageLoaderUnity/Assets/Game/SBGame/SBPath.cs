@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class SBPath : UObject
+    [System.Serializable] public class SBPath : UObject
     {
         
         public List<Vector> Path = new List<Vector>();

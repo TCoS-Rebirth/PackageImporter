@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
 #pragma warning disable 414   
     
-    public class ScenarioManager : Actor
+    [System.Serializable] public class ScenarioManager : Actor
     {
         
         [IgnoreFieldExtraction()]
@@ -47,7 +47,7 @@ namespace SBGamePlay
         {
         }
         
-        public struct EditorVisibilityInfoStruct
+        [System.Serializable] public struct EditorVisibilityInfoStruct
         {
             
             public Actor anActor;

@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class RenderResource : UObject
+    [System.Serializable] public class RenderResource : UObject
     {
         
         public RenderResource()

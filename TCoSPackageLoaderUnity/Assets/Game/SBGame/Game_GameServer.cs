@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_GameServer : Base_GameServer
+    [System.Serializable] public class Game_GameServer : Base_GameServer
     {
         
         public int FActorStatsWindowDummy1;

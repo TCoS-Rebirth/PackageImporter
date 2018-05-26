@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_TeamMemberPawn : Game_PlayerPawn
+    [System.Serializable] public class Game_TeamMemberPawn : Game_PlayerPawn
     {
         
         public Game_TeamMemberPawn()

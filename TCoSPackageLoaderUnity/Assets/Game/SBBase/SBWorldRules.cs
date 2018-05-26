@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBWorldRules : UObject
+    [System.Serializable] public class SBWorldRules : UObject
     {
         
         [FieldCategory(Category="SBWorldRules")]

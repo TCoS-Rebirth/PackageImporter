@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EdPaintLocationActor : Actor
+    [System.Serializable] public class FSkill_EdPaintLocationActor : Actor
     {
         
         public FSkill_EdPaintLocationActor()

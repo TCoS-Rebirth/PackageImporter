@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Subsystem : UObject
+    [System.Serializable] public class Subsystem : UObject
     {
         
         [FieldConst()]

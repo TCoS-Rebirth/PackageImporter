@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class ActionTrigger : Actor
+    [System.Serializable] public class ActionTrigger : Actor
     {
         
         public ActionTrigger()

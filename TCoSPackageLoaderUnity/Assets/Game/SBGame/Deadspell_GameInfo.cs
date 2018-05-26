@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Deadspell_GameInfo : Game_GameInfo
+    [System.Serializable] public class Deadspell_GameInfo : Game_GameInfo
     {
         
         [FieldCategory(Category="Deadspell")]

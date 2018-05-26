@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_Quest : Interaction_Component
+    [System.Serializable] public class Interaction_Quest : Interaction_Component
     {
         
         public Interaction_Quest()

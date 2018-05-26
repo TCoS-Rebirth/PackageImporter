@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify : UObject
+    [System.Serializable] public class AnimNotify : UObject
     {
         
         [IgnoreFieldExtraction()]

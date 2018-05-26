@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class TriggerLight : ScriptedTrigger
+    [System.Serializable] public class TriggerLight : ScriptedTrigger
     {
         public float MaxCoronaSize;
     }

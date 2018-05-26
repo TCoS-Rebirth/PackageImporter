@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Fragment : Effects
+    [System.Serializable] public class Fragment : Effects
     {
         
         [FieldCategory(Category="Fragment")]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionTrigger : MatSubAction
+    [System.Serializable] public class SubActionTrigger : MatSubAction
     {
         
         [FieldCategory(Category="Trigger")]

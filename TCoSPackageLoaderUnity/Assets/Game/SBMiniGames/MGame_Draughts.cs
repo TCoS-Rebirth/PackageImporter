@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
 #pragma warning disable 414   
     
-    public class MGame_Draughts : MGame_BoardGame
+    [System.Serializable] public class MGame_Draughts : MGame_BoardGame
     {
         
         public const int PIECE_DRAUGHTS_TYPE_KING = 2;
@@ -60,7 +60,7 @@ namespace SBMiniGames
         {
         }
         
-        public struct Capture
+        [System.Serializable] public struct Capture
         {
             
             public int Destination;
@@ -68,7 +68,7 @@ namespace SBMiniGames
             public int Captured;
         }
         
-        public struct DraughtsMove
+        [System.Serializable] public struct DraughtsMove
         {
             
             public int StartSquare;
@@ -78,7 +78,7 @@ namespace SBMiniGames
             public List<Capture> Squares;
         }
         
-        public struct Neighbours
+        [System.Serializable] public struct Neighbours
         {
             
             public int[] Square;

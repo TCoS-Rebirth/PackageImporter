@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_Greeting : Conversation_Topic
+    [System.Serializable] public class CT_Greeting : Conversation_Topic
     {
         
         public LocalizedString DefaultText;

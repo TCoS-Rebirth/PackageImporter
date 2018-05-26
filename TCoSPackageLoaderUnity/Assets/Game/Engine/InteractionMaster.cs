@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class InteractionMaster : Interactions
+    [System.Serializable] public class InteractionMaster : Interactions
     {
         
         [IgnoreFieldExtraction()]

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_ItemManager : Base_Component
+    [System.Serializable] public class Game_ItemManager : Base_Component
     {
         
         [IgnoreFieldExtraction()]

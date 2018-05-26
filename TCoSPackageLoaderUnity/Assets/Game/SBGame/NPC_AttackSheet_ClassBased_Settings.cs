@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AttackSheet_ClassBased_Settings : UObject
+    [System.Serializable] public class NPC_AttackSheet_ClassBased_Settings : UObject
     {
         
         [ArraySizeForExtraction(Size=15)]

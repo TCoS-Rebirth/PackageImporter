@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_Trading : Base_Component
+    [System.Serializable] public class Game_Trading : Base_Component
     {
         
         public const int MAX_TRADE_ITEMS = 16;
@@ -73,7 +73,7 @@ namespace SBGame
         {
         }
         
-        public struct PaintItem
+        [System.Serializable] public struct PaintItem
         {
             
             public int DBID;

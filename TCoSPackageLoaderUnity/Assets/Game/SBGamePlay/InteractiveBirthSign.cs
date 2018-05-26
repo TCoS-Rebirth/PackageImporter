@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveBirthSign : InteractiveLevelElement
+    [System.Serializable] public class InteractiveBirthSign : InteractiveLevelElement
     {
         
         [FieldCategory(Category="InteractiveBirthSign")]

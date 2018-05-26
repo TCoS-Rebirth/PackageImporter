@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexCoordSource : TexModifier
+    [System.Serializable] public class TexCoordSource : TexModifier
     {
         
         [FieldCategory(Category="TexCoordSource")]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MaterialTrigger : Triggers
+    [System.Serializable] public class MaterialTrigger : Triggers
     {
         
         [FieldCategory(Category="MaterialTrigger")]

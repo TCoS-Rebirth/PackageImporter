@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ZoneTrigger : Trigger
+    [System.Serializable] public class ZoneTrigger : Trigger
     {
         
         public ZoneTrigger()

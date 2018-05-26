@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIEscortFramework : AIRegistered
+    [System.Serializable] public class AIEscortFramework : AIRegistered
     {
         
         [FieldCategory(Category="EscortQuest")]
@@ -86,7 +86,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct EscortStruct
+        [System.Serializable] public struct EscortStruct
         {
             
             public Game_Pawn Pawn;

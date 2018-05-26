@@ -24,7 +24,7 @@ namespace Engine
 {
  #pragma warning disable 414   
     
-    public class EnvironmentManager : Actor
+    [System.Serializable] public class EnvironmentManager : Actor
     {
         
         private List<ZoneInfo> mZoneInfos = new List<ZoneInfo>();

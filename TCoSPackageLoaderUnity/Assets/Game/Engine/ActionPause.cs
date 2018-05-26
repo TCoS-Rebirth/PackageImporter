@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ActionPause : MatAction
+    [System.Serializable] public class ActionPause : MatAction
     {
         
         public ActionPause()

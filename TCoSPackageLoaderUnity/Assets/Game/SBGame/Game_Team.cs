@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Team : UObject
+    [System.Serializable] public class Game_Team : UObject
     {
         
         public List<Game_Pawn> mMembers = new List<Game_Pawn>();

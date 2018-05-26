@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_LeftShin : Appearance_Base
+    [System.Serializable] public class Appearance_LeftShin : Appearance_Base
     {
         
         public Appearance_LeftShin()

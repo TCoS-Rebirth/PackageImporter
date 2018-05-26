@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBOverrideModulation : Modifier
+    [System.Serializable] public class SBOverrideModulation : Modifier
     {
         
         [FieldCategory(Category="SBOverrideModulation")]

@@ -6,7 +6,7 @@ using Engine;
 
 namespace Gameplay
 {
-    public class RockingSkyZoneInfo: SkyZoneInfo
+    [System.Serializable] public class RockingSkyZoneInfo: SkyZoneInfo
     {
     }
 }

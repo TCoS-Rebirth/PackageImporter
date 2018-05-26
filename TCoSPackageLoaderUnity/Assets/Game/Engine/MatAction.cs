@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MatAction : MatObject
+    [System.Serializable] public class MatAction : MatObject
     {
         
         [FieldCategory(Category="MatAction")]

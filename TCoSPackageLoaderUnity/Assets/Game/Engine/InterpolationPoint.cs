@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class InterpolationPoint : Keypoint
+    [System.Serializable] public class InterpolationPoint : Keypoint
     {
         
         public InterpolationPoint()

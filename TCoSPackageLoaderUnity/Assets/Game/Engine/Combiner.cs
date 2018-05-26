@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Combiner : Material
+    [System.Serializable] public class Combiner : Material
     {
         
         public int combiner_dummy;

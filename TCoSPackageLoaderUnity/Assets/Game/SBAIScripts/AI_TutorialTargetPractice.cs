@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_TutorialTargetPractice : AI_Script
+    [System.Serializable] public class AI_TutorialTargetPractice : AI_Script
     {
         
         [FieldCategory(Category="AI_TutorialTargetPractice")]

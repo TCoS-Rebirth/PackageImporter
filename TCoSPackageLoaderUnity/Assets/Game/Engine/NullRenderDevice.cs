@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class NullRenderDevice : RenderDevice
+    [System.Serializable] public class NullRenderDevice : RenderDevice
     {
         
         public NullRenderDevice()

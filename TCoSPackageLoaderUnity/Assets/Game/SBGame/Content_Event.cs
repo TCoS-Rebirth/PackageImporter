@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Content_Event : Content_Type
+    [System.Serializable] public class Content_Event : Content_Type
     {
         
         public Content_Event()

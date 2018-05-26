@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredAnimation : RegisteredAI
+    [System.Serializable] public class RegisteredAnimation : RegisteredAI
     {
         
         public bool IsAnimating;

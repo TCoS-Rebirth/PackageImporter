@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexOscillator : TexModifier
+    [System.Serializable] public class TexOscillator : TexModifier
     {
         
         [FieldCategory(Category="TexOscillator")]

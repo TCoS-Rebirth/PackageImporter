@@ -2,7 +2,7 @@
 
 namespace Gameplay
 {
-    public class TriggeredCondition: Triggers
+    [System.Serializable] public class TriggeredCondition: Triggers
     {
         public bool bTriggerControlled;
         public bool bToggled;

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIGruntPatrolState : AIPatrolState
+    [System.Serializable] public class AIGruntPatrolState : AIPatrolState
     {
         
         public float FollowDistance;

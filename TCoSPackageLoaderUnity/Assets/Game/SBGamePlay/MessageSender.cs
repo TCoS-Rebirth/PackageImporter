@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class MessageSender : UObject
+    [System.Serializable] public class MessageSender : UObject
     {
         
         public const int RANGE_UNKNOWN = 512;

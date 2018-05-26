@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class ViewMap_Controller : Game_PlayerController
+    [System.Serializable] public class ViewMap_Controller : Game_PlayerController
     {
         
         public bool SceneManagerActive;

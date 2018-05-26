@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Enums : UObject
+    [System.Serializable] public class FSkill_Enums : UObject
     {
         
         public FSkill_Enums()

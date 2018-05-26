@@ -23,7 +23,7 @@ namespace SBGame
 {
 #pragma warning disable 414     
     
-    public class Game_Effects : Base_Component
+    [System.Serializable] public class Game_Effects : Base_Component
     {
         
         public const int MAX_NUM_REPLICATED_EFFECTS = 5;
@@ -66,7 +66,7 @@ namespace SBGame
         {
         }
         
-        public struct mTaggedEffect
+        [System.Serializable] public struct mTaggedEffect
         {
             
             public int ServerSideEffectHandle;

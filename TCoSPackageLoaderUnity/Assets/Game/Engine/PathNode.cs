@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class PathNode : NavigationPoint
+    [System.Serializable] public class PathNode : NavigationPoint
     {
         
         public PathNode()

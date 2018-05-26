@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class NullClient : Client
+    [System.Serializable] public class NullClient : Client
     {
         
         public NullClient()

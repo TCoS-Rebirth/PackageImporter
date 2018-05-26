@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Equipment : Content_API
+    [System.Serializable] public class NPC_Equipment : Content_API
     {
         
         public NPC_Equipment()

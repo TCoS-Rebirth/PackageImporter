@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Emote : UObject
+    [System.Serializable] public class Game_Emote : UObject
     {
         
         public byte Emote;

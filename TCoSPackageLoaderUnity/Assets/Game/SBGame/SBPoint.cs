@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class SBPoint : Actor
+    [System.Serializable] public class SBPoint : Actor
     {
         
         [FieldCategory(Category="Paths")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct SBPathConnection
+        [System.Serializable] public struct SBPathConnection
         {
             
             public SBPoint ConnectedActor;

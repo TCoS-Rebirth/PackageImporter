@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_ConversationState : UObject
+    [System.Serializable] public class Game_ConversationState : UObject
     {
         
         public Game_Pawn partner;

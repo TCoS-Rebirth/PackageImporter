@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionSubTitle : MatSubAction
+    [System.Serializable] public class SubActionSubTitle : MatSubAction
     {
         
         [FieldCategory(Category="SubActionSubTitle")]

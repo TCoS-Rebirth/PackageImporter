@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_Ormoburu_Clearing : AI_Script
+    [System.Serializable] public class AIScript_AQOrmo_Ormoburu_Clearing : AI_Script
     {
         
         [FieldCategory(Category="Ormoburu")]

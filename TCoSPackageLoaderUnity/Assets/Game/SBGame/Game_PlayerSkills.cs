@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerSkills : Game_Skills
+    [System.Serializable] public class Game_PlayerSkills : Game_Skills
     {
         
         public Game_PlayerSkills()

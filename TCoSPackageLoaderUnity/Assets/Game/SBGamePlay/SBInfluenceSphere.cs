@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBInfluenceSphere : SBInfluenceVolume
+    [System.Serializable] public class SBInfluenceSphere : SBInfluenceVolume
     {
         
         [FieldCategory(Category="SBInfluenceSphere")]

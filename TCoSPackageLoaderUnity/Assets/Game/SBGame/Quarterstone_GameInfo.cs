@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Quarterstone_GameInfo : Game_GameInfo
+    [System.Serializable] public class Quarterstone_GameInfo : Game_GameInfo
     {
         
         public Quarterstone_GameInfo()

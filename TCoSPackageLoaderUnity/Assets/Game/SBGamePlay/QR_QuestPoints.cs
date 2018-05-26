@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QR_QuestPoints : Quest_Reward
+    [System.Serializable] public class QR_QuestPoints : Quest_Reward
     {
         
         [FieldCategory(Category="reward")]

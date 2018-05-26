@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class MatDemoActor : Actor
+    [System.Serializable] public class MatDemoActor : Actor
     {
         
         public MatDemoActor()

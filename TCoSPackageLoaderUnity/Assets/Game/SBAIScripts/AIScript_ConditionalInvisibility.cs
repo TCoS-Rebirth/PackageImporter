@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_ConditionalInvisibility : AI_Script
+    [System.Serializable] public class AIScript_ConditionalInvisibility : AI_Script
     {
         
         [FieldCategory(Category="AIScript_ConditionalInvisibility")]

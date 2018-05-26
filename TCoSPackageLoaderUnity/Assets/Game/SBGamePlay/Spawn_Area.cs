@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Area : NPC_Spawner
+    [System.Serializable] public class Spawn_Area : NPC_Spawner
     {
         
         [FieldCategory(Category="Policy")]

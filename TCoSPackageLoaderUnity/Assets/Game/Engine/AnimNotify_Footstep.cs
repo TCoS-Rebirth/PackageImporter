@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_Footstep : AnimNotify_Impact
+    [System.Serializable] public class AnimNotify_Footstep : AnimNotify_Impact
     {
         
         public AnimNotify_Footstep()

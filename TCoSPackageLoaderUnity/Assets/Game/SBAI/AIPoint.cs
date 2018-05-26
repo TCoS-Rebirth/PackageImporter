@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class AIPoint : AnnotationActor
+    [System.Serializable] public class AIPoint : AnnotationActor
     {
         
         [FieldCategory(Category="Script")]

@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_ConditionalDespawn : AIRegistered
+    [System.Serializable] public class AI_ConditionalDespawn : AIRegistered
     {
         
         [FieldCategory(Category="AI_ConditionalDespawn")]

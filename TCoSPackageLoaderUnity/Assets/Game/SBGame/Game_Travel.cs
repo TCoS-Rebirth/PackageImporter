@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Travel : Base_Component
+    [System.Serializable] public class Game_Travel : Base_Component
     {
         
         public int mTravelTimeOut;
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct TravelDestination
+        [System.Serializable] public struct TravelDestination
         {
             
             public string RouteName;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_Direct : FSkill_EffectClass
+    [System.Serializable] public class FSkill_EffectClass_Direct : FSkill_EffectClass
     {
         
         public FSkill_EffectClass_Direct()

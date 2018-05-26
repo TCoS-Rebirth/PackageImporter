@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAudio_Base : Actor
+    [System.Serializable] public class SBAudio_Base : Actor
     {
         
         public const float SB_AUDIO_INACTIVE_UPDATE_FREQY = 2.3F;

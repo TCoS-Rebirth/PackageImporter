@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Ladder : SmallNavigationPoint
+    [System.Serializable] public class Ladder : SmallNavigationPoint
     {
         
         public LadderVolume MyLadder;

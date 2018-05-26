@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PersistentPawn : Game_Pawn
+    [System.Serializable] public class Game_PersistentPawn : Game_Pawn
     {
         
         public float NextPositionStoreTime;

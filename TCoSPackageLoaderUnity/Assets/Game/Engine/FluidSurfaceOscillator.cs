@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class FluidSurfaceOscillator : Actor
+    [System.Serializable] public class FluidSurfaceOscillator : Actor
     {
         
         [FieldCategory(Category="FluidSurfaceOscillator")]

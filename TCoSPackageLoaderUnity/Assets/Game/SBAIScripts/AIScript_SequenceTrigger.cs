@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_SequenceTrigger : AI_Script
+    [System.Serializable] public class AIScript_SequenceTrigger : AI_Script
     {
         
         [FieldCategory(Category="SequenceTrigger")]
@@ -64,7 +64,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct SequenceItem
+        [System.Serializable] public struct SequenceItem
         {
             
             public Actor TriggerActor;

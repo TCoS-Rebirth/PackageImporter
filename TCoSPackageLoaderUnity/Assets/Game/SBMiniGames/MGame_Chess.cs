@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_Chess : MGame_BoardGame
+    [System.Serializable] public class MGame_Chess : MGame_BoardGame
     {
         
         public const int MOVE_HISTORY_LENGTH = 5;
@@ -90,7 +90,7 @@ namespace SBMiniGames
         {
         }
         
-        public struct BoardPosition
+        [System.Serializable] public struct BoardPosition
         {
             
             public int X;
@@ -100,7 +100,7 @@ namespace SBMiniGames
             public int t;
         }
         
-        public struct Move
+        [System.Serializable] public struct Move
         {
             
             public BoardPosition Source;

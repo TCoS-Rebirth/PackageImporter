@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ConvexVolume : Primitive
+    [System.Serializable] public class ConvexVolume : Primitive
     {
         
         public ConvexVolume()

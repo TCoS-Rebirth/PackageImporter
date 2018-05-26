@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TotA_5_Sequence : AI_Script
+    [System.Serializable] public class AIScript_TotA_5_Sequence : AI_Script
     {
         
         [FieldCategory(Category="AIScript_TotA_5_Sequence")]
@@ -55,7 +55,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct TotA_5_Enemy
+        [System.Serializable] public struct TotA_5_Enemy
         {
             
             public Game_AIController Controller;

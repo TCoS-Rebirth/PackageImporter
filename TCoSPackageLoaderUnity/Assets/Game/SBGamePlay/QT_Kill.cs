@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QT_Kill : Quest_Target
+    [System.Serializable] public class QT_Kill : Quest_Target
     {
         
         [FieldCategory(Category="Kill")]

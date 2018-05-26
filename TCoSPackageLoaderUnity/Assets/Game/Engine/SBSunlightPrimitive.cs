@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SBSunlightPrimitive : Primitive
+    [System.Serializable] public class SBSunlightPrimitive : Primitive
     {
         
         public SBSunlightPrimitive()

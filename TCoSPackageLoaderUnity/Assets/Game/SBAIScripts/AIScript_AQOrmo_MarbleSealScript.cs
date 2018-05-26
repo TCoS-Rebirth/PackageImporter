@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_MarbleSealScript : AI_Script
+    [System.Serializable] public class AIScript_AQOrmo_MarbleSealScript : AI_Script
     {
         
         [FieldCategory(Category="AIScript_AQOrmo_MarbleSealScript")]
@@ -58,7 +58,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct tier
+        [System.Serializable] public struct tier
         {
             
             public string ChargingEvent;

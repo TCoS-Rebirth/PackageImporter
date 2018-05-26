@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TotA_4_IceStatueScript : AI_Script
+    [System.Serializable] public class AIScript_TotA_4_IceStatueScript : AI_Script
     {
         
         [FieldCategory(Category="AIScript_TotA_4_IceStatueScript")]
@@ -42,7 +42,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct TotA_4_Enemy
+        [System.Serializable] public struct TotA_4_Enemy
         {
             
             public Game_AIController Controller;

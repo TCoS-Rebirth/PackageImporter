@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Login_PlayerController : Base_Controller
+    [System.Serializable] public class Login_PlayerController : Base_Controller
     {
         
         public List<UniverseInfo> mUniverses = new List<UniverseInfo>();
@@ -36,7 +36,7 @@ namespace SBGame
         {
         }
         
-        public struct UniverseInfo
+        [System.Serializable] public struct UniverseInfo
         {
             
             public int Id;

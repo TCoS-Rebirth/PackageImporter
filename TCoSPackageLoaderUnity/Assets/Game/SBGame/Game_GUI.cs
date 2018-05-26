@@ -23,7 +23,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_GUI : Base_Component
+    [System.Serializable] public class Game_GUI : Base_Component
     {
         
         public string mStartMenuClass = string.Empty;

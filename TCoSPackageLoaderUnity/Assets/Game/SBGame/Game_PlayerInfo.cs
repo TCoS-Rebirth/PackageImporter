@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerInfo : UObject
+    [System.Serializable] public class Game_PlayerInfo : UObject
     {
         
         [IgnoreFieldExtraction()]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexPannerTriggered : TexPanner
+    [System.Serializable] public class TexPannerTriggered : TexPanner
     {
         
         [FieldCategory(Category="TexPannerTriggered")]

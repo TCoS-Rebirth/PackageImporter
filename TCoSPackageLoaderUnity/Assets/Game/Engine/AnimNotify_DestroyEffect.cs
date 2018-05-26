@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_DestroyEffect : AnimNotify
+    [System.Serializable] public class AnimNotify_DestroyEffect : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_DestroyEffect")]

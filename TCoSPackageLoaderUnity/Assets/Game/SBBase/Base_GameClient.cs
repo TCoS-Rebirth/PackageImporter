@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class Base_GameClient : GameEngine
+    [System.Serializable] public class Base_GameClient : GameEngine
     {
         
         public int @__LogoutState;

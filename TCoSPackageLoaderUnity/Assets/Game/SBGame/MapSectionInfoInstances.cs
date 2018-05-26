@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class MapSectionInfoInstances : UObject
+    [System.Serializable] public class MapSectionInfoInstances : UObject
     {
         
         public List<MapSectionInfo> mapSectionTable = new List<MapSectionInfo>();

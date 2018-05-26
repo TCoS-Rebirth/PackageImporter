@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBVolumeModulator : SBAudioModulator
+    [System.Serializable] public class SBVolumeModulator : SBAudioModulator
     {
         
         public SBVolumeModulator()

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class DayNightCycleKeyframe : EnvironmentSettings
+    [System.Serializable] public class DayNightCycleKeyframe : EnvironmentSettings
     {
         
         public float TimeStamp;

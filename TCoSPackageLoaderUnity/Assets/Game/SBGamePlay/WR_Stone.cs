@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class WR_Stone : WorldResource
+    [System.Serializable] public class WR_Stone : WorldResource
     {
         
         public WR_Stone()

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_Chat : Conversation_Topic
+    [System.Serializable] public class CT_Chat : Conversation_Topic
     {
         
         public CT_Chat()

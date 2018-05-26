@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_PlayerPawn : Game_PersistentPawn
+    [System.Serializable] public class Game_PlayerPawn : Game_PersistentPawn
     {
         
         public const float PVP_SETTINGS_UPDATE_TIME = 1F;

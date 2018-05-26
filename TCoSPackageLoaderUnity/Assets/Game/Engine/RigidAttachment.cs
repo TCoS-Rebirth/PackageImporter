@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class RigidAttachment : SBAttachment
+    [System.Serializable] public class RigidAttachment : SBAttachment
     {
         
         public RigidAttachment()

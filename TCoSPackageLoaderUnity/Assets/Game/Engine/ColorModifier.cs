@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class ColorModifier : Modifier
+    [System.Serializable] public class ColorModifier : Modifier
     {
         
         [FieldCategory(Category="ColorModifier")]

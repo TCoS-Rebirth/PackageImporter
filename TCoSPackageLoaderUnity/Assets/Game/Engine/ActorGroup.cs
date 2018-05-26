@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ActorGroup : UObject
+    [System.Serializable] public class ActorGroup : UObject
     {
         
         public string Description = string.Empty;

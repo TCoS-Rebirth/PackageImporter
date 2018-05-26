@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_MiniGameProxy : Game_MiniGameProxy
+    [System.Serializable] public class MGame_MiniGameProxy : Game_MiniGameProxy
     {
         
         public const bool QUICKSTART = false;

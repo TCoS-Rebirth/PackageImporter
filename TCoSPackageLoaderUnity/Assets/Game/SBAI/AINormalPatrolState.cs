@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AINormalPatrolState : AIPatrolState
+    [System.Serializable] public class AINormalPatrolState : AIPatrolState
     {
         
         public AINormalPatrolState()

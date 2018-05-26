@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_PT_Trial15_Lezu_Script : AI_Script
+    [System.Serializable] public class AIScript_PT_Trial15_Lezu_Script : AI_Script
     {
         
         [FieldCategory(Category="AIScript_PT_Trial15_Lezu_Script")]

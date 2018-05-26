@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Trigger : Triggers
+    [System.Serializable] public class Trigger : Triggers
     {
         
         [FieldCategory(Category="Trigger")]

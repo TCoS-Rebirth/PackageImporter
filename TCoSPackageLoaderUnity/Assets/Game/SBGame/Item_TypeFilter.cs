@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Item_TypeFilter : UObject
+    [System.Serializable] public class Item_TypeFilter : UObject
     {
         
         public bool mAllowFilterItems;

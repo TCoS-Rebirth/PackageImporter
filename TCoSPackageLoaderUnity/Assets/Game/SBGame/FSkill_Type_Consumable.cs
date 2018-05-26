@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Type_Consumable : FSkill_Type
+    [System.Serializable] public class FSkill_Type_Consumable : FSkill_Type
     {
         
         public FSkill_Type_Consumable()

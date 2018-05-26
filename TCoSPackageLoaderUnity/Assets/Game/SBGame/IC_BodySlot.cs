@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_BodySlot : Item_Component
+    [System.Serializable] public class IC_BodySlot : Item_Component
     {
         
         [FieldCategory(Category="Skill")]

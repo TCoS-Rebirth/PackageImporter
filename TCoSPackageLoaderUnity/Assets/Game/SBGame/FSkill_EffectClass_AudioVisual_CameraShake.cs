@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual_CameraShake : FSkill_EffectClass_AudioVisual_LocalView
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual_CameraShake : FSkill_EffectClass_AudioVisual_LocalView
     {
         
         [FieldCategory(Category="CameraShake")]

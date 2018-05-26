@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class fell : DamageType
+    [System.Serializable] public class fell : DamageType
     {
         
         public fell()

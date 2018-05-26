@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Editor_SpwnieControl : Base_Component
+    [System.Serializable] public class Editor_SpwnieControl : Base_Component
     {
         
         public Editor_Spwnie mTarget;

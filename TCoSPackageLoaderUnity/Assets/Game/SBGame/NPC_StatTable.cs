@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_StatTable : Content_Type
+    [System.Serializable] public class NPC_StatTable : Content_Type
     {
         
         [FieldCategory(Category="Preview")]
@@ -51,7 +51,7 @@ namespace SBGame
         {
         }
         
-        public struct StatPreview
+        [System.Serializable] public struct StatPreview
         {
             
             public int B;

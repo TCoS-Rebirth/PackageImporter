@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class MapResolutionInfo : UObject
+    [System.Serializable] public class MapResolutionInfo : UObject
     {
         
         public List<Material> mapSectionMaterial = new List<Material>();

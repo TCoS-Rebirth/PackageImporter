@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Engine : Subsystem
+    [System.Serializable] public class Engine : Subsystem
     {
         
         public Primitive Cylinder;

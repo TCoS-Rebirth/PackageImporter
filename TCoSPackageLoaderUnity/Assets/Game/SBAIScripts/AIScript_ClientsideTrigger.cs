@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_ClientsideTrigger : AI_Script
+    [System.Serializable] public class AIScript_ClientsideTrigger : AI_Script
     {
         
         [FieldCategory(Category="ClientSideTrigger")]

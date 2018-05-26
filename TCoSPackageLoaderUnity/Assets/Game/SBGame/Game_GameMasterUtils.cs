@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_GameMasterUtils : Game_DebugUtils
+    [System.Serializable] public class Game_GameMasterUtils : Game_DebugUtils
     {
         
         public const string Concentration = "\"c\"";
@@ -48,7 +48,7 @@ namespace SBGame
         {
         }
         
-        public struct CommandInfo
+        [System.Serializable] public struct CommandInfo
         {
             
             public int MinLevel;

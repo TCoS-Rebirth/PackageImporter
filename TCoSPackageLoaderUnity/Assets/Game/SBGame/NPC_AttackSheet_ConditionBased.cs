@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AttackSheet_ConditionBased : NPC_AttackSheet
+    [System.Serializable] public class NPC_AttackSheet_ConditionBased : NPC_AttackSheet
     {
         
         [FieldCategory(Category="Contexts")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct SkillContext
+        [System.Serializable] public struct SkillContext
         {
             
             public FSkill_Type Skill;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBMaterial : Material
+    [System.Serializable] public class SBMaterial : Material
     {
         
         [IgnoreFieldExtraction()]

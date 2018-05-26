@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class AI_MetaController : NPC_AI
+    [System.Serializable] public class AI_MetaController : NPC_AI
     {
         
         [FieldCategory(Category="AI_MetaController")]
@@ -51,7 +51,7 @@ namespace SBAI
         {
         }
         
-        public struct ControllerMessageFilter
+        [System.Serializable] public struct ControllerMessageFilter
         {
             
             public bool OnSpawn;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_RadialMenuOptions : UObject
+    [System.Serializable] public class Game_RadialMenuOptions : UObject
     {
         
         public Game_RadialMenuOptions()

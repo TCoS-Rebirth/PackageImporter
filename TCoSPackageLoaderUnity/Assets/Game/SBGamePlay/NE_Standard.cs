@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NE_Standard : NPC_Equipment
+    [System.Serializable] public class NE_Standard : NPC_Equipment
     {
         
         [FieldCategory(Category="Equipment")]

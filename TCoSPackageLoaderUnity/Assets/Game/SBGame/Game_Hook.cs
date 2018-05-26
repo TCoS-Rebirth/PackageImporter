@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Hook : UObject
+    [System.Serializable] public class Game_Hook : UObject
     {
         
         public byte HookType;

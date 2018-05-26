@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_TokenSkill : Item_Component
+    [System.Serializable] public class IC_TokenSkill : Item_Component
     {
         
         [FieldCategory(Category="Token")]

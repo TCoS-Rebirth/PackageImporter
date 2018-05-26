@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class LevelAreaVolume : Volume
+    [System.Serializable] public class LevelAreaVolume : Volume
     {
         
         [FieldCategory(Category="LevelAreaVolume")]

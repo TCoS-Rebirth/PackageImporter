@@ -24,7 +24,7 @@ namespace SBBase
 {
 #pragma warning disable 414   
     
-    public class Base_Component : UObject
+    [System.Serializable] public class Base_Component : UObject
     {
         
         [IgnoreFieldExtraction()]

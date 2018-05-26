@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class MapNote : UObject
+    [System.Serializable] public class MapNote : UObject
     {
         
         public const int MAX_TARGETS_SIZE = 8;

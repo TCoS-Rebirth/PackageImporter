@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveShop : InteractiveLevelElement
+    [System.Serializable] public class InteractiveShop : InteractiveLevelElement
     {
         
         [FieldCategory(Category="InteractiveShop")]

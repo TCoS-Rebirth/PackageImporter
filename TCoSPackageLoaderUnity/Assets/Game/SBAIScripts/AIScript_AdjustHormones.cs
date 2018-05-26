@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AdjustHormones : AI_Script
+    [System.Serializable] public class AIScript_AdjustHormones : AI_Script
     {
         
         [FieldCategory(Category="AIScript_AdjustHormones")]
@@ -39,7 +39,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct Hormone
+        [System.Serializable] public struct Hormone
         {
             
             public string Tag;

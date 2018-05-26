@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class MultiCombiner : Material
+    [System.Serializable] public class MultiCombiner : Material
     {
         
         public MultiCombiner()

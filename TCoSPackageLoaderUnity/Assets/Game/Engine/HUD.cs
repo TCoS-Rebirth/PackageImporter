@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class HUD : Actor
+    [System.Serializable] public class HUD : Actor
     {
         
         [FieldCategory(Category="HUD")]
@@ -174,7 +174,7 @@ namespace Engine
         {
         }
         
-        public struct ConsoleMessage
+        [System.Serializable] public struct ConsoleMessage
         {
             
             public string Text;

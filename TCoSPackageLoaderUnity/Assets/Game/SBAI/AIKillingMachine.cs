@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIKillingMachine : AIStateMachine
+    [System.Serializable] public class AIKillingMachine : AIStateMachine
     {
         
         public AIKillingMachine()

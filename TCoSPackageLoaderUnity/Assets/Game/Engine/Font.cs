@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Font : UObject
+    [System.Serializable] public class Font : UObject
     {
         
         public Font()

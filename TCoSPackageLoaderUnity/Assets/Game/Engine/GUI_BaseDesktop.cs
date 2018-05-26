@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class GUI_BaseDesktop : Interaction
+    [System.Serializable] public class GUI_BaseDesktop : Interaction
     {
         
         public const int GUI_MBS_WHEEL_DOWN = 16;

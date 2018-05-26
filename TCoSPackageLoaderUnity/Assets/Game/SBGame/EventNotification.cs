@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class EventNotification : Base_Notification
+    [System.Serializable] public class EventNotification : Base_Notification
     {
         
         public EventNotification()

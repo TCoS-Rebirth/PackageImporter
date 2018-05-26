@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_Shop : Interaction_Component
+    [System.Serializable] public class Interaction_Shop : Interaction_Component
     {
         
         [FieldCategory(Category="Interaction_Shop")]

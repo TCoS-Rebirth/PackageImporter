@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAudioModifier : UObject
+    [System.Serializable] public class SBAudioModifier : UObject
     {
         
         public SBAudioModifier()

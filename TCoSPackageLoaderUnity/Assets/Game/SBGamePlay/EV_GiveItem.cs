@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_GiveItem : Content_Event
+    [System.Serializable] public class EV_GiveItem : Content_Event
     {
         
         [FieldCategory(Category="Action")]

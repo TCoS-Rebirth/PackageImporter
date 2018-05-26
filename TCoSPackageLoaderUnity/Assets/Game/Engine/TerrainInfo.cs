@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TerrainInfo : Info
+    [System.Serializable] public class TerrainInfo : Info
     {
         
         [FieldCategory(Category="TerrainInfo")]
@@ -148,7 +148,7 @@ namespace Engine
         {
         }
         
-        public struct DecoInfo
+        [System.Serializable] public struct DecoInfo
         {
             
             public Vector Location;
@@ -164,7 +164,7 @@ namespace Engine
             public int Distance;
         }
         
-        public struct DecoSectorInfo
+        [System.Serializable] public struct DecoSectorInfo
         {
             
             public List<DecoInfo> DecoInfo;
@@ -186,13 +186,13 @@ namespace Engine
             public byte VertexStreamOffsetHi;
         }
         
-        public struct DecorationLayerData
+        [System.Serializable] public struct DecorationLayerData
         {
             
             public List<DecoSectorInfo> DecoSectorInfos;
         }
         
-        public struct DecorationLayer
+        [System.Serializable] public struct DecorationLayer
         {
             
             public int ShowOnTerrain;
@@ -232,7 +232,7 @@ namespace Engine
             public byte DetailMode;
         }
         
-        public struct TerrainLayer
+        [System.Serializable] public struct TerrainLayer
         {
             
             public Material Texture;
@@ -262,7 +262,7 @@ namespace Engine
             public string LayerWeightMap;
         }
         
-        public struct NormalPair
+        [System.Serializable] public struct NormalPair
         {
             
             public Vector Normal1;

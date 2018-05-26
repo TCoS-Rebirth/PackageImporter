@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Volume : Brush
+    [System.Serializable] public class Volume : Brush
     {
         
         public Actor AssociatedActor;

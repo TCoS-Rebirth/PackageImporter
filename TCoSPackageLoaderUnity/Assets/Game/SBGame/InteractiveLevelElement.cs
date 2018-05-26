@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class InteractiveLevelElement : Game_Actor
+    [System.Serializable] public class InteractiveLevelElement : Game_Actor
     {
         
         [FieldCategory(Category="Interactions")]
@@ -120,7 +120,7 @@ namespace SBGame
         {
         }
         
-        public struct TaggedEffect
+        [System.Serializable] public struct TaggedEffect
         {
             
             public FSkill_EffectClass_AudioVisual effect;
@@ -130,7 +130,7 @@ namespace SBGame
             public NameProperty Tag;
         }
         
-        public struct MenuInteraction
+        [System.Serializable] public struct MenuInteraction
         {
             
             public byte MenuOption;
@@ -142,7 +142,7 @@ namespace SBGame
             public List<Content_Requirement> Requirements;
         }
         
-        public struct IntegralRange
+        [System.Serializable] public struct IntegralRange
         {
             
             public int Min;

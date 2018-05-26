@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class HiveMind : GroupMind
+    [System.Serializable] public class HiveMind : GroupMind
     {
         
         public const float RedetectTime = 0.5F;

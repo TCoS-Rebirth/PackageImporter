@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_DirectAdvanced : FSkill_Event_Direct
+    [System.Serializable] public class FSkill_Event_DirectAdvanced : FSkill_Event_Direct
     {
         
         [FieldConst()]

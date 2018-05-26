@@ -23,7 +23,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_PlayerTeams : Base_Component
+    [System.Serializable] public class Game_PlayerTeams : Base_Component
     {
         
         public const int NOTIFY_HUD_CLOSE_ALL = 0;

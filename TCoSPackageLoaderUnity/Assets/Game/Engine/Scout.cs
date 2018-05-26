@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Scout : Pawn
+    [System.Serializable] public class Scout : Pawn
     {
         
         [FieldConst()]

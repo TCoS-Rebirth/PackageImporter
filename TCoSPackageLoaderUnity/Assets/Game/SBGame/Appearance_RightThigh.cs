@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_RightThigh : Appearance_Base
+    [System.Serializable] public class Appearance_RightThigh : Appearance_Base
     {
         
         public Appearance_RightThigh()

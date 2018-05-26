@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class InteractiveMailbox : InteractiveLevelElement
+    [System.Serializable] public class InteractiveMailbox : InteractiveLevelElement
     {
         
         public LocalizedString MailTooltip;

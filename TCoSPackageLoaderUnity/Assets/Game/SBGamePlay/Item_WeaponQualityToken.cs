@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Item_WeaponQualityToken : Item_Type
+    [System.Serializable] public class Item_WeaponQualityToken : Item_Type
     {
         
         public Item_WeaponQualityToken()

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAudioPlayer : SBAudio_Base
+    [System.Serializable] public class SBAudioPlayer : SBAudio_Base
     {
         
         [FieldCategory(Category="SBAudioPlayer")]
@@ -128,7 +128,7 @@ namespace SBGamePlay
         {
         }
         
-        public struct SBPlayerActiveAudio
+        [System.Serializable] public struct SBPlayerActiveAudio
         {
             
             public int Index;
@@ -138,7 +138,7 @@ namespace SBGamePlay
             public bool bPlaying;
         }
         
-        public struct SBAudioModifierProps
+        [System.Serializable] public struct SBAudioModifierProps
         {
             
             public byte ModifierType;
@@ -156,7 +156,7 @@ namespace SBGamePlay
             public float ModulationDampingVariation;
         }
         
-        public struct SBExcludedAudio
+        [System.Serializable] public struct SBExcludedAudio
         {
             
             public NameProperty ActorName;
@@ -166,7 +166,7 @@ namespace SBGamePlay
             public bool Excluded;
         }
         
-        public struct SBSoundEditor
+        [System.Serializable] public struct SBSoundEditor
         {
             
             public string OggFilename;
@@ -176,7 +176,7 @@ namespace SBGamePlay
             public byte WhenPlayed;
         }
         
-        public struct SBSound
+        [System.Serializable] public struct SBSound
         {
             
             public Sound Sound;

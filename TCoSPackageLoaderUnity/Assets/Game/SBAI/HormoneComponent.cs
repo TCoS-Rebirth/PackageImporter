@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class HormoneComponent : Base_Component
+    [System.Serializable] public class HormoneComponent : Base_Component
     {
         
         public List<Hormone> Hormones = new List<Hormone>();
@@ -47,7 +47,7 @@ namespace SBAI
         {
         }
         
-        public struct HormoneSynergy
+        [System.Serializable] public struct HormoneSynergy
         {
             
             public int FromIndex;
@@ -57,7 +57,7 @@ namespace SBAI
             public float Rate;
         }
         
-        public struct Hormone
+        [System.Serializable] public struct Hormone
         {
             
             public NameProperty Tag;

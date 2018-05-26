@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TotA_5_Judge : AIRegistered
+    [System.Serializable] public class AIScript_TotA_5_Judge : AIRegistered
     {
         
         public AIScript_TotA_5_Judge()

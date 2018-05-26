@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class KMeshProps : UObject
+    [System.Serializable] public class KMeshProps : UObject
     {
         
         public KMeshProps()

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIConversationState : AIState
+    [System.Serializable] public class AIConversationState : AIState
     {
         
         public AIConversationState()

@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredSkillPerformer : RegisteredAI
+    [System.Serializable] public class RegisteredSkillPerformer : RegisteredAI
     {
         
         public bool Performing;

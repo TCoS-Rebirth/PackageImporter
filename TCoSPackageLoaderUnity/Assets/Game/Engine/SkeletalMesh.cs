@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SkeletalMesh : LodMesh
+    [System.Serializable] public class SkeletalMesh : LodMesh
     {
         
         public SkeletalMesh()

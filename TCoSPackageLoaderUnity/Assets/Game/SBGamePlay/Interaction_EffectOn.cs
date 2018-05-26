@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_EffectOn : Interaction_Component
+    [System.Serializable] public class Interaction_EffectOn : Interaction_Component
     {
         
         [FieldCategory(Category="Interaction_EffectOn")]

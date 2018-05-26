@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_Duff_CondEv : UObject
+    [System.Serializable] public class FSkill_Event_Duff_CondEv : UObject
     {
         
         [FieldCategory(Category="CondEv")]

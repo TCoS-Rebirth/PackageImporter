@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_TotA_8_Sequence : AIRegistered
+    [System.Serializable] public class AIScript_TotA_8_Sequence : AIRegistered
     {
         
         [FieldCategory(Category="AIScript_TotA_8_Sequence")]

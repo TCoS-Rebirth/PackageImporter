@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIReturnState : AIState
+    [System.Serializable] public class AIReturnState : AIState
     {
         
         public AIReturnState()

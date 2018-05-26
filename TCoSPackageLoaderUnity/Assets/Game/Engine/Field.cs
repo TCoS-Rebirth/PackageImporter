@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Field : UObject
+    [System.Serializable] public class Field : UObject
     {
         
         public Field()

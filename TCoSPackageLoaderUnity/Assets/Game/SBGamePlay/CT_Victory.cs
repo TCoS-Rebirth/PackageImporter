@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CT_Victory : CT_Target
+    [System.Serializable] public class CT_Victory : CT_Target
     {
         
         public CT_Victory()

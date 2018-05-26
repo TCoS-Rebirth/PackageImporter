@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Loot_Manager : Actor
+    [System.Serializable] public class Loot_Manager : Actor
     {
         
         [IgnoreFieldExtraction()]

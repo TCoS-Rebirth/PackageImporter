@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Route : SBRoute
+    [System.Serializable] public class Game_Route : SBRoute
     {
         
         public List<Content_Requirement> Requirements = new List<Content_Requirement>();

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIRetreatState : AIState
+    [System.Serializable] public class AIRetreatState : AIState
     {
         
         public AIRetreatState()

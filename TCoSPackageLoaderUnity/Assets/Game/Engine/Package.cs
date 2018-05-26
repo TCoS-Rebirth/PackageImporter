@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Package : UObject
+    [System.Serializable] public class Package : UObject
     {
         
         public Package()

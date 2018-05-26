@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Quest_Standard : Quest_Type
+    [System.Serializable] public class Quest_Standard : Quest_Type
     {
         
         public Quest_Standard()

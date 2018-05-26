@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Content_Type : Content_API
+    [System.Serializable] public class Content_Type : Content_API
     {
         
         [IgnoreFieldExtraction()]

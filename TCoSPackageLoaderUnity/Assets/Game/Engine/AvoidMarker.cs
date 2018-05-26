@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AvoidMarker : Triggers
+    [System.Serializable] public class AvoidMarker : Triggers
     {
         
         public byte TeamNum;

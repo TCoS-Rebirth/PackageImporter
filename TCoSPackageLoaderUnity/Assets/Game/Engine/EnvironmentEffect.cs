@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class EnvironmentEffect : Actor
+    [System.Serializable] public class EnvironmentEffect : Actor
     {
         
         [IgnoreFieldExtraction()]

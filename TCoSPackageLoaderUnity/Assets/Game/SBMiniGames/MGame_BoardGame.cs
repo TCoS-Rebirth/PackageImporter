@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_BoardGame : MGame_MiniGame
+    [System.Serializable] public class MGame_BoardGame : MGame_MiniGame
     {
         
         public const int PIECE_COLOR_BLACK = 0;
@@ -40,7 +40,7 @@ namespace SBMiniGames
         {
         }
         
-        public struct ExecuteMove
+        [System.Serializable] public struct ExecuteMove
         {
             
             public int Source;

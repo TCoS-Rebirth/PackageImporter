@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class GameInfo : Info
+    [System.Serializable] public class GameInfo : Info
     {
         
         public GameInfo()

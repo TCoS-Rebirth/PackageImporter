@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Spawner : NPC_Habitat
+    [System.Serializable] public class NPC_Spawner : NPC_Habitat
     {
         
         [FieldCategory(Category="Type")]

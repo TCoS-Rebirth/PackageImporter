@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Palette : UObject
+    [System.Serializable] public class Palette : UObject
     {
         
         [FieldConst()]

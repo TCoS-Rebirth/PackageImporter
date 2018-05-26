@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class PolyMarker : Keypoint
+    [System.Serializable] public class PolyMarker : Keypoint
     {
         
         public PolyMarker()

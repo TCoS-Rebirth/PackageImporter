@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class StateListener : UObject
+    [System.Serializable] public class StateListener : UObject
     {
         
         //public delegate<OnStateBegin> @__OnStateBegin__Delegate;

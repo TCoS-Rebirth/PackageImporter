@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBClock : Base_Component
+    [System.Serializable] public class SBClock : Base_Component
     {
         
         private int mReplicatedRealWorldTime;

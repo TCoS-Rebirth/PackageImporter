@@ -2,7 +2,7 @@
 
 namespace Gameplay
 {
-    public class Action_IFCONDITION: LatentScriptedAction
+    [System.Serializable] public class Action_IFCONDITION: LatentScriptedAction
     {
         public NameProperty TriggeredConditionTag;
     }

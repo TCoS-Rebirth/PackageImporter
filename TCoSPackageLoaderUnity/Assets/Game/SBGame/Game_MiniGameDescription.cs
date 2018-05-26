@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_MiniGameDescription : UObject
+    [System.Serializable] public class Game_MiniGameDescription : UObject
     {
         
         public string Title = string.Empty;

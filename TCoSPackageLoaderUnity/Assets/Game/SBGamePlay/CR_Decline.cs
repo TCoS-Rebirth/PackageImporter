@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CR_Decline : Conversation_Response
+    [System.Serializable] public class CR_Decline : Conversation_Response
     {
         
         public CR_Decline()

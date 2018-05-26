@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_BodySlot : FSkill_Event_Target
+    [System.Serializable] public class FSkill_Event_BodySlot : FSkill_Event_Target
     {
         
         public FSkill_Event_BodySlot()

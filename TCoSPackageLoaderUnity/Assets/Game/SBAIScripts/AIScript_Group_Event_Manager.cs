@@ -26,7 +26,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Group_Event_Manager : AIRegistered
+    [System.Serializable] public class AIScript_Group_Event_Manager : AIRegistered
     {
         
         [FieldCategory(Category="Group_Event_Manager")]
@@ -57,7 +57,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct PlayerInRoom
+        [System.Serializable] public struct PlayerInRoom
         {
             
             public Game_PlayerPawn playerPawn;

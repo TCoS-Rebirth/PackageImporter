@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_TextParser : Base_Component
+    [System.Serializable] public class Game_TextParser : Base_Component
     {
         
         public Game_TextParser()

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_ValueSpecifier : Content_Type
+    [System.Serializable] public class FSkill_ValueSpecifier : Content_Type
     {
         
         [FieldCategory(Category="Base")]
@@ -127,7 +127,7 @@ namespace SBGame
         {
         }
         
-        public struct TaxonomyIncrease
+        [System.Serializable] public struct TaxonomyIncrease
         {
             
             public NPC_Taxonomy Node;

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AttackSheet_ClassBased : NPC_AttackSheet
+    [System.Serializable] public class NPC_AttackSheet_ClassBased : NPC_AttackSheet
     {
         
         [FieldCategory(Category="HealPhase")]
@@ -76,7 +76,7 @@ namespace SBGame
         {
         }
         
-        public struct SkillWeight
+        [System.Serializable] public struct SkillWeight
         {
             
             public float Weight;

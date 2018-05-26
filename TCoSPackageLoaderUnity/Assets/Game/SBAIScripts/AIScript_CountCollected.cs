@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_CountCollected : AIScript_CollectEventinstigators
+    [System.Serializable] public class AIScript_CountCollected : AIScript_CollectEventinstigators
     {
         
         [FieldCategory(Category="CollectEventinstigators")]
@@ -36,7 +36,7 @@ namespace SBAIScripts
         {
         }
         
-        //public struct CountEvent
+        //[System.Serializable] public struct CountEvent
         //{
             
         //    public string EnterEvent;

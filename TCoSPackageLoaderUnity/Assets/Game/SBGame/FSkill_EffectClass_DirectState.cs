@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_DirectState : FSkill_EffectClass_Direct
+    [System.Serializable] public class FSkill_EffectClass_DirectState : FSkill_EffectClass_Direct
     {
         
         [FieldCategory(Category="State")]

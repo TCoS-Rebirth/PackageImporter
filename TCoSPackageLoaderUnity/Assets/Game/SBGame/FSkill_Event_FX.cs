@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_FX : FSkill_Event
+    [System.Serializable] public class FSkill_Event_FX : FSkill_Event
     {
         
         [FieldConst()]
@@ -46,7 +46,7 @@ namespace SBGame
         {
         }
         
-        public struct Client_FX
+        [System.Serializable] public struct Client_FX
         {
             
             public FSkill_EffectClass_AudioVisual_Sound Sound;
@@ -56,7 +56,7 @@ namespace SBGame
             public FSkill_EffectClass_AudioVisual_Emitter Emitter;
         }
         
-        public struct FX_RunData
+        [System.Serializable] public struct FX_RunData
         {
             
             public bool ExecutedFX;

@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AIController : Controller
+    [System.Serializable] public class AIController : Controller
     {
         
         public bool bHunting;

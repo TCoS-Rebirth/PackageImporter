@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_MiniGameManager : Game_MiniGameManager
+    [System.Serializable] public class MGame_MiniGameManager : Game_MiniGameManager
     {
         
         public List<int> mFreeIDs = new List<int>();

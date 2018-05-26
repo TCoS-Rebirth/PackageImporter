@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_PowerSystem : UObject
+    [System.Serializable] public class FSkill_PowerSystem : UObject
     {
         
         [FieldCategory(Category="targeting")]
@@ -327,7 +327,7 @@ namespace SBGame
         {
         }
         
-        public struct ConditionFireChance
+        [System.Serializable] public struct ConditionFireChance
         {
             
             public float MaxFiresPerSecond;

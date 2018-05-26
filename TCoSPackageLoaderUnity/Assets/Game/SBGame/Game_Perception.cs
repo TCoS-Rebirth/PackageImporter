@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Perception : UObject
+    [System.Serializable] public class Game_Perception : UObject
     {
         
         public bool DebugTracking;

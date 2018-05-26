@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class BlockingVolume : Volume
+    [System.Serializable] public class BlockingVolume : Volume
     {
         
         [FieldCategory(Category="BlockingVolume")]

@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredEscort : RegisteredAI
+    [System.Serializable] public class RegisteredEscort : RegisteredAI
     {
         
         public AIStateMachine OriginalMachine;

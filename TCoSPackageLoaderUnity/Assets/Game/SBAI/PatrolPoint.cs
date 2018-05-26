@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class PatrolPoint : AIPoint
+    [System.Serializable] public class PatrolPoint : AIPoint
     {
         
         [FieldCategory(Category="PatrolPoint")]

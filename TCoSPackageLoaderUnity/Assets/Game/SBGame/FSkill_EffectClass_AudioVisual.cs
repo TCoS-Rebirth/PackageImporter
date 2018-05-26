@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual : FSkill_EffectClass
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual : FSkill_EffectClass
     {
         
         public const int INFINITE_EFFECT_DURATION = -1;
@@ -53,7 +53,7 @@ namespace SBGame
         {
         }
         
-        public struct RunningEffectData
+        [System.Serializable] public struct RunningEffectData
         {
             
             public int Handle;

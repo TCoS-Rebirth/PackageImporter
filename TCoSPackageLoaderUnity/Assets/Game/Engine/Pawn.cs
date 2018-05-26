@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Pawn : Actor
+    [System.Serializable] public class Pawn : Actor
     {
         
         public Controller Controller;
@@ -473,7 +473,7 @@ namespace Engine
         {
         }
         
-        public struct HitFXData
+        [System.Serializable] public struct HitFXData
         {
             
             public NameProperty Bone;

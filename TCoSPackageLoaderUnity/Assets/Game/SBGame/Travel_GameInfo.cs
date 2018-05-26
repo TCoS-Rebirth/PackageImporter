@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Travel_GameInfo : Deadspell_GameInfo
+    [System.Serializable] public class Travel_GameInfo : Deadspell_GameInfo
     {
         
         [FieldCategory(Category="Travel")]
@@ -39,7 +39,7 @@ namespace SBGame
         {
         }
         
-        public struct TravelScenario
+        [System.Serializable] public struct TravelScenario
         {
             
             public List<NameProperty> StartEvents;

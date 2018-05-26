@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_ChessConfig : MGame_Config
+    [System.Serializable] public class MGame_ChessConfig : MGame_Config
     {
         
         public const int MGAME_CHESS_CONFIG_COUNT = 3;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SceneManager : Info
+    [System.Serializable] public class SceneManager : Info
     {
         
         [FieldCategory(Category="SceneManager")]
@@ -132,7 +132,7 @@ namespace Engine
         {
         }
         
-        public struct Interpolator
+        [System.Serializable] public struct Interpolator
         {
             
             public int bDone;
@@ -148,7 +148,7 @@ namespace Engine
             public float _acceleration;
         }
         
-        public struct Orientation
+        [System.Serializable] public struct Orientation
         {
             
             public byte CamOrientation;

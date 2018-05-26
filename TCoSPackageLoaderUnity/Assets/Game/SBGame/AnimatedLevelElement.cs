@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class AnimatedLevelElement : TriggeringLevelElement
+    [System.Serializable] public class AnimatedLevelElement : TriggeringLevelElement
     {
         
         [FieldCategory(Category="Animations")]
@@ -38,7 +38,7 @@ namespace SBGame
         {
         }
         
-        public struct AnimationParameters
+        [System.Serializable] public struct AnimationParameters
         {
             
             public byte MenuOption;

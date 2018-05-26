@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event : Content_Type
+    [System.Serializable] public class FSkill_Event : Content_Type
     {
         
         public const int CF_VS_RECURSIVE = 268435456;
@@ -182,7 +182,7 @@ namespace SBGame
         {
         }
         
-        public struct AimingInfo
+        [System.Serializable] public struct AimingInfo
         {
             
             public Rotator CameraRotation;

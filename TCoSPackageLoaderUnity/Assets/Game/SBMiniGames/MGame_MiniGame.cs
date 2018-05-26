@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_MiniGame : UObject
+    [System.Serializable] public class MGame_MiniGame : UObject
     {
         
         public string mConfigGUI = string.Empty;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class NPC_ClassSet : UObject
+    [System.Serializable] public class NPC_ClassSet : UObject
     {
         
         public List<NPC_Type> mClasses = new List<NPC_Type>();

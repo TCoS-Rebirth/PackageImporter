@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredTouching : RegisteredAI
+    [System.Serializable] public class RegisteredTouching : RegisteredAI
     {
         
         public bool WasTouching;

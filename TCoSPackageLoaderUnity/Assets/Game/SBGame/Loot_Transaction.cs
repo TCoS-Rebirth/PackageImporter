@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Loot_Transaction : UObject
+    [System.Serializable] public class Loot_Transaction : UObject
     {
         
         public const float MINIMUM_TIMER_VALUE = 0.5F;
@@ -69,7 +69,7 @@ namespace SBGame
         {
         }
         
-        public struct DroppedLootItem
+        [System.Serializable] public struct DroppedLootItem
         {
             
             public int LootItemID;
@@ -79,7 +79,7 @@ namespace SBGame
             public bool Given;
         }
         
-        public struct GroupLootSelection
+        [System.Serializable] public struct GroupLootSelection
         {
             
             public int DroppedItemIndex;

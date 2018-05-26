@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Appearance : Content_API
+    [System.Serializable] public class NPC_Appearance : Content_API
     {
         
         public const int SMALL_RADIUS = 21;

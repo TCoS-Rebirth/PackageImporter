@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class ACTION_WaitForPlayer : LatentScriptedAction
+    [System.Serializable] public class ACTION_WaitForPlayer : LatentScriptedAction
     {
 
         public float Distance = 150f;

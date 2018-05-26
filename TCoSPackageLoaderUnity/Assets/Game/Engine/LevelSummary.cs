@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class LevelSummary : UObject
+    [System.Serializable] public class LevelSummary : UObject
     {
         
         [FieldCategory(Category="LevelSummary")]

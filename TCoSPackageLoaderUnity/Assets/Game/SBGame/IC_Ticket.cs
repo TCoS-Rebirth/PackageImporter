@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_Ticket : Item_Component
+    [System.Serializable] public class IC_Ticket : Item_Component
     {
         
         [FieldCategory(Category="Ticket")]

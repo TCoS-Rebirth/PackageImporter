@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_ActionsOnCollected : AIScript_CollectEventinstigators
+    [System.Serializable] public class AIScript_ActionsOnCollected : AIScript_CollectEventinstigators
     {
         
         [FieldCategory(Category="CollectEventinstigators")]

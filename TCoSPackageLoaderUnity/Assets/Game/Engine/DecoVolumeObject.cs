@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DecoVolumeObject : Actor
+    [System.Serializable] public class DecoVolumeObject : Actor
     {
         
         public DecoVolumeObject()

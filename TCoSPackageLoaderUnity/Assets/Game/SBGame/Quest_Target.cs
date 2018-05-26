@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Quest_Target : Content_Type
+    [System.Serializable] public class Quest_Target : Content_Type
     {
         
         [FieldCategory(Category="Target")]
@@ -43,7 +43,7 @@ namespace SBGame
         {
         }
         
-        public struct QuestInventory
+        [System.Serializable] public struct QuestInventory
         {
             
             public Item_Type Item;

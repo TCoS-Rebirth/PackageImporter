@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_StatesignalTrigger : AI_Script
+    [System.Serializable] public class AIScript_StatesignalTrigger : AI_Script
     {
         
         [FieldCategory(Category="StatesignalTrigger")]
@@ -34,7 +34,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct StateSignalEvent
+        [System.Serializable] public struct StateSignalEvent
         {
             
             public string Event;

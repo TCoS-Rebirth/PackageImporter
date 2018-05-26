@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Gibbed : DamageType
+    [System.Serializable] public class Gibbed : DamageType
     {
         
         public Gibbed()

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIAnimalIdleState : AIIdleState
+    [System.Serializable] public class AIAnimalIdleState : AIIdleState
     {
         
         public AIAnimalIdleState()

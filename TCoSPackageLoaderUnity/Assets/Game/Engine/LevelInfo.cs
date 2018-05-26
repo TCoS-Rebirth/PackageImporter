@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class LevelInfo : ZoneInfo
+    [System.Serializable] public class LevelInfo : ZoneInfo
     {
         
         public float TimeDilation;

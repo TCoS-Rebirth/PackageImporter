@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AnimNotify_LIPSinc : AnimNotify
+    [System.Serializable] public class AnimNotify_LIPSinc : AnimNotify
     {
         
         [FieldCategory(Category="AnimNotify_LIPSinc")]

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Type : Content_Type
+    [System.Serializable] public class FSkill_Type : Content_Type
     {
         
         [IgnoreFieldExtraction()]
@@ -254,7 +254,7 @@ namespace SBGame
         {
         }
         
-        public struct FKeyframeEffects
+        [System.Serializable] public struct FKeyframeEffects
         {
             
             public NameProperty KeyFrame;

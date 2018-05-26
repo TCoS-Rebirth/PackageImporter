@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Camera : Base_Component
+    [System.Serializable] public class Game_Camera : Base_Component
     {
         
         public const float HEAD_RADIUS = 1F;

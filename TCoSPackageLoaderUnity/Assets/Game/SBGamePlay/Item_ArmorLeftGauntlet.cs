@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Item_ArmorLeftGauntlet : Item_Type
+    [System.Serializable] public class Item_ArmorLeftGauntlet : Item_Type
     {
         
         public Item_ArmorLeftGauntlet()

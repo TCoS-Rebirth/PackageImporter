@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_Conditional_Enemy : AIRegistered
+    [System.Serializable] public class AI_Conditional_Enemy : AIRegistered
     {
         
         [FieldCategory(Category="AI_Conditional_Enemy")]

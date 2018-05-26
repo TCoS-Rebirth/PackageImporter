@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class LodMeshInstance : MeshInstance
+    [System.Serializable] public class LodMeshInstance : MeshInstance
     {
         
         public LodMeshInstance()

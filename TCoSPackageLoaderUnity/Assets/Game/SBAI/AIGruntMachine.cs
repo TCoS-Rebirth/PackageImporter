@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIGruntMachine : AIStateMachine
+    [System.Serializable] public class AIGruntMachine : AIStateMachine
     {
         
         public AIGruntMachine()

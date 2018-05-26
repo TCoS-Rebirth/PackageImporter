@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_Mailbox : Interaction_Component
+    [System.Serializable] public class Interaction_Mailbox : Interaction_Component
     {
         
         public Interaction_Mailbox()

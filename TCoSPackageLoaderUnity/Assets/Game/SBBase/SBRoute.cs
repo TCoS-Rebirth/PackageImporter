@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBRoute : UObject
+    [System.Serializable] public class SBRoute : UObject
     {
         
         public LocalizedString ShardName;

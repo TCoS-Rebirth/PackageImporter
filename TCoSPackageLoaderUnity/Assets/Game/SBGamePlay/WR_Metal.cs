@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class WR_Metal : WorldResource
+    [System.Serializable] public class WR_Metal : WorldResource
     {
         
         public WR_Metal()

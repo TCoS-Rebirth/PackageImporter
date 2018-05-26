@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class StaticPawnSounds : UObject
+    [System.Serializable] public class StaticPawnSounds : UObject
     {
         
         public StaticPawnSounds()

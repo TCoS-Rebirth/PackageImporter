@@ -23,14 +23,14 @@ namespace Engine
 {
     
     
-    public class MatObject : UObject
+    [System.Serializable] public class MatObject : UObject
     {
         
         public MatObject()
         {
         }
         
-        //public struct Orientation
+        //[System.Serializable] public struct Orientation
         //{
             
         //    public byte CamOrientation;

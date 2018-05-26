@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_CombatState : Base_Component
+    [System.Serializable] public class Game_CombatState : Base_Component
     {
         
         public byte mCombatMode;

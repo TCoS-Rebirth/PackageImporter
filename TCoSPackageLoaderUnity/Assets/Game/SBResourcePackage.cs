@@ -2,7 +2,7 @@
 
 namespace TCosReborn
 {
-    public class SBResourcePackage: SBPackageResource
+    [System.Serializable] public class SBResourcePackage: SBPackageResource
     {
         public string Name;
         public Dictionary<string, object> Resources = new Dictionary<string, object>();

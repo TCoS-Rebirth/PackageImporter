@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class ClipMarker : Keypoint
+    [System.Serializable] public class ClipMarker : Keypoint
     {
         
         public ClipMarker()

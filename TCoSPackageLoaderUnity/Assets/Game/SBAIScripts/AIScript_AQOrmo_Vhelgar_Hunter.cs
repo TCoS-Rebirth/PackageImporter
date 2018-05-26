@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_Vhelgar_Hunter : AIRegistered
+    [System.Serializable] public class AIScript_AQOrmo_Vhelgar_Hunter : AIRegistered
     {
         
         [FieldCategory(Category="VhelgarHunter")]

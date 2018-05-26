@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class WarpZoneInfo : ZoneInfo
+    [System.Serializable] public class WarpZoneInfo : ZoneInfo
     {
         
         [FieldCategory(Category="WarpZoneInfo")]

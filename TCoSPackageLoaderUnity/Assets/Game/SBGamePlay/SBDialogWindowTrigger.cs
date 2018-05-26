@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBDialogWindowTrigger : Trigger
+    [System.Serializable] public class SBDialogWindowTrigger : Trigger
     {
         
         [FieldCategory(Category="SBDialogWindowTrigger")]

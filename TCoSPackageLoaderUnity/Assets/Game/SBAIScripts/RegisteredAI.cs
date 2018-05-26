@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredAI : AIScriptSubObject
+    [System.Serializable] public class RegisteredAI : AIScriptSubObject
     {
         
         public Game_AIController Controller;

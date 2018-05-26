@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual_CameraAmbient : FSkill_EffectClass_AudioVisual_Camera
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual_CameraAmbient : FSkill_EffectClass_AudioVisual_Camera
     {
         
         [FieldCategory(Category="CameraAmbient")]

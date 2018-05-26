@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AICombatState : AIFightState
+    [System.Serializable] public class AICombatState : AIFightState
     {
         
         public AICombatState()

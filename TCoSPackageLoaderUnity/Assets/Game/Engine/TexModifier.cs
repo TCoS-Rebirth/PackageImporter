@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexModifier : Modifier
+    [System.Serializable] public class TexModifier : Modifier
     {
         
         public byte TexCoordSource;

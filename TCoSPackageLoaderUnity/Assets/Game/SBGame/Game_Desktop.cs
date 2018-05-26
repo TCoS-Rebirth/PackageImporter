@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Desktop : GUI_BaseDesktop
+    [System.Serializable] public class Game_Desktop : GUI_BaseDesktop
     {
         
         public const int CT_System = 7;

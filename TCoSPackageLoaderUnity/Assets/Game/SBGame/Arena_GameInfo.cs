@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Arena_GameInfo : Game_GameInfo
+    [System.Serializable] public class Arena_GameInfo : Game_GameInfo
     {
         
         public const float COUNTDOWN_TIME = 10F;
@@ -81,7 +81,7 @@ namespace SBGame
         {
         }
         
-        public struct ArenaGameInfoPlayer
+        [System.Serializable] public struct ArenaGameInfoPlayer
         {
             
             public int Id;
@@ -95,7 +95,7 @@ namespace SBGame
             public int UserData;
         }
         
-        public struct ArenaGameInfoTeam
+        [System.Serializable] public struct ArenaGameInfoTeam
         {
             
             public PlayerStart Start;

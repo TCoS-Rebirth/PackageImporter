@@ -3,7 +3,7 @@ using TCosReborn;
 
 namespace Gameplay
 {
-    public class ScriptedAction : SBPackageResource
+    [System.Serializable] public class ScriptedAction : SBPackageResource
     {
         //public event Action ActionCompleted; TODO ..maybe ..if even needed
 

@@ -1,6 +1,6 @@
 ﻿namespace Gameplay
 {
-    public class Action_KILLINSTIGATOR : LatentScriptedAction
+    [System.Serializable] public class Action_KILLINSTIGATOR : LatentScriptedAction
     {
         
     }

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SubActionSceneSpeed : MatSubAction
+    [System.Serializable] public class SubActionSceneSpeed : MatSubAction
     {
         
         [FieldCategory(Category="SceneSpeed")]

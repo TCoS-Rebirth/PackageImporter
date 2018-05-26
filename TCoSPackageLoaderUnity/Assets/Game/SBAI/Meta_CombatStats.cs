@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class Meta_CombatStats : Game_CombatStats
+    [System.Serializable] public class Meta_CombatStats : Game_CombatStats
     {
         
         public Meta_CombatStats()

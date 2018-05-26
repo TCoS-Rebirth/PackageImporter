@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class TimeManager : TimedEnvironmentEffect
+    [System.Serializable] public class TimeManager : TimedEnvironmentEffect
     {
         
         public List<DayNightCycleKeyframe> mKeyFrames = new List<DayNightCycleKeyframe>();

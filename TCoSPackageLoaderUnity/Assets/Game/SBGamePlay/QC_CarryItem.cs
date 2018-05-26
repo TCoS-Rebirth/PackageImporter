@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QC_CarryItem : Quest_Condition
+    [System.Serializable] public class QC_CarryItem : Quest_Condition
     {
         
         [FieldCategory(Category="CarryItem")]

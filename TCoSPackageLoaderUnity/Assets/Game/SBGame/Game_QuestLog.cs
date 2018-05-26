@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_QuestLog : Base_Component
+    [System.Serializable] public class Game_QuestLog : Base_Component
     {
         
         public List<int> targetProgress = new List<int>();
@@ -65,7 +65,7 @@ namespace SBGame
         {
         }
         
-        public struct CompleteQuest
+        [System.Serializable] public struct CompleteQuest
         {
             
             public Quest_Type quest;
@@ -73,7 +73,7 @@ namespace SBGame
             public int TimesFinished;
         }
         
-        public struct QuestTimerProgress
+        [System.Serializable] public struct QuestTimerProgress
         {
             
             public Quest_Type quest;

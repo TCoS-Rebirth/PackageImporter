@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Viewport : Player
+    [System.Serializable] public class Viewport : Player
     {
         
         public Viewport()

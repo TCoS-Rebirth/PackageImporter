@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NA_Invisible : NPC_Appearance
+    [System.Serializable] public class NA_Invisible : NPC_Appearance
     {
         
         public NA_Invisible()

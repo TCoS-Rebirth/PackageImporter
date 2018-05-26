@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Content_Trigger : InsideTrigger
+    [System.Serializable] public class Content_Trigger : InsideTrigger
     {
         
         [FieldCategory(Category="PseudoScript")]

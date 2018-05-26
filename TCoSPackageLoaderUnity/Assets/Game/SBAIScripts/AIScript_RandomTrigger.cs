@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_RandomTrigger : AI_Script
+    [System.Serializable] public class AIScript_RandomTrigger : AI_Script
     {
         
         [FieldCategory(Category="RandomTrigger")]
@@ -36,7 +36,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct RandomEvent
+        [System.Serializable] public struct RandomEvent
         {
             
             public string Event;

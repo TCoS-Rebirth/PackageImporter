@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_HealthLevel_Trigger : AIRegistered
+    [System.Serializable] public class AI_HealthLevel_Trigger : AIRegistered
     {
         
         [FieldCategory(Category="AI_HealthLevel_Trigger")]
@@ -43,7 +43,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct HealthLevelEvent
+        [System.Serializable] public struct HealthLevelEvent
         {
             
             public float HealthFraction;

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class QC_Timed : Quest_Condition
+    [System.Serializable] public class QC_Timed : Quest_Condition
     {
         
         [FieldCategory(Category="Condition")]

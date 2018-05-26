@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class TooltipActor : Actor
+    [System.Serializable] public class TooltipActor : Actor
     {
         
         [FieldCategory(Category="TooltipActor")]

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCCombatState : Game_CombatState
+    [System.Serializable] public class Game_NPCCombatState : Game_CombatState
     {
         
         public Game_NPCCombatState()

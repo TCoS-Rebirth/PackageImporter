@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_StateSwitch : AIRegistered
+    [System.Serializable] public class AI_StateSwitch : AIRegistered
     {
         
         [FieldCategory(Category="AI_StateSwitch")]

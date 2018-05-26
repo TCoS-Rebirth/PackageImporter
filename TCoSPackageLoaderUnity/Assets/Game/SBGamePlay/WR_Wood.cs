@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class WR_Wood : WorldResource
+    [System.Serializable] public class WR_Wood : WorldResource
     {
         
         public WR_Wood()

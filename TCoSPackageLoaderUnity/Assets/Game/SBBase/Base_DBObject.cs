@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class Base_DBObject : UObject
+    [System.Serializable] public class Base_DBObject : UObject
     {
         
         public int _Mask;

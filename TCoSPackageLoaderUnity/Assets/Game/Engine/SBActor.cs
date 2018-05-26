@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SBActor : Actor
+    [System.Serializable] public class SBActor : Actor
     {
         
         public SBActor()

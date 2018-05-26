@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class MeshObject : UObject
+    [System.Serializable] public class MeshObject : UObject
     {
         
         public MeshObject()

@@ -23,7 +23,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_TradeManager : Base_Component
+    [System.Serializable] public class Game_TradeManager : Base_Component
     {
         
         private List<Trade_Transaction> mTransactions = new List<Trade_Transaction>();

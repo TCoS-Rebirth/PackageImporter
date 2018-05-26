@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Taxonomy : Content_Type
+    [System.Serializable] public class NPC_Taxonomy : Content_Type
     {
         
         [FieldCategory(Category="NPC_Taxonomy")]

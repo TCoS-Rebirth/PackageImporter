@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_EmoteRotate : Game_Emote
+    [System.Serializable] public class Game_EmoteRotate : Game_Emote
     {
         
         public int Yaw;

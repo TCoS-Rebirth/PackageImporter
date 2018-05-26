@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class AnnotationTriggerable : AnnotationActor
+    [System.Serializable] public class AnnotationTriggerable : AnnotationActor
     {
         
         [FieldCategory(Category="Annotation")]

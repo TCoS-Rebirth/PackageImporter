@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AmbientSound : Keypoint
+    [System.Serializable] public class AmbientSound : Keypoint
     {
         
         [FieldCategory(Category="Sound")]
@@ -37,7 +37,7 @@ namespace Engine
         {
         }
         
-        public struct SoundEmitter
+        [System.Serializable] public struct SoundEmitter
         {
             
             public float EmitInterval;

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCPawn : Game_TransientPawn
+    [System.Serializable] public class Game_NPCPawn : Game_TransientPawn
     {
         
         public NPC_Type NPCType;
@@ -97,7 +97,7 @@ namespace SBGame
         {
         }
         
-        public struct NetMovement
+        [System.Serializable] public struct NetMovement
         {
             
             public Vector Destination;

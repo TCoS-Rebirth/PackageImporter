@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MaterialSwitch : Modifier
+    [System.Serializable] public class MaterialSwitch : Modifier
     {
         
         [FieldCategory(Category="MaterialSwitch")]

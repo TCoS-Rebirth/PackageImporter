@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIDefeatScript : AIRegistered
+    [System.Serializable] public class AIDefeatScript : AIRegistered
     {
         
         [FieldCategory(Category="DefeatQuest")]

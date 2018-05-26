@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Req_Equipment : Content_Requirement
+    [System.Serializable] public class Req_Equipment : Content_Requirement
     {
         
         [FieldCategory(Category="Requirement")]

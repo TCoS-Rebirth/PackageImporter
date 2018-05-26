@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_SkillCondition : Content_Type
+    [System.Serializable] public class NPC_SkillCondition : Content_Type
     {
         
         [FieldCategory(Category="Default")]

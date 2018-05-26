@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class GroupMind : AI_MetaController
+    [System.Serializable] public class GroupMind : AI_MetaController
     {
         
         public NPC_Taxonomy mFaction;
@@ -59,7 +59,7 @@ namespace SBAI
         {
         }
         
-        public struct GroupMember
+        [System.Serializable] public struct GroupMember
         {
             
             public Game_AIController Controller;

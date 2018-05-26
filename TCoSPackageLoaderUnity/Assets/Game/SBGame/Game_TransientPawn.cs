@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_TransientPawn : Game_Pawn
+    [System.Serializable] public class Game_TransientPawn : Game_Pawn
     {
         
         public Game_TransientPawn()

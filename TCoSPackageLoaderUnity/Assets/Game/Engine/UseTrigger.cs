@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class UseTrigger : Triggers
+    [System.Serializable] public class UseTrigger : Triggers
     {
         
         [FieldCategory(Category="UseTrigger")]

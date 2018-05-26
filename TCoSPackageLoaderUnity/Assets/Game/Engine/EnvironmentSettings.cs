@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class EnvironmentSettings : UObject
+    [System.Serializable] public class EnvironmentSettings : UObject
     {
         
         [FieldCategory(Category="ZoneInfo")]
@@ -86,7 +86,7 @@ namespace Engine
         {
         }
         
-        public struct EmitterModifier
+        [System.Serializable] public struct EmitterModifier
         {
             
             public float DensityMultiplier;
@@ -104,7 +104,7 @@ namespace Engine
             public float OpacityMultiplier;
         }
         
-        public struct LightHSB
+        [System.Serializable] public struct LightHSB
         {
             
             public byte LightHue;

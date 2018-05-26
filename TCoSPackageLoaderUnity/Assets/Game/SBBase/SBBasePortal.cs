@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBBasePortal : Trigger
+    [System.Serializable] public class SBBasePortal : Trigger
     {
         
         [FieldCategory(Category="SBBasePortal")]

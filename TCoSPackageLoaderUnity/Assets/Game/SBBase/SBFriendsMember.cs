@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBFriendsMember : UObject
+    [System.Serializable] public class SBFriendsMember : UObject
     {
 
         public new string Name = string.Empty;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class SourcedNotification : Base_Notification
+    [System.Serializable] public class SourcedNotification : Base_Notification
     {
         
         public SourcedNotification()

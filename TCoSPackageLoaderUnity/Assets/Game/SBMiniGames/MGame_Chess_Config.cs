@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_Chess_Config : MGame_Config
+    [System.Serializable] public class MGame_Chess_Config : MGame_Config
     {
         
         public const int MGAME_CHESS_CONFIG_CASTLING = 5;

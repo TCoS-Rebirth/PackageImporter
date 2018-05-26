@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIDroneMachine : AIStateMachine
+    [System.Serializable] public class AIDroneMachine : AIStateMachine
     {
         
         public AIDroneMachine()

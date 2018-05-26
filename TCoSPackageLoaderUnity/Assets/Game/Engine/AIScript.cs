@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AIScript : Keypoint
+    [System.Serializable] public class AIScript : Keypoint
     {
         
         [FieldCategory(Category="AIScript")]

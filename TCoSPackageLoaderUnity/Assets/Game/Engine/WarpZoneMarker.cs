@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class WarpZoneMarker : SmallNavigationPoint
+    [System.Serializable] public class WarpZoneMarker : SmallNavigationPoint
     {
         
         public WarpZoneInfo markedWarpZone;

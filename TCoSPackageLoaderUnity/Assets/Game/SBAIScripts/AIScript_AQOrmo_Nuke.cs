@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_Nuke : AIRegistered
+    [System.Serializable] public class AIScript_AQOrmo_Nuke : AIRegistered
     {
         
         [FieldCategory(Category="AIScript_AQOrmo_Nuke")]

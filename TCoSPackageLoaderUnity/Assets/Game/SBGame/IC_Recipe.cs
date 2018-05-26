@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_Recipe : Item_Component
+    [System.Serializable] public class IC_Recipe : Item_Component
     {
         
         [FieldConst()]
@@ -40,7 +40,7 @@ namespace SBGame
         {
         }
         
-        public struct RecipeComponent
+        [System.Serializable] public struct RecipeComponent
         {
             
             public Item_Type Item;

@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Resource : UObject
+    [System.Serializable] public class Resource : UObject
     {
         
         public Resource()

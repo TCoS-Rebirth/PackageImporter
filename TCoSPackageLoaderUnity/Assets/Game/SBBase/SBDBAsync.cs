@@ -23,14 +23,14 @@ namespace SBBase
 {
     
     
-    public class SBDBAsync : UObject
+    [System.Serializable] public class SBDBAsync : UObject
     {
         
         public SBDBAsync()
         {
         }
         
-        public struct SetPersistentVariableParams
+        [System.Serializable] public struct SetPersistentVariableParams
         {
             
             public int character_id;
@@ -44,7 +44,7 @@ namespace SBBase
             public Pawn Pawn;
         }
         
-        public struct SBDBAsyncCallback
+        [System.Serializable] public struct SBDBAsyncCallback
         {
             
             public NameProperty ObjectName;

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Quest_Chain : Content_Type
+    [System.Serializable] public class Quest_Chain : Content_Type
     {
 
         [FieldCategory(Category = "Chain")]

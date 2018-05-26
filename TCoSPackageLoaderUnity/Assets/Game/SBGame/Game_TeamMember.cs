@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_TeamMember : UObject
+    [System.Serializable] public class Game_TeamMember : UObject
     {
         
         public int MemberHandle;

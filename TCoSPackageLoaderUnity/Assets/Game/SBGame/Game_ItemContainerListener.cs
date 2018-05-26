@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_ItemContainerListener : UObject
+    [System.Serializable] public class Game_ItemContainerListener : UObject
     {
         
         public byte mLocationType;

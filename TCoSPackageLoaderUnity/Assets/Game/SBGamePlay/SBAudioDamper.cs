@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAudioDamper : SBAudio_Base
+    [System.Serializable] public class SBAudioDamper : SBAudio_Base
     {
         
         [FieldCategory(Category="Damping")]
@@ -50,13 +50,13 @@ namespace SBGamePlay
         {
         }
         
-        public struct ExemptActors
+        [System.Serializable] public struct ExemptActors
         {
             
             public NameProperty ActorTagName;
         }
         
-        public struct DamperInfo
+        [System.Serializable] public struct DamperInfo
         {
             
             public bool Initialized;
@@ -64,7 +64,7 @@ namespace SBGamePlay
             public int FaderID;
         }
         
-        public struct AudioTypeDamper
+        [System.Serializable] public struct AudioTypeDamper
         {
             
             public byte AudioType;
@@ -72,7 +72,7 @@ namespace SBGamePlay
             public DamperInfo Info;
         }
         
-        public struct AudioNameDamper
+        [System.Serializable] public struct AudioNameDamper
         {
             
             public NameProperty ActorTagName;

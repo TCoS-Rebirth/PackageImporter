@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIOnScreenMessages : AI_Script
+    [System.Serializable] public class AIOnScreenMessages : AI_Script
     {
         
         [FieldCategory(Category="AIOnScreenMessages")]

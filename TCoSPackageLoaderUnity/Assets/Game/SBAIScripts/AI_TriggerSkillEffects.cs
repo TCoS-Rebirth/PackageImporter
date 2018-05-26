@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_TriggerSkillEffects : AIRegistered
+    [System.Serializable] public class AI_TriggerSkillEffects : AIRegistered
     {
         
         [FieldCategory(Category="TriggerSkillEffects")]

@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class SBDBSync : UObject
+    [System.Serializable] public class SBDBSync : UObject
     {
         
         public SBDBSync()

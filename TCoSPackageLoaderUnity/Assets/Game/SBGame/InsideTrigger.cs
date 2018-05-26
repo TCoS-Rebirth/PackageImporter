@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class InsideTrigger : Trigger
+    [System.Serializable] public class InsideTrigger : Trigger
     {
         
         public List<Game_Pawn> PawnsInside = new List<Game_Pawn>();

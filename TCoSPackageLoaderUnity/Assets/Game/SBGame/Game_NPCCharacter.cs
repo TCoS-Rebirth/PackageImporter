@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCCharacter : Game_Character
+    [System.Serializable] public class Game_NPCCharacter : Game_Character
     {
         
         public Game_NPCCharacter()

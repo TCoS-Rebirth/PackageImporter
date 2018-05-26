@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Quest_Condition : Quest_Target
+    [System.Serializable] public class Quest_Condition : Quest_Target
     {
         
         [FieldCategory(Category="Target")]

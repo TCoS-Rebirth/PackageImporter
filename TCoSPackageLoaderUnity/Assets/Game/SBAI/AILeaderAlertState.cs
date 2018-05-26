@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AILeaderAlertState : AIAlertState
+    [System.Serializable] public class AILeaderAlertState : AIAlertState
     {
         
         public bool mWarned;

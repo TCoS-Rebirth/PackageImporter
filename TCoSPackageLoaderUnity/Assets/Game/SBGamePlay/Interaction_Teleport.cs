@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Interaction_Teleport : Interaction_Component
+    [System.Serializable] public class Interaction_Teleport : Interaction_Component
     {
         
         [FieldCategory(Category="Interaction_Teleport")]

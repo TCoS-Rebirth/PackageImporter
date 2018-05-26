@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class CCom_FriendIgnore : Game_ConsoleCommand
+    [System.Serializable] public class CCom_FriendIgnore : Game_ConsoleCommand
     {
         
         public CCom_FriendIgnore()

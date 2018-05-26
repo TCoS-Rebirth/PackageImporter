@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AILeaderCombatState : AICombatState
+    [System.Serializable] public class AILeaderCombatState : AICombatState
     {
         
         public float mCommandTimer;

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_AIAggro : Content_Event
+    [System.Serializable] public class EV_AIAggro : Content_Event
     {
         
         public EV_AIAggro()

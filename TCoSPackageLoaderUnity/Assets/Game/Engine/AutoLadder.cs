@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AutoLadder : Ladder
+    [System.Serializable] public class AutoLadder : Ladder
     {
         
         public AutoLadder()

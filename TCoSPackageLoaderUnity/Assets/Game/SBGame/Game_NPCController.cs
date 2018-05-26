@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_NPCController : Game_Controller
+    [System.Serializable] public class Game_NPCController : Game_Controller
     {
         
         public NPC_Type NPCType;

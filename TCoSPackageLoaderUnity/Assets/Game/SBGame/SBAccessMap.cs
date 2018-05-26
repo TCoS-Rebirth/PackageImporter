@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class SBAccessMap : UObject
+    [System.Serializable] public class SBAccessMap : UObject
     {
         
         public AccessmapExplorer mScout;

@@ -2,7 +2,7 @@
 
 namespace Gameplay
 {
-    public class WaterVolume : PhysicsVolume
+    [System.Serializable] public class WaterVolume : PhysicsVolume
     {
         //public float DamagePerSec;
         //public DamageType DamageType;

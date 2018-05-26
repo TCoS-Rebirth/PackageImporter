@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class RoadPathNode : PathNode
+    [System.Serializable] public class RoadPathNode : PathNode
     {
         
         [FieldCategory(Category="RoadPathNode")]

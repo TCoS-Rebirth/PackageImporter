@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Shop_Base : UObject
+    [System.Serializable] public class Shop_Base : UObject
     {
         
         [FieldCategory(Category="Shop_Base")]

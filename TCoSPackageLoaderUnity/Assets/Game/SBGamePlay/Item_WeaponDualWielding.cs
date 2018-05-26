@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class Item_WeaponDualWielding : Item_Type
+    [System.Serializable] public class Item_WeaponDualWielding : Item_Type
     {
         
         public Item_WeaponDualWielding()

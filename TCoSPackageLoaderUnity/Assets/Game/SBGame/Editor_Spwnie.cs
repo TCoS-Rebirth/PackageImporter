@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Editor_Spwnie : Editor_Pawn
+    [System.Serializable] public class Editor_Spwnie : Editor_Pawn
     {
         
         public bool mSelected;

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class StatueLocation : Actor
+    [System.Serializable] public class StatueLocation : Actor
     {
         
         [FieldCategory(Category="Statue")]

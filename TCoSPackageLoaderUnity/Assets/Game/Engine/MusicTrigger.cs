@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class MusicTrigger : Triggers
+    [System.Serializable] public class MusicTrigger : Triggers
     {
         
         [FieldCategory(Category="MusicTrigger")]

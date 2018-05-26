@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class VariableTexPanner : TexModifier
+    [System.Serializable] public class VariableTexPanner : TexModifier
     {
         
         [FieldCategory(Category="VariableTexPanner")]

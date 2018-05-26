@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class AIMarker : SmallNavigationPoint
+    [System.Serializable] public class AIMarker : SmallNavigationPoint
     {
         
         public AIScript markedScript;

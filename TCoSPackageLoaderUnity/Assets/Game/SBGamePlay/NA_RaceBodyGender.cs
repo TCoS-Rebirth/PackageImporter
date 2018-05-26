@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NA_RaceBodyGender : NPC_Appearance
+    [System.Serializable] public class NA_RaceBodyGender : NPC_Appearance
     {
         
         [FieldCategory(Category="Basics")]

@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIFleeState : AIState
+    [System.Serializable] public class AIFleeState : AIState
     {
         
         public AIFleeState()

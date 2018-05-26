@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class MovingLevelElement : Game_Actor
+    [System.Serializable] public class MovingLevelElement : Game_Actor
     {
         
         [FieldCategory(Category="MovingLevelElement")]
@@ -118,7 +118,7 @@ namespace SBGame
         {
         }
         
-        public struct MLEKey
+        [System.Serializable] public struct MLEKey
         {
             
             public Vector Location;

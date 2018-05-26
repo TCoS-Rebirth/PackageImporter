@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_SkeletalAppearance : Game_Appearance
+    [System.Serializable] public class Game_SkeletalAppearance : Game_Appearance
     {
         
         [IgnoreFieldExtraction()]

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_Boss : NPC_Class
+    [System.Serializable] public class NPC_Boss : NPC_Class
     {
         
         public NPC_Boss()

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NS_Rotator : NPC_StatTable
+    [System.Serializable] public class NS_Rotator : NPC_StatTable
     {
         
         [FieldCategory(Category="stat")]

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_EditorPawn : Game_Pawn
+    [System.Serializable] public class Game_EditorPawn : Game_Pawn
     {
         
         public byte OverwriteEquippedWeaponFlag;

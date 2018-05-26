@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class SBAttachment : Actor
+    [System.Serializable] public class SBAttachment : Actor
     {
         
         public byte AnimationType;
@@ -59,13 +59,13 @@ namespace Engine
         {
         }
         
-        public struct SBGameInfoPtr
+        [System.Serializable] public struct SBGameInfoPtr
         {
             
             public int Ptr;
         }
         
-        public struct SBSoftBodyPtr
+        [System.Serializable] public struct SBSoftBodyPtr
         {
             
             public int Ptr;

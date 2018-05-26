@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class GlobalTempObjects : UObject
+    [System.Serializable] public class GlobalTempObjects : UObject
     {
         
         public GlobalTempObjects()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TCosReborn
 {
-    public class SBPackageResource
+    [System.Serializable] public class SBPackageResource
     {
         /// <summary>
         /// SBPackageResource - the ResourceID of this Object

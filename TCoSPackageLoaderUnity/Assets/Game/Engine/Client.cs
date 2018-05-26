@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Client : UObject
+    [System.Serializable] public class Client : UObject
     {
         
         [FieldConfig()]

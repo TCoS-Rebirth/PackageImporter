@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerController : Game_Controller
+    [System.Serializable] public class Game_PlayerController : Game_Controller
     {
         
         public const string MUTE_GLOBAL = "\"global\"";

@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class SBWorld : UObject
+    [System.Serializable] public class SBWorld : UObject
     {
         
         public int worldID;

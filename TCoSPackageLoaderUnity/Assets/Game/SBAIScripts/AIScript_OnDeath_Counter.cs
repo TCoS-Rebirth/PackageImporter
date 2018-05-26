@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_OnDeath_Counter : AIScript_Counter
+    [System.Serializable] public class AIScript_OnDeath_Counter : AIScript_Counter
     {
         
         [FieldCategory(Category="Counter")]

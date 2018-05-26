@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class xProcMesh : Actor
+    [System.Serializable] public class xProcMesh : Actor
     {
         
         [FieldConst()]
@@ -111,7 +111,7 @@ namespace Engine
         {
         }
         
-        public struct ProcMeshVertex
+        [System.Serializable] public struct ProcMeshVertex
         {
             
             public Vector Position;

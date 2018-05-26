@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class OpacityModifier : Modifier
+    [System.Serializable] public class OpacityModifier : Modifier
     {
         
         [IgnoreFieldExtraction()]

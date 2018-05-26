@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Trial50_Uddathin : AI_Script
+    [System.Serializable] public class AIScript_Trial50_Uddathin : AI_Script
     {
         
         [FieldCategory(Category="uddathin")]

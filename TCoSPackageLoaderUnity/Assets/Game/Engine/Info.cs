@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Info : Actor
+    [System.Serializable] public class Info : Actor
     {
         
         public Info()

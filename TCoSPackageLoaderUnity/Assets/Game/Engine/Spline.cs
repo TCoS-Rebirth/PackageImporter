@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Spline : UObject
+    [System.Serializable] public class Spline : UObject
     {
         
         public const int mMaxTimes = 5;

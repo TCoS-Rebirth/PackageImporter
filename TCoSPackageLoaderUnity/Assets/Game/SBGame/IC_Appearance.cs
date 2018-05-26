@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_Appearance : Item_Component
+    [System.Serializable] public class IC_Appearance : Item_Component
     {
         
         [FieldCategory(Category="IC_Appearance")]

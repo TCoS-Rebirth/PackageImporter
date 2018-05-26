@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_CombatStats : Base_Component
+    [System.Serializable] public class Game_CombatStats : Base_Component
     {
         
         public Game_Pawn mScriptedClaim;
@@ -88,7 +88,7 @@ namespace SBGame
         {
         }
         
-        public struct SocialStruct
+        [System.Serializable] public struct SocialStruct
         {
             
             public Game_CombatStats LinkedStats;
@@ -96,7 +96,7 @@ namespace SBGame
             public float Weight;
         }
         
-        public struct ParticipantStruct
+        [System.Serializable] public struct ParticipantStruct
         {
             
             public Game_Pawn Pwnie;

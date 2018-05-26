@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class PotentialClimbWatcher : Info
+    [System.Serializable] public class PotentialClimbWatcher : Info
     {
         
         public PotentialClimbWatcher()

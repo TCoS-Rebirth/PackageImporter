@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredStateSwitch : RegisteredAI
+    [System.Serializable] public class RegisteredStateSwitch : RegisteredAI
     {
         
         public AIStateMachine OldStateMachine;

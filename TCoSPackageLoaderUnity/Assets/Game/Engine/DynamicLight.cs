@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DynamicLight : Light
+    [System.Serializable] public class DynamicLight : Light
     {
         
         public DynamicLight()

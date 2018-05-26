@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Appearance_SecondaryWeapon : Appearance_Base
+    [System.Serializable] public class Appearance_SecondaryWeapon : Appearance_Base
     {
         
         public Appearance_SecondaryWeapon()

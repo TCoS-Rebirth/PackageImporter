@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class WR_Flower : WorldResource
+    [System.Serializable] public class WR_Flower : WorldResource
     {
         
         public WR_Flower()

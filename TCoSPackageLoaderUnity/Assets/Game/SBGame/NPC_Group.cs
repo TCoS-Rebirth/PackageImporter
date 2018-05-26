@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_Group : Content_Type
+    [System.Serializable] public class NPC_Group : Content_Type
     {
         
         [FieldCategory(Category="Classes")]
@@ -38,7 +38,7 @@ namespace SBGame
         {
         }
         
-        public struct GroupUnit
+        [System.Serializable] public struct GroupUnit
         {
             
             public int Minimum;

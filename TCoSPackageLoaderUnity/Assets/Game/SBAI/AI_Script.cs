@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class AI_Script : Annotation_Script
+    [System.Serializable] public class AI_Script : Annotation_Script
     {
         
         [FieldCategory(Category="AI_Script")]
@@ -52,7 +52,7 @@ namespace SBAI
         {
         }
         
-        public struct AppliedEffect
+        [System.Serializable] public struct AppliedEffect
         {
             
             public Game_Pawn Pawn;
@@ -60,7 +60,7 @@ namespace SBAI
             public int EffectHandle;
         }
 
-        public struct CountEvent
+        [System.Serializable] public struct CountEvent
         {
 
             public string EnterEvent;

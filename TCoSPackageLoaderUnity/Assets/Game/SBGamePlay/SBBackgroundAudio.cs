@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBBackgroundAudio : Actor
+    [System.Serializable] public class SBBackgroundAudio : Actor
     {
         
         public SBBackgroundAudio()

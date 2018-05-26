@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Interaction_Component : Content_API
+    [System.Serializable] public class Interaction_Component : Content_API
     {
         
         [FieldCategory(Category="Interaction")]

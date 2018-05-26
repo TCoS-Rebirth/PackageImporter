@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Event_Duff : FSkill_Event_FX
+    [System.Serializable] public class FSkill_Event_Duff : FSkill_Event_FX
     {
         
         [FieldConst()]
@@ -119,7 +119,7 @@ namespace SBGame
         {
         }
         
-        public struct ConditionalEventRunData
+        [System.Serializable] public struct ConditionalEventRunData
         {
             
             public float EarliestStartTime;
@@ -127,7 +127,7 @@ namespace SBGame
             public int UsesLeft;
         }
         
-        public struct DirectEffectRunData
+        [System.Serializable] public struct DirectEffectRunData
         {
             
             public float NextStartTime;
@@ -135,7 +135,7 @@ namespace SBGame
             public int ActualRepeatCount;
         }
         
-        public struct DuffEffectRunData
+        [System.Serializable] public struct DuffEffectRunData
         {
             
             public float NextStartTime;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class RenderDevice : Subsystem
+    [System.Serializable] public class RenderDevice : Subsystem
     {
         
         [FieldConfig()]

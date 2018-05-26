@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Trial25_Graidlon : AI_Script
+    [System.Serializable] public class AIScript_Trial25_Graidlon : AI_Script
     {
         
         [FieldCategory(Category="Graidlon_Script")]

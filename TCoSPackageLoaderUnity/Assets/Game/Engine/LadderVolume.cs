@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class LadderVolume : PhysicsVolume
+    [System.Serializable] public class LadderVolume : PhysicsVolume
     {
         
         [FieldCategory(Category="LadderVolume")]

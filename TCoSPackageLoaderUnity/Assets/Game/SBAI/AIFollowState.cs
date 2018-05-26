@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIFollowState : AIState
+    [System.Serializable] public class AIFollowState : AIState
     {
         
         public float FollowDistance;

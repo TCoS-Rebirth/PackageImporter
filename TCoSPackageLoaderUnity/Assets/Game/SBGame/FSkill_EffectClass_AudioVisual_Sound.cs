@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_AudioVisual_Sound : FSkill_EffectClass_AudioVisual
+    [System.Serializable] public class FSkill_EffectClass_AudioVisual_Sound : FSkill_EffectClass_AudioVisual
     {
         
         [FieldCategory(Category="Sound")]

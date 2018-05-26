@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class SBGameEnums : UObject
+    [System.Serializable] public class SBGameEnums : UObject
     {
         
         public SBGameEnums()

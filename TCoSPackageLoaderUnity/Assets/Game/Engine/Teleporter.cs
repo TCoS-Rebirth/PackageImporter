@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Teleporter : SmallNavigationPoint
+    [System.Serializable] public class Teleporter : SmallNavigationPoint
     {
         
         [FieldCategory(Category="Teleporter")]

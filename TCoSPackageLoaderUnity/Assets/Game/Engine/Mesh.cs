@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Mesh : Primitive
+    [System.Serializable] public class Mesh : Primitive
     {
         
         public Mesh()

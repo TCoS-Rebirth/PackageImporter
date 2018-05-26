@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class StaticMeshInstance : UObject
+    [System.Serializable] public class StaticMeshInstance : UObject
     {
         
         public StaticMeshInstance()

@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBAudioModulator : SBAudioModifier
+    [System.Serializable] public class SBAudioModulator : SBAudioModifier
     {
         
         public const float MIN_MOD_DAMP_VARIATION = 0.001F;

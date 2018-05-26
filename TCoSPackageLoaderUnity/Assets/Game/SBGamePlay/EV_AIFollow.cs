@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_AIFollow : Content_Event
+    [System.Serializable] public class EV_AIFollow : Content_Event
     {
         
         public EV_AIFollow()

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class GameEngine : Engine
+    [System.Serializable] public class GameEngine : Engine
     {
         
         public string mGameType = string.Empty;
@@ -82,7 +82,7 @@ namespace Engine
         {
         }
         
-        public struct URL
+        [System.Serializable] public struct URL
         {
             
             public string Protocol;

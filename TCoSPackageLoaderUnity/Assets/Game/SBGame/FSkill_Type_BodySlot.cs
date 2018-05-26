@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_Type_BodySlot : FSkill_Type
+    [System.Serializable] public class FSkill_Type_BodySlot : FSkill_Type
     {
         
         [FieldCategory(Category="BodySlot")]

@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Item_Type : Content_Type
+    [System.Serializable] public class Item_Type : Content_Type
     {
         
         [FieldConst()]

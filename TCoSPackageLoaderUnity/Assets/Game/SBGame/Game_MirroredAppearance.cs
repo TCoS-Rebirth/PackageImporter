@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_MirroredAppearance : Game_ShiftableAppearance
+    [System.Serializable] public class Game_MirroredAppearance : Game_ShiftableAppearance
     {
         
         private Game_Pawn mReferencedPawn;

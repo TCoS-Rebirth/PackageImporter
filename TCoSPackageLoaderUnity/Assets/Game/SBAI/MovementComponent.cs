@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class MovementComponent : Base_Component
+    [System.Serializable] public class MovementComponent : Base_Component
     {
         
         public byte MoveMode;
@@ -70,7 +70,7 @@ namespace SBAI
         {
         }
         
-        public struct MCTimer
+        [System.Serializable] public struct MCTimer
         {
             
             public byte mMode;
@@ -86,7 +86,7 @@ namespace SBAI
             public int mMoves;
         }
         
-        public struct MovementConfigStruct
+        [System.Serializable] public struct MovementConfigStruct
         {
             
             public UObject mOwner;
@@ -114,7 +114,7 @@ namespace SBAI
             public bool MovingTurn;
         }
         
-        public struct TacticalLocation
+        [System.Serializable] public struct TacticalLocation
         {
             
             public Vector Location;

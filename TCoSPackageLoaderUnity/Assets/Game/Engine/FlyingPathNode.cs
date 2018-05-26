@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class FlyingPathNode : PathNode
+    [System.Serializable] public class FlyingPathNode : PathNode
     {
         
         public FlyingPathNode()

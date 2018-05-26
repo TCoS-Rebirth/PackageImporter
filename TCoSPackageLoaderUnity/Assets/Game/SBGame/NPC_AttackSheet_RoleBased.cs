@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AttackSheet_RoleBased : NPC_AttackSheet
+    [System.Serializable] public class NPC_AttackSheet_RoleBased : NPC_AttackSheet
     {
         
         [FieldCategory(Category="Roles")]

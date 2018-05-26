@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class GUI_BaseWindow : UObject
+    [System.Serializable] public class GUI_BaseWindow : UObject
     {
         
         public GUI_BaseWindow()

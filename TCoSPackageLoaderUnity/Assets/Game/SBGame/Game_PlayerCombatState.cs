@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerCombatState : Game_CombatState
+    [System.Serializable] public class Game_PlayerCombatState : Game_CombatState
     {
         
         public Game_PlayerCombatState()

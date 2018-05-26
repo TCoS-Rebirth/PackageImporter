@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_Triggered : Spawn_Area
+    [System.Serializable] public class Spawn_Triggered : Spawn_Area
     {
         
         [IgnoreFieldExtraction()]
@@ -65,7 +65,7 @@ namespace SBGamePlay
         {
         }
         
-        public struct SpawnConfig
+        [System.Serializable] public struct SpawnConfig
         {
             
             public NPC_Type NPCType;

@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class QT_Subquest : Quest_Target
+    [System.Serializable] public class QT_Subquest : Quest_Target
     {
         
         public Quest_Type SubQuest;

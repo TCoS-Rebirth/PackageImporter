@@ -24,7 +24,7 @@ namespace SBBase
 {
     
     
-    public class Base_Controller : PlayerController
+    [System.Serializable] public class Base_Controller : PlayerController
     {
         
         public int AccountID;

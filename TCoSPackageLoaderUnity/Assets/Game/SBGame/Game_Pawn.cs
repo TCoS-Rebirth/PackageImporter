@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_Pawn : Base_Pawn
+    [System.Serializable] public class Game_Pawn : Base_Pawn
     {
         
         public const int cHistoryEnd = -1;
@@ -209,7 +209,7 @@ namespace SBGame
         {
         }
         
-        public struct RangeDisplayData
+        [System.Serializable] public struct RangeDisplayData
         {
             
             public FSkill_EffectClass_Range Range;
@@ -219,7 +219,7 @@ namespace SBGame
             public float RemoveTime;
         }
         
-        public struct CharacterIdentity
+        [System.Serializable] public struct CharacterIdentity
         {
             
             public int TransferWorldID;
@@ -231,7 +231,7 @@ namespace SBGame
             public int TransferAccountID;
         }
         
-        public struct HistoryLocation
+        [System.Serializable] public struct HistoryLocation
         {
             
             public Vector Location;

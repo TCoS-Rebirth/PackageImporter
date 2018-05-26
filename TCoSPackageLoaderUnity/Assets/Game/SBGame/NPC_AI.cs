@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class NPC_AI : Actor
+    [System.Serializable] public class NPC_AI : Actor
     {
         
         [FieldCategory(Category="Spawning")]

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Modifier : Material
+    [System.Serializable] public class Modifier : Material
     {
         
         [FieldCategory(Category="Modifier")]

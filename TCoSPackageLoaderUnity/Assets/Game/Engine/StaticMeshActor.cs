@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class StaticMeshActor : Actor
+    [System.Serializable] public class StaticMeshActor : Actor
     {
         
         [FieldCategory(Category="Collision")]

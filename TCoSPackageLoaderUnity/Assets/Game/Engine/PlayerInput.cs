@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class PlayerInput : UObject
+    [System.Serializable] public class PlayerInput : UObject
     {
         
         public bool bInvertMouse;

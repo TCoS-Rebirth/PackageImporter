@@ -24,7 +24,7 @@ namespace SBGame
 {
 #pragma warning disable 414   
     
-    public class Game_CharacterStats : Base_Component
+    [System.Serializable] public class Game_CharacterStats : Base_Component
     {
         
         public const int EFF_Stats = 8;
@@ -317,7 +317,7 @@ namespace SBGame
         {
         }
         
-        public struct FreezeData
+        [System.Serializable] public struct FreezeData
         {
             
             public float Start;
@@ -325,7 +325,7 @@ namespace SBGame
             public float Duration;
         }
         
-        public struct CharacterStatsRecord
+        [System.Serializable] public struct CharacterStatsRecord
         {
             
             public int Body;

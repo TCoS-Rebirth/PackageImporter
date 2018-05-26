@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_StatuePawn : Game_Pawn
+    [System.Serializable] public class Game_StatuePawn : Game_Pawn
     {
         
         public const int POLL_INTERVAL = 3600;

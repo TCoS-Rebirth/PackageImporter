@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIWakingAlertState : AIAlertState
+    [System.Serializable] public class AIWakingAlertState : AIAlertState
     {
         
         public AIWakingAlertState()

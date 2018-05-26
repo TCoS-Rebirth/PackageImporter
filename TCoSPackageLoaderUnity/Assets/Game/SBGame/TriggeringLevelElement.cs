@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class TriggeringLevelElement : InteractiveLevelElement
+    [System.Serializable] public class TriggeringLevelElement : InteractiveLevelElement
     {
         
         [FieldCategory(Category="TriggeringLevelElement")]
@@ -34,7 +34,7 @@ namespace SBGame
         {
         }
         
-        public struct MenuOptionRelationStruct
+        [System.Serializable] public struct MenuOptionRelationStruct
         {
             
             public byte Option;

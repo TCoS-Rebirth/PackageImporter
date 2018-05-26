@@ -23,7 +23,7 @@ namespace SBAI
 {
     
     
-    public class AIPredatorMachine : AIStateMachine
+    [System.Serializable] public class AIPredatorMachine : AIStateMachine
     {
         
         public AIPredatorMachine()

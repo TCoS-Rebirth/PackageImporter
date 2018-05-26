@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScripted : AIRegistered
+    [System.Serializable] public class AIScripted : AIRegistered
     {
         
         public AIScripted()

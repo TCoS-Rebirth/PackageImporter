@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_EquippedAppearance : Game_Appearance
+    [System.Serializable] public class Game_EquippedAppearance : Game_Appearance
     {
         
         public byte mHead;
@@ -149,7 +149,7 @@ namespace SBGame
         {
         }
         
-        public struct Appearance_Skin
+        [System.Serializable] public struct Appearance_Skin
         {
             //texture
             public string Torso;

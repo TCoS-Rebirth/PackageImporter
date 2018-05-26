@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIAccompanyScript : AIEscortFramework
+    [System.Serializable] public class AIAccompanyScript : AIEscortFramework
     {
         
         [FieldCategory(Category="Escort")]

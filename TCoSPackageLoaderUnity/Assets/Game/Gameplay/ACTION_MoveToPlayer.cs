@@ -1,6 +1,6 @@
 namespace Gameplay
 {
-    public class ACTION_MoveToPlayer : LatentScriptedAction
+    [System.Serializable] public class ACTION_MoveToPlayer : LatentScriptedAction
     {
         public override string ActionString
         {

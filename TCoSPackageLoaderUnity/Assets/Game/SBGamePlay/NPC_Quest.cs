@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class NPC_Quest : NPC_Type
+    [System.Serializable] public class NPC_Quest : NPC_Type
     {
         
         public NPC_Quest()

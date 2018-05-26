@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class WorldResource : InteractiveLevelElement
+    [System.Serializable] public class WorldResource : InteractiveLevelElement
     {
         
         [FieldCategory(Category="WorldResource")]

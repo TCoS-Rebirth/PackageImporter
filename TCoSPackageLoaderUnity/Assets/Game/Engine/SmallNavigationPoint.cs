@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SmallNavigationPoint : NavigationPoint
+    [System.Serializable] public class SmallNavigationPoint : NavigationPoint
     {
         
         public SmallNavigationPoint()

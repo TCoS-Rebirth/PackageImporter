@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class HudOverlay : Actor
+    [System.Serializable] public class HudOverlay : Actor
     {
         
         public HudOverlay()

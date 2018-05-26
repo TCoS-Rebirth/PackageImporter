@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class TexRotator : TexModifier
+    [System.Serializable] public class TexRotator : TexModifier
     {
         
         [IgnoreFieldExtraction()]

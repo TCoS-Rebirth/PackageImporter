@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Door : NavigationPoint
+    [System.Serializable] public class Door : NavigationPoint
     {
         
         [FieldCategory(Category="Door")]

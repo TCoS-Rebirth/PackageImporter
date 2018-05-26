@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class Keypoint : Actor
+    [System.Serializable] public class Keypoint : Actor
     {
         
         public Keypoint()

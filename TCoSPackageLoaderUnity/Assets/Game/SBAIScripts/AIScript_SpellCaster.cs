@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_SpellCaster : AI_Script
+    [System.Serializable] public class AIScript_SpellCaster : AI_Script
     {
         
         [FieldCategory(Category="SpellCaster")]
@@ -58,7 +58,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct Caster
+        [System.Serializable] public struct Caster
         {
             
             public Game_AIController Controller;

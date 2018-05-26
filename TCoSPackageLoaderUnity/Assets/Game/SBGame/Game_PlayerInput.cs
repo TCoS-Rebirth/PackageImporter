@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerInput : Base_Component
+    [System.Serializable] public class Game_PlayerInput : Base_Component
     {
         
         public const int GPI_MOUSEMODIFIER3 = 2;

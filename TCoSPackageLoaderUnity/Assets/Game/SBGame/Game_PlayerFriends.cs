@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PlayerFriends : Base_Component
+    [System.Serializable] public class Game_PlayerFriends : Base_Component
     {
         
         public List<SBFriendsMember> FriendsMembers = new List<SBFriendsMember>();

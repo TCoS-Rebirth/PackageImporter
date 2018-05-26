@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Game_StaticAppearance : Game_Appearance
+    [System.Serializable] public class Game_StaticAppearance : Game_Appearance
     {
         
         [IgnoreFieldExtraction()]

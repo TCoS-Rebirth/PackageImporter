@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EffectClass_DuffMaxHealth : FSkill_EffectClass_Duff
+    [System.Serializable] public class FSkill_EffectClass_DuffMaxHealth : FSkill_EffectClass_Duff
     {
         
         [FieldCategory(Category="MaxHealth")]

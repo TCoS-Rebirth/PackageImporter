@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class AccessmapStartPoint : NavigationPoint
+    [System.Serializable] public class AccessmapStartPoint : NavigationPoint
     {
         
         [FieldCategory(Category="AccessmapStartPoint")]

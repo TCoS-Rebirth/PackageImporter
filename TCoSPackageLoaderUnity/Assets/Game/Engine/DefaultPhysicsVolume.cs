@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DefaultPhysicsVolume : PhysicsVolume
+    [System.Serializable] public class DefaultPhysicsVolume : PhysicsVolume
     {
         
         public DefaultPhysicsVolume()

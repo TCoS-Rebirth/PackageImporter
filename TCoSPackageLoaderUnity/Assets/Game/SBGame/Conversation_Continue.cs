@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Conversation_Continue : Conversation_Response
+    [System.Serializable] public class Conversation_Continue : Conversation_Response
     {
         
         public Conversation_Continue()

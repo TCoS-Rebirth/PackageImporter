@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AI_Conditional_ForceFriendly : AIRegistered
+    [System.Serializable] public class AI_Conditional_ForceFriendly : AIRegistered
     {
         
         [FieldCategory(Category="AI_Conditional_ForceFriendly")]

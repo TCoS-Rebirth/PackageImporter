@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class IC_LabyrinthKey : IC_Key
+    [System.Serializable] public class IC_LabyrinthKey : IC_Key
     {
         
         [FieldCategory(Category="Key")]

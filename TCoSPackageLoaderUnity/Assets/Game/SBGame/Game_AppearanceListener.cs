@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_AppearanceListener : UObject
+    [System.Serializable] public class Game_AppearanceListener : UObject
     {
         
         //public delegate<OnAppearanceChanged> @__OnAppearanceChanged__Delegate;

@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class FinalBlend : Modifier
+    [System.Serializable] public class FinalBlend : Modifier
     {
         
         [FieldCategory(Category="FinalBlend")]

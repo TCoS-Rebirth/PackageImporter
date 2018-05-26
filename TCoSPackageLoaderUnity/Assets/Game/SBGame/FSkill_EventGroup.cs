@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class FSkill_EventGroup : Content_Type
+    [System.Serializable] public class FSkill_EventGroup : Content_Type
     {
         
         [IgnoreFieldExtraction()]

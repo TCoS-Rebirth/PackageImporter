@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class FellLava : fell
+    [System.Serializable] public class FellLava : fell
     {
         
         public FellLava()

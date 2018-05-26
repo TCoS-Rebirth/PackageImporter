@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class NE_SlotsBase : NPC_Equipment
+    [System.Serializable] public class NE_SlotsBase : NPC_Equipment
     {
         
         [FieldCategory(Category="Equipment")]
@@ -97,7 +97,7 @@ namespace SBGamePlay
         {
         }
         
-        public struct NE_ItemColor
+        [System.Serializable] public struct NE_ItemColor
         {
             
             public int Color1;

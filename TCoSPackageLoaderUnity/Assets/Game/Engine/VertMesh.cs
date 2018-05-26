@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class VertMesh : LodMesh
+    [System.Serializable] public class VertMesh : LodMesh
     {
         
         public VertMesh()

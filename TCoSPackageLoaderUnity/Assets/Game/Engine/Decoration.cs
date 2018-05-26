@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Decoration : Actor
+    [System.Serializable] public class Decoration : Actor
     {
         
         [FieldCategory(Category="Decoration")]

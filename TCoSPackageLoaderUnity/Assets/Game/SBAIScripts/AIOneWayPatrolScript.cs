@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIOneWayPatrolScript : AIPatrolScript
+    [System.Serializable] public class AIOneWayPatrolScript : AIPatrolScript
     {
         
         public AIOneWayPatrolScript()

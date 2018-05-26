@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_BodySlots : Base_Component
+    [System.Serializable] public class Game_BodySlots : Base_Component
     {
         
         public const int MAX_BODYSLOT_ITEMS = 5;

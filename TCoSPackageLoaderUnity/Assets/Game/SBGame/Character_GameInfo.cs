@@ -24,7 +24,7 @@ namespace SBGame
 {
     
     
-    public class Character_GameInfo : Game_GameInfo
+    [System.Serializable] public class Character_GameInfo : Game_GameInfo
     {
         
         public const int MAX_CHARACTERS_PER_UNIVERSE = 7;

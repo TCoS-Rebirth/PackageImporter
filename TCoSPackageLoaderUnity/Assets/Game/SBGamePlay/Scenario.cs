@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
 #pragma warning disable 414   
     
-    public class Scenario : Content_Type
+    [System.Serializable] public class Scenario : Content_Type
     {
         
         [IgnoreFieldExtraction()]

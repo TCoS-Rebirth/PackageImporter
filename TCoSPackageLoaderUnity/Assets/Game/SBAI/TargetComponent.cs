@@ -24,7 +24,7 @@ namespace SBAI
 {
     
     
-    public class TargetComponent : Base_Component
+    [System.Serializable] public class TargetComponent : Base_Component
     {
         
         public bool Initialized;
@@ -114,7 +114,7 @@ namespace SBAI
         {
         }
         
-        public struct VisualMemoryStruct
+        [System.Serializable] public struct VisualMemoryStruct
         {
             
             public float LastSeen;
@@ -122,7 +122,7 @@ namespace SBAI
             public bool CurrentlyDetected;
         }
         
-        public struct PredictionStruct
+        [System.Serializable] public struct PredictionStruct
         {
             
             public byte Method;
@@ -138,7 +138,7 @@ namespace SBAI
             public Vector Result;
         }
         
-        public struct UnreachableStruct
+        [System.Serializable] public struct UnreachableStruct
         {
             
             public Game_Pawn Pawn;
@@ -152,7 +152,7 @@ namespace SBAI
             public float Time;
         }
         
-        public struct TargetConfigStruct
+        [System.Serializable] public struct TargetConfigStruct
         {
             
             public UObject mOwner;
@@ -182,7 +182,7 @@ namespace SBAI
             public NameProperty FilterDelegateName;
         }
         
-        public struct DetectedStruct
+        [System.Serializable] public struct DetectedStruct
         {
             
             public Actor Detected;

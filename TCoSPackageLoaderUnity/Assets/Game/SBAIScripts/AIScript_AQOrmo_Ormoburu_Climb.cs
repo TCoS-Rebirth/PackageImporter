@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_AQOrmo_Ormoburu_Climb : AI_Script
+    [System.Serializable] public class AIScript_AQOrmo_Ormoburu_Climb : AI_Script
     {
         
         [FieldCategory(Category="Ormoburu")]
@@ -67,7 +67,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct OrmoAnim
+        [System.Serializable] public struct OrmoAnim
         {
             
             public float Duration;

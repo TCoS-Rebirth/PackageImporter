@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIPatrolScript : AIRegistered
+    [System.Serializable] public class AIPatrolScript : AIRegistered
     {
         
         [FieldCategory(Category="AIPatrolScript")]

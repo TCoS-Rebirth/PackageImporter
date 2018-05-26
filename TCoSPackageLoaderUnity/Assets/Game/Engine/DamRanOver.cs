@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class DamRanOver : DamageType
+    [System.Serializable] public class DamRanOver : DamageType
     {
         
         public DamRanOver()

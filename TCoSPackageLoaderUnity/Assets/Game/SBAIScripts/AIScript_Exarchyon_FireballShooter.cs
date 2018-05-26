@@ -24,7 +24,7 @@ namespace SBAIScripts
 {
     
     
-    public class AIScript_Exarchyon_FireballShooter : AI_Script
+    [System.Serializable] public class AIScript_Exarchyon_FireballShooter : AI_Script
     {
         
         [FieldCategory(Category="FireballShooter")]
@@ -54,7 +54,7 @@ namespace SBAIScripts
         {
         }
         
-        public struct FireballTarget
+        [System.Serializable] public struct FireballTarget
         {
             
             public Actor Target;

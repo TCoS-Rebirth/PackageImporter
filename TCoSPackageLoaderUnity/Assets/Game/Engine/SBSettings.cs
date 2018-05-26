@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class SBSettings : UObject
+    [System.Serializable] public class SBSettings : UObject
     {
         
         public bool ShowPawnShadowsOnEnvironment;

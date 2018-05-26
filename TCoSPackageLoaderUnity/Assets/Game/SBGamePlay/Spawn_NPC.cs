@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class Spawn_NPC : NPC_Spawner
+    [System.Serializable] public class Spawn_NPC : NPC_Spawner
     {
         
         [FieldCategory(Category="Spawn")]

@@ -23,7 +23,7 @@ namespace SBBase
 {
     
     
-    public class Base_InstanceType : SBActor
+    [System.Serializable] public class Base_InstanceType : SBActor
     {
         
         public Base_InstanceType()

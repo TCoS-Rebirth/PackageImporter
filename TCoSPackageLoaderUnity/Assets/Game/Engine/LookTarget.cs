@@ -23,7 +23,7 @@ namespace Engine
 {
     
     
-    public class LookTarget : Keypoint
+    [System.Serializable] public class LookTarget : Keypoint
     {
         
         public LookTarget()

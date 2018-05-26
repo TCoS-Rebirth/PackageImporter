@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_MiniGameManager : Base_Component
+    [System.Serializable] public class Game_MiniGameManager : Base_Component
     {
         
         public Game_MiniGameManager()

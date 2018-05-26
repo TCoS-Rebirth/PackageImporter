@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Player : UObject
+    [System.Serializable] public class Player : UObject
     {
         
         public const int IDC_WAIT = 6;

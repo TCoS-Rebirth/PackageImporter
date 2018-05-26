@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class Actor : UObject
+    [System.Serializable] public class Actor : UObject
     {
         
         public const float MINFLOORZ = 0.7F;
@@ -824,7 +824,7 @@ namespace Engine
         {
         }
         
-        public struct ActorRelation
+        [System.Serializable] public struct ActorRelation
         {
             
             public Actor mActor;
@@ -834,7 +834,7 @@ namespace Engine
             public Color mColour;
         }
         
-        public struct KRBVec
+        [System.Serializable] public struct KRBVec
         {
             
             public float X;
@@ -844,7 +844,7 @@ namespace Engine
             public float Z;
         }
         
-        public struct KRigidBodyState
+        [System.Serializable] public struct KRigidBodyState
         {
             
             public KRBVec Position;
@@ -856,7 +856,7 @@ namespace Engine
             public KRBVec AngVel;
         }
         
-        public struct SBSoundTypeParams
+        [System.Serializable] public struct SBSoundTypeParams
         {
             
             public byte SoundType;
@@ -866,7 +866,7 @@ namespace Engine
             public float TimeBetweenSounds;
         }
         
-        public struct SBSoundGroupParams
+        [System.Serializable] public struct SBSoundGroupParams
         {
             
             public NameProperty PropertyGroupName;
@@ -876,25 +876,25 @@ namespace Engine
             public float TimeBetweenSounds;
         }
         
-        public struct SBProjectorRenderInfoPtr
+        [System.Serializable] public struct SBProjectorRenderInfoPtr
         {
             
             public int Ptr;
         }
         
-        public struct StaticMeshProjectorRenderInfoPtr
+        [System.Serializable] public struct StaticMeshProjectorRenderInfoPtr
         {
             
             public int Ptr;
         }
         
-        public struct ProjectorRenderInfoPtr
+        [System.Serializable] public struct ProjectorRenderInfoPtr
         {
             
             public int Ptr;
         }
         
-        public struct HashLink
+        [System.Serializable] public struct HashLink
         {
             
             public int HashNext;
@@ -906,7 +906,7 @@ namespace Engine
             public int PreviousIndex;
         }
         
-        public struct HashValues
+        [System.Serializable] public struct HashValues
         {
             
             public List<HashLink> HashLinks;
@@ -916,7 +916,7 @@ namespace Engine
             public int EndIndices;
         }
         
-        public struct PointRegion
+        [System.Serializable] public struct PointRegion
         {
             [IgnoreFieldExtraction]
             public ZoneInfo Zone;
@@ -926,7 +926,7 @@ namespace Engine
             public byte ZoneNumber;
         }
         
-        public struct BatchReference
+        [System.Serializable] public struct BatchReference
         {
             
             public int BatchIndex;
@@ -934,19 +934,19 @@ namespace Engine
             public int ElementIndex;
         }
         
-        public struct LightRenderDataPtr
+        [System.Serializable] public struct LightRenderDataPtr
         {
             
             public int Ptr;
         }
         
-        public struct ActorRenderDataPtr
+        [System.Serializable] public struct ActorRenderDataPtr
         {
             
             public int Ptr;
         }
         
-        public struct ActorFrameDataPtr
+        [System.Serializable] public struct ActorFrameDataPtr
         {
             
             public int Ptr;

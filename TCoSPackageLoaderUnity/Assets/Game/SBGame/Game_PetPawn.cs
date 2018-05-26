@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_PetPawn : Game_NPCPawn
+    [System.Serializable] public class Game_PetPawn : Game_NPCPawn
     {
         
         public const float ErrorTimeOut = 3F;

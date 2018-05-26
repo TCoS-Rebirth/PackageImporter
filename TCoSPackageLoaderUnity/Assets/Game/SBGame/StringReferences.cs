@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class StringReferences : UObject
+    [System.Serializable] public class StringReferences : UObject
     {
         
         public LocalizedString DB_ROGUE_M_NAME;

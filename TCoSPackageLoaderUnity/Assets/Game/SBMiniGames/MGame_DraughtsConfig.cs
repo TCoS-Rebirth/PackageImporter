@@ -23,7 +23,7 @@ namespace SBMiniGames
 {
     
     
-    public class MGame_DraughtsConfig : MGame_Config
+    [System.Serializable] public class MGame_DraughtsConfig : MGame_Config
     {
         
         public const int MGAME_DRAUGHTS_CONFIG_COUNT = 3;

@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_ConsoleCommand : UObject
+    [System.Serializable] public class Game_ConsoleCommand : UObject
     {
         
         public string Command = string.Empty;

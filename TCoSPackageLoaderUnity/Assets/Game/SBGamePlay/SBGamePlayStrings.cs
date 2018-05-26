@@ -23,7 +23,7 @@ namespace SBGamePlay
 {
     
     
-    public class SBGamePlayStrings : UObject
+    [System.Serializable] public class SBGamePlayStrings : UObject
     {
         
         public LocalizedString Unknown_Area;

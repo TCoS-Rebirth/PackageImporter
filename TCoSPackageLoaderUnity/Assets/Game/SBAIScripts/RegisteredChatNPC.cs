@@ -23,7 +23,7 @@ namespace SBAIScripts
 {
     
     
-    public class RegisteredChatNPC : RegisteredAI
+    [System.Serializable] public class RegisteredChatNPC : RegisteredAI
     {
         
         public bool WasInVulnerable;

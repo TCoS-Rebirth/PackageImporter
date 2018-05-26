@@ -23,7 +23,7 @@ namespace SBGame
 {
     
     
-    public class Game_Character : Base_Component
+    [System.Serializable] public class Game_Character : Base_Component
     {
         
         public NPC_Taxonomy mFaction;

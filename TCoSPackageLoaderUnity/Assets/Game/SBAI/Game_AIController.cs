@@ -24,7 +24,7 @@ namespace SBAI
 {
 #pragma warning disable 414   
     
-    public class Game_AIController : Game_NPCController
+    [System.Serializable] public class Game_AIController : Game_NPCController
     {
         
         public const float cSpawnInTimer = 2F;
@@ -92,7 +92,7 @@ namespace SBAI
         {
         }
         
-        public struct AITimerStruct
+        [System.Serializable] public struct AITimerStruct
         {
             
             public Actor Instigator;

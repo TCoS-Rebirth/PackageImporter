@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    public class AudioSubsystem : Subsystem
+    [System.Serializable] public class AudioSubsystem : Subsystem
     {
         
         [FieldConfig()]

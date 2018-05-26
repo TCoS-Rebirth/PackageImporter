@@ -24,7 +24,7 @@ namespace SBGamePlay
 {
     
     
-    public class EV_EffectsApply : Content_Event
+    [System.Serializable] public class EV_EffectsApply : Content_Event
     {
         
         [FieldCategory(Category="Action")]
