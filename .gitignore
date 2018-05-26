@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+TCoSPackageLoaderUnity/Library/
+TCoSPackageLoaderUnity/Temp/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

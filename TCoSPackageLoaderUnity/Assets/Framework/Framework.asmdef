@@ -1,0 +1,12 @@
+{
+    "name": "Framework",
+    "references": [
+        "Game",
+        "Shared",
+        "Serialization"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

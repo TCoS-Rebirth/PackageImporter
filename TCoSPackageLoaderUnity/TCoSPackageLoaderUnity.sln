@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCoSPackageLoaderUnity", "Game.csproj", "{AABB5970-6451-4385-5A11-DCBAFDF5F0B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCoSPackageLoaderUnity", "Framework.csproj", "{C20159D8-FFE6-6724-15A3-649FC462A7F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCoSPackageLoaderUnity", "Shared.csproj", "{F67947DA-33B3-878C-6A36-F9F624333318}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AABB5970-6451-4385-5A11-DCBAFDF5F0B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABB5970-6451-4385-5A11-DCBAFDF5F0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABB5970-6451-4385-5A11-DCBAFDF5F0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABB5970-6451-4385-5A11-DCBAFDF5F0B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C20159D8-FFE6-6724-15A3-649FC462A7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C20159D8-FFE6-6724-15A3-649FC462A7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C20159D8-FFE6-6724-15A3-649FC462A7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C20159D8-FFE6-6724-15A3-649FC462A7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F67947DA-33B3-878C-6A36-F9F624333318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67947DA-33B3-878C-6A36-F9F624333318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67947DA-33B3-878C-6A36-F9F624333318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67947DA-33B3-878C-6A36-F9F624333318}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

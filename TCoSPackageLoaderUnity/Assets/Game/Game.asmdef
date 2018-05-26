@@ -1,0 +1,11 @@
+{
+    "name": "Game",
+    "references": [
+        "Shared",
+        "Serialization"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
