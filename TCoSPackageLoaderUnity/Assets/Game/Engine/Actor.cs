@@ -918,7 +918,7 @@ namespace Engine
         
         public struct PointRegion
         {
-            
+            [IgnoreFieldExtraction]
             public ZoneInfo Zone;
             
             public int iLeaf;

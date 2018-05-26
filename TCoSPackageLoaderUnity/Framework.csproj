@@ -59,8 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Framework\Common\LevelProgression.cs" />
-    <Compile Include="Assets\Framework\Common\SBMap.cs" />
-    <Compile Include="Assets\Framework\Common\SBMaps.cs" />
     <Compile Include="Assets\Framework\Common\SBResourceListing.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\Constants.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\ImportLink.cs" />

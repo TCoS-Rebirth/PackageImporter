@@ -23,6 +23,7 @@ namespace Framework.PackageExtractor
 
         const string NULL = "null";
         const string NONE = "none";
+        const string DRFORTHEWIN = "DRFORTHEWIN";
 
         Queue<ImportLink> LinkerLinks;
 
@@ -33,7 +34,7 @@ namespace Framework.PackageExtractor
                 var result = GetName(ExportTable[reference - 1].ObjectNameReference);
                 if (!showAncestors) return result;
                 var ancestors = FindReferenceName(ExportTable[reference - 1].PackageReference);
-                if (ancestors != NULL)
+                if (!string.Equals(ancestors, NULL, StringComparison.OrdinalIgnoreCase))
                     result = ancestors + "." + result;
                 return result;
             }
@@ -42,7 +43,7 @@ namespace Framework.PackageExtractor
                 var result = GetName(ImportTable[-reference - 1].ObjectReference);
                 if (!showAncestors) return result;
                 var ancestors = FindReferenceName(ImportTable[-reference - 1].PackageReference);
-                if (ancestors != NULL)
+                if (!string.Equals(ancestors, NULL, StringComparison.OrdinalIgnoreCase))
                     result = ancestors + "." + result;
                 return result;
             }
@@ -200,7 +201,7 @@ namespace Framework.PackageExtractor
         {
 
             //Currently we cannot read null class
-            if (entry.SerialSize <= 0 || activeObject.ClassName == NULL) return null;
+            if (entry.SerialSize <= 0 || string.Equals(activeObject.ClassName, NULL, StringComparison.OrdinalIgnoreCase)) return null;
 
             //Read Object data if present
             fileReader.Seek(entry.SerialOffset, SeekOrigin.Begin);
@@ -318,7 +319,7 @@ namespace Framework.PackageExtractor
                     activeObject.Class = ReadNullClass(fileReader);
                     break;
             }
-            if (activeObject.Class != null && activeObject.Class.Name != NULL)
+            if (activeObject.Class != null && !string.Equals(activeObject.Class.Name, NULL, StringComparison.OrdinalIgnoreCase))
             {
                 Debug.LogWarning("!Wow, a class was read!");
             }
@@ -347,7 +348,7 @@ namespace Framework.PackageExtractor
                 }
                 if (ReflectionHelper.IsMarkedAsIgnored(targetField))
                 {
-                    allPropsSize = entry.SerialSize;
+                    //allPropsSize = entry.SerialSize;
                     break;
                 }
                 var propValue = ReadPropertyValue(activeObject, fileReader, activeProperty, out propBytesRead);
@@ -358,10 +359,10 @@ namespace Framework.PackageExtractor
                 }
             } while (fileReader.Position < entry.SerialOffset + entry.SerialSize);
             if (allPropsSize == entry.SerialSize) return;
-            var diff = entry.SerialSize - allPropsSize;
+            var diff = /*entry.SerialSize - allPropsSize*/entry.SerialOffset + entry.SerialSize - fileReader.Position;
             //if (diff > 17) //ignore appended 'Standard' data (not sure if standard, but it's appended to a lot of objects (in map files!)
             //{
-            //    Debug.LogWarning(string.Format("{1} has {0} bytes of additional data appended", diff, activeObject.ReferenceObjectName));
+            //    Debug.LogWarning(string.Format("{1} has {0} bytes of additional data appended", diff, activeObject));
             //}
             fileReader.Seek(diff, SeekOrigin.Current);
         }
@@ -382,7 +383,7 @@ namespace Framework.PackageExtractor
                 return null;
             }
             //Detect end of property list
-            if (activeProperty.Name == "DRFORTHEWIN" || activeProperty.Name == NONE)
+            if (activeProperty.Name.Equals(DRFORTHEWIN) || activeProperty.Name.Equals(NONE, StringComparison.OrdinalIgnoreCase))
                 return null;
 
             //Read the property info byte
@@ -527,7 +528,11 @@ namespace Framework.PackageExtractor
                             isClass = true;
                         }
                     }
-                    return new ImportLink(obj, null) { IsTypeReference = isClass, indexReference = activeProperty.ArrayIndex };
+                    return new ImportLink(obj, null)
+                    {
+                        IsTypeReference = isClass, indexReference = activeProperty.ArrayIndex,
+                        targetReference = activeObject
+                    };
                 case PropertyType.VectorProperty:
                     propValueBytesRead = 12;
                     return new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
@@ -578,10 +583,10 @@ namespace Framework.PackageExtractor
                                     break;
                                 }
                                 var targetField = ReflectionHelper.FindField(realStruct, structProp.Name);
-                                if (targetField == null) throw new Exception("Field does not exist in struct");
+                                if (targetField == null) throw new Exception(string.Format("Field '{0}' does not exist in struct {1}", structProp.Name, realStruct));
                                 if (ReflectionHelper.IsMarkedAsIgnored(targetField))
                                 {
-                                    fileReader.Seek(structProp.SerialSize - structPropBytesRead, SeekOrigin.Current);
+                                    fileReader.Seek(structProp.SerialSize/*structProp.SerialSize - structPropBytesRead*/, SeekOrigin.Current);
                                     continue;
                                 }
                                 var propValue = ReadPropertyValue(realStruct, fileReader, structProp, out structPropBytesRead);

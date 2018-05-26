@@ -34,38 +34,32 @@ namespace Framework.PackageExtractor
         static readonly HashSet<string> skippableTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "SBEditor.GraphState",
-            //"Engine.TerrainInfo",
             "Engine.Sound",
             "Engine.Shader",
-            //"Engine.ActionMoveCamera",
-            //"Engine.ActionPause",
-            //"Engine.TerrainSector",
-            //"Engine.Emitter",
+            "Engine.Emitter",
             "Engine.SkeletalMesh",
             "Engine.Material",
             "Engine.TexPanner",
             "Engine.Combiner",
-            //"Engine.SBMover",
-            //"Engine.BeamEmitter",
-            //"Engine.xProcMesh",
+            "Engine.SBFogMaterial",
+            "Engine.Camera",
+            "Engine.SBLightColorMaterial",
+            "Engine.SBFogColorMaterial",
+            "Engine.SkyZoneInfo",
+            "Gameplay.RockingSkyZoneInfo",
+            "Gameplay.Sunlight",
+            "Engine.ConstantColor",
+            "Engine.BeamEmitter",
+            "Engine.VertexColor",
             "Engine.xWeatherEffect",
-            //"Engine.StaticMeshActor",
-            //"Engine.StaticMeshInstance",
             "Engine.Light",
-            "Engine.LevelInfo",
-            //"Engine.SubActionSceneSpeed",
+            //"Engine.LevelInfo",
             "Engine.SBSunlight",
-            //"Engine.Polys",
             "Engine.SpriteEmitter",
             "Engine.MeshEmitter",
             "Engine.Projector",
             "Engine.SBProjector",
             "Engine.Texture",
-            //"Engine.Model",
-            //"Engine.StaticMesh",
-            //"Engine.Camera",
-            //"SBGamePlay.TooltipActor",
-            //"Gameplay.WaterVolume",
             "Engine.SBAudioPlayer",
             "SBGamePlay.SBAudioPlayer",
             "SBGamePlay.SBAudioDamper",
@@ -254,8 +248,7 @@ namespace Framework.PackageExtractor
         {
             if (className.StartsWith("SBEditor", StringComparison.Ordinal)) return true;
             if (className.StartsWith("SBParticles", StringComparison.Ordinal)) return true;
-            if (className.Equals("Engine.Shader")) return true;
-            return false;
+            return skippableTypes.Contains(className);
         }
 
         public static bool IsMarkedAsIgnored(FieldInfo field)

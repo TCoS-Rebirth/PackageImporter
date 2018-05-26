@@ -46,6 +46,7 @@ namespace Engine
         
         [FieldCategory(Category="PhysicsVolume")]
         [TypeProxyDefinition(TypeName="DamageType")]
+        [IgnoreFieldExtraction]
         public System.Type DamageType;
         
         [FieldCategory(Category="PhysicsVolume")]

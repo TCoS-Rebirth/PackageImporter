@@ -52,6 +52,14 @@ namespace Framework.PackageExtractor
             {
                 return ResolveResult.Skipped;
             }
+            //if (link.AbsoluteObjectReference.StartsWith("SBGuiTX", StringComparison.Ordinal))
+            //{
+            //    return ResolveResult.Skipped;
+            //}
+            //if (link.AbsoluteObjectReference.StartsWith("SBIconTX", StringComparison.Ordinal))
+            //{
+            //    return ResolveResult.Skipped;
+            //}
             object imported;
             if (objectsByName.TryGetValue(link.AbsoluteObjectReference, out imported))
             {
@@ -103,7 +111,7 @@ namespace Framework.PackageExtractor
                     }
                 }
             }
-            Debug.LogError("Could not find imported object: " + link.AbsoluteObjectReference);
+            Debug.LogError(string.Format("Could not find imported object: {0} for {1} (field:{2})", link.AbsoluteObjectReference, link.targetReference, link.fieldReference));
             return ResolveResult.NotFound;
         }
     }
