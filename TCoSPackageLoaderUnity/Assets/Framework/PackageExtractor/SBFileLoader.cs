@@ -3,24 +3,60 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Engine;
 using Framework.Common;
 using TCosReborn;
+using UnityEditor;
 using UnityEngine;
 
 namespace Framework.PackageExtractor
 {
-    class SBFileLoader
+    class SBFileLoader: MonoBehaviour
     {
 
-        public SBFileLoader(string dataPath)
-        {
-            dataFilePath = dataPath;
-        }
-
-        string dataFilePath;
+        [SerializeField] string dataFilePath;
         const string MapExtension = "sbw";
         const string PackageExtension = "sbg";
         const string StaticFileExtension = "s";
+
+        [ContextMenu("Cleanup")]
+        void Cleanup()
+        {
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
+        }
+
+        [ContextMenu("Load Gameplay packages")]
+        void LoadGameplayPackages()
+        {
+            if (string.IsNullOrEmpty(dataFilePath)) dataFilePath = EditorUtility.OpenFolderPanel("", "", "");
+            if (!IsDataFolder(dataFilePath))
+            {
+                Debug.LogError("Wrong path (should be [GameDirectory]/data )");
+                return;
+            }
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
+            var start = Time.realtimeSinceStartup;
+            LoadAllPackages(GetGameplayPackagePaths());
+            Debug.Log("Loading took: " + (Time.realtimeSinceStartup - start));
+        }
+
+        [ContextMenu("Load Map packages")]
+        void LoadMapPackages()
+        {
+            if (string.IsNullOrEmpty(dataFilePath)) dataFilePath = EditorUtility.OpenFolderPanel("", "", "");
+            if (!IsDataFolder(dataFilePath))
+            {
+                Debug.LogError("Wrong path (should be [GameDirectory]/data )");
+                return;
+            }
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
+            var start = Time.realtimeSinceStartup;
+            LoadAllPackages(GetMapPackagePaths());
+            Debug.Log("Loading took: " + (Time.realtimeSinceStartup - start));
+        }
 
         bool IsDataFolder(string path)
         {
@@ -33,13 +69,13 @@ namespace Framework.PackageExtractor
             return dirInfo.Name.Equals("data", StringComparison.OrdinalIgnoreCase);
         }
 
-        List<string> GetPackageFiles()
+        List<string> GetGameplayPackagePaths()
         {
             var path = Path.Combine(dataFilePath, "gameplay");
             return new List<string>(Directory.GetFiles(path, string.Format("*.{0}", PackageExtension), SearchOption.AllDirectories));
         }
 
-        List<string> GetMapFiles()
+        List<string> GetMapPackagePaths()
         {
             var path = Path.Combine(dataFilePath, "environment");
             return new List<string>(Directory.GetFiles(path, string.Format("*.{0}", MapExtension), SearchOption.AllDirectories));
@@ -55,41 +91,33 @@ namespace Framework.PackageExtractor
             return Path.Combine(Path.Combine(dataFilePath, "static"), "resources.s");
         }
 
-        bool LoadPackages(List<string> paths, ref List<SBResourcePackage> packages, ref Dictionary<string, object> exportedObjects)
+        static void LoadAllPackages(List<string> paths)
         {
-            if (!IsDataFolder(dataFilePath))
+            PackageObjectDescription.ResetIDs();
+            var packages = new SBResourcePackage[paths.Count];
+            var descriptions = new List<PackageObjectDescription>[paths.Count];
+            var imports = new Queue<ImportLink>(70000);
+            for (var i = 0; i < packages.Length; i++)
             {
-                packages = null;
-                exportedObjects = null;
-                return false;
+                packages[i] = new GameObject(Path.GetFileNameWithoutExtension(paths[i])).AddComponent<SBResourcePackage>();
+                descriptions[i] = new List<PackageObjectDescription>(128);
             }
-            var pendingImports = new Queue<ImportLink>(160000);
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.DisplayProgressBar("Loading packages", "", 0);
             try
             {
-#endif
-                for (var i = 0; i < paths.Count; i++)
+                for (var i = 0; i < packages.Length; i++)
                 {
-                    var fileName = Path.GetFileNameWithoutExtension(paths[i]);
-                    if (string.IsNullOrEmpty(fileName))
+                    if (EditorUtility.DisplayCancelableProgressBar("Loading Packages", string.Format("{0}/{1} - {2}", i, packages.Length, packages[i].name),
+                        Mathf.Clamp01((float) i / packages.Length) * 0.5f))
                     {
-                        Debug.LogError("Invalid Package filename: " + paths);
-                        packages = null;
-                        return false;
+                        if (EditorUtility.DisplayDialog("Cancel?", "temporary objects will not be cleaned up", "Yes", "No")) throw new Exception("Loading aborted");
                     }
-#if UNITY_EDITOR
-                    UnityEditor.EditorUtility.DisplayProgressBar("Loading packages", fileName, Mathf.Clamp01((float) i / paths.Count));
-#endif
-                    var package = new SBResourcePackage {Name = fileName};
-                    new PackageDeserializer().Load(paths[i], pendingImports, package, exportedObjects);
-                    packages.Add(package);
+                    new PackageDeserializer().Load(paths[i], imports, ref packages[i], descriptions[i]);
                 }
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.DisplayProgressBar("Resolving imports", "", 1f);
-#endif
-                PackageImportResolver.Resolve(pendingImports, exportedObjects);
-#if UNITY_EDITOR
+                PackageImportResolver.Resolve(imports, descriptions);
+                for (int i = 0; i < packages.Length; i++)
+                {
+                    EditorUtility.SetDirty(packages[i]);
+                }
             }
             catch (Exception e)
             {
@@ -97,125 +125,8 @@ namespace Framework.PackageExtractor
             }
             finally
             {
-                UnityEditor.EditorUtility.ClearProgressBar();
+                EditorUtility.ClearProgressBar();
             }
-#endif
-            return true;
-        }
-
-        bool LoadPackagesAsync(List<string> paths, ref List<SBResourcePackage> packages, ref Dictionary<string, object> exportedObjects)
-        {
-            if (!IsDataFolder(dataFilePath))
-            {
-                packages = null;
-                exportedObjects = null;
-                return false;
-            }
-            var pendingImports = new Queue<ImportLink>(160000);
-            var jobs = new List<PackageLoadJob>();
-            const int jobsPerThread = 15;
-            for (var i = 0; i < paths.Count; i+=jobsPerThread)
-            {
-                var maxCount = Mathf.Min(jobsPerThread, paths.Count - i);
-                var jobPaths = new string[maxCount];
-                for (var j = i; j < i+maxCount; j++)
-                {
-                    var fileName = Path.GetFileNameWithoutExtension(paths[j]);
-                    if (string.IsNullOrEmpty(fileName))
-                    {
-                        Debug.LogError("Invalid Package filename: " + paths);
-                        packages = null;
-                        return false;
-                    }
-                    jobPaths[j-i] = paths[j];
-                }
-                jobs.Add(new PackageLoadJob(jobPaths));
-            }
-            try
-            {
-                for (var i = 0; i < jobs.Count; i++)
-                {
-                    jobs[i].Start();
-                }
-                var numDone = 0;
-                while (numDone < jobs.Count)
-                {
-                    numDone = 0;
-                    for (var i = 0; i < jobs.Count; i++)
-                    {
-                        numDone += jobs[i].IsDone ? 1 : 0;
-                    }
-                    #if UNITY_EDITOR
-                    if (UnityEditor.EditorUtility.DisplayCancelableProgressBar("Loading packages", "", Mathf.Clamp01((float) numDone / jobs.Count)))
-                    {
-                        for (var i = 0; i < jobs.Count; i++)
-                        {
-                            jobs[i].Cancel();
-                        }
-                        return false;
-                    }
-                    #endif
-                    Thread.Sleep(100);
-                }
-                for (var i = 0; i < jobs.Count; i++)
-                {
-                    if (jobs[i].LastException != null)
-                    {
-                        Debug.LogException(jobs[i].LastException);
-                        continue;
-                    }
-                    packages.AddRange(jobs[i].Packages);
-                    foreach (var exportedObject in jobs[i].ExportedObjects)
-                    {
-                        exportedObjects.Add(exportedObject.Key, exportedObject.Value);
-                    }
-                    while (jobs[i].PendingImports.Count > 0)
-                    {
-                        pendingImports.Enqueue(jobs[i].PendingImports.Dequeue());
-                    }
-                }
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.DisplayProgressBar("Resolving imports", "", 1f);
-#endif
-                PackageImportResolver.Resolve(pendingImports, exportedObjects);
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-            }
-            #if UNITY_EDITOR
-            finally
-            {
-                UnityEditor.EditorUtility.ClearProgressBar();
-            }
-            #endif
-            return true;
-        }
-
-        public bool LoadGameplayPackages(out List<SBResourcePackage> packages, out Dictionary<string, object> exportedObjects)
-        {
-            packages = new List<SBResourcePackage>();
-            exportedObjects = new Dictionary<string, object>(8000, StringComparer.OrdinalIgnoreCase);
-            return LoadPackages(GetPackageFiles(), ref packages, ref exportedObjects);
-        }
-
-        public bool LoadGameplayPackagesAsync(out List<SBResourcePackage> packages, out Dictionary<string, object> exportedObjects)
-        {
-            packages = new List<SBResourcePackage>();
-            exportedObjects = new Dictionary<string, object>(8000, StringComparer.OrdinalIgnoreCase);
-            return LoadPackagesAsync(GetPackageFiles(), ref packages, ref exportedObjects);
-        }
-
-        public bool LoadMaps(ref Dictionary<string, object> exportedObjects, out List<SBResourcePackage> packages)
-        {
-            packages = new List<SBResourcePackage>();
-            return LoadPackages(GetMapFiles(), ref packages, ref exportedObjects);
-        }
-
-        public bool LoadMapsAsync(ref Dictionary<string, object> exportedObjects, out List<SBResourcePackage> packages)
-        {
-            packages = new List<SBResourcePackage>();
-            return LoadPackagesAsync(GetMapFiles(), ref packages, ref exportedObjects);
         }
 
         public bool LoadLevelProgressData()
@@ -287,77 +198,6 @@ namespace Framework.PackageExtractor
                 }
             }
             return true;
-        }
-
-        class PackageLoadJob
-        {
-            volatile bool isDone;
-            Thread workerThread;
-            readonly string[] filePaths;
-            public readonly List<SBResourcePackage> Packages;
-            public readonly Queue<ImportLink> PendingImports;
-            public Exception LastException;
-            public readonly Dictionary<string, object> ExportedObjects;
-
-            public bool IsDone
-            {
-                get
-                {
-                    lock (this)
-                    {
-                        return isDone;
-                    }
-                }
-                private set
-                {
-                    lock (this)
-                    {
-                        isDone = value;
-                    }
-                }
-            }
-
-            public PackageLoadJob(string[] filePaths)
-            {
-                this.filePaths = filePaths;
-                isDone = false;
-                Packages = new List<SBResourcePackage>(filePaths.Length);
-                PendingImports = new Queue<ImportLink>(256);
-                ExportedObjects = new Dictionary<string, object>(256, StringComparer.OrdinalIgnoreCase);
-            }
-
-            public void Start()
-            {
-                workerThread = new Thread(DoWork);
-                workerThread.Start();
-            }
-
-            public void Cancel()
-            {
-                workerThread.Abort();
-            }
-
-            void DoWork()
-            {
-                try
-                {
-                    IsDone = false;
-                    for (var i = 0; i < filePaths.Length; i++)
-                    {
-                        var pkg = new SBResourcePackage {Name = Path.GetFileNameWithoutExtension(filePaths[i])};
-                        new PackageDeserializer().Load(filePaths[i], PendingImports, pkg, ExportedObjects);
-                        Packages.Add(pkg);
-                    }
-                }
-                catch (Exception e)
-                {
-                    LastException = e;
-                }
-                finally
-                {
-                    IsDone = true;
-                }
-            }
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SBGame
         public byte QuestArea;
 
         [FieldCategory(Category = "Information")]
-        public new LocalizedString Name;
+        public LocalizedString Name;
 
         [FieldCategory(Category="Information")]
         [FieldConst()]

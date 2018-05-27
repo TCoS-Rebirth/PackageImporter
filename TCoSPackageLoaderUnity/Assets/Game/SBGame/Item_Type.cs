@@ -109,7 +109,7 @@ namespace SBGame
 
         [FieldCategory(Category = "Info")]
         [FieldConst()]
-        public new LocalizedString Name;
+        public LocalizedString Name;
 
         [FieldCategory(Category="Info")]
         [FieldConst()]

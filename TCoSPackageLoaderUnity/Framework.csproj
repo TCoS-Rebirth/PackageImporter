@@ -64,11 +64,10 @@
     <Compile Include="Assets\Framework\PackageExtractor\ImportLink.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\PackageDeserializer.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\PackageImportResolver.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\PackageObjectDescription.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\ReflectionHelper.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\SBFileLoader.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\SBFileReader.cs" />
-    <Compile Include="Assets\Framework\SBPackageCollection.cs" />
-    <Compile Include="Assets\Framework\UnitySBPackageLoader.cs" />
     <None Include="Assets\Framework\Framework.asmdef" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity2018.1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

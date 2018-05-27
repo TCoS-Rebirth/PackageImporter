@@ -20,13 +20,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Framework.Attributes;
 using TCosReborn;
+using UnityEngine;
 
 namespace Engine
 {
 #pragma warning disable 414    
     
-    [System.Serializable] public class UObject: SBPackageResource
+    [System.Serializable] public class UObject: MonoBehaviour
     {
+
+        //added
+        public int ResourceID = -1;
         
         public const float Pi = 3.141593F;
         
@@ -100,6 +104,7 @@ namespace Engine
         public UObject Outer;
         
         [FieldConst()]
+        [HideInInspector]
         public int ObjectFlags;
 
         //[FieldCategory(Category = "Object")]

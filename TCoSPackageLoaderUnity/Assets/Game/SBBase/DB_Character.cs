@@ -48,7 +48,7 @@ namespace SBBase
         
         public int LastUsedTimestamp;
 
-        public new string Name = string.Empty;
+        public string Name = string.Empty;
 
         public DB_Character()
         {

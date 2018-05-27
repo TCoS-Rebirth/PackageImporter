@@ -28,7 +28,7 @@ namespace SBGame
         
         public int MemberHandle;
 
-        public new string Name = string.Empty;
+        public string Name = string.Empty;
 
         public bool IsFeminine;
         

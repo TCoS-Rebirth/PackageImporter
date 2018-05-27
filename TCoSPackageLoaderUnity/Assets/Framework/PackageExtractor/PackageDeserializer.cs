@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Engine;
+using SBGame;
 using TCosReborn;
+using UnityEditor;
 using UnityEngine;
 using Color = Engine.Color;
 
@@ -63,7 +66,7 @@ namespace Framework.PackageExtractor
             return NameTable[reference];
         }
 
-        public void Load(string filePath, Queue<ImportLink> linkQueue, SBResourcePackage targetPackage, Dictionary<string, object> exportedObjects)
+        public void Load(string filePath, Queue<ImportLink> linkQueue, ref SBResourcePackage targetPackage, List<PackageObjectDescription> descriptors)
         {
             LinkerLinks = linkQueue;
             PackageName = Path.GetFileNameWithoutExtension(filePath);
@@ -170,6 +173,8 @@ namespace Framework.PackageExtractor
 
             #region Objects
 
+            var objects = new SBObject[ExportTable.Length];
+            var objDescriptors = new PackageObjectDescription[ExportTable.Length];
             for (var i = 0; i < ExportTable.Length; i++)
             {
                 var entry = ExportTable[i];
@@ -178,28 +183,96 @@ namespace Framework.PackageExtractor
                     Class = new SBClass(),
                     Flags = new List<ObjectFlags>(),
                     ClassName = entry.ClassName,
-                    PackageName = entry.ObjectPackageName,
-                    ObjectName = entry.ObjectName,
+                    PackageName = entry.ObjectPackageName.Replace("\0", string.Empty),
+                    ObjectName = entry.ObjectName.Replace("\0", string.Empty),
                 };
-                var obj = ReadObject(activeObject, fileReader, entry);
-                if (obj == null) continue;
+                objects[i] = activeObject;
+                objects[i].Instance = ReadObjectPrepass(activeObject, fileReader, entry);
+                if (objects[i].Instance == null) continue;
                 try
                 {
-                    exportedObjects.Add(entry.AbsoluteObjectReference, obj);
-                    targetPackage.Resources.Add(entry.AbsoluteObjectReference, obj);
+                    objects[i].Instance.name = activeObject.ObjectName;
+                    objects[i].Instance.ResourceID = PackageObjectDescription.NextID();
+                    var descriptor = new PackageObjectDescription
+                    {
+                        Obj = objects[i].Instance,
+                        ID = objects[i].Instance.ResourceID,
+                        AbsoluteObjectPath = entry.AbsoluteObjectReference.Replace("\0", string.Empty),
+                        InternalPackagePath = activeObject.PackageName
+                    };
+                    objDescriptors[i] = descriptor;
                 }
                 catch (Exception)
                 {
                     Debug.LogWarning(string.Format("Duplicate object name: {0}", entry.AbsoluteObjectReference));
                 }
             }
-            #endregion
+            descriptors.AddRange(objDescriptors);
+            //Assemble hierarchy
+            for (var i = 0; i < objects.Length; i++)
+            {
+                if (objects[i].Instance == null) continue;
+                objects[i].Instance.transform.SetParent(targetPackage.transform);
+                if (!objects[i].PackageName.Equals(NULL, StringComparison.OrdinalIgnoreCase))
+                {
+                    var specificParent = objects[i].PackageName.Replace("\0", string.Empty);
+                    if (specificParent.Contains(".")) specificParent = specificParent.Substring(specificParent.LastIndexOf(".", StringComparison.Ordinal) + 1);
+                    for (var j = 0; j < objects.Length; j++)
+                    {
+                        if (objects[j].Instance == null) continue;
+                        if (objects[j].Instance.name.Equals(specificParent, StringComparison.OrdinalIgnoreCase))
+                        {
+                            objects[i].Instance.transform.SetParent(objects[j].Instance.transform);
+                            var pkg = objects[j].Instance as SBResourcePackage;
+                            if (pkg == null)
+                            {
+                                objects[i].Instance.Outer = objects[j].Instance;
+                            }
+                            else
+                            {
+                                pkg.Resources.Add(objects[i].Instance);
+                            }
+                        }
+                    }
+                }
+            }
+            //reconnect resources
+            var oldInstance = targetPackage;
+            targetPackage = PrefabUtility.CreatePrefab("Assets/Packages/" + PackageName + ".prefab", targetPackage.gameObject).GetComponent<SBResourcePackage>();
+            var prefabObjs = targetPackage.GetComponentsInChildren<UObject>(true);
+            targetPackage.Resources.Clear();
+            targetPackage.Resources.AddRange(prefabObjs);
+            targetPackage.Resources.Remove(targetPackage);
+            EditorUtility.SetDirty(targetPackage);
 
+            var resDict = new Dictionary<int, UObject>();
+            for (int i = 0; i < targetPackage.Resources.Count; i++)
+            {
+                resDict.Add(targetPackage.Resources[i].ResourceID, targetPackage.Resources[i]);
+            }
+
+            for (var i = 0; i < objDescriptors.Length; i++)
+            {
+                if (objDescriptors[i] == null || objDescriptors[i].Obj == null) continue;
+                objDescriptors[i].Obj = resDict[objDescriptors[i].ID];
+                objects[i].Instance = objDescriptors[i].Obj;
+            }
+
+            UnityEngine.Object.DestroyImmediate(oldInstance.gameObject);
+
+            //read properties for objects
+            for (var i = 0; i < objects.Length; i++)
+            {
+                if (objects[i].Instance == null) continue;
+                objects[i].Instance.ResourceID = -1;
+                ReadObject(objects[i], fileReader, ExportTable[i]);
+            }
+
+            #endregion
         }
 
-        SBPackageResource ReadObject(SBObject activeObject, SBFileReader fileReader, ExportEntry entry)
+        UObject ReadObjectPrepass(SBObject activeObject, SBFileReader fileReader, ExportEntry entry)
         {
-
             //Currently we cannot read null class
             if (entry.SerialSize <= 0 || string.Equals(activeObject.ClassName, NULL, StringComparison.OrdinalIgnoreCase)) return null;
 
@@ -213,12 +286,12 @@ namespace Framework.PackageExtractor
             }
 
             var realType = ReflectionHelper.GetTypeFromName(activeObject.ClassName);
-            SBPackageResource realObject = null;
+            UObject realObject = null;
             if (realType != null)
             {
                 try
                 {
-                    realObject = ReflectionHelper.CreateInstance(realType) as SBPackageResource;
+                    realObject = ReflectionHelper.CreateInstance(realType) as UObject;
                 }
                 catch (Exception e)
                 {
@@ -251,7 +324,14 @@ namespace Framework.PackageExtractor
                     fileReader.ReadIndex();
                 }
             }
-            ReadProperties(fileReader, realObject, entry);
+            activeObject.PrepassOffset = fileReader.Position;
+            return realObject;
+        }
+
+        void ReadObject(SBObject activeObject, SBFileReader fileReader, ExportEntry entry)
+        {
+            fileReader.Seek(activeObject.PrepassOffset, SeekOrigin.Begin);
+            ReadProperties(fileReader, activeObject.Instance, entry);
 
             //Try to read class
             var className = activeObject.ClassName.Contains("(") ? activeObject.ClassName.Substring(0, activeObject.ClassName.IndexOf("(", StringComparison.Ordinal) - 1).Trim() : activeObject.ClassName;
@@ -323,13 +403,12 @@ namespace Framework.PackageExtractor
             {
                 Debug.LogWarning("!Wow, a class was read!");
             }
-            return realObject;
         }
 
         /// <summary>
         /// Read all of <paramref name="activeObject"/>'s properties
         /// </summary>
-        void ReadProperties(SBFileReader fileReader, SBPackageResource activeObject, ExportEntry entry)
+        void ReadProperties(SBFileReader fileReader, UObject activeObject, ExportEntry entry)
         {
             var allPropsSize = 0;
             do
@@ -570,6 +649,10 @@ namespace Framework.PackageExtractor
                                 propValueBytesRead = 0;
                                 return null;
                             }
+                            if (type == typeof(FSkill_Type.FKeyframeEffects))
+                            {
+                                bool breakHere = true;
+                            }
                             var realStruct = ReflectionHelper.CreateInstance(type);
                             if (realStruct == null) throw new Exception("This should not happen");
                             var structBytesRead = 0;
@@ -641,6 +724,10 @@ namespace Framework.PackageExtractor
                         listType = listType.MakeGenericType(arrayContentType);
                         var list = Activator.CreateInstance(listType) as IList;
                         var elementType = listType.GetGenericArguments()[0];
+                        if (elementType == typeof(FSkill_Type.FKeyframeEffects))
+                        {
+                            bool breakHere = true;
+                        }
                         for (var i = 0; i < arraySize; i++) //resize
                         {
                             list.Add(elementType.IsValueType ? Activator.CreateInstance(elementType) : null);
@@ -1142,6 +1229,7 @@ namespace Framework.PackageExtractor
         class SBObject
         {
             public SBClass Class;
+
             /// <summary>
             /// Type of the object
             /// </summary>
@@ -1150,6 +1238,8 @@ namespace Framework.PackageExtractor
             public string ObjectName;
             public string PackageName;
 
+            public UObject Instance;
+            public long PrepassOffset = 0;
         }
 
         public class SBClass

@@ -239,19 +239,19 @@ namespace Engine
         [FieldTransient()]
         public int LastRelevantTick;
         
-        public float GroundSpeed;
+        public float GroundSpeed = 320;
         
-        public float WaterSpeed;
+        public float WaterSpeed = 200;
         
         public float AirSpeed;
         
         public float LadderSpeed;
         
-        public float AccelRate;
+        public float AccelRate = 500;
         
-        public float JumpZ;
+        public float JumpZ = 325;
         
-        public float AirControl;
+        public float AirControl = 0.05f;
         
         public float WalkingPct;
         

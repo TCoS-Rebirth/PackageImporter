@@ -30,7 +30,7 @@ namespace SBGame
         public List<LootEntry> Entries = new List<LootEntry>();
 
         [FieldCategory(Category = "LootTable")]
-        public new string Name = string.Empty;
+        public string Name = string.Empty;
 
         [FieldCategory(Category="LootTable")]
         public byte TableType;

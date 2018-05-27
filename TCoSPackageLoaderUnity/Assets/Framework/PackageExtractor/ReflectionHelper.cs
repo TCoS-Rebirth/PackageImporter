@@ -167,7 +167,7 @@ namespace Framework.PackageExtractor
                                 var arr = targetField.Get(activeObject) as Array;
                                 if (arr.Length <= arrayIndex)
                                 {
-                                    var arrResized = Array.CreateInstance(elemType, arrayIndex + 1);
+                                    var arrResized = Array.CreateInstance(elemType, arrayIndex);
                                     arr.CopyTo(arrResized, 0);
                                     arr = arrResized;
                                 }
@@ -185,7 +185,7 @@ namespace Framework.PackageExtractor
                     }
                     else
                     {
-                        Debug.Log("field is not an array, unhandled");
+                        Debug.Log(string.Format("field: {0} is not an array, unhandled", targetField));
                     }
                 }
             }
@@ -223,7 +223,6 @@ namespace Framework.PackageExtractor
             var link = listContent as ImportLink;
             if (link != null)
             {
-                list.Add(null);
                 link.indexReference = listIndex;
                 link.SkipTestClassReference = listContentType.FullName;
                 link.listReference = list;
@@ -372,6 +371,11 @@ namespace Framework.PackageExtractor
 
         public static object CreateInstance(Type t)
         {
+            //return t.CreateInstance();
+            if (t.IsSubclassOf(typeof(MonoBehaviour)))
+            {
+                return new GameObject().AddComponent(t);
+            }
             return t.CreateInstance();
         }
 

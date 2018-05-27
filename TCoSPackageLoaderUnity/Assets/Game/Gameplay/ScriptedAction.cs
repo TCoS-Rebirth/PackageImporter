@@ -1,9 +1,10 @@
 ﻿using System;
+using Engine;
 using TCosReborn;
 
 namespace Gameplay
 {
-    [System.Serializable] public class ScriptedAction : SBPackageResource
+    [System.Serializable] public class ScriptedAction : UObject
     {
         //public event Action ActionCompleted; TODO ..maybe ..if even needed
 

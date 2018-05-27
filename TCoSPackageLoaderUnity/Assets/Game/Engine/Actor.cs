@@ -19,6 +19,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Framework.Attributes;
+using UnityEngine;
 
 namespace Engine
 {
@@ -612,17 +613,17 @@ namespace Engine
         
         [FieldCategory(Category="Collision")]
         [FieldConst()]
-        public bool bCollideActors;
+        public bool bCollideActors = true;
         
-        public bool bCollideWorld;
+        public bool bCollideWorld = true;
         
         [FieldCategory(Category="Collision")]
-        public bool bBlockActors;
+        public bool bBlockActors = true;
         
         public bool bBlockProjectiles;
         
         [FieldCategory(Category="Collision")]
-        public bool bProjTarget;
+        public bool bProjTarget = true;
         
         [FieldCategory(Category="Collision")]
         public bool bBlockZeroExtentTraces;
@@ -676,7 +677,7 @@ namespace Engine
         public float Buoyancy;
         
         [FieldCategory(Category="Movement")]
-        public Rotator RotationRate;
+        public Rotator RotationRate = new Rotator(4096,50000,3072);
         
         [FieldCategory(Category="Movement")]
         public Rotator DesiredRotation;

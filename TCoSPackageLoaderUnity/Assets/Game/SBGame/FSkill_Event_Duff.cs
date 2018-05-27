@@ -49,7 +49,7 @@ namespace SBGame
 
         [FieldCategory(Category = "Duff")]
         [FieldConst()]
-        public new LocalizedString Name;
+        public LocalizedString Name;
 
         [FieldCategory(Category="Duff")]
         [FieldConst()]

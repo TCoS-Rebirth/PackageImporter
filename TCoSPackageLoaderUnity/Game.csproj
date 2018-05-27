@@ -1095,7 +1095,6 @@
     <Compile Include="Assets\Game\SBMiniGames\MGame_MiniGameManager.cs" />
     <Compile Include="Assets\Game\SBMiniGames\MGame_MiniGameProxy.cs" />
     <Compile Include="Assets\Game\SBMiniGames\MGame_Rules.cs" />
-    <Compile Include="Assets\Game\SBPackageResource.cs" />
     <Compile Include="Assets\Game\SBResourcePackage.cs" />
     <None Include="Assets\Game\Game.asmdef" />
     <Reference Include="UnityEngine.AIModule">

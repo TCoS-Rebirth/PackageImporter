@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Engine;
+using UnityEngine;
 
 namespace TCosReborn
 {
-    [System.Serializable] public class SBResourcePackage: SBPackageResource
+    [System.Serializable] public class SBResourcePackage: UObject
     {
-        public string Name;
-        public Dictionary<string, object> Resources = new Dictionary<string, object>();
-
-        public override string ToString()
-        {
-            return string.Format("{0} (SBResourcePackage)", Name);
-        }
+        //public Dictionary<string, UObject> Resources = new Dictionary<string, UObject>(StringComparer.OrdinalIgnoreCase);
+        [HideInInspector]
+        public List<UObject> Resources = new List<UObject>();
     }
 }

@@ -28,7 +28,7 @@ namespace SBGame
     {
 
         [FieldCategory(Category = "Chain")]
-        public new LocalizedString Name;
+        public LocalizedString Name;
 
         [FieldCategory(Category="Chain")]
         public byte QuestArea;

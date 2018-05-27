@@ -40,7 +40,7 @@ namespace SBGame
         public LocalizedString ShortName;
 
         //Custom addition
-        public new LocalizedString Name;
+        public LocalizedString Name;
         
         [FieldCategory(Category="Basics")]
         [FieldConst()]

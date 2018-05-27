@@ -26,7 +26,7 @@ namespace SBBase
     [System.Serializable] public class SBFriendsMember : UObject
     {
 
-        public new string Name = string.Empty;
+        public string Name = string.Empty;
 
         public int Flag;
         

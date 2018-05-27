@@ -32,7 +32,7 @@ namespace SBBase
         
         public int Level;
 
-        public new string Name = string.Empty;
+        public string Name = string.Empty;
 
         public int Location;
         
