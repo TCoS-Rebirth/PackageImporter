@@ -2,8 +2,7 @@
     "name": "Framework",
     "references": [
         "Game",
-        "Shared",
-        "Serialization"
+        "Shared"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

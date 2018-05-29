@@ -1335,7 +1335,7 @@
       <HintPath>C:/Program Files/Unity2018.1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Fasterflect">
-      <HintPath>H:/eigene Projekte/TCoSFileReader/TCoSPackageLoaderUnity/Assets/Serialization/Fasterflect.dll</HintPath>
+      <HintPath>H:/eigene Projekte/TCoSFileReader/TCoSPackageLoaderUnity/Assets/Framework/Fasterflect.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>

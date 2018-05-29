@@ -7,10 +7,10 @@ namespace Framework.Attributes
 
     }
 
-    public class IgnoreFieldExtractionAttribute : PackageExtractorAttribute
-    {
+    //public class IgnoreFieldExtractionAttribute : PackageExtractorAttribute
+    //{
 
-    }
+    //}
 
     public class FieldCategoryAttribute : PackageExtractorAttribute
     {

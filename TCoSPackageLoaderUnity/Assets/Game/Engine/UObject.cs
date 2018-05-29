@@ -335,7 +335,7 @@ namespace Engine
 
     [System.Serializable] public class NameProperty
     {
-        public readonly string Value;
+        public string Value;
         public NameProperty(string value)
         {
             Value = value;

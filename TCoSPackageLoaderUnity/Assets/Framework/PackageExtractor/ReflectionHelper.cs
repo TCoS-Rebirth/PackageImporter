@@ -124,118 +124,57 @@ namespace Framework.PackageExtractor
             return field;
         }
 
-        public static void TrySetFieldValue(object activeObject, FieldInfo targetField, object propValue, int arrayIndex, Queue<ImportLink> linkQueue)
+        public static void TrySetValue(object target, FieldInfo targetField, object propValue, int arrayIndex, IResourceLocator resourceLocator)
         {
-            var link = propValue as ImportLink;
+            var link = propValue as DelayedLink;
             if (link != null)
             {
-                link.fieldReference = targetField;
-                link.targetReference = activeObject;
-                link.indexReference = arrayIndex;
+                link.FieldReference = targetField;
+                link.TargetReference = target;
+                link.IndexReference = arrayIndex;
                 link.SkipTestClassReference = targetField.FieldType.FullName;
-                var isArray = targetField.FieldType.IsArray;
-                if (isArray) link.arrayReference = targetField.Get(activeObject) as Array;
-                link.Link = obj =>
+                if (CanSkipImport(link.SkipTestClassReference)) return;
+                UObject subject;
+                if (resourceLocator.TryFindObject(link.AbsoluteObjectReference, out subject))
                 {
-                    try
+                    link.Assign(subject);
+                    return;
+                }
+                if (link.FieldReference.FieldType == typeof(Type) || 
+                    (link.FieldReference.FieldType.IsArray && link.FieldReference.FieldType.GetElementType() == typeof(Type)) ||
+                    (link.FieldReference.FieldType.IsGenericType && link.FieldReference.FieldType.GetGenericTypeDefinition() == typeof(List<>) && link.FieldReference.FieldType.GetGenericArguments()[0] == typeof(Type))
+                    )
+                {
+                    if (CanSkipImport(link.AbsoluteObjectReference) || CanSkipImport(GetSkipTesFieldType(link.FieldReference).FullName)) return;
+                    var t = GetTypeFromName(link.AbsoluteObjectReference);
+                    if (t != null)
                     {
-                        if (isArray) link.arrayReference.SetValue(obj, 0);
-                        else link.fieldReference.SetValue(link.targetReference, obj);
+                        link.Assign(t);
+                        return;
                     }
-                    catch (Exception e)
-                    {
-                        Debug.LogException(e);
-                    }
-                };
-                if (!CanSkipImport(link.SkipTestClassReference)) linkQueue.Enqueue(link);
+                    Debug.LogWarning("Couldn't find type: " + link.AbsoluteObjectReference);
+                    return;
+                }
+                Debug.LogError(string.Format("Couldn't find linked object: {0} for {1} (field:{2})", link.AbsoluteObjectReference, link.TargetReference, link.FieldReference));
             }
             else
             {
-                try
+                link = new DelayedLink()
                 {
-                    targetField.SetValue(activeObject, propValue);
-                }
-                catch (Exception e)
-                {
-                    if (targetField.FieldType.IsArray)
-                    {
-                        var elemType = targetField.FieldType.GetElementType();
-                        if (elemType == propValue.GetType())
-                        {
-                            try
-                            {
-                                var arr = targetField.Get(activeObject) as Array;
-                                if (arr.Length <= arrayIndex)
-                                {
-                                    var arrResized = Array.CreateInstance(elemType, arrayIndex);
-                                    arr.CopyTo(arrResized, 0);
-                                    arr = arrResized;
-                                }
-                                arr.SetValue(propValue, arrayIndex);
-                            }
-                            catch (Exception ae)
-                            {
-                                Debug.LogException(ae);
-                            }
-                        }
-                        else
-                        {
-                            Debug.LogException(e);
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log(string.Format("field: {0} is not an array, unhandled", targetField));
-                    }
-                }
+                    FieldReference = targetField,
+                    TargetReference = target,
+                    IndexReference = arrayIndex,
+                    SkipTestClassReference = targetField.FieldType.FullName
+                };
+                link.Assign(propValue);
             }
         }
 
-        public static void TrySetArrayValue(Array array, object arrayContent, int arrayIndex, Type arrayContentType, Queue<ImportLink> linkQueue)
+        static Type GetSkipTesFieldType(FieldInfo field)
         {
-            var link = arrayContent as ImportLink;
-            if (link != null)
-            {
-                link.indexReference = arrayIndex;
-                link.SkipTestClassReference = arrayContentType.FullName;
-                link.arrayReference = array;
-                link.Link = aobj =>
-                {
-                    link.arrayReference.SetValue(aobj, link.indexReference);
-                };
-                if (!CanSkipImport(link.SkipTestClassReference)) linkQueue.Enqueue(link);
-            }
-            else
-            {
-                try
-                {
-                    array.SetValue(arrayContent, arrayIndex);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogException(e);
-                }
-            }
-        }
-
-        public static void TrySetListValue(IList list, object listContent, Type listContentType, int listIndex, Queue<ImportLink> linkQueue)
-        {
-            var link = listContent as ImportLink;
-            if (link != null)
-            {
-                link.indexReference = listIndex;
-                link.SkipTestClassReference = listContentType.FullName;
-                link.listReference = list;
-                link.Link = aobj =>
-                {
-                    link.listReference[link.indexReference] = aobj;
-                };
-                if (!CanSkipImport(link.SkipTestClassReference)) linkQueue.Enqueue(link);
-            }
-            else
-            {
-                list[listIndex] = listContent;
-            }
+            if (field.FieldType.IsArray) return field.FieldType.GetElementType();
+            if (field.FieldType.IsGenericType) return field.FieldType.GetGenericArguments()[0];
+            return field.FieldType;
         }
 
         static bool CanSkipImport(string className)

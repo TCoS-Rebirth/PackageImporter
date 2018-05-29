@@ -38,33 +38,43 @@ namespace Engine
         [FieldConst()]
         public Vector Location;
         
+        [NonSerialized]
         public SBSettings mSBSettings;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public byte LightType;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public byte LightEffect;
         
         [FieldCategory(Category="LightColor")]
+        [NonSerialized]
         public byte LightHue;
         
         [FieldCategory(Category="LightColor")]
+        [NonSerialized]
         public byte LightSaturation;
         
         [FieldCategory(Category="LightColor")]
+        [NonSerialized]
         public float LightBrightness;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public float LightRadius;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public byte LightPeriod;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public byte LightPhase;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public byte LightCone;
         
         [FieldCategory(Category="Display")]
@@ -80,6 +90,7 @@ namespace Engine
         [FieldCategory(Category="Display")]
         [FieldConst()]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public StaticMesh StaticMesh;
         
         [FieldConst()]
@@ -89,18 +100,23 @@ namespace Engine
         public Actor Base;
         
         [FieldConst()]
+        [NonSerialized]
         public ActorFrameDataPtr ActorFrameData;
         
         [FieldConst()]
+        [NonSerialized]
         public ActorRenderDataPtr ActorRenderData;
         
         [FieldConst()]
+        [NonSerialized]
         public LightRenderDataPtr LightRenderData;
         
         [FieldConst()]
+        [NonSerialized]
         public int RenderRevision;
         
         [FieldConst()]
+        [NonSerialized]
         public List<BatchReference> StaticSectionBatches = new List<BatchReference>();
         
         [FieldCategory(Category="Display")]
@@ -118,28 +134,37 @@ namespace Engine
         public bool NeverCull;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bSpecialLit;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bActorShadows;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bCorona;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bDirectionalCorona;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bAttenByLife;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bLightingVisibility;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bUseDynamicLights;
         
+        [NonSerialized]
         public bool bLightChanged;
         
+        [NonSerialized]
         public bool bDramaticLighting;
         
         [FieldConst()]
@@ -161,6 +186,7 @@ namespace Engine
         public bool bTicked;
         
         [FieldCategory(Category="Lighting")]
+        [NonSerialized]
         public bool bDynamicLight;
         
         public bool bTimerLoop;
@@ -168,9 +194,11 @@ namespace Engine
         public bool bOnlyOwnerSee;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bHighDetail;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bSuperHighDetail;
         
         public bool bOnlyDrawIfAttached;
@@ -178,18 +206,23 @@ namespace Engine
         [FieldCategory(Category="Advanced")]
         public bool bStasis;
         
+        [NonSerialized]
         public bool bTrailerAllowRotation;
         
+        [NonSerialized]
         public bool bTrailerSameRotation;
         
+        [NonSerialized]
         public bool bTrailerPrePivot;
         
         public bool bWorldGeometry;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bAcceptsProjectors;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bAcceptsDynamicProjectors;
         
         public bool bOrientOnSlope;
@@ -198,16 +231,20 @@ namespace Engine
         public bool bOnlyAffectPawns;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bDisableSorting;
         
         [FieldCategory(Category="Movement")]
         public bool bIgnoreEncroachers;
         
+        [NonSerialized]
         public bool bShowOctreeNodes;
         
+        [NonSerialized]
         public bool bWasSNFiltered;
         
         [FieldConst()]
+        [NonSerialized]
         public bool bDetailAttachment;
         
         [FieldConst()]
@@ -241,21 +278,27 @@ namespace Engine
         
         public bool bAlwaysZeroBoneOffset;
         
+        [NonSerialized]
         public bool bIgnoreVehicles;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bDeferRendering;
         
+        [NonSerialized]
         public bool bBadStateCode;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bSkipOnMerge;
         
+        [NonSerialized]
         public bool SkinsConverted;
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public int MLURefCount;
         
         [FieldCategory(Category="Advanced")]
@@ -271,6 +314,7 @@ namespace Engine
         
         [FieldCategory(Category="Sound")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Sound AmbientSound;
         
         [FieldConst()]
@@ -302,18 +346,22 @@ namespace Engine
         
         [FieldCategory(Category="Display")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Material OverlayMaterial;
         
         [FieldCategory(Category="Display")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Color OverlayColor;
         
         [FieldCategory(Category="Display")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Mesh Mesh;
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public float LastRenderTime;
         
         public int IsChainableIndex;
@@ -333,6 +381,7 @@ namespace Engine
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public MeshInstance MeshInstance;
         
         [FieldCategory(Category="Display")]
@@ -354,24 +403,29 @@ namespace Engine
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public List<int> OctreeNodes = new List<int>();
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public Box OctreeBox;
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public Vector OctreeBoxCenter;
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public Vector OctreeBoxRadii;
         
         [FieldConst()]
+        [NonSerialized]
         public HashValues HashData;
         
         [FieldConst()]
@@ -424,51 +478,67 @@ namespace Engine
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Matrix HardRelMatrix;
         
         [FieldConst()]
+        [NonSerialized]
         public List<ProjectorRenderInfoPtr> Projectors = new List<ProjectorRenderInfoPtr>();
         
         [FieldConst()]
+        [NonSerialized]
         public List<StaticMeshProjectorRenderInfoPtr> StaticMeshProjectors = new List<StaticMeshProjectorRenderInfoPtr>();
         
         [FieldConst()]
+        [NonSerialized]
         public List<SBProjectorRenderInfoPtr> SBProjectors = new List<SBProjectorRenderInfoPtr>();
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public bool bUseLightmap;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public bool bUseSunlights;
         
+        [NonSerialized]
         public bool TakeSunlightingFromBase;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float LightmapContrastAdjust;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public int LightmapSize;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float LightmapBlurScale;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float ZBias;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float SunlightsContrastAdjust;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float SunlightsBrightness;
         
         [FieldCategory(Category="Spellborn")]
+        [NonSerialized]
         public float StaticLightAmount;
         
         [FieldCategory(Category="Display")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Material Texture;
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public StaticMeshInstance StaticMeshInstance;
         
         [FieldConst()]
@@ -489,15 +559,19 @@ namespace Engine
         public List<Material> Skins = new List<Material>();
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Material RepSkin;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public byte AmbientGlow;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public byte MaxLights;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public byte UV2Mode;
         
         [FieldCategory(Category="Display")]
@@ -505,9 +579,11 @@ namespace Engine
         
         [FieldCategory(Category="Display")]
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Material UV2Texture;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public float ScaleGlow;
         
         [FieldCategory(Category="Collision")]
@@ -517,15 +593,19 @@ namespace Engine
         public byte Style;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bUnlit;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bShadowCast;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bStaticLighting;
         
         [FieldCategory(Category="Display")]
+        [NonSerialized]
         public bool bUseLightingFromBase;
         
         public bool bHurtEntry;
@@ -559,12 +639,14 @@ namespace Engine
         
         public bool bClientAnim;
         
+        [NonSerialized]
         public bool bDisturbFluidSurface;
         
         [FieldConst()]
         public bool bAlwaysTick;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public bool bFullVolume;
         
         public bool bNotifyLocalPlayerTeamReceived;
@@ -572,37 +654,47 @@ namespace Engine
         [FieldCategory(Category="Movement")]
         public bool bHardAttach;
         
+        [NonSerialized]
         public bool bForceSkelUpdate;
         
         [FieldConst()]
         public bool bClientAuthoritative;
         
+        [NonSerialized]
         public float FluidSurfaceShootStrengthMod;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public byte SoundVolume;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public byte SoundPitch;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public byte SoundOcclusion;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public float SoundRadius;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public float TransientSoundVolume;
         
         [FieldCategory(Category="Sound")]
+        [NonSerialized]
         public float TransientSoundRadius;
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public List<SBSoundGroupParams> SoundGroupsPlaying = new List<SBSoundGroupParams>();
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public List<SBSoundTypeParams> SoundTypesPlaying = new List<SBSoundTypeParams>();
         
         [FieldCategory(Category="Collision")]
@@ -737,47 +829,60 @@ namespace Engine
         public bool bNetRelevant;
         
         [FieldConst()]
+        [NonSerialized]
         public bool bDemoRecording;
         
         [FieldConst()]
+        [NonSerialized]
         public bool bClientDemoRecording;
         
         [FieldConst()]
+        [NonSerialized]
         public bool bRepClientDemo;
         
         [FieldConst()]
+        [NonSerialized]
         public bool bClientDemoNetFunc;
         
+        [NonSerialized]
         public bool bNoRepMesh;
         
         public bool bNotOnDedServer;
         
+        [NonSerialized]
         public bool bAlreadyPrecachedMaterials;
         
+        [NonSerialized]
         public bool bAlreadyPrecachedMeshes;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bHiddenEd;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bHiddenEdGroup;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bDirectional;
         
         [FieldConst()]
         public bool bSelected;
         
         [FieldCategory(Category="Advanced")]
+        [NonSerialized]
         public bool bEdShouldSnap;
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public bool bEdSnap;
         
         [FieldConst()]
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public bool bTempEditor;
         
         [FieldCategory(Category="Collision")]
@@ -785,6 +890,7 @@ namespace Engine
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public bool bPathTemp;
         
         public bool bScriptInitialized;
@@ -813,6 +919,7 @@ namespace Engine
         public bool SBTickDisabled;
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public Material HighDetailOverlay;
         
         [FieldCategory(Category="Advanced")]

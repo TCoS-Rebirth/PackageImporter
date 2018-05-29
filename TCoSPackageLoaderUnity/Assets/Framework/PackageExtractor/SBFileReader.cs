@@ -29,6 +29,7 @@ namespace Framework.PackageExtractor
 
         public void Dispose()
         {
+            if (accessor == null) return;
             accessor.Close();
         }
 

@@ -68,10 +68,12 @@ namespace Engine
         [IgnoreFieldExtraction()]
         [FieldTransient()]
         [ArraySizeForExtraction(Size=4)]
+        [NonSerialized]
         public Actor[] SunLights = new Actor[0];
         
         [IgnoreFieldExtraction()]
         [FieldTransient()]
+        [NonSerialized]
         public int NumSunLights;
         
         public float PauseDelay;
@@ -211,53 +213,69 @@ namespace Engine
         public bool bIsSaveGame;
         
         [FieldCategory(Category="SaveGames")]
+        [NonSerialized]
         public bool bSupportSaveGames;
         
         [FieldConfig()]
         public bool bNeverPrecache;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public int LevelTextureLODBias;
         
+        [NonSerialized]
         public float AnimMeshGlobalLOD;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public Vector CameraLocationDynamic;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public Vector CameraLocationTop;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public Vector CameraLocationFront;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public Vector CameraLocationSide;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public Rotator CameraRotationDynamic;
         
         [FieldCategory(Category="Audio")]
+        [NonSerialized]
         public string Song = string.Empty;
         
         [FieldCategory(Category="Audio")]
+        [NonSerialized]
         public float PlayerDoppler;
         
         [FieldCategory(Category="Audio")]
+        [NonSerialized]
         public float MusicVolumeOverride;
         
         [FieldCategory(Category="LevelInfo")]
+        [NonSerialized]
         public float Brightness;
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public string DefaultTexture; //texture
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public string WireframeTexture;//texture
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public string WhiteSquareTexture;//texture
         
         [IgnoreFieldExtraction()]
+        [NonSerialized]
         public string LargeVertex;
         
         public int HubStackLevel;

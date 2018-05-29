@@ -9,6 +9,8 @@
 
 TCoSPackageLoaderUnity/Library/
 TCoSPackageLoaderUnity/Temp/
+TCoSPackageLoaderUnity/Assets/Maps/
+TCoSPackageLoaderUnity/Assets/Packages/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

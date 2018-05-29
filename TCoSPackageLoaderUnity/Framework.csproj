@@ -61,12 +61,13 @@
     <Compile Include="Assets\Framework\Common\LevelProgression.cs" />
     <Compile Include="Assets\Framework\Common\SBResourceListing.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\Constants.cs" />
-    <Compile Include="Assets\Framework\PackageExtractor\ImportLink.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\DelayedLink.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\IResourceLocator.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\PackageDeserializer.cs" />
-    <Compile Include="Assets\Framework\PackageExtractor\PackageImportResolver.cs" />
-    <Compile Include="Assets\Framework\PackageExtractor\PackageObjectDescription.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\PackageLinkResolver.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\PackageObject.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\ReflectionHelper.cs" />
-    <Compile Include="Assets\Framework\PackageExtractor\SBFileLoader.cs" />
+    <Compile Include="Assets\Framework\PackageExtractor\SBFileConverter.cs" />
     <Compile Include="Assets\Framework\PackageExtractor\SBFileReader.cs" />
     <None Include="Assets\Framework\Framework.asmdef" />
     <Reference Include="UnityEngine.AIModule">
@@ -307,7 +308,7 @@
       <HintPath>C:/Program Files/Unity2018.1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Fasterflect">
-      <HintPath>H:/eigene Projekte/TCoSFileReader/TCoSPackageLoaderUnity/Assets/Serialization/Fasterflect.dll</HintPath>
+      <HintPath>H:/eigene Projekte/TCoSFileReader/TCoSPackageLoaderUnity/Assets/Framework/Fasterflect.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>

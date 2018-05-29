@@ -1,8 +1,7 @@
 {
     "name": "Game",
     "references": [
-        "Shared",
-        "Serialization"
+        "Shared"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Engine;
@@ -14,7 +13,7 @@ using Color = Engine.Color;
 
 namespace Framework.PackageExtractor
 {
-    public class PackageDeserializer
+    public class PackageDeserializer:IDisposable
     {
         GlobalHeader Header;
 
@@ -22,13 +21,13 @@ namespace Framework.PackageExtractor
         ExportEntry[] ExportTable { get; set; }
         ImportEntry[] ImportTable { get; set; }
 
-        string PackageName = string.Empty;
+        public string PackageName { get; }
 
         const string NULL = "null";
         const string NONE = "none";
         const string DRFORTHEWIN = "DRFORTHEWIN";
 
-        Queue<ImportLink> LinkerLinks;
+        //Queue<DelayedLink> LinkerLinks;
 
         string FindReferenceName(int reference, bool showAncestors = true)
         {
@@ -66,11 +65,31 @@ namespace Framework.PackageExtractor
             return NameTable[reference];
         }
 
-        public void Load(string filePath, Queue<ImportLink> linkQueue, ref SBResourcePackage targetPackage, List<PackageObjectDescription> descriptors)
+        string filePath;
+
+        SBFileReader fileReader;
+
+        public void Dispose()
         {
-            LinkerLinks = linkQueue;
+            if (fileReader == null) return;
+            fileReader.Dispose();
+        }
+
+        IResourceLocator resourceLocator;
+
+        string targetFolder;
+
+        public PackageDeserializer(string filePath, string targetProjectFolder, IResourceLocator resourceLocator)
+        {
+            targetFolder = targetProjectFolder;
+            this.resourceLocator = resourceLocator;
+            this.filePath = filePath;
             PackageName = Path.GetFileNameWithoutExtension(filePath);
-            var fileReader = new SBFileReader(filePath);
+        }
+
+        public void Load(ref SBResourcePackage targetPackage, List<PackageObject> exportedObjects)
+        {
+            fileReader = new SBFileReader(filePath);
             fileReader.Read(out Header, Marshal.SizeOf(Header));
             fileReader.Seek(Header.NameOffset, SeekOrigin.Begin);
 
@@ -173,115 +192,107 @@ namespace Framework.PackageExtractor
 
             #region Objects
 
-            var objects = new SBObject[ExportTable.Length];
-            var objDescriptors = new PackageObjectDescription[ExportTable.Length];
+            var packageObjects = new List<PackageObject>(ExportTable.Length);
             for (var i = 0; i < ExportTable.Length; i++)
             {
                 var entry = ExportTable[i];
-                var activeObject = new SBObject
+                var po = new PackageObject
                 {
-                    Class = new SBClass(),
-                    Flags = new List<ObjectFlags>(),
-                    ClassName = entry.ClassName,
+                    AbsoluteObjectNamePath = entry.AbsoluteObjectReference.Replace("\0", string.Empty),
+                    ID = PackageObject.NextID(),
+                    Instance = null,
+                    ClassName = entry.ClassName.Replace("\0", string.Empty),
                     PackageName = entry.ObjectPackageName.Replace("\0", string.Empty),
-                    ObjectName = entry.ObjectName.Replace("\0", string.Empty),
+                    ObjectFlags = entry.ObjectFlags,
+                    SerialOffset = entry.SerialOffset,
+                    SerialSize = entry.SerialSize,
+                    ReaderOffset = entry.SerialOffset,
+                    ObjectName = entry.ObjectName.Replace("\0", string.Empty)
                 };
-                objects[i] = activeObject;
-                objects[i].Instance = ReadObjectPrepass(activeObject, fileReader, entry);
-                if (objects[i].Instance == null) continue;
-                try
+                po.Instance = ReadObjectPrepass(po);
+                if (po.Instance == null)
                 {
-                    objects[i].Instance.name = activeObject.ObjectName;
-                    objects[i].Instance.ResourceID = PackageObjectDescription.NextID();
-                    var descriptor = new PackageObjectDescription
-                    {
-                        Obj = objects[i].Instance,
-                        ID = objects[i].Instance.ResourceID,
-                        AbsoluteObjectPath = entry.AbsoluteObjectReference.Replace("\0", string.Empty),
-                        InternalPackagePath = activeObject.PackageName
-                    };
-                    objDescriptors[i] = descriptor;
+                    continue;
                 }
-                catch (Exception)
-                {
-                    Debug.LogWarning(string.Format("Duplicate object name: {0}", entry.AbsoluteObjectReference));
-                }
+                po.Instance.name = po.ObjectName;
+                po.Instance.ResourceID = po.ID; //temporary, for prefab reconnection
+                packageObjects.Add(po);
             }
-            descriptors.AddRange(objDescriptors);
+            exportedObjects.AddRange(packageObjects);
             //Assemble hierarchy
-            for (var i = 0; i < objects.Length; i++)
+
+            for (var i = 0; i < packageObjects.Count; i++)
             {
-                if (objects[i].Instance == null) continue;
-                objects[i].Instance.transform.SetParent(targetPackage.transform);
-                if (!objects[i].PackageName.Equals(NULL, StringComparison.OrdinalIgnoreCase))
+                if (packageObjects[i].Instance == null) continue;
+                packageObjects[i].Instance.transform.SetParent(targetPackage.transform);
+                if (packageObjects[i].PackageName.Equals(NULL, StringComparison.OrdinalIgnoreCase)) continue;
+                var specificParent = packageObjects[i].PackageName.Replace("\0", string.Empty);
+                if (specificParent.Contains(".")) specificParent = specificParent.Substring(specificParent.LastIndexOf(".", StringComparison.Ordinal) + 1);
+                var found = false;
+                for (var j = 0; j < packageObjects.Count; j++)
                 {
-                    var specificParent = objects[i].PackageName.Replace("\0", string.Empty);
-                    if (specificParent.Contains(".")) specificParent = specificParent.Substring(specificParent.LastIndexOf(".", StringComparison.Ordinal) + 1);
-                    for (var j = 0; j < objects.Length; j++)
+                    if (packageObjects[j].Instance == null) continue;
+                    if (!packageObjects[j].Instance.name.Equals(specificParent, StringComparison.OrdinalIgnoreCase)) continue;
+                    found = true;
+                    packageObjects[i].Instance.transform.SetParent(packageObjects[j].Instance.transform);
+                    var pkg = packageObjects[j].Instance as SBResourcePackage;
+                    if (pkg == null)
                     {
-                        if (objects[j].Instance == null) continue;
-                        if (objects[j].Instance.name.Equals(specificParent, StringComparison.OrdinalIgnoreCase))
-                        {
-                            objects[i].Instance.transform.SetParent(objects[j].Instance.transform);
-                            var pkg = objects[j].Instance as SBResourcePackage;
-                            if (pkg == null)
-                            {
-                                objects[i].Instance.Outer = objects[j].Instance;
-                            }
-                            else
-                            {
-                                pkg.Resources.Add(objects[i].Instance);
-                            }
-                        }
+                        packageObjects[i].Instance.Outer = packageObjects[j].Instance;
                     }
+                    else
+                    {
+                        pkg.Resources.Add(packageObjects[i].Instance);
+                    }
+                }
+                if (!found)
+                {
+                    throw new Exception(string.Format("Parent {0} not found for {1}", specificParent, packageObjects[i].AbsoluteObjectNamePath));
                 }
             }
             //reconnect resources
-            var oldInstance = targetPackage;
-            targetPackage = PrefabUtility.CreatePrefab("Assets/Packages/" + PackageName + ".prefab", targetPackage.gameObject).GetComponent<SBResourcePackage>();
+            var prefabPath = string.Format("Assets/{0}/{1}.prefab", targetFolder, PackageName);
+            PrefabUtility.CreatePrefab(prefabPath, targetPackage.gameObject);
+            UnityEngine.Object.DestroyImmediate(targetPackage.gameObject, false);
+            targetPackage = AssetDatabase.LoadAssetAtPath<SBResourcePackage>(prefabPath);
             var prefabObjs = targetPackage.GetComponentsInChildren<UObject>(true);
             targetPackage.Resources.Clear();
             targetPackage.Resources.AddRange(prefabObjs);
             targetPackage.Resources.Remove(targetPackage);
-            EditorUtility.SetDirty(targetPackage);
+            EditorUtility.SetDirty(targetPackage.gameObject);
 
             var resDict = new Dictionary<int, UObject>();
-            for (int i = 0; i < targetPackage.Resources.Count; i++)
+            for (var i = 0; i < targetPackage.Resources.Count; i++)
             {
                 resDict.Add(targetPackage.Resources[i].ResourceID, targetPackage.Resources[i]);
             }
 
-            for (var i = 0; i < objDescriptors.Length; i++)
+            for (var i = 0; i < packageObjects.Count; i++)
             {
-                if (objDescriptors[i] == null || objDescriptors[i].Obj == null) continue;
-                objDescriptors[i].Obj = resDict[objDescriptors[i].ID];
-                objects[i].Instance = objDescriptors[i].Obj;
-            }
-
-            UnityEngine.Object.DestroyImmediate(oldInstance.gameObject);
-
-            //read properties for objects
-            for (var i = 0; i < objects.Length; i++)
-            {
-                if (objects[i].Instance == null) continue;
-                objects[i].Instance.ResourceID = -1;
-                ReadObject(objects[i], fileReader, ExportTable[i]);
+                packageObjects[i].Instance = resDict[packageObjects[i].ID];
+                packageObjects[i].ID = -1;
+                packageObjects[i].Instance.ResourceID = -1;
+                if (!(packageObjects[i].Instance is Actor) && !(packageObjects[i].Instance is SBResourcePackage)) packageObjects[i].Instance.hideFlags = HideFlags.HideInHierarchy;
+                resourceLocator.RegisterExportedResource(packageObjects[i].AbsoluteObjectNamePath, packageObjects[i].Instance);
             }
 
             #endregion
         }
 
-        UObject ReadObjectPrepass(SBObject activeObject, SBFileReader fileReader, ExportEntry entry)
+        UObject ReadObjectPrepass(PackageObject activeObject)
         {
             //Currently we cannot read null class
-            if (entry.SerialSize <= 0 || string.Equals(activeObject.ClassName, NULL, StringComparison.OrdinalIgnoreCase)) return null;
+            if (activeObject.SerialSize <= 0 || string.Equals(activeObject.ClassName, NULL, StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
 
             //Read Object data if present
-            fileReader.Seek(entry.SerialOffset, SeekOrigin.Begin);
+            fileReader.Seek(activeObject.SerialOffset, SeekOrigin.Begin);
 
             if (ReflectionHelper.CanSkipExport(activeObject.ClassName))
             {
-                fileReader.Seek(entry.SerialSize, SeekOrigin.Current);
+                fileReader.Seek(activeObject.SerialSize, SeekOrigin.Current);
                 return null;
             }
 
@@ -308,7 +319,7 @@ namespace Framework.PackageExtractor
 
             //If Object has a stack, read it but do nothing with it
             var hasExecutionStack = false;
-            if ((entry.ObjectFlags & (int)ObjectFlags.RF_HasStack) != 0)
+            if ((activeObject.ObjectFlags & (int)ObjectFlags.RF_HasStack) != 0)
             {
                 hasExecutionStack = true;
                 activeObject.Flags.Add(ObjectFlags.RF_HasStack);
@@ -324,121 +335,49 @@ namespace Framework.PackageExtractor
                     fileReader.ReadIndex();
                 }
             }
-            activeObject.PrepassOffset = fileReader.Position;
+            activeObject.ReaderOffset = fileReader.Position;
             return realObject;
         }
 
-        void ReadObject(SBObject activeObject, SBFileReader fileReader, ExportEntry entry)
+        public void ReadObject(PackageObject activeObject)
         {
-            fileReader.Seek(activeObject.PrepassOffset, SeekOrigin.Begin);
-            ReadProperties(fileReader, activeObject.Instance, entry);
-
+            fileReader.Seek(activeObject.ReaderOffset, SeekOrigin.Begin);
+            ReadProperties(activeObject);
             //Try to read class
-            var className = activeObject.ClassName.Contains("(") ? activeObject.ClassName.Substring(0, activeObject.ClassName.IndexOf("(", StringComparison.Ordinal) - 1).Trim() : activeObject.ClassName;
-            switch (className)
-            {
-                case "Const":
-                    activeObject.Class = ReadConstClass(fileReader);
-                    break;
-                case "Enum":
-                    activeObject.Class = ReadEnumClass(fileReader);
-                    break;
-                case "Property":
-                    activeObject.Class = ReadPropertyClass(fileReader);
-                    break;
-                case "ByteProperty":
-                    activeObject.Class = ReadBytePropertyClass(fileReader);
-                    break;
-                case "ObjectProperty":
-                    activeObject.Class = ReadObjectPropertyClass(fileReader);
-                    break;
-                case "FixedArrayProperty":
-                    activeObject.Class = ReadFixedArrayPropertyClass(fileReader);
-                    break;
-                case "ArrayProperty":
-                    activeObject.Class = ReadArrayPropertyClass(fileReader);
-                    break;
-                case "MapProperty":
-                    activeObject.Class = ReadMapPropertyClass(fileReader);
-                    break;
-                case "ClassProperty":
-                    activeObject.Class = ReadClassPropertyClass(fileReader);
-                    break;
-                case "StructProperty":
-                    activeObject.Class = ReadStructPropertyClass(fileReader);
-                    break;
-                case "IntProperty":
-                    activeObject.Class = ReadIntPropertyClass(fileReader);
-                    break;
-                case "BoolProperty":
-                    activeObject.Class = ReadBoolPropertyClass(fileReader);
-                    break;
-                case "FloatProperty":
-                    activeObject.Class = ReadFloatPropertyClass(fileReader);
-                    break;
-                case "NameProperty":
-                    activeObject.Class = ReadNamePropertyClass(fileReader);
-                    break;
-                case "StrProperty":
-                    activeObject.Class = ReadStrPropertyClass(fileReader);
-                    break;
-                case "StringProperty":
-                    activeObject.Class = ReadIntPropertyClass(fileReader);
-                    break;
-                case "Struct":
-                    activeObject.Class = ReadStructClass(fileReader);
-                    break;
-                case "Function":
-                    activeObject.Class = ReadFunctionClass(fileReader);
-                    break;
-                case "State":
-                    activeObject.Class = ReadStateClass(fileReader);
-                    break;
-                case NULL:
-                case NONE:
-                    activeObject.Class = ReadNullClass(fileReader);
-                    break;
-            }
-            if (activeObject.Class != null && !string.Equals(activeObject.Class.Name, NULL, StringComparison.OrdinalIgnoreCase))
-            {
-                Debug.LogWarning("!Wow, a class was read!");
-            }
+            ReadClass(activeObject);
         }
 
-        /// <summary>
-        /// Read all of <paramref name="activeObject"/>'s properties
-        /// </summary>
-        void ReadProperties(SBFileReader fileReader, UObject activeObject, ExportEntry entry)
+        void ReadProperties(PackageObject activeObject)
         {
             var allPropsSize = 0;
             do
             {
                 int propBytesRead;
-                var activeProperty = ReadProperty(activeObject, fileReader, out propBytesRead);
+                var activeProperty = ReadProperty(activeObject.Instance, out propBytesRead);
                 allPropsSize += propBytesRead;
                 if (activeProperty == null)
                 {
                     break;
                 }
-                var targetField = ReflectionHelper.FindField(activeObject, activeProperty.Name);
+                var targetField = ReflectionHelper.FindField(activeObject.Instance, activeProperty.Name);
                 if (targetField == null)
                 {
-                    throw new Exception(string.Format("Field: {0} doesn't exist for: {1} ", activeProperty.Name, activeObject));
+                    throw new Exception(string.Format("Field: {0} doesn't exist for: {1} ", activeProperty.Name, activeObject.Instance));
                 }
                 if (ReflectionHelper.IsMarkedAsIgnored(targetField))
                 {
                     //allPropsSize = entry.SerialSize;
                     break;
                 }
-                var propValue = ReadPropertyValue(activeObject, fileReader, activeProperty, out propBytesRead);
+                var propValue = ReadPropertyValue(activeObject.Instance, activeProperty, out propBytesRead);
                 allPropsSize += propBytesRead;
                 if (propValue != null)
                 {
-                    ReflectionHelper.TrySetFieldValue(activeObject, targetField, propValue, activeProperty.ArrayIndex, LinkerLinks);
+                    ReflectionHelper.TrySetValue(activeObject.Instance, targetField, propValue, activeProperty.ArrayIndex, resourceLocator);
                 }
-            } while (fileReader.Position < entry.SerialOffset + entry.SerialSize);
-            if (allPropsSize == entry.SerialSize) return;
-            var diff = /*entry.SerialSize - allPropsSize*/entry.SerialOffset + entry.SerialSize - fileReader.Position;
+            } while (fileReader.Position < activeObject.SerialOffset + activeObject.SerialSize);
+            if (allPropsSize == activeObject.SerialSize) return;
+            var diff = activeObject.SerialOffset + activeObject.SerialSize - fileReader.Position;
             //if (diff > 17) //ignore appended 'Standard' data (not sure if standard, but it's appended to a lot of objects (in map files!)
             //{
             //    Debug.LogWarning(string.Format("{1} has {0} bytes of additional data appended", diff, activeObject));
@@ -446,7 +385,7 @@ namespace Framework.PackageExtractor
             fileReader.Seek(diff, SeekOrigin.Current);
         }
 
-        SBProperty ReadProperty(object activeObject, SBFileReader fileReader, out int returnBytesRead)
+        SBProperty ReadProperty(object activeObject, out int returnBytesRead)
         {
             int readIndexBytes;
             var activeProperty = new SBProperty();
@@ -553,7 +492,7 @@ namespace Framework.PackageExtractor
             return activeProperty;
         }
 
-        object ReadPropertyValue(object activeObject, SBFileReader fileReader, SBProperty activeProperty, out int propValueBytesRead)
+        object ReadPropertyValue(object activeObject, SBProperty activeProperty, out int propValueBytesRead)
         {
             int readIndexBytes;
             switch (activeProperty.Type)
@@ -589,29 +528,32 @@ namespace Framework.PackageExtractor
                     var objectReference = fileReader.ReadIndex(out readIndexBytes);
                     propValueBytesRead = readIndexBytes;
                     var obj = FindAbsoluteObjectReference(objectReference);
-                    var isClass = false;
                     if (obj.Equals(NULL, StringComparison.OrdinalIgnoreCase)) return null;
+                    var link = new DelayedLink
+                    {
+                        IndexReference = activeProperty.ArrayIndex,
+                        AbsoluteObjectReference = obj,
+                        TargetReference = activeObject
+                    };
                     if (objectReference < 0)
                     {
                         var importRef = ImportTable[-objectReference - 1];
                         if (importRef.IsClassType)
                         {
-                            isClass = true;
+                            link.IsTypeReference = true;
                         }
+                        link.IsImport = true;
                     }
                     else
                     {
                         var exportRef = ExportTable[objectReference - 1];
                         if (exportRef.IsClassType)
                         {
-                            isClass = true;
+                            link.IsTypeReference = true;
                         }
+                        link.IsImport = false;
                     }
-                    return new ImportLink(obj, null)
-                    {
-                        IsTypeReference = isClass, indexReference = activeProperty.ArrayIndex,
-                        targetReference = activeObject
-                    };
+                    return link;
                 case PropertyType.VectorProperty:
                     propValueBytesRead = 12;
                     return new Vector(fileReader.ReadFloat(), fileReader.ReadFloat(), fileReader.ReadFloat());
@@ -649,17 +591,13 @@ namespace Framework.PackageExtractor
                                 propValueBytesRead = 0;
                                 return null;
                             }
-                            if (type == typeof(FSkill_Type.FKeyframeEffects))
-                            {
-                                bool breakHere = true;
-                            }
                             var realStruct = ReflectionHelper.CreateInstance(type);
                             if (realStruct == null) throw new Exception("This should not happen");
                             var structBytesRead = 0;
                             do
                             {
                                 int structPropBytesRead;
-                                var structProp = ReadProperty(realStruct, fileReader, out structPropBytesRead);
+                                var structProp = ReadProperty(realStruct, out structPropBytesRead);
                                 structBytesRead += structPropBytesRead;
                                 if (structProp == null)
                                 {
@@ -672,11 +610,11 @@ namespace Framework.PackageExtractor
                                     fileReader.Seek(structProp.SerialSize/*structProp.SerialSize - structPropBytesRead*/, SeekOrigin.Current);
                                     continue;
                                 }
-                                var propValue = ReadPropertyValue(realStruct, fileReader, structProp, out structPropBytesRead);
+                                var propValue = ReadPropertyValue(realStruct, structProp, out structPropBytesRead);
                                 structBytesRead += structPropBytesRead;
                                 if (propValue != null)
                                 {
-                                    ReflectionHelper.TrySetFieldValue(realStruct, targetField, propValue, structProp.ArrayIndex, LinkerLinks);
+                                    ReflectionHelper.TrySetValue(realStruct, targetField, propValue, structProp.ArrayIndex, resourceLocator);
                                 }
                             } while (true);
                             propValueBytesRead = structBytesRead;
@@ -707,11 +645,11 @@ namespace Framework.PackageExtractor
                         {
                             var arrayContentProp = new SBProperty { Type = arrayContentUType, StructName = arrayContentType.Name };
                             int propBytesRead;
-                            var arrayContent = ReadPropertyValue(activeObject, fileReader, arrayContentProp, out propBytesRead);
+                            var arrayContent = ReadPropertyValue(activeObject, arrayContentProp, out propBytesRead);
                             arrayBytesRead += propBytesRead;
                             if (arrayContent != null)
                             {
-                                ReflectionHelper.TrySetArrayValue(array, arrayContent, i, arrayContentType, LinkerLinks);
+                                ReflectionHelper.TrySetValue(array, arrayField, arrayContent, i, resourceLocator);
                             }
                         }
                         propValueBytesRead += arrayBytesRead;
@@ -722,26 +660,22 @@ namespace Framework.PackageExtractor
                     {
                         var listType = typeof(List<>);
                         listType = listType.MakeGenericType(arrayContentType);
-                        var list = Activator.CreateInstance(listType) as IList;
+                        var list = ReflectionHelper.CreateInstance(listType) as IList;
                         var elementType = listType.GetGenericArguments()[0];
-                        if (elementType == typeof(FSkill_Type.FKeyframeEffects))
-                        {
-                            bool breakHere = true;
-                        }
                         for (var i = 0; i < arraySize; i++) //resize
                         {
-                            list.Add(elementType.IsValueType ? Activator.CreateInstance(elementType) : null);
+                            list.Add(elementType.IsValueType ? ReflectionHelper.CreateInstance(elementType) : null);
                         }
                         var listBytesRead = 0;
                         for (var i = 0; i < arraySize; i++)
                         {
                             var listContentProp = new SBProperty { Type = arrayContentUType, StructName = arrayContentType.Name };
                             int propBytesRead;
-                            var listContent = ReadPropertyValue(activeObject, fileReader, listContentProp, out propBytesRead);
+                            var listContent = ReadPropertyValue(activeObject, listContentProp, out propBytesRead);
                             listBytesRead += propBytesRead;
                             if (listContent != null)
                             {
-                                ReflectionHelper.TrySetListValue(list, listContent, arrayContentType, i, LinkerLinks);
+                                ReflectionHelper.TrySetValue(list, arrayField, listContent, i, resourceLocator);
                             }
                         }
                         propValueBytesRead += listBytesRead;
@@ -754,6 +688,80 @@ namespace Framework.PackageExtractor
                     return null;
             }
         }
+        
+        void ReadClass(PackageObject activeObject)
+        {
+            var className = activeObject.ClassName.Contains("(") ? activeObject.ClassName.Substring(0, activeObject.ClassName.IndexOf("(", StringComparison.Ordinal) - 1).Trim() : activeObject.ClassName;
+            switch (className)
+            {
+                case "Const":
+                    activeObject.Class = ReadConstClass(fileReader);
+                    break;
+                case "Enum":
+                    activeObject.Class = ReadEnumClass(fileReader);
+                    break;
+                case "Property":
+                    activeObject.Class = ReadPropertyClass(fileReader);
+                    break;
+                case "ByteProperty":
+                    activeObject.Class = ReadBytePropertyClass(fileReader);
+                    break;
+                case "ObjectProperty":
+                    activeObject.Class = ReadObjectPropertyClass(fileReader);
+                    break;
+                case "FixedArrayProperty":
+                    activeObject.Class = ReadFixedArrayPropertyClass(fileReader);
+                    break;
+                case "ArrayProperty":
+                    activeObject.Class = ReadArrayPropertyClass(fileReader);
+                    break;
+                case "MapProperty":
+                    activeObject.Class = ReadMapPropertyClass(fileReader);
+                    break;
+                case "ClassProperty":
+                    activeObject.Class = ReadClassPropertyClass(fileReader);
+                    break;
+                case "StructProperty":
+                    activeObject.Class = ReadStructPropertyClass(fileReader);
+                    break;
+                case "IntProperty":
+                    activeObject.Class = ReadIntPropertyClass(fileReader);
+                    break;
+                case "BoolProperty":
+                    activeObject.Class = ReadBoolPropertyClass(fileReader);
+                    break;
+                case "FloatProperty":
+                    activeObject.Class = ReadFloatPropertyClass(fileReader);
+                    break;
+                case "NameProperty":
+                    activeObject.Class = ReadNamePropertyClass(fileReader);
+                    break;
+                case "StrProperty":
+                    activeObject.Class = ReadStrPropertyClass(fileReader);
+                    break;
+                case "StringProperty":
+                    activeObject.Class = ReadIntPropertyClass(fileReader);
+                    break;
+                case "Struct":
+                    activeObject.Class = ReadStructClass(fileReader);
+                    break;
+                case "Function":
+                    activeObject.Class = ReadFunctionClass(fileReader);
+                    break;
+                case "State":
+                    activeObject.Class = ReadStateClass(fileReader);
+                    break;
+                case NULL:
+                case NONE:
+                    activeObject.Class = ReadNullClass(fileReader);
+                    break;
+            }
+            if (activeObject.Class != null && !string.Equals(activeObject.Class.Name, NULL, StringComparison.OrdinalIgnoreCase))
+            {
+                Debug.LogWarning("!Wow, a class was read!");
+            }
+        }
+
 
         #region Class reading Specific
         SBClass ReadFieldClass(SBFileReader reader)
@@ -1165,7 +1173,7 @@ namespace Framework.PackageExtractor
             }
         }
 
-        struct ExportEntry
+        public struct ExportEntry
         {
 
             /// <summary>
@@ -1226,7 +1234,7 @@ namespace Framework.PackageExtractor
             public bool boolValue;
         }
 
-        class SBObject
+        public class SBObject
         {
             public SBClass Class;
 
