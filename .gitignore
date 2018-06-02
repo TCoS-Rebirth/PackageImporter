@@ -7,10 +7,15 @@
 *.userosscache
 *.sln.docstates
 
-TCoSPackageLoaderUnity/Library/
-TCoSPackageLoaderUnity/Temp/
-TCoSPackageLoaderUnity/Assets/Maps/
-TCoSPackageLoaderUnity/Assets/Packages/
+Library/
+Temp/
+Assets/Maps/*
+Assets/Packages/*
+
+Assets/Plugins/Sirenix/*
+Assets/Plugins/Sirenix/Assemblies/*
+!Assets/Plugins/Sirenix/Assemblies/
+!Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

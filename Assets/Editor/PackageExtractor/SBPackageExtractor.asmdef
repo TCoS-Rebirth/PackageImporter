@@ -1,0 +1,15 @@
+{
+    "name": "SBPackageExtractor",
+    "references": [
+        "Game",
+        "Shared"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
