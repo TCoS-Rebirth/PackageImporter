@@ -28,9 +28,11 @@ namespace Engine
     {
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bExactProjectileCollision;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIgnoreSimpleCollision;
         
         public StaticMeshActor()

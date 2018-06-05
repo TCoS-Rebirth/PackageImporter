@@ -1,8 +1,6 @@
 {
-    "name": "Game",
-    "references": [
-        "Shared"
-    ],
+    "name": "SBAssemblies",
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

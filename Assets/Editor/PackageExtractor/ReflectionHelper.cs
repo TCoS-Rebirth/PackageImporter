@@ -33,9 +33,10 @@ namespace Framework.PackageExtractor
 
         static readonly HashSet<string> skippableTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            //"Shader",
-            //"Texture",
-            //"Material",
+            "Engine.TerrainInfo",
+            "Engine.TerrainSector",
+
+            "SBGamePlay.TooltipActor",
             "SBEditor.GraphState",
             "Engine.Sound",
             "Engine.Shader",

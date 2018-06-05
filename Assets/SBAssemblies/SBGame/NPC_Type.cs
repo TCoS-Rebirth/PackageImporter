@@ -88,7 +88,7 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        public float AccelRate;
+        public float AccelRate = 500;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
@@ -96,7 +96,7 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        public float GroundSpeed;
+        public float GroundSpeed = 320;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
@@ -108,7 +108,7 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        public float WaterSpeed;
+        public float WaterSpeed = 200;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
@@ -116,7 +116,7 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        public float AirControl;
+        public float AirControl = 0.05f;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]

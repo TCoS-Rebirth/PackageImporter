@@ -79,10 +79,11 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte DrawType;
         
         [Sirenix.OdinInspector.FoldoutGroup("Relevancy")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte RelevancyRange;
         
         [FieldConst()]
@@ -95,6 +96,7 @@ namespace Engine
         public StaticMesh StaticMesh;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Actor Owner;
         
         [FieldConst()]
@@ -131,9 +133,11 @@ namespace Engine
         public NameProperty ForcedLightingZoneTag;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float CullDistance;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool NeverCull;
         
         [Sirenix.OdinInspector.FoldoutGroup("Lighting")]
@@ -196,10 +200,10 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bDynamicLight;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bTimerLoop;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bOnlyOwnerSee;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
@@ -237,7 +241,7 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAcceptsDynamicProjectors;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bOrientOnSlope;
         
         [FieldConst()]
@@ -263,7 +267,7 @@ namespace Engine
         public bool bDetailAttachment;
         
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNetTemporary;
         
         [HideInInspector]
@@ -335,7 +339,7 @@ namespace Engine
         
         public byte Role;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Pawn Instigator;
         
         [Sirenix.OdinInspector.FoldoutGroup("Sound")]
@@ -363,6 +367,7 @@ namespace Engine
         public Actor InstanceOriginal;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float LifeSpan;
         
         [FieldConst()]
@@ -455,11 +460,11 @@ namespace Engine
         public Actor Deleted;
         
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float LatentFloat;
         
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public int CollisionTag;
         
         [FieldConst()]
@@ -484,6 +489,7 @@ namespace Engine
         public Vector Acceleration;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector CachedLocation;
         
         [FieldConst()]
@@ -493,6 +499,7 @@ namespace Engine
         public Matrix CachedLocalToWorld;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public NameProperty AttachTag;
         
         [FieldConst()]
@@ -571,16 +578,16 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float DrawScale;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector DrawScale3D;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector PrePivot;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
@@ -603,6 +610,7 @@ namespace Engine
         public byte UV2Mode;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public ConvexVolume AntiPortal;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
@@ -614,6 +622,7 @@ namespace Engine
         public float ScaleGlow;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte SurfaceType;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
@@ -640,25 +649,27 @@ namespace Engine
         public bool bHurtEntry;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bGameRelevant;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCollideWhenPlacing;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bTravel;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
-        public bool bMovable;
+        public bool bMovable = true;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bDestroyInPainVolume;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanBeDamaged;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bShouldBaseAtStartup;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -667,11 +678,11 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAnimByOwner;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bOwnerNoSee;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanTeleport;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -681,6 +692,7 @@ namespace Engine
         public bool bDisturbFluidSurface;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAlwaysTick;
         
         [Sirenix.OdinInspector.FoldoutGroup("Sound")]
@@ -698,7 +710,7 @@ namespace Engine
         public bool bForceSkelUpdate;
         
         [FieldConst()]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bClientAuthoritative;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -744,25 +756,33 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCollideActors = true;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCollideWorld = true;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlockActors = true;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlockProjectiles;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bProjTarget = true;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlockZeroExtentTraces;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlockNonZeroExtentTraces;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAutoAlignToTerrain;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
@@ -770,9 +790,10 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlockKarma;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bBlocksTeleport;
         
         [Sirenix.OdinInspector.FoldoutGroup("Display")]
@@ -782,7 +803,7 @@ namespace Engine
         [HideInInspector]
         public bool bUseCollisionStaticMesh;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIgnoreOutOfWorld;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
@@ -796,6 +817,7 @@ namespace Engine
         public bool bRotateToDesired;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIgnoreTerminalVelocity;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
@@ -809,6 +831,7 @@ namespace Engine
         public bool bJustTeleported;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float Mass;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
@@ -819,13 +842,15 @@ namespace Engine
         public Rotator RotationRate = new Rotator(4096,50000,3072);
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Rotator DesiredRotation;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Actor PendingTouch;
         
         [FieldConst()]
-        public Vector ColLocation;
+        [System.NonSerialized, UnityEngine.HideInInspector]
+        public Vector ColLocation; //old location, only for debugging
         
         [Sirenix.OdinInspector.FoldoutGroup("Events")]
         [ArraySizeForExtraction(Size=8)]
@@ -858,23 +883,22 @@ namespace Engine
         public bool bAlignToFloorPitch;
         
         [Sirenix.OdinInspector.FoldoutGroup("Force")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte ForceType;
         
         [Sirenix.OdinInspector.FoldoutGroup("Force")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float ForceRadius;
         
         [Sirenix.OdinInspector.FoldoutGroup("Force")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float ForceScale;
         
         [Sirenix.OdinInspector.FoldoutGroup("Force")]
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float ForceNoise;
         
         [FieldConst()]
-        [HideInInspector]
         public bool bNetInitial;
         
         [FieldConst()]
@@ -904,7 +928,7 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNoRepMesh;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNotOnDedServer;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -943,19 +967,21 @@ namespace Engine
         public bool bTempEditor;
         
         [Sirenix.OdinInspector.FoldoutGroup("Collision")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bPathColliding;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public bool bPathTemp;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bScriptInitialized;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bLockLocation;
         
-        [HideInInspector]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bTraceWater;
         
         [Sirenix.OdinInspector.FoldoutGroup("Debugging")]
@@ -982,6 +1008,7 @@ namespace Engine
         public Material HighDetailOverlay;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte OwningDepartment;
         
         [ArraySizeForExtraction(Size=10)]

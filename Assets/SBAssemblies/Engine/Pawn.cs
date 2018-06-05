@@ -31,6 +31,7 @@ namespace Engine
         
         public float NetRelevancyTime;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public PlayerController LastRealViewer;
         
         public Actor LastViewer;
@@ -65,19 +66,24 @@ namespace Engine
         public bool bTryToUncrouch;
         
         [Sirenix.OdinInspector.FoldoutGroup("Pawn")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanCrouch;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCrawler;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bReducedSpeed;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bJumpCapable;
         
         public bool bCanJump;
         
         public bool bCanWalk;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanSwim;
         
         public bool bCanFly;
@@ -94,31 +100,43 @@ namespace Engine
         
         public bool bStopAtLedges;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNoJumpAdjust;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCountJumps;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bSimulateGravity;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bUpdateEyeheight;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIgnoreForces;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNoVelocityUpdate;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanWalkOffLedges;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanBeBaseForPawns;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bClientCollision;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bSimGravityDisabled;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bDirectHitWall;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bServerMoveSetPawnRot;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -127,48 +145,64 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bNoCoronas;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bThumped;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bInvulnerableBody;
         
         public Vector desiredMovement;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float lastUpdateTime;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIsFemale;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAutoActivate;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanPickupInventory;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bUpdatingDisplay;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAmbientCreature;
         
         [Sirenix.OdinInspector.FoldoutGroup("aI")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bLOSHearing;
         
         [Sirenix.OdinInspector.FoldoutGroup("aI")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bSameZoneHearing;
         
         [Sirenix.OdinInspector.FoldoutGroup("aI")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAdjacentZoneHearing;
         
         [Sirenix.OdinInspector.FoldoutGroup("aI")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bMuffledHearing;
         
         [Sirenix.OdinInspector.FoldoutGroup("aI")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bAroundCornerHearing;
         
-        public bool bRollToDesired;
+        [System.NonSerialized, UnityEngine.HideInInspector]
+        public bool bRollToDesired = false;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIgnorePlayFiring;
         
         public bool bStationary;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCachedRelevant;
         
-        public bool bUseCompressedPosition;
+        public bool bUseCompressedPosition = true;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bHideRegularHUD;
@@ -185,8 +219,10 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bIsTyping;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bCanUse;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bSuperSize;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -221,6 +257,7 @@ namespace Engine
         public float SkillModifier;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float AvgPhysicsTime;
         
         public float MeleeRange;
@@ -230,6 +267,7 @@ namespace Engine
         public NavigationPoint Anchor;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public NavigationPoint LastAnchor;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -254,6 +292,7 @@ namespace Engine
         public float SerpentineTime;
         
         [FieldConst()]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float UncrouchTime;
         
         public float SpawnTime;
@@ -282,6 +321,7 @@ namespace Engine
         
         public float MaxFallSpeed;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector ConstantAcceleration;
         
         [Sirenix.OdinInspector.FoldoutGroup("Pawn")]
@@ -305,30 +345,41 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector Floor;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float SplashTime;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float CrouchHeight;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float CrouchRadius;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float OldZ;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public PhysicsVolume HeadVolume;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float BreathTime;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float UnderWaterTime;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         public float LastPainTime;
         
         [TypeProxyDefinition(TypeName="DamageType")]
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public System.Type ReducedDamageType;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float HeadRadius;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float HeadHeight;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float HeadScale;
         
         [FieldConst()]
@@ -384,6 +435,7 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public float SoundDampening;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float DamageScaling;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -413,17 +465,22 @@ namespace Engine
         
         public PlayerStart LastStartSpot;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float LastStartTime;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector TakeHitLocation;
         
         [TypeProxyDefinition(TypeName="DamageType")]
         public System.Type HitDamageType;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public Vector TearOffMomentum;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public byte OldPhysics;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bPhysicsAnimUpdate;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -435,6 +492,7 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bWasOnGround;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public bool bInitializeAnimation;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
@@ -532,6 +590,7 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         public Controller LastHitBy;
         
+        [System.NonSerialized, UnityEngine.HideInInspector]
         public float MinFlySpeed;
         
         public float MaxRotation;

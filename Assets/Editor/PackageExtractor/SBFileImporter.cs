@@ -42,6 +42,11 @@ namespace Framework.PackageExtractor
             if (GUILayout.Button("Import Resource Listing file")) ImportResourceList();
             if (GUILayout.Button("Assign ResourceIDs")) AssignResourceIDs();
             if (GUILayout.Button("Import CompleteUniverse package")) ImportCompleteUniverses();
+            GUILayout.Space(20);
+            if (GUILayout.Button("ReSerialize All assets (!)"))
+            {
+                AssetDatabase.ForceReserializeAssets();
+            }
         }
 
         void ImportGameplayPackages()
