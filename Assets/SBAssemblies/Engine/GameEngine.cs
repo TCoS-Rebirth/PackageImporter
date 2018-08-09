@@ -31,40 +31,11 @@ namespace Engine
         
         public string mWorldFile = string.Empty;
         
-        public URL LastURL;
-        
         [FieldConfig()]
         public List<string> ServerActors = new List<string>();
         
         [FieldConfig()]
         public List<string> ServerPackages = new List<string>();
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorHighDetailMeshes;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorSlowCollisionMeshes;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorNoCollisionMeshes;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorWorldTextures;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorPlayerAndWeaponTextures;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Settings")]
-        [FieldConfig()]
-        public bool ColorInterfaceTextures;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("VoiceChat")]
-        public bool VoIPAllowVAD;
         
         [FieldConst()]
         public LevelInfo LevelInfo;
@@ -74,9 +45,6 @@ namespace Engine
         
         [FieldConst()]
         public GameInfo GGameInfo;
-        
-        [FieldConst()]
-        public int DetailMode;
         
         public GameEngine()
         {

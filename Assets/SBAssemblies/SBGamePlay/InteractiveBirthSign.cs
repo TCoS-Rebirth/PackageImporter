@@ -29,18 +29,10 @@ namespace SBGamePlay
         
         [Sirenix.OdinInspector.FoldoutGroup("InteractiveBirthSign")]
         [FieldConst()]
-        public SBDecoration BirthSignGlow;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("InteractiveBirthSign")]
-        [FieldConst()]
         public NameProperty Spawner_Event;
         
         [Sirenix.OdinInspector.FoldoutGroup("InteractiveBirthSign")]
         public NameProperty DeactivationEvent;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("InteractiveBirthSign")]
-        [FieldConst()]
-        public NameProperty SoundEvent;
         
         [Sirenix.OdinInspector.FoldoutGroup("InteractiveBirthSign")]
         [FieldConst()]

@@ -27,18 +27,6 @@ namespace SBGamePlay
     [System.Serializable] public class NA_Skeletal : NA_RaceBodyGender
     {
         
-        [Sirenix.OdinInspector.FoldoutGroup("NA_Skeletal")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Mesh SkeletalMesh;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NA_Skeletal")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Mesh SkeletalMeshAddition;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NA_Skeletal")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material SkinTexture;
-        
         [Sirenix.OdinInspector.FoldoutGroup("Modifiers")]
         public bool Ghostly;
         

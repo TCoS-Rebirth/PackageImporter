@@ -27,18 +27,6 @@ namespace SBGame
     [System.Serializable] public class Appearance_Tattoo : UObject
     {
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material MaleTorso;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material FemaleTorso;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material MaleHead;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material FemaleHead;
-        
         public Appearance_Tattoo()
         {
         }

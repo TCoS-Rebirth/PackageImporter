@@ -26,43 +26,7 @@ namespace SBGame
     
     [System.Serializable] public class Game_Actor : Actor
     {
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_vtbl;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mRelevanceObjectID;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpRelevance;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpMatineeObject;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexX;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexY;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mVisibilityLevel;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbVisible;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbGM;
-        
+  
         public Vector mNetLocation;
         
         public Vector mNetRotation;
@@ -72,8 +36,6 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Game_Actor")]
         public byte mCollisionType;
-        
-        public float mFadeFactor;
         
         [Sirenix.OdinInspector.FoldoutGroup("Appearance")]
         public List<FSkill_EffectClass_AudioVisual> EnabledEffects = new List<FSkill_EffectClass_AudioVisual>();

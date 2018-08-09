@@ -27,15 +27,6 @@ namespace SBGame
     [System.Serializable] public class Game_SkeletalAppearance : Game_Appearance
     {
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Mesh SkeletalMesh;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Mesh SkeletalMeshAddition;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material SkinTexture;
-        
         public float CollisionRadius;
         
         public float CollisionHeight;

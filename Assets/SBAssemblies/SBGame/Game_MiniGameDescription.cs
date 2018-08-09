@@ -31,9 +31,6 @@ namespace SBGame
         
         public string Description = string.Empty;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material IconMaterial;
-        
         public Game_MiniGameDescription()
         {
         }

@@ -26,8 +26,6 @@ namespace SBGame
     [System.Serializable] public class MapResolutionInfo : UObject
     {
         
-        public List<Material> mapSectionMaterial = new List<Material>();
-        
         public float Size;
         
         public MapResolutionInfo()

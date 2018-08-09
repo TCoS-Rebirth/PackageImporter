@@ -33,9 +33,6 @@ namespace Engine
         [Sirenix.OdinInspector.FoldoutGroup("Time")]
         public float Duration;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string Icon; //Texture
-        
         public byte Status;
         
         public string Desc = string.Empty;

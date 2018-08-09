@@ -29,70 +29,13 @@ namespace Engine
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
-        private List<SBAttachmentInfo> Attachments = new List<SBAttachmentInfo>();
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private List<SBDirectionFlagSet> animDirectionSet = new List<SBDirectionFlagSet>();
-        
-        private List<SBAnimationTypeStack> AnimTypeStacks = new List<SBAnimationTypeStack>();
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int xMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int yMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int zMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int oldXMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int oldYMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private int oldZMovement;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
         private bool bSittingOnChair;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public bool bAnimationPaused;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bPreviouslyRunning;
-        
         public SBAnimatedPawn()
         {
-        }
-        
-        [System.Serializable] public struct SBAttachmentInfo
-        {
-            
-            public string AttachmentName;
-            
-            public string meshName;
-            
-            public NameProperty AttachmentBoneTag;
-            
-            public Vector ScaleFactor;
-            
-            public Rotator Orientation;
-            
-            public Vector PosOffset;
-            
-            public bool IgnoreParentRotation;
         }
         
         [System.Serializable] public struct SBAnimationParameters

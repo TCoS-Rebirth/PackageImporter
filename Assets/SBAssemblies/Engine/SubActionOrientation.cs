@@ -27,9 +27,6 @@ namespace Engine
     [System.Serializable] public class SubActionOrientation : MatSubAction
     {
         
-        [Sirenix.OdinInspector.FoldoutGroup("Orientation")]
-        public SceneManager.Orientation CamOrientation;
-        
         public SubActionOrientation()
         {
         }

@@ -111,9 +111,6 @@ namespace SBGame
         
         public Game_MiniGameProxy MiniGameProxy;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Game_HUD HUD;
-        
         private byte mCurrentState;
         
         private byte mNetState;

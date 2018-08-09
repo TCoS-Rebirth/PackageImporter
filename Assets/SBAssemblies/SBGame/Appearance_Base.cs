@@ -120,14 +120,6 @@ namespace SBGame
         
         public bool ApplyToFeet;
         
-        [Sirenix.OdinInspector.FoldoutGroup("Sections")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material MaterialFemale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Sections")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material MaterialMale;
-        
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public Item_Type _IT;

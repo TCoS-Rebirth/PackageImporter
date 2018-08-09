@@ -30,8 +30,6 @@ namespace SBGame
         
         public Game_PropertyEditor PropertyEditor;
         
-        public Editor_SpwnieControl SpwnieControl;
-        
         private bool mIsVisibleInRelevance;
         
         private int mSpeedBoosts;

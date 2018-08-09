@@ -28,10 +28,6 @@ namespace Engine
     {
         
         [Sirenix.OdinInspector.FoldoutGroup("AnimNotify_SBSound")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound Sound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("AnimNotify_SBSound")]
         public int Radius;
         
         [Sirenix.OdinInspector.FoldoutGroup("AnimNotify_SBSound")]

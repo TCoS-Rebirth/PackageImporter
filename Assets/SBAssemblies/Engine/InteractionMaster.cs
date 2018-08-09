@@ -27,10 +27,6 @@ namespace Engine
     [System.Serializable] public class InteractionMaster : Interactions
     {
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Client Client;
-        
         [FieldConst()]
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]

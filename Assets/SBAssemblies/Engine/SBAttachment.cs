@@ -31,44 +31,8 @@ namespace Engine
         
         public NameProperty AttachmentTag;
         
-        public Vector PositionOffset;
-        
-        public Rotator OrientationOffset;
-        
-        public float LocalDrawScale;
-        
-        public Vector LocalDrawScale3D;
-        
-        [FieldConst()]
-        public SBSoftBodyPtr softBody;
-        
-        [FieldConst()]
-        public SBGameInfoPtr localGameInfo;
-        
-        public bool Initialized;
-        
-        public bool bIgnoreTagRotation;
-        
-        public bool bIsBaked;
-        
-        public int RealBoneIndex;
-        
-        public bool AddScaleFromBase;
-        
         public SBAttachment()
         {
-        }
-        
-        [System.Serializable] public struct SBGameInfoPtr
-        {
-            
-            public int Ptr;
-        }
-        
-        [System.Serializable] public struct SBSoftBodyPtr
-        {
-            
-            public int Ptr;
         }
         
         public enum SBAttachment_AnimType

@@ -53,9 +53,6 @@ namespace SBGame
         
         private string mVoicePackage = string.Empty;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material mAvatarTexture;
-        
         public Game_Appearance()
         {
         }

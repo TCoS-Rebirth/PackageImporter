@@ -96,8 +96,6 @@ namespace SBGame
         
         private Vector mPreviousDisplacement;
         
-        private Game_CameraEnvironmentEffect mEnvironmentEffect;
-        
         public Game_Camera()
         {
         }

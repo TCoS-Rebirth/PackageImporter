@@ -54,11 +54,6 @@ namespace SBGamePlay
         [Sirenix.OdinInspector.FoldoutGroup("InteractiveHatch")]
         public LocalizedString DoorSign;
         
-        [Sirenix.OdinInspector.FoldoutGroup("InteractiveHatch")]
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound DoorSound;
-        
         public InteractiveHatch()
         {
         }

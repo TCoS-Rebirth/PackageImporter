@@ -27,31 +27,11 @@ namespace SBGame
     [System.Serializable] public class Appearance_Set : UObject
     {
         
-        public List<Mesh> BodySet = new List<Mesh>();
-        
-        public List<Mesh> LowQualBodySet = new List<Mesh>();
-        
-        public List<BodyFlaps> FlapSet = new List<BodyFlaps>();
-        
-        public List<BodyFlaps> LowQualFlapSet = new List<BodyFlaps>();
-        
         public List<string> HeadSet = new List<string>();
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [ArraySizeForExtraction(Size=5)]
         public string[] BodyPalette = new string[0];
-        
-        public List<Material> TorsoSkin = new List<Material>();
-        
-        public List<Material> LegsSkin = new List<Material>();
-        
-        public List<Material> HeadSkin1 = new List<Material>();
-        
-        public List<Material> HeadSkin2 = new List<Material>();
-        
-        public List<Material> HeadSkin3 = new List<Material>();
-        
-        public List<Material> HeadSkin4 = new List<Material>();
         
         public List<Appearance_Base> ChestClothesSet = new List<Appearance_Base>();
         
@@ -103,28 +83,6 @@ namespace SBGame
         
         public Appearance_Set()
         {
-        }
-        
-        [System.Serializable] public struct BodyFlaps
-        {
-            
-            public SkeletalMesh Foot_l;
-            
-            public SkeletalMesh Foot_r;
-            
-            public SkeletalMesh LoLeg_l;
-            
-            public SkeletalMesh LoLeg_r;
-            
-            public SkeletalMesh UpLeg;
-            
-            public SkeletalMesh LoArm_l;
-            
-            public SkeletalMesh LoArm_r;
-            
-            public SkeletalMesh UpArm_l;
-            
-            public SkeletalMesh UpArm_r;
         }
     }
 }

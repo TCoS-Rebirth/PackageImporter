@@ -380,11 +380,11 @@ namespace Framework.PackageExtractor
                     break;
                 }
                 var targetField = ReflectionHelper.FindField(activeObject.Instance, activeProperty.Name);
-                if (targetField == null)
-                {
-                    throw new Exception(string.Format("Field: {0} doesn't exist for: {1} ", activeProperty.Name, activeObject.Instance));
-                }
-                if (ReflectionHelper.IsMarkedAsIgnored(targetField))
+                //if (targetField == null)
+                //{
+                //    throw new Exception(string.Format("Field: {0} doesn't exist for: {1} ", activeProperty.Name, activeObject.Instance));
+                //}
+                if (targetField == null || ReflectionHelper.IsMarkedAsIgnored(targetField))
                 {
                     fileReader.Seek(activeProperty.ValueOffset + activeProperty.SerialSize, SeekOrigin.Begin);
                     allPropsSize += activeProperty.SerialSize;

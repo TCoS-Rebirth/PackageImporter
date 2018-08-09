@@ -65,17 +65,6 @@ namespace Engine
         [FieldTransient()]
         public int Millisecond;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        [ArraySizeForExtraction(Size=4)]
-        public Actor[] SunLights = new Actor[0];
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int NumSunLights;
-        
-        public float PauseDelay;
-        
         [FieldConst()]
         public float RelativeTimeOfDay;
         
@@ -93,10 +82,6 @@ namespace Engine
         public string Description = string.Empty;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material Screenshot;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
         public string DecoTextName = string.Empty;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
@@ -108,48 +93,6 @@ namespace Engine
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
         public string ExtraInfo = string.Empty;
         
-        [Sirenix.OdinInspector.FoldoutGroup("SinglePlayer")]
-        public int SinglePlayerTeamSize;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("RadarMap")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material RadarMapImage;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("RadarMap")]
-        public float CustomRadarRange;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [FieldConfig()]
-        public byte PhysicsDetailLevel;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [FieldConfig()]
-        public byte MeshLODDetailLevel;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Karma")]
-        public float KarmaTimeScale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Karma")]
-        public float RagdollTimeScale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Karma")]
-        public int MaxRagdolls;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Karma")]
-        public float KarmaGravScale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Karma")]
-        public bool bKStaticFriction;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        public bool bKNoInit;
-        
-        [ArraySizeForExtraction(Size=2)]
-        public int[] LastTaunt = new int[0];
-        
-        [FieldConfig()]
-        public float DecalStayScale;
-        
         [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
         public string LevelEnterText = string.Empty;
         
@@ -160,143 +103,9 @@ namespace Engine
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
-        public string VisibleGroups = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
-        public bool HideFromMenus;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        public bool bLonePlayer;
-        
-        public bool bBegunPlay;
-        
-        public bool bPlayersOnly;
-        
-        public bool bFreezeKarma;
-        
-        [FieldConst()]
-        public byte DetailMode;
-        
-        public bool bDropDetail;
-        
-        public bool bAggressiveLOD;
-        
-        public bool bStartup;
-        
-        [FieldConfig()]
-        public bool bLowSoundDetail;
-        
-        public bool bPathsRebuilt;
-        
-        public bool bHasPathNodes;
-        
-        public bool bLevelChange;
-        
-        public bool bShouldPreload;
-        
-        public bool bDesireSkinPreload;
-        
-        public bool bKickLiveIdlers;
-        
-        public bool bSkinsPreloaded;
-        
-        public bool bClassicView;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("RadarMap")]
-        public bool bShowRadarMap;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("RadarMap")]
-        public bool bUseTerrainForRadarRange;
-        
-        public bool bIsSaveGame;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("SaveGames")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public bool bSupportSaveGames;
-        
-        [FieldConfig()]
-        public bool bNeverPrecache;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public int LevelTextureLODBias;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public float AnimMeshGlobalLOD;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Vector CameraLocationDynamic;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Vector CameraLocationTop;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Vector CameraLocationFront;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Vector CameraLocationSide;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Rotator CameraRotationDynamic;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Audio")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string Song = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Audio")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public float PlayerDoppler;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Audio")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public float MusicVolumeOverride;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public float Brightness;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string DefaultTexture; //texture
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string WireframeTexture;//texture
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string WhiteSquareTexture;//texture
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string LargeVertex;
-        
-        public int HubStackLevel;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
         public byte LevelAction;
         
         public byte NetMode;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string ComputerName = string.Empty;
-        
-        public string EngineVersion = string.Empty;
-        
-        public string MinNetVersion = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        public string DefaultGameType = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public string PreCacheGame = string.Empty;
-        
-        public float DefaultGravity;
-        
-        public float LastVehicleCheck;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
         public float StallZ;
@@ -305,76 +114,10 @@ namespace Engine
         public NavigationPoint NavigationPointList;
         
         [FieldConst()]
-        public Controller ControllerList;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Headlights")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public bool bUseHeadlights;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Headlights")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public float HeadlightScaling;
-        
-        public string NextURL = string.Empty;
-        
-        public bool bNextItems;
-        
-        public float NextSwitchCountdown;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public ObjectPool ObjectPool;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public List<Material> PrecacheMaterials = new List<Material>();
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public List<StaticMesh> PrecacheStaticMeshes = new List<StaticMesh>();
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Camouflage")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh IndoorCamouflageMesh;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Camouflage")]
-        public float IndoorMeshDrawscale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Camouflage")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh OutdoorCamouflageMesh;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Camouflage")]
-        public float OutdoorMeshDrawscale;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("DustColor")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Color DustColor;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("DustColor")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Color WaterDustColor;
-        
-        public float MoveRepSize;
-        
-        public float MaxClientFrameRate;
-        
-        public float MaxTimeMargin;
-        
-        public float TimeMarginSlack;
-        
-        public float MinTimeMargin;
-        
-        [FieldConst()]
         public PlayerController ReplicationViewer;
         
         [FieldConst()]
         public Actor ReplicationViewTarget;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public string LightingCubeMap; //SBLightingCubemap
         
         public LevelInfo()
         {

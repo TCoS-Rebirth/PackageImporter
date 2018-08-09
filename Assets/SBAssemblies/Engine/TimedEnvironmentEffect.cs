@@ -28,18 +28,6 @@ namespace Engine
     {
         
         [Sirenix.OdinInspector.FoldoutGroup("Preview")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public float PreviewSpeed;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Preview")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public byte PreviewProgress;
-        
-        public float PreviewRelative;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Preview")]
         public float UpdateSpeed;
         
         public float UpdateTimer;

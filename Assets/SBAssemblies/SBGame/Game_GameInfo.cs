@@ -52,12 +52,6 @@ namespace SBGame
         
         public Game_MiniGameManager MiniGameManager;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material mChessIcon;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material mCheckersIcon;
-        
         [Sirenix.OdinInspector.FoldoutGroup("Game_GameInfo")]
         public NameProperty PlayerEvent;
         

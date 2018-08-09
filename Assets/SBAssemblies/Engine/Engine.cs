@@ -29,18 +29,6 @@ namespace Engine
         
         public Primitive Cylinder;
         
-        [FieldConst()]
-        public Client Client;
-        
-        [FieldConst()]
-        public AudioSubsystem Audio;
-        
-        [FieldConst()]
-        public RenderDevice GRenDev;
-        
-        [FieldConst()]
-        public SBAudioManager AudioManager;
-        
         public int bShowFrameRate;
         
         public int bShowRenderStats;

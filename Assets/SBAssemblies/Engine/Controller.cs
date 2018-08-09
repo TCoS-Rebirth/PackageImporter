@@ -31,76 +31,7 @@ namespace Engine
         
         public Pawn Pawn;
         
-        [FieldConst()]
-        public int PlayerNum;
-        
-        public float SightCounter;
-        
-        public float FovAngle;
-        
-        public float Handedness;
-        
-        public bool bIsPlayer;
-        
         public bool bGodMode;
-        
-        [FieldConst()]
-        public bool bLOSflag;
-        
-        public bool bAdvancedTactics;
-        
-        public bool bCanOpenDoors;
-        
-        public bool bCanDoSpecial;
-        
-        public bool bAdjusting;
-        
-        public bool bPreparingMove;
-        
-        public bool bControlAnimations;
-        
-        public bool bEnemyInfoValid;
-        
-        public bool bNotifyApex;
-        
-        public bool bUsePlayerHearing;
-        
-        public bool bJumpOverWall;
-        
-        public bool bEnemyAcquired;
-        
-        public bool bSoaking;
-        
-        public bool bNotifyFallingHitWall;
-        
-        public bool bSlowerZAcquire;
-        
-        public bool bInDodgeMove;
-        
-        public bool bVehicleTransition;
-        
-        public bool bForceStrafe;
-        
-        public bool bNotifyPostLanded;
-        
-        public byte bRun;
-        
-        public byte bDuck;
-        
-        public byte bFire;
-        
-        public byte bAltFire;
-        
-        public byte bVoiceTalk;
-        
-        public Vector AdjustLoc;
-        
-        [FieldConst()]
-        public Controller nextController;
-        
-        public float Stimulus;
-        
-        public float MoveTimer;
         
         public Actor MoveTarget;
         
@@ -108,57 +39,9 @@ namespace Engine
         
         public Vector FocalPoint;
         
-        public Actor Focus;
-        
-        public float FocusLead;
-        
         public Mover PendingMover;
         
-        [ArraySizeForExtraction(Size=4)]
-        public Actor[] GoalList = new Actor[0];
-        
         public NavigationPoint home;
-        
-        public float MinHitWall;
-        
-        public float RespawnPredictionTime;
-        
-        public float DodgeToGoalPct;
-        
-        public int AcquisitionYawRate;
-        
-        public float DodgeLandZ;
-        
-        public Pawn Enemy;
-        
-        public Actor Target;
-        
-        public Vector LastSeenPos;
-        
-        public Vector LastSeeingPos;
-        
-        public float LastSeenTime;
-        
-        public string VoiceType = string.Empty;
-        
-        public float OldMessageTime;
-        
-        [ArraySizeForExtraction(Size=16)]
-        public Actor[] RouteCache = new Actor[0];
-        
-        public ReachSpec CurrentPath;
-        
-        public ReachSpec NextRoutePath;
-        
-        public Vector CurrentPathDir;
-        
-        public Actor RouteGoal;
-        
-        public float RouteDist;
-        
-        public float LastRouteFind;
-        
-        public Vector DirectionHint;
         
         [TypeProxyDefinition(TypeName="Pawn")]
         public System.Type PawnClass;
@@ -166,31 +49,10 @@ namespace Engine
         [TypeProxyDefinition(TypeName="Pawn")]
         public System.Type PreviousPawnClass;
         
-        public float GroundPitchTime;
-        
-        public Vector ViewX;
-        
-        public Vector ViewY;
-        
-        public Vector ViewZ;
-        
         public NavigationPoint StartSpot;
         
         [ArraySizeForExtraction(Size=2)]
         public AvoidMarker[] FearSpots = new AvoidMarker[0];
-        
-        public float WarningDelay;
-        
-        public Pawn ShotTarget;
-        
-        [FieldConst()]
-        public Actor LastFailedReach;
-        
-        [FieldConst()]
-        public float FailedReachTime;
-        
-        [FieldConst()]
-        public Vector FailedReachLocation;
         
         public Controller()
         {

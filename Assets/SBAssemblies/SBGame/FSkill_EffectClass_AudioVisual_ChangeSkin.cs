@@ -27,10 +27,6 @@ namespace SBGame
     [System.Serializable] public class FSkill_EffectClass_AudioVisual_ChangeSkin : FSkill_EffectClass_AudioVisual
     {
         
-        [Sirenix.OdinInspector.FoldoutGroup("Skin")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material Skin;
-        
         public FSkill_EffectClass_AudioVisual_ChangeSkin()
         {
         }

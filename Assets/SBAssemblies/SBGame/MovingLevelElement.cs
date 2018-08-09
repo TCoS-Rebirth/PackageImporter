@@ -55,26 +55,10 @@ namespace SBGame
         public float KeyDuration;
         
         [Sirenix.OdinInspector.FoldoutGroup("KeyFrame")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound KeySound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("KeyFrame")]
         public NameProperty KeyTriggerEvent;
         
         [Sirenix.OdinInspector.FoldoutGroup("KeyFrame")]
         public NameProperty KeyUntriggerEvent;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Sound")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound StartMoveSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Sound")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound MovingSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Sound")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound StoppingSound;
         
         [Sirenix.OdinInspector.FoldoutGroup("MovingLevelElement")]
         [FieldConst()]
@@ -132,8 +116,6 @@ namespace SBGame
             public NameProperty TriggerEvent;
             
             public NameProperty UntriggerEvent;
-            
-            public Sound Sound;
         }
         
         public enum EMLESoundType

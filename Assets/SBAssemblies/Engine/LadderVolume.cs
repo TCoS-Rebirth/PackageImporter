@@ -27,31 +27,6 @@ namespace Engine
     [System.Serializable] public class LadderVolume : PhysicsVolume
     {
         
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public NameProperty ClimbingAnimation;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public NameProperty TopAnimation;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public Rotator WallDir;
-        
-        public Vector LookDir;
-        
-        public Vector ClimbDir;
-        
-        [FieldConst()]
-        public Ladder LadderList;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public bool bNoPhysicalLadder;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public bool bAutoPath;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LadderVolume")]
-        public bool bAllowLadderStrafing;
-        
         public Pawn PendingClimber;
         
         public LadderVolume()

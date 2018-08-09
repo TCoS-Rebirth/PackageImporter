@@ -59,14 +59,6 @@ namespace SBGame
         [FieldConst()]
         public byte PlayerSound;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private bool ReportedMissingSound;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        private Sound Sound;
-        
         public FSkill_EffectClass_AudioVisual_Sound()
         {
         }

@@ -29,27 +29,7 @@ namespace Engine
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
-        public Vector mNetOldPos;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int mNetOldRotPitch;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int mNetOldRotYaw;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int mNetOldRotRoll;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
         public Vector mNetInterpolate;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Vector mOldNetInterpolate;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
@@ -58,10 +38,6 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public byte StoppedPosition;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public byte mNetActiveSound;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]

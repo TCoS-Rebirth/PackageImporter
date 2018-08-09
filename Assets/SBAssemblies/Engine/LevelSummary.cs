@@ -49,16 +49,6 @@ namespace Engine
         public int IdealPlayerCountMax;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
-        public bool HideFromMenus;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("SinglePlayer")]
-        public int SinglePlayerTeamSize;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material Screenshot;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
         public string ExtraInfo = string.Empty;
         
         public LevelSummary()

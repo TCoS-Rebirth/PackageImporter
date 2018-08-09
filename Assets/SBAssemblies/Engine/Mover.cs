@@ -48,81 +48,11 @@ namespace Engine
         public const int MOVER_MAXIMUM_MOVE_TIME = 10000;
         
         [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public byte MoverEncroachType;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public byte MoverGlideType;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public byte BumpType;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
         public byte KeyNum;
-        
-        public byte PrevKeyNum;
         
         [Sirenix.OdinInspector.FoldoutGroup("Mover")]
         [FieldConst()]
         public byte NumKeys;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        [FieldConst()]
-        public byte WorldRaytraceKey;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        [FieldConst()]
-        public byte BrushRaytraceKey;
-        
-        public byte StartKeyNum;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public float MoveTime;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public float StayOpenTime;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public float OtherTime;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public int EncroachDamage;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bToggleDirection;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bTriggerOnceOnly;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bSlave;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bUseTriggered;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bDamageTriggered;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bDynamicLightMover;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bUseShortestRotation;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ReturnGroup")]
-        public bool bIsLeader;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public NameProperty PlayerBumpEvent;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public NameProperty BumpEvent;
-        
-        public Actor SavedTrigger;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public float DamageThreshold;
-        
-        public int numTriggerEvents;
         
         public Mover Leader;
         
@@ -133,30 +63,6 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Mover")]
         public float DelayTime;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound OpeningSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound OpenedSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound ClosingSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound ClosedSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound MoveAmbientSound;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("MoverSounds")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound LoopSound;
         
         [Sirenix.OdinInspector.FoldoutGroup("MoverEvents")]
         public NameProperty OpeningEvent;
@@ -181,69 +87,9 @@ namespace Engine
         
         public Vector BasePos;
         
-        public Vector OldPos;
-        
-        public Vector OldPrePivot;
-        
-        public Vector SavedPos;
-        
         public Rotator BaseRot;
         
-        public Rotator OldRot;
-        
-        public Rotator SavedRot;
-        
-        public float PhysAlpha;
-        
-        public float PhysRate;
-        
         public NavigationPoint myMarker;
-        
-        public bool bOpening;
-        
-        public bool bDelaying;
-        
-        public bool bClientPause;
-        
-        public bool bClosed;
-        
-        public bool bPlayerOnly;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("aI")]
-        public bool bAutoDoor;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("aI")]
-        public bool bNoAIRelevance;
-        
-        public bool bJumpLift;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public bool bOscillatingLoop;
-        
-        public int StepDirection;
-        
-        public List<AntiPortalActor> AntiPortals = new List<AntiPortalActor>();
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Mover")]
-        public NameProperty AntiPortalTag;
-        
-        public bool bResetting;
-        
-        public bool BACKUP_bHidden;
-        
-        public NameProperty Backup_InitialState;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public byte mActiveSounds;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int mAmbientSoundHandle;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int mLoopingSoundHandle;
         
         public Mover()
         {

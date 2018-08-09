@@ -125,10 +125,6 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("Animation")]
         [FieldConst()]
-        public SkeletalMesh AnimationBaseMesh;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Animation")]
-        [FieldConst()]
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public bool _ForceNotifyUpdate;

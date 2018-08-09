@@ -35,75 +35,8 @@ namespace Engine
         [FieldTransient()]
         public bool bTransientEndPoint;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bHideEditorPaths;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bCanReach;
-        
-        public bool taken;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bBlocked;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bPropagatesSound;
-        
         [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
         public bool bOneWayPath;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bNeverUseStrafing;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bAlwaysUseStrafing;
-        
-        [FieldConst()]
-        public bool bForceNoStrafing;
-        
-        [FieldConst()]
-        public bool bAutoBuilt;
-        
-        public bool bSpecialMove;
-        
-        public bool bNoAutoConnect;
-        
-        [FieldConst()]
-        public bool bNotBased;
-        
-        [FieldConst()]
-        public bool bPathsChanged;
-        
-        public bool bDestinationOnly;
-        
-        public bool bSourceOnly;
-        
-        public bool bSpecialForced;
-        
-        public bool bMustBeReachable;
-        
-        public bool bBlockable;
-        
-        public bool bFlyingPreferred;
-        
-        public bool bMayCausePain;
-        
-        public bool bReceivePlayerToucherDiedNotify;
-        
-        public bool bAlreadyVisited;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bVehicleDestination;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bMakeSourceOnly;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public bool bNoSuperSize;
-        
-        public bool bForcedOnly;
         
         [FieldConst()]
         public List<ReachSpec> PathList = new List<ReachSpec>();
@@ -115,47 +48,6 @@ namespace Engine
         [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
         [ArraySizeForExtraction(Size=4)]
         public NameProperty[] ForcedPaths = new NameProperty[0];
-        
-        public int visitedWeight;
-        
-        [FieldConst()]
-        public int bestPathWeight;
-        
-        [FieldConst()]
-        public NavigationPoint nextNavigationPoint;
-        
-        [FieldConst()]
-        public NavigationPoint nextOrdered;
-        
-        [FieldConst()]
-        public NavigationPoint prevOrdered;
-        
-        [FieldConst()]
-        public NavigationPoint previousPath;
-        
-        public int cost;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NavigationPoint")]
-        public int ExtraCost;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int TransientCost;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int FearCost;
-        
-        [FieldConst()]
-        public float LastDetourWeight;
-        
-        [ArraySizeForExtraction(Size=2)]
-        public byte[] BaseVisible = new byte[0];
-        
-        [ArraySizeForExtraction(Size=2)]
-        public float[] BaseDist = new float[0];
-        
-        public Vector MaxPathSize;
         
         public NavigationPoint()
         {

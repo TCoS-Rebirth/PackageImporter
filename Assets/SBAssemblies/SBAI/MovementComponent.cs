@@ -52,8 +52,6 @@ namespace SBAI
         
         public List<TacticalLocation> TacticalLocations = new List<TacticalLocation>();
         
-        public SBAccessMap mAccessmap;
-        
         private SBPath mPath;
         
         public List<MovementConfigStruct> ConfigStack = new List<MovementConfigStruct>();

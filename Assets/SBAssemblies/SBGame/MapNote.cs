@@ -29,10 +29,6 @@ namespace SBGame
         
         public const int MAX_TARGETS_SIZE = 8;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [ArraySizeForExtraction(Size=8)]
-        public Material[] mTargetMaterials = new Material[0];
-        
         public LocalizedString Title;
         
         public LocalizedString Level;

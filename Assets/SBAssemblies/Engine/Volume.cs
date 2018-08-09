@@ -24,7 +24,7 @@ namespace Engine
 {
     
     
-    [System.Serializable] public class Volume : Brush
+    [System.Serializable] public class Volume : Actor
     {
         
         public Actor AssociatedActor;
@@ -33,14 +33,7 @@ namespace Engine
         public NameProperty AssociatedActorTag;
         
         [Sirenix.OdinInspector.FoldoutGroup("Volume")]
-        public int LocationPriority;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Volume")]
         public string LocationName = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Volume")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public DecorationList DecoList;
         
         public Volume()
         {

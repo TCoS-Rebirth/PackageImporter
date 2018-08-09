@@ -44,56 +44,7 @@ namespace Engine
         [FieldConst()]
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
-        public int vfOut;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int vfExec;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
         public PlayerController Actor;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public PlayerController OldActor;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Console Console;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bWindowsMouseAvailable;
-        
-        public bool bShowWindowsMouse;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public float WindowsMouseX;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public float WindowsMouseY;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int CurrentVoiceBandwidth;
-        
-        [FieldConst()]
-        public int CurrentNetSpeed;
-        
-        public int ConfiguredInternetSpeed;
-        
-        public int ConfiguredLanSpeed;
-        
-        public byte SelectedCursor;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
@@ -102,14 +53,6 @@ namespace Engine
         [System.NonSerialized, UnityEngine.HideInInspector]
         [FieldTransient()]
         public List<Interaction> LocalInteractions = new List<Interaction>();
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public BaseGUIController GUIController;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public GUI_BaseDesktop GUIDesktop;
         
         public Player()
         {

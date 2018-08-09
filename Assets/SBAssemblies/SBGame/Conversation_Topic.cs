@@ -68,10 +68,6 @@ namespace SBGame
         public string Icon;
         
         [Sirenix.OdinInspector.FoldoutGroup("Banner")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Sound Speech;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Banner")]
         [TypeProxyDefinition(TypeName="Emitter")]
         public System.Type EmitterClass;
         

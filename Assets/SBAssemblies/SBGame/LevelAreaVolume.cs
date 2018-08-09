@@ -37,10 +37,6 @@ namespace SBGame
         public LocalizedString LevelAreaName;
         
         [Sirenix.OdinInspector.FoldoutGroup("ShardMap")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material CurrentShardMap;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ShardMap")]
         public bool IsShardMap;
         
         [Sirenix.OdinInspector.FoldoutGroup("ShardMap")]

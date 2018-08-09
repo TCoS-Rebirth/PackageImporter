@@ -40,10 +40,6 @@ namespace SBGame
         [Sirenix.OdinInspector.FoldoutGroup("Voice")]
         public byte Voice;
         
-        [Sirenix.OdinInspector.FoldoutGroup("NPC_Appearance")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Material AvatarTexture;
-        
         public NPC_Appearance()
         {
         }

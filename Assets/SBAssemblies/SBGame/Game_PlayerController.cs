@@ -62,8 +62,6 @@ namespace SBGame
         
         public Game_PlayerInput Input;
         
-        public Game_GUI GUI;
-        
         public Game_Chat Chat;
         
         public Game_Camera Camera;

@@ -96,18 +96,8 @@ namespace Engine
         public const int RF_Transactional = 1;
         
         [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        [ArraySizeForExtraction(Size=6)]
-        private int[] ObjectInternal = new int[0];
-        
-        [FieldConst()]
         [ReadOnly]
         public UObject Outer;
-        
-        [FieldConst()]
-        [HideInInspector]
-        public int ObjectFlags;
 
         //[Sirenix.OdinInspector.FoldoutGroup("Object")]
         //[FieldConst()]
@@ -121,26 +111,6 @@ namespace Engine
         {
         }
        
-    }
-
-    [System.Serializable] public struct DatabaseRow
-    {
-
-        public List<string> Fields;
-    }
-
-    [System.Serializable] public struct TMultiMap
-    {
-
-        public int FArray_Data;
-
-        public int FArray_ArrayNum;
-
-        public int FArray_ArrayMax;
-
-        public int TMapBase_Hash;
-
-        public int TMapBase_HashCount;
     }
 
     [System.Serializable] public struct Rotator

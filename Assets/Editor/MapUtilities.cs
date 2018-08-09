@@ -4,8 +4,11 @@ using System.Linq;
 using System.Reflection;
 using Engine;
 using Fasterflect;
+using SBGame;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Editor
 {
@@ -65,6 +68,62 @@ namespace Assets.Editor
                     {
                         sms[i].transform.SetParent(dataGO.transform);
                     }
+                }
+            }
+        }
+
+        class CountReferencesToTarget : MapAction
+        {
+            public override string Description
+            {
+                get { return "Count References to Target"; }
+            }
+            public override void Execute()
+            {
+                var obj = Selection.activeGameObject;
+                var tracer = new ReferenceTracer();
+                var refs = new List<Component>();
+                tracer.BacktraceSelection(obj.scene, obj, refs);
+                Debug.Log(refs.Count);
+            }
+        }
+
+        class CleanupHelper : MapAction
+        {
+            public override string Description
+            {
+                get { return "Cleanup"; }
+            }
+            public override void Execute()
+            {
+                try
+                {
+                    var objs = new List<GameObject>();
+                    foreach (var staticMeshActor in FindObjectsOfType<StaticMeshActor>())
+                    {
+                        objs.Add(staticMeshActor.gameObject);
+                    }
+                    foreach (var staticMesh in FindObjectsOfType<StaticMesh>())
+                    {
+                        objs.Add(staticMesh.gameObject);
+                    }
+                    foreach (var staticMeshInstance in FindObjectsOfType<StaticMeshInstance>())
+                    {
+                        objs.Add(staticMeshInstance.gameObject);
+                    }
+                    foreach (var gameStaticMesh in FindObjectsOfType<GameStaticMesh>())
+                    {
+                        objs.Add(gameStaticMesh.gameObject);
+                    }
+                    for (int i = 0; i < objs.Count; i++)
+                    {
+                        DestroyImmediate(objs[i], false);
+                    }
+                    EditorSceneManager.MarkAllScenesDirty();
+                }
+                catch
+                {
+                    EditorUtility.ClearProgressBar();
                 }
             }
         }

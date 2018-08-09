@@ -2,26 +2,27 @@
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class ReferenceTracer
 {
 
     Dictionary<Component, SerializedObject> sOs = new Dictionary<Component, SerializedObject>();
 
-    public void RebuildSceneCache()
+    public void RebuildSceneCache(Scene scene)
     {
         sOs.Clear();
-        var sceneComponents = GetAllSceneComponents();
+        var sceneComponents = GetAllSceneComponents(scene);
         for (var i = 0; i < sceneComponents.Length; i++)
         {
+            if (sceneComponents[i] == null) continue;
             sOs[sceneComponents[i]] = new SerializedObject(sceneComponents[i]);
         }
     }
 
-    static Component[] GetAllSceneComponents()
+    static Component[] GetAllSceneComponents(Scene scene)
     {
-        var rootObjects = UnityEngine.SceneManagement.SceneManager
-            .GetActiveScene()
+        var rootObjects = scene
             .GetRootGameObjects();
         var result = new List<Component>();
         foreach (var rootObject in rootObjects)
@@ -31,9 +32,9 @@ public class ReferenceTracer
         return result.ToArray();
     }
 
-    public void BacktraceSelection(Component selection, List<Component> referencingTargets)
+    public void BacktraceSelection(Scene scene, Component selection, List<Component> referencingTargets)
     {
-        if (sOs.Count == 0) RebuildSceneCache();
+        if (sOs.Count == 0) RebuildSceneCache(scene);
         foreach (var serObj in sOs)
         {
             var prop = serObj.Value.GetIterator();
@@ -48,12 +49,12 @@ public class ReferenceTracer
         }
     }
 
-    public void BacktraceSelection(GameObject selection, List<Component> referencingTargets)
+    public void BacktraceSelection(Scene scene, GameObject selection, List<Component> referencingTargets)
     {
-        if (sOs.Count == 0) RebuildSceneCache();
+        if (sOs.Count == 0) RebuildSceneCache(scene);
         foreach (var componentInTarget in selection.GetComponents(typeof(Component)))
         {
-            BacktraceSelection(componentInTarget, referencingTargets);
+            BacktraceSelection(scene, componentInTarget, referencingTargets);
         }
     }
 }

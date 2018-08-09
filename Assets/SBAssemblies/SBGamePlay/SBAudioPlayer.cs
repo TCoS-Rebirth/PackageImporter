@@ -81,10 +81,6 @@ namespace SBGamePlay
         [FieldTransient()]
         public Vector MeanLocation;
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public SBAudioManager AudioManager;
-        
         [Sirenix.OdinInspector.FoldoutGroup("Modifiers")]
         public List<SBAudioModifierProps> ModifierProperties = new List<SBAudioModifierProps>();
         
@@ -171,15 +167,11 @@ namespace SBGamePlay
             
             public string OggFilename;
             
-            public Sound Sound;
-            
             public byte WhenPlayed;
         }
         
         [System.Serializable] public struct SBSound
         {
-            
-            public Sound Sound;
             
             public float StartTime;
             

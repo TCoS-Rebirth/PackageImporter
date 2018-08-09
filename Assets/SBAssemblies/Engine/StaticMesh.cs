@@ -26,37 +26,10 @@ namespace Engine
     
     [System.Serializable] public class StaticMesh : Primitive
     {
-
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public List<StaticMeshMaterial> Materials = new List<StaticMeshMaterial>();
-
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public bool AutoUnwrap;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public bool UseSimpleLineCollision;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        public bool UseSimpleBoxCollision;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public bool UseVertexColor;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("")]
-        public bool UseSimpleKarmaCollision;
         
         public StaticMesh()
         {
         }
 
-        [System.Serializable] public struct StaticMeshMaterial
-        {
-            public bool EnableCollision;
-            public Material Material;
-        }
     }
 }

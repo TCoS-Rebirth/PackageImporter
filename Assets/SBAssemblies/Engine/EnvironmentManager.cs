@@ -29,8 +29,6 @@ namespace Engine
         
         private List<ZoneInfo> mZoneInfos = new List<ZoneInfo>();
         
-        private List<Light> mLights = new List<Light>();
-        
         private List<string> mEmitters = new List<string>(); //ParticleEmitter
         
         private List<EnvironmentEffect> mEffects = new List<EnvironmentEffect>();
