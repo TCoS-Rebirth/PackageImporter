@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace Engine
 {
@@ -38,14 +38,6 @@ namespace Engine
         public int CollisionRadius;
         
         public int CollisionHeight;
-        
-        public int reachFlags;
-        
-        public int MaxLandingVelocity;
-        
-        public byte bPruned;
-        
-        public bool bForced;
         
         public ReachSpec()
         {

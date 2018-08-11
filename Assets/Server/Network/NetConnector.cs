@@ -1,0 +1,304 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using UnityEngine;
+
+namespace Server.Network
+{
+    public class NetConnector
+    {
+        readonly List<NetConnection> connections = new List<NetConnection>();
+
+        readonly Queue<NetworkPacket> packetQueu = new Queue<NetworkPacket>();
+        readonly int port;
+
+        readonly ManualResetEvent waitHandler = new ManualResetEvent(false);
+
+        Socket listenSocket;
+
+        BackgroundWorker queueWorker;
+
+        volatile bool shutDownRequested;
+
+        Thread _thread;
+
+        public NetConnector(int loginPort)
+        {
+            port = loginPort;
+        }
+
+        public bool IsRunning
+        {
+            get { return _thread != null & listenSocket.IsBound; }
+        }
+
+        public int GetConnectionCount()
+        {
+            lock (connections)
+            {
+                return connections.Count;
+            }
+        }
+
+        public NetConnection GetConnection(Predicate<NetConnection> condition)
+        {
+            lock (connections)
+            {
+                for (var i = 0; i < connections.Count; i++)
+                {
+                    if (condition(connections[i]))
+                    {
+                        return connections[i];
+                    }
+                }
+            }
+            return null;
+        }
+
+        public bool TryGetPacket(out NetworkPacket networkPacket)
+        {
+            lock (packetQueu)
+            {
+                if (packetQueu.Count > 0)
+                {
+                    networkPacket = packetQueu.Dequeue();
+                    return true;
+                }
+            }
+            networkPacket = null;
+            return false;
+        }
+
+        public bool Start()
+        {
+            _thread = new Thread(Listen) {Name = string.Format("TcpServer:{0}", port)};
+            _thread.Start();
+            queueWorker = new BackgroundWorker {WorkerSupportsCancellation = true};
+            queueWorker.DoWork += ResolveSendPacketQueues;
+            queueWorker.RunWorkerAsync();
+            return true;
+        }
+
+        public void Shutdown()
+        {
+            if (queueWorker != null)
+            {
+                queueWorker.CancelAsync();
+            }
+            if (_thread != null)
+            {
+                shutDownRequested = true;
+                try
+                {
+                    listenSocket.Shutdown(SocketShutdown.Both);
+                }
+                catch { }
+                listenSocket.Close();
+                lock (connections)
+                {
+                    for (var i = 0; i < connections.Count; i++)
+                    {
+                        HandleDisconnect(connections[i]);
+                    }
+                }
+                waitHandler.Set();
+                if (_thread != null)
+                {
+                    _thread.Join(1000);
+                }
+            }
+            lock (connections)
+            {
+                connections.Clear();
+            }
+            if (_thread != null)
+            {
+                _thread.Interrupt();
+                _thread.Abort();
+            }
+        }
+
+        void Listen()
+        {
+            var localEndPoint = new IPEndPoint(IPAddress.Any, port);
+            listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
+            {
+                listenSocket.Bind(localEndPoint);
+                listenSocket.Listen(100);
+                while (!shutDownRequested)
+                {
+                    if (Thread.CurrentThread.ThreadState == ThreadState.StopRequested || Thread.CurrentThread.ThreadState == ThreadState.Aborted)
+                    {
+                        break;
+                    }
+                    if (shutDownRequested) break;
+                    waitHandler.Reset();
+                    try
+                    {
+                        listenSocket.BeginAccept(AcceptConnection, listenSocket);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("NetConnector (acceptRoutine): "+e.Message);
+                        break;
+                    }
+                    waitHandler.WaitOne();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("NetConnector: "+e.Message);
+            }
+        }
+
+        void AcceptConnection(IAsyncResult res)
+        {
+            waitHandler.Set();
+            var listenerSocket = (Socket) res.AsyncState;
+            lock (connections)
+            {
+                try
+                {
+                    var clientSocket = listenerSocket.EndAccept(res);
+                    if (clientSocket != null)
+                    {
+                        var nc = new NetConnection(clientSocket);
+                        clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+                        connections.Add(nc);
+                        nc.SetupReceiveState(NetConnection.ReceiveState.Header);
+                        clientSocket.BeginReceive(nc.incomingReadBuffer, 0, 4, SocketFlags.None, ReadMessageCallback, nc);
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (!(e is ObjectDisposedException))
+                    {
+                        Debug.Log("NetConnector (accepting): " + e.Message);
+                    }
+                }
+            }
+        }
+
+        void ReadMessageCallback(IAsyncResult ar)
+        {
+            var connection = ar.AsyncState as NetConnection;
+            if (connection == null || !connection.ClientSocket.Connected)
+            {
+                if (connection != null)
+                {
+                    HandleDisconnect(connection);
+                }
+                return;
+            }
+            try
+            {
+                var bytesRead = connection.ClientSocket.EndReceive(ar);
+                if (bytesRead == 0)
+                {
+                    HandleDisconnect(connection);
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                HandleDisconnect(connection);
+                return;
+            }
+            if (connection.State == NetConnection.ReceiveState.Header)
+            {
+                connection.SetupReceiveState(NetConnection.ReceiveState.Body);
+                if (connection.incomingMessageSize > 0)
+                {
+                    connection.ClientSocket.BeginReceive(connection.incomingReadBuffer, 0, connection.incomingMessageSize, SocketFlags.None, ReadMessageCallback,
+                        connection);
+                }
+                else
+                {
+                    var m = connection.ReceiveMessage();
+                    HandlePacketReceived(m);
+                }
+            }
+            else
+            {
+                var m = connection.ReceiveMessage();
+                HandlePacketReceived(m);
+            }
+        }
+
+        void HandlePacketReceived(NetworkPacket networkPacket)
+        {
+            lock (packetQueu) packetQueu.Enqueue(networkPacket);
+            if (!networkPacket.Connection.ClientSocket.Connected)
+            {
+                return;
+            }
+            try //Start listening for next networkPacket
+            {
+                networkPacket.Connection.SetupReceiveState(NetConnection.ReceiveState.Header);
+                networkPacket.Connection.ClientSocket.BeginReceive(networkPacket.Connection.incomingReadBuffer, 0, 4, 0, ReadMessageCallback, networkPacket.Connection);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("NetConnector (dispatchMessage): "+ e.Message);
+            }
+        }
+
+        void HandleDisconnect(NetConnection connection)
+        {
+            if (connection.ClientSocket != null)
+            {
+                try
+                {
+                    connection.ClientSocket.Shutdown(SocketShutdown.Both);
+                }
+                catch { }
+                connection.ClientSocket.Close();
+            }
+            lock (connections)
+            {
+                connections.Remove(connection);
+            }
+        }
+
+        void ResolveSendPacketQueues(object sender, DoWorkEventArgs e)
+        {
+            var worker = sender as BackgroundWorker;
+            if (Thread.CurrentThread.Name == null)
+            {
+                Thread.CurrentThread.Name = "NetconnectorSendQueue";
+            }
+            while (!worker.CancellationPending & !shutDownRequested)
+            {
+                lock (connections)
+                {
+                    for (var i = connections.Count; i-- > 0;)
+                    {
+                        if (connections[i].MessageQueue.Count <= 0) continue;
+                        var messageBytes = new List<byte>();
+                        lock (connections[i].MessageQueue)
+                        {
+                            while (connections[i].MessageQueue.Count > 0)
+                            {
+                                if (worker.CancellationPending || shutDownRequested)
+                                {
+                                    return;
+                                }
+                                var m = connections[i].MessageQueue.Dequeue();
+                                if (m != null)
+                                {
+                                    messageBytes.AddRange(m.FinalizeForSending());
+                                }
+                            }
+                        }//networkPacket queue lock
+                        connections[i].ClientSocket.Send(messageBytes.ToArray());
+                    } //loop
+                } // connections lock
+                Thread.Sleep(100);
+            } //while
+        }
+    }
+}

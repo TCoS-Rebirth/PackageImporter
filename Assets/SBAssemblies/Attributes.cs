@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Framework.Attributes
+namespace SBAssemblies
 {
     public class PackageObjectPropertyAttribute : Attribute
     {

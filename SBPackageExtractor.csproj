@@ -673,6 +673,10 @@
       <Project>{9C7379BE-970A-5458-7343-F7D2EE7AF2B4}</Project>
       <Name>SBAssemblies</Name>
     </ProjectReference>
+    <ProjectReference Include="Server.csproj">
+      <Project>{856DFFBB-9058-5552-FCAF-49EBCE27434F}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

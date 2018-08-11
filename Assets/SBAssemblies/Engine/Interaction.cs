@@ -25,19 +25,6 @@ namespace Engine
     
     [System.Serializable] public class Interaction : Interactions
     {
-        
-        public bool bActive;
-        
-        public bool bVisible;
-        
-        public bool bRequiresTick;
-        
-        public bool bNativeEvents;
-        
-        public Player ViewportOwner;
-        
-        public InteractionMaster Master;
-        
         public Interaction()
         {
         }

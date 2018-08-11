@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -26,29 +25,6 @@ namespace Engine
     
     [System.Serializable] public class InteractionMaster : Interactions
     {
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Interaction BaseMenu;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Interaction Console;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public List<Interaction> GlobalInteractions = new List<Interaction>();
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public int ScreenshotMode;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bRequireRawJoystick;
-        
         public InteractionMaster()
         {
         }

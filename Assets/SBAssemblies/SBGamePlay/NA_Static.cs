@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace SBGamePlay
 {
@@ -26,10 +25,6 @@ namespace SBGamePlay
     
     [System.Serializable] public class NA_Static : NPC_Appearance
     {
-        
-        [Sirenix.OdinInspector.FoldoutGroup("NA_Static")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh StatMesh;
         
         [Sirenix.OdinInspector.FoldoutGroup("NA_Static")]
         public float Scale;

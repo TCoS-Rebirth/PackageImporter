@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace SBGame
 {
@@ -26,9 +25,6 @@ namespace SBGame
     
     [System.Serializable] public class Game_StaticAppearance : Game_Appearance
     {
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh StatMesh;
         
         public float CollisionRadius;
         

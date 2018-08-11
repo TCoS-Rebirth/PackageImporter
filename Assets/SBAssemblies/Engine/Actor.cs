@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 using UnityEngine;
 
 namespace Engine
@@ -32,23 +32,7 @@ namespace Engine
         
         public const float MAXSTEPHEIGHT = 25F;
         
-        public byte SBRole;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Movement")]
-        [FieldConst()]
-        public Vector Location;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Display")]
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh StaticMesh;
-        
-        [FieldConst()]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Actor Owner;
-        
-        [FieldConst()]
-        public Actor Base;
+        public eSBNetworkRoles SBRole;
         
         [Sirenix.OdinInspector.FoldoutGroup("Advanced")]
         [HideInInspector]
@@ -56,9 +40,9 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        public byte Physics;
+        public EPhysics Physics;
         
-        public byte Role;
+        public ENetRole Role;
         
         [FieldConst()]
         public LevelInfo Level;
@@ -92,24 +76,7 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         [FieldConst()]
-        [HideInInspector]
         public Rotator Rotation;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Movement")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public NameProperty AttachTag;
-        
-        [FieldConst()]
-        public List<Actor> Attached = new List<Actor>();
-        
-        [FieldConst()]
-        public Vector RelativeLocation;
-        
-        [FieldConst()]
-        public Rotator RelativeRotation;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMeshInstance StaticMeshInstance;
         
         [Sirenix.OdinInspector.FoldoutGroup("Movement")]
         public Rotator RotationRate = new Rotator(4096,50000,3072);
@@ -118,36 +85,11 @@ namespace Engine
         [ArraySizeForExtraction(Size=8)]
         public NameProperty[] ExcludeTag = new NameProperty[0];
         
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public List<ActorRelation> ActorRelations = new List<ActorRelation>();
-        
         [ArraySizeForExtraction(Size=10)]
         public string[] StatsGroups = new string[0];
         
         public Actor()
         {
-        }
-        
-        [System.Serializable] public struct ActorRelation
-        {
-            
-            public Actor mActor;
-            
-            public string mDescription;
-            
-            public Color mColour;
-        }
-
-        
-        [System.Serializable] public struct PointRegion
-        {
-            [System.NonSerialized, UnityEngine.HideInInspector]
-            public ZoneInfo Zone;
-            
-            public int iLeaf;
-            
-            public byte ZoneNumber;
         }
         
         public enum EOwningDepartmentType
@@ -182,186 +124,6 @@ namespace Engine
             TRAVEL_Partial ,
             
             TRAVEL_Relative,
-        }
-        
-        public enum EForceType
-        {
-            
-            FT_None ,
-            
-            FT_DragAlong ,
-            
-            FT_Constant,
-        }
-        
-        public enum EMusicTransition
-        {
-            
-            MTRAN_None ,
-            
-            MTRAN_Instant ,
-            
-            MTRAN_Segue ,
-            
-            MTRAN_Fade ,
-            
-            MTRAN_FastFade ,
-            
-            MTRAN_SlowFade,
-        }
-        
-        public enum ESoundSlot
-        {
-            
-            SLOT_None ,
-            
-            SLOT_Misc ,
-            
-            SLOT_Pain ,
-            
-            SLOT_Interact ,
-            
-            SLOT_Ambient ,
-            
-            SLOT_Talk ,
-            
-            SLOT_Interface,
-        }
-        
-        public enum ESoundOcclusion
-        {
-            
-            OCCLUSION_Default ,
-            
-            OCCLUSION_None ,
-            
-            OCCLUSION_BSP ,
-            
-            OCCLUSION_StaticMeshes,
-        }
-        
-        public enum ERenderStyle
-        {
-            
-            STY_None ,
-            
-            STY_Normal ,
-            
-            STY_Masked ,
-            
-            STY_Translucent ,
-            
-            STY_Modulated ,
-            
-            STY_Alpha ,
-            
-            STY_Additive ,
-            
-            STY_Subtractive ,
-            
-            STY_Particle ,
-            
-            STY_AlphaZ,
-        }
-        
-        public enum ESurfaceTypes
-        {
-            
-            EST_Default ,
-            
-            EST_Rock ,
-            
-            EST_Dirt ,
-            
-            EST_Metal ,
-            
-            EST_Wood ,
-            
-            EST_Plant ,
-            
-            EST_Flesh ,
-            
-            EST_Ice ,
-            
-            EST_Snow ,
-            
-            EST_Water ,
-            
-            EST_Glass ,
-            
-            EST_CreakyWood ,
-            
-            EST_Grass ,
-            
-            EST_Gravel ,
-            
-            EST_HardRock ,
-            
-            EST_Mud ,
-            
-            EST_Stone ,
-            
-            EST_Hardwood ,
-            
-            EST_WoodRug ,
-            
-            EST_Custom08 ,
-            
-            EST_Custom09 ,
-            
-            EST_Custom10 ,
-            
-            EST_Custom11 ,
-            
-            EST_Custom12 ,
-            
-            EST_Custom13 ,
-            
-            EST_Custom14 ,
-            
-            EST_Custom15 ,
-            
-            EST_Custom16 ,
-            
-            EST_Custom17 ,
-            
-            EST_Custom18 ,
-            
-            EST_Custom19 ,
-            
-            EST_Custom20 ,
-            
-            EST_Custom21 ,
-            
-            EST_Custom22 ,
-            
-            EST_Custom23 ,
-            
-            EST_Custom24 ,
-            
-            EST_Custom25 ,
-            
-            EST_Custom26 ,
-            
-            EST_Custom27 ,
-            
-            EST_Custom28 ,
-            
-            EST_Custom29 ,
-            
-            EST_Custom30 ,
-            
-            EST_Custom31,
-        }
-        
-        public enum EUV2Mode
-        {
-            
-            UVM_MacroTexture ,
-            
-            UVM_LightMap ,
-            
-            UVM_Skin,
         }
         
         public enum ENetRole
@@ -460,110 +222,6 @@ namespace Engine
             RelevancyVeryFar ,
             
             RelevancyWorld,
-        }
-        
-        public enum EDrawType
-        {
-            
-            DT_None ,
-            
-            DT_Sprite ,
-            
-            DT_Mesh ,
-            
-            DT_Brush ,
-            
-            DT_RopeSprite ,
-            
-            DT_VerticalSprite ,
-            
-            DT_Terraform ,
-            
-            DT_SpriteAnimOnce ,
-            
-            DT_StaticMesh ,
-            
-            DT_DrawType ,
-            
-            DT_Particle ,
-            
-            DT_AntiPortal ,
-            
-            DT_FluidSurface,
-        }
-        
-        public enum ELightEffect
-        {
-            
-            LE_None ,
-            
-            LE_TorchWaver ,
-            
-            LE_FireWaver ,
-            
-            LE_WateryShimmer ,
-            
-            LE_Searchlight ,
-            
-            LE_SlowWave ,
-            
-            LE_FastWave ,
-            
-            LE_CloudCast ,
-            
-            LE_StaticSpot ,
-            
-            LE_Shock ,
-            
-            LE_Disco ,
-            
-            LE_Warp ,
-            
-            LE_Spotlight ,
-            
-            LE_NonIncidence ,
-            
-            LE_Shell ,
-            
-            LE_OmniBumpMap ,
-            
-            LE_Interference ,
-            
-            LE_Cylinder ,
-            
-            LE_Rotor ,
-            
-            LE_Negative ,
-            
-            LE_Sunlight ,
-            
-            LE_QuadraticNonIncidence,
-        }
-        
-        public enum ELightType
-        {
-            
-            LT_None ,
-            
-            LT_Steady ,
-            
-            LT_Pulse ,
-            
-            LT_Blink ,
-            
-            LT_Flicker ,
-            
-            LT_Strobe ,
-            
-            LT_BackdropLight ,
-            
-            LT_SubtlePulse ,
-            
-            LT_TexturePaletteOnce ,
-            
-            LT_TexturePaletteLoop ,
-            
-            LT_FadeOut,
         }
         
         public enum eSBNetworkRoles

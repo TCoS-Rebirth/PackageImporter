@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace SBAIScripts
 {

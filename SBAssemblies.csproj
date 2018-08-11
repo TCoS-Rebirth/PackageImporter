@@ -90,7 +90,6 @@
     <Compile Include="Assets\SBAssemblies\Engine\AutoLadder.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\AvoidMarker.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\Controller.cs" />
-    <Compile Include="Assets\SBAssemblies\Engine\ConvexVolume.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\DefaultPhysicsVolume.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\Door.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\Effects.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="Assets\SBAssemblies\Engine\MusicTrigger.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\NavigationPoint.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\Note.cs" />
-    <Compile Include="Assets\SBAssemblies\Engine\Package.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\PathNode.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\Pawn.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\PhysicsVolume.cs" />
@@ -148,9 +146,6 @@
     <Compile Include="Assets\SBAssemblies\Engine\Scout.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\SkyZoneInfo.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\SmallNavigationPoint.cs" />
-    <Compile Include="Assets\SBAssemblies\Engine\StaticMesh.cs" />
-    <Compile Include="Assets\SBAssemblies\Engine\StaticMeshActor.cs" />
-    <Compile Include="Assets\SBAssemblies\Engine\StaticMeshInstance.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\SubActionCameraEffect.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\SubActionCameraShake.cs" />
     <Compile Include="Assets\SBAssemblies\Engine\SubActionFade.cs" />
@@ -443,7 +438,6 @@
     <Compile Include="Assets\SBAssemblies\SBGame\Conversation_Node.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Conversation_Response.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Conversation_Topic.cs" />
-    <Compile Include="Assets\SBAssemblies\SBGame\DayNightCycleKeyframe.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Deadspell_GameInfo.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\DeadspellStormEffect.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\DS_Quest_GameInfo.cs" />
@@ -604,7 +598,6 @@
     <Compile Include="Assets\SBAssemblies\SBGame\Game_TransientPawn.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Game_Travel.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Game_UnarmedCombatState.cs" />
-    <Compile Include="Assets\SBAssemblies\SBGame\GameStaticMesh.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\Help_Article.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\IC_Appearance.cs" />
     <Compile Include="Assets\SBAssemblies\SBGame\IC_BodySlot.cs" />

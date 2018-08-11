@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace Engine
 {
@@ -28,7 +28,7 @@ namespace Engine
     {
         
         [Sirenix.OdinInspector.FoldoutGroup("Trigger")]
-        public byte TriggerType;
+        public ETriggerType TriggerType;
         
         [Sirenix.OdinInspector.FoldoutGroup("Trigger")]
         public string Message = string.Empty;
@@ -48,19 +48,6 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("Trigger")]
         public float ReTriggerDelay;
-        
-        public float TriggerTime;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Trigger")]
-        public float DamageThreshold;
-        
-        public Actor TriggerActor;
-        
-        public Actor TriggerActor2;
-        
-        public bool bSavedInitialCollision;
-        
-        public bool bSavedInitialActive;
         
         public Trigger()
         {

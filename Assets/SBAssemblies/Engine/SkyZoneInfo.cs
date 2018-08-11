@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -26,16 +25,6 @@ namespace Engine
     
     [System.Serializable] public class SkyZoneInfo : ZoneInfo
     {
-        
-        [Sirenix.OdinInspector.FoldoutGroup("DayNightCycle")]
-        public string OverlaySkyColor; //ConstantMaterial
-        
-        [Sirenix.OdinInspector.FoldoutGroup("SkyZoneInfo")]
-        public float RelativeOffsetDevider;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public Vector mOriginalLocation;
         
         public SkyZoneInfo()
         {

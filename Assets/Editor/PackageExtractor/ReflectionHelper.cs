@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Engine;
-using Framework.Attributes;
-using TCosReborn;
 using UnityEngine;
 using Fasterflect;
+using SBAssemblies;
 
 namespace Framework.PackageExtractor
 {

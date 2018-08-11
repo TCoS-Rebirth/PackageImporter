@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Framework.Attributes;
 using UnityEngine;
 
-namespace Framework.Common
+namespace SBAssemblies
 {
     public class LevelProgression : ScriptableObject
     {

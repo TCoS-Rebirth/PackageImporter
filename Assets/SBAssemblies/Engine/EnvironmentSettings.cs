@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -27,91 +26,9 @@ namespace Engine
     [System.Serializable] public class EnvironmentSettings : UObject
     {
         
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float BloomContrast;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float BloomScreenAmount;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float OriginalScreenAmount;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float BlurScreenAmount;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Color DistanceFogColor;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float DistanceFogEnd;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float DistanceFogEndMin;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float DistanceFogStart;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public byte AmbientBrightness;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public byte AmbientHue;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public byte AmbientSaturation;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float SunlightsBrightness;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float SunlightsContrastAdjust;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
-        public float LightmapContrastAdjust;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("HUD")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public Color HUDColorModifier;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Light")]
-        [ArraySizeForExtraction(Size=8)]
-        public LightHSB[] LightColor = new LightHSB[0];
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Emitter")]
-        [ArraySizeForExtraction(Size=8)]
-        public EmitterModifier[] EmitterMod = new EmitterModifier[0];
-        
         public EnvironmentSettings()
         {
         }
-        
-        [System.Serializable] public struct EmitterModifier
-        {
-            
-            public float DensityMultiplier;
-            
-            public float SizeMultiplier;
-            
-            public float VelocityMultiplier;
-            
-            public byte HueModifier;
-            
-            public float SaturationMultiplier;
-            
-            public float BrightnessMultiplier;
-            
-            public float OpacityMultiplier;
-        }
-        
-        [System.Serializable] public struct LightHSB
-        {
-            
-            public byte LightHue;
-            
-            public byte LightSaturation;
-            
-            public float LightBrightness;
-        }
+
     }
 }

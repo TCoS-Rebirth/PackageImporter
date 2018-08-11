@@ -2,7 +2,7 @@
     "name": "SBPackageExtractor",
     "references": [
         "SBAssemblies",
-        "Framework"
+        "Server"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

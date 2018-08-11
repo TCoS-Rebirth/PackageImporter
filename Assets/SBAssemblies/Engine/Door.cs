@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -44,8 +43,6 @@ namespace Engine
         public bool bBlockedWhenClosed;
         
         public bool bDoorOpen;
-        
-        public bool bTempNoCollide;
         
         public Door()
         {

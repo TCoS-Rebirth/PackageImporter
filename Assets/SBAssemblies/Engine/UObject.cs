@@ -18,15 +18,14 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
-using TCosReborn;
+using SBAssemblies;
 using UnityEngine;
 
 namespace Engine
 {
 #pragma warning disable 414    
     
-    [System.Serializable] public class UObject: MonoBehaviour
+    public class UObject: MonoBehaviour
     {
 
         //added

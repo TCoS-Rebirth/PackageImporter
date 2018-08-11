@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace SBGamePlay
 {
@@ -26,14 +25,6 @@ namespace SBGamePlay
     
     [System.Serializable] public class Interaction_ChangeMesh : Interaction_Component
     {
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Interaction_ChangeMesh")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh Mesh;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public StaticMesh originalMesh;
         
         public Interaction_ChangeMesh()
         {

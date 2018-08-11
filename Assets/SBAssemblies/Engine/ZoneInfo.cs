@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -26,8 +25,6 @@ namespace Engine
     
     [System.Serializable] public class ZoneInfo : Info
     {
-        
-        public const float CHECK_MUSIC_PLAYING_TIMER = 1F;
         
         [System.NonSerialized, UnityEngine.HideInInspector]
         public SkyZoneInfo SkyZone;
@@ -49,10 +46,6 @@ namespace Engine
         
         [Sirenix.OdinInspector.FoldoutGroup("ZoneInfo")]
         public bool bTerrainZone;
-        
-        [FieldConst()]
-        public List<TerrainInfo> Terrains = new List<TerrainInfo>();
-
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelArea")]
         public LocalizedString LevelAreaName;

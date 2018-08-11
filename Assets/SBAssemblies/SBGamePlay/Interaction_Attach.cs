@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace SBGamePlay
 {
@@ -26,10 +26,6 @@ namespace SBGamePlay
     
     [System.Serializable] public class Interaction_Attach : Interaction_Component
     {
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Interaction_Attach")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh Attachment;
         
         [Sirenix.OdinInspector.FoldoutGroup("Interaction_Attach")]
         public string Bone = string.Empty;

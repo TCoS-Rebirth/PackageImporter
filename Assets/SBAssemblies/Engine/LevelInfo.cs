@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace Engine
 {
@@ -82,9 +82,6 @@ namespace Engine
         public string Description = string.Empty;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
-        public string DecoTextName = string.Empty;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
         public int IdealPlayerCountMin;
         
         [Sirenix.OdinInspector.FoldoutGroup("LevelSummary")]
@@ -96,79 +93,13 @@ namespace Engine
         [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
         public string LevelEnterText = string.Empty;
         
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        public string LocalizedPkg = string.Empty;
-        
         public LevelSummary Summary;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public byte LevelAction;
-        
-        public byte NetMode;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("LevelInfo")]
-        public float StallZ;
         
         [FieldConst()]
         public NavigationPoint NavigationPointList;
         
-        [FieldConst()]
-        public PlayerController ReplicationViewer;
-        
-        [FieldConst()]
-        public Actor ReplicationViewTarget;
-        
         public LevelInfo()
         {
-        }
-        
-        public enum ENetMode
-        {
-            
-            NM_Standalone ,
-            
-            NM_DedicatedServer ,
-            
-            NM_ListenServer ,
-            
-            NM_Client,
-        }
-        
-        public enum ELevelAction
-        {
-            
-            LEVACT_None ,
-            
-            LEVACT_Loading ,
-            
-            LEVACT_Saving ,
-            
-            LEVACT_Connecting ,
-            
-            LEVACT_Precaching,
-        }
-        
-        public enum EMeshLODDetailLevel
-        {
-            
-            MDL_Low ,
-            
-            MDL_Medium ,
-            
-            MDL_High ,
-            
-            MDL_Ultra,
-        }
-        
-        public enum EPhysicsDetailLevel
-        {
-            
-            PDL_Low ,
-            
-            PDL_Medium ,
-            
-            PDL_High,
         }
     }
 }

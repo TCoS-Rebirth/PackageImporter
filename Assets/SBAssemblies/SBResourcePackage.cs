@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Engine;
-using UnityEngine;
+﻿using Engine;
 
-namespace TCosReborn
+namespace SBAssemblies
 {
-    [System.Serializable] public class SBResourcePackage: UObject
+    public class SBResourcePackage: UObject
     {
         //[HideInInspector]
         //public List<UObject> Resources = new List<UObject>();

@@ -18,7 +18,7 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
+using SBAssemblies;
 
 namespace SBGamePlay
 {
@@ -33,10 +33,6 @@ namespace SBGamePlay
         [Sirenix.OdinInspector.FoldoutGroup("Interaction_Progress")]
         [FieldConst()]
         public float speed;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Interaction_Progress")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh Tool;
         
         [Sirenix.OdinInspector.FoldoutGroup("Interaction_Progress")]
         public float ProgressSeconds;

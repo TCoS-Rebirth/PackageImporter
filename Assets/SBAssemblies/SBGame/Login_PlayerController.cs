@@ -28,10 +28,6 @@ namespace SBGame
         
         public List<UniverseInfo> mUniverses = new List<UniverseInfo>();
         
-        //public delegate<HandleLoginResult> @__HandleLoginResult__Delegate;
-        
-        //public delegate<HandleUniverseSelectionResult> @__HandleUniverseSelectionResult__Delegate;
-        
         public Login_PlayerController()
         {
         }

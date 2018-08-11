@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace SBGame
 {
@@ -29,10 +28,6 @@ namespace SBGame
         
         [Sirenix.OdinInspector.FoldoutGroup("WorldResource")]
         public WorldResourceManager Manager;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("WorldResource")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        public StaticMesh Tool;
         
         [Sirenix.OdinInspector.FoldoutGroup("WorldResource")]
         public string Animation = string.Empty;

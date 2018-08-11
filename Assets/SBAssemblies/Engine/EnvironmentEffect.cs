@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -26,19 +25,7 @@ namespace Engine
     
     [System.Serializable] public class EnvironmentEffect : Actor
     {
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool bAttachedToManager;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("Preview")]
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        [FieldTransient()]
-        public bool Preview;
-        
-        [Sirenix.OdinInspector.FoldoutGroup("EnvironmentEffect")]
-        public int Priority;
-        
+
         public EnvironmentEffect()
         {
         }

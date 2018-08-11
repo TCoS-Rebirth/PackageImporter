@@ -1,6 +1,8 @@
 {
-    "name": "Framework",
-    "references": [],
+    "name": "Server",
+    "references": [
+        "SBAssemblies"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Engine;
-using Fasterflect;
-using Framework.Common;
-using TCosReborn;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using NUnit.Framework;
-using UnityEngine.TestTools;
+using SBAssemblies;
 
 namespace Framework.PackageExtractor
 {

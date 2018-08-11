@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Framework.Common
+namespace SBAssemblies
 {
     public class SBResourceListing: ScriptableObject
     {

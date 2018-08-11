@@ -18,7 +18,6 @@ using SBMiniGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework.Attributes;
 
 namespace Engine
 {
@@ -26,17 +25,6 @@ namespace Engine
     
     [System.Serializable] public class EnvironmentManager : Actor
     {
-        
-        private List<ZoneInfo> mZoneInfos = new List<ZoneInfo>();
-        
-        private List<string> mEmitters = new List<string>(); //ParticleEmitter
-        
-        private List<EnvironmentEffect> mEffects = new List<EnvironmentEffect>();
-        
-        private EnvironmentSettings mCurrentSettings;
-        
-        [System.NonSerialized, UnityEngine.HideInInspector]
-        private Color mDefaultColor;
         
         public EnvironmentManager()
         {
