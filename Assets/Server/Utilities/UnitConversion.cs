@@ -19,9 +19,9 @@ namespace Utilities
             return new Vector3(pos.Y, pos.Z, pos.X)*UnrUnitsToMeters;
         }
 
-        public static Vector3 ToUnreal(Vector3 pos)
+        public static Vector ToUnreal(Vector3 pos)
         {
-            return new Vector3(pos.z, pos.x, pos.y)*MetersToUnrUnits;
+            return new Vector(pos.z * MetersToUnrUnits, pos.x * MetersToUnrUnits, pos.y * MetersToUnrUnits);
         }
 
         public static Quaternion ToUnity(Rotator rot)

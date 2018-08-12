@@ -8,7 +8,7 @@ namespace SBGame
     {
         public const int MAX_CHARACTERS_PER_UNIVERSE = 7;
 
-        public byte mState;
+        public ECharacterCreationState mState;
 
         [FieldConst()]
         [ArraySizeForExtraction(Size = 12)]

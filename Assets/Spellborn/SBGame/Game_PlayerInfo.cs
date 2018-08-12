@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_PlayerInfo : UObject
+    [Serializable] public class Game_PlayerInfo
     {
         [NonSerialized, HideInInspector]
         [FieldTransient()]

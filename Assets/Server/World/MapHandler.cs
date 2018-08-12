@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Engine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace World
@@ -8,11 +6,9 @@ namespace World
     public class MapHandler: IMapHandler
     {
 
-        List<LevelInfo> loadedLevels = new List<LevelInfo>();
-
         public MapHandler()
         {
-            LevelInfo.OnLevelLoaded += OnLevelLoaded;
+            SceneManager.sceneLoaded += OnLevelLoaded;
         }
 
         public void LoadMap(MapIDs map)
@@ -25,11 +21,9 @@ namespace World
             if (SceneManager.GetSceneByName(map.ToString()).isLoaded) SceneManager.UnloadSceneAsync(map.ToString());
         }
 
-        void OnLevelLoaded(LevelInfo info)
+        void OnLevelLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (loadedLevels.Contains(info)) return;
-            loadedLevels.Add(info);
-            Debug.Log(string.Format("Level loaded: {0}", info.gameObject.scene.name));
+            Debug.Log(string.Format("Map loaded: {0}", scene.name));
         }
 
         public void Update()

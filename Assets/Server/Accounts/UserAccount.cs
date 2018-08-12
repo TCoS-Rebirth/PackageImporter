@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Accounts
 {
@@ -17,20 +18,19 @@ namespace Accounts
     [Serializable]
     public class UserAccount
     {
-        public string EMail { get; private set; }
+        public int UID { get; private set; }
         public string Name { get; private set; }
         public string PasswordHash { get; private set; }
-
-        public int UID { get; private set; }
-        public bool Banned { get; private set; }
-
-        public bool IsOnline { get; private set; }
-
-        public DateTime LastLogin { get; private set; }
-        public int LastUniverse { get; private set; }
+        public string EMail { get; private set; }
         public AccountPrivilege Level { get; private set; }
+        public bool Banned { get; set; }
 
-        public UserAccount(int id, string name, string pass, string mail, bool banned, AccountPrivilege accPrivileges, DateTime lastLogin, bool isOnline, int lastUniverse)
+        public DateTime LastLogin { get; set; }
+        public IPAddress LastIP { get; set; }
+        public int LoginToken { get; set; }
+        public int LastUniverse { get; set; }
+
+        public UserAccount(int id, string name, string pass, string mail, bool banned, AccountPrivilege accPrivileges, DateTime lastLogin, int lastUniverse)
         {
             UID = id;
             Name = name;
@@ -39,18 +39,7 @@ namespace Accounts
             Banned = banned;
             Level = accPrivileges == AccountPrivilege.Error ? AccountPrivilege.Player : accPrivileges;
             LastLogin = lastLogin;
-            IsOnline = isOnline;
             LastUniverse = lastUniverse;
-        }
-
-        public void SetLastLogin(DateTime time)
-        {
-            LastLogin = time;
-        }
-
-        public void SetIsOnline(bool value)
-        {
-            IsOnline = value;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Network
 {
@@ -14,22 +13,31 @@ namespace Network
             if (!typeof(THeader).IsEnum) throw new ArgumentException("THeader must be enum");
         }
 
-        public void RegisterHandler(THeader header, Action<NetworkPacket> handler)
+        public void Add(THeader header, Action<NetworkPacket> handler)
         {
             _dispatchTable.Add((ushort)(object)header, handler);
         }
 
-        public void Dispatch(NetworkPacket packet)
+        public bool Dispatch(NetworkPacket packet)
         {
             Action<NetworkPacket> handler;
             if (_dispatchTable.TryGetValue(packet.Header, out handler))
             {
                 handler(packet);
+                return true;
             }
-            else
-            {
-                Debug.LogWarning("PacketID is not registered: " + packet.Header);
-            }
+            return false;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class HandlesPacketAttribute: Attribute
+    {
+        public GameHeader HeaderType { get; set; }
+
+        public HandlesPacketAttribute(GameHeader headerType)
+        {
+            HeaderType = headerType;
         }
     }
 }

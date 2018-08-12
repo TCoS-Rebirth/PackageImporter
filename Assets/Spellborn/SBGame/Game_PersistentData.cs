@@ -13,10 +13,6 @@ namespace SBGame
         [FieldConfig()]
         public int mCurrentShardID;
 
-        [FieldConfig()]
-        [NonSerialized, HideInInspector]
-        public float mAudioRepeatTimer;
-
         public Game_PersistentData()
         {
         }

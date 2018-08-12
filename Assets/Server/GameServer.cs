@@ -1,11 +1,15 @@
-﻿using Accounts;
+﻿using System.Diagnostics;
+using Accounts;
 using Database;
 using SBBase;
+using SBGamePlay;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using World;
+using Debug = UnityEngine.Debug;
 
 public class GameServer : MonoBehaviour
 {
@@ -56,20 +60,13 @@ public class GameServer : MonoBehaviour
         worldServer.Stop();
     }
 
-    [Button]
-    void FixSceneLighting()
+    #if UNITY_EDITOR
+    [Button(ButtonSizes.Small, Expanded = false)]
+    void LaunchClient()
     {
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            var scene = SceneManager.GetSceneAt(i);
-            SceneManager.SetActiveScene(scene);
-            UnityEditor.Lightmapping.realtimeGI = false;
-            UnityEditor.Lightmapping.bakedGI = false;
-            RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.skybox = null;
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);
-        }
+        Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe");
     }
+    #endif
 
     void LoadPersistentWorlds()
     {

@@ -13,15 +13,6 @@ namespace Engine
         [ReadOnly]
         public UObject Outer;
     }
-
-    public enum EAxis
-    {
-        AXIS_X,
-
-        AXIS_Y,
-
-        AXIS_Z,
-    }
 }
 /*
 final static native function FireDelegateString(Object aObj,name aFunction,string aValue);

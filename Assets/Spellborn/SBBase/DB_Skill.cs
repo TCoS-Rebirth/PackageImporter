@@ -2,7 +2,7 @@
 
 namespace SBBase
 {
-    [Serializable] public class DB_Skill : Base_DBObject
+    [Serializable] public class DB_Skill: Base_DBObject
     {
         public int ActionRid;
 

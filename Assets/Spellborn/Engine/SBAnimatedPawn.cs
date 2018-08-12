@@ -20,56 +20,6 @@ namespace Engine
         {
         }
 
-        [Serializable] public struct SBAnimationParameters
-        {
-            public float BlendFactor;
-
-            public float BlendInTime;
-
-            public float BlendOutTime;
-
-            public float AnimSpeed;
-
-            public float StartFrame;
-
-            public bool Looped;
-
-            public bool Reversed;
-        }
-
-        [Serializable] public struct SBAnimationStackEntry
-        {
-            public NameProperty AnimationName;
-
-            public List<int> ActionFlags;
-
-            public byte directionFlag;
-
-            public byte WeaponFlag;
-
-            public byte VariationNumber;
-
-            public SBAnimationParameters AnimParameters;
-
-            public bool OverrideSequenceAnimTypes;
-
-            public bool IgnoreNotifies;
-        }
-
-        [Serializable] public struct SBAnimationTypeStack
-        {
-            public byte AnimType;
-
-            public List<SBAnimationStackEntry> AnimationStack;
-        }
-
-        [Serializable] public struct SBDirectionFlagSet
-        {
-            public int directionFlag;
-
-            public float directionBlendFactor;
-        }
-
         public enum SBAnimationType
         {
             SBAnimType_None,

@@ -5,6 +5,7 @@ using System.Reflection;
 using Engine;
 using UnityEngine;
 using Fasterflect;
+using SBBase;
 
 namespace Framework.PackageExtractor
 {
@@ -108,7 +109,7 @@ namespace Framework.PackageExtractor
 
         static void CacheAssemblyTypes()
         {
-            var types = Assembly.GetAssembly(typeof(GameEngine)).GetTypes();
+            var types = Assembly.GetAssembly(typeof(SBUniverse)).GetTypes();
             cachedTypes.Clear();
             cachedTypes.AddRange(types.Where(type => sbNamespaces.Contains(type.Namespace)));
             for (var i = 0; i < types.Length; i++)

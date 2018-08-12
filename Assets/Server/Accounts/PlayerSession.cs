@@ -1,20 +1,19 @@
 ﻿using Network;
-using SBGame;
 
 namespace Accounts
 {
-    public class PlayerSession
+    public abstract class PlayerSession
     {
         public NetConnection Connection { get; private set; }
         public UserAccount Account { get; private set; }
-        public int TransferKey { get; private set; }
-        public Game_PlayerCharacter ActiveCharacter { get; private set; }
 
-        public PlayerSession(NetConnection connection, UserAccount account, int transferKey)
+        protected PlayerSession(NetConnection connection, UserAccount account)
         {
             Connection = connection;
             Account = account;
-            TransferKey = transferKey;
         }
+
+        public abstract void OnBegin();
+        public abstract void OnEnd();
     }
 }

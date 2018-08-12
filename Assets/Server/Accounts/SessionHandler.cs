@@ -1,54 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using Network;
-using UnityEngine;
 
 namespace Accounts
 {
     public class SessionHandler: ISessionHandler
     {
+        List<PlayerSession> sessions = new List<PlayerSession>();
 
-        List<PlayerSession> activeSessions = new List<PlayerSession>();
-
-        public void StartSession(PlayerSession session)
+        public void Begin(PlayerSession session)
         {
-            if (session == null) throw new ArgumentException("Session must not be null", "session");
-            activeSessions.Add(session);
+            if (session == null) throw new ArgumentException("Session must not be null", nameof(session));
+            if (Get<PlayerSession>(session.Connection) != null) throw new Exception("Duplicate session begin");
+            sessions.Add(session);
+            session.OnBegin();
         }
 
-        public PlayerSession GetSession(int transferKey)
+        public T Get<T>(NetConnection connection) where T: PlayerSession
         {
-            for (int i = 0; i < activeSessions.Count; i++)
+            for (var i = 0; i < sessions.Count; i++)
             {
-                if (activeSessions[i].TransferKey == transferKey) return activeSessions[i];
+                if (sessions[i].Connection == connection) return sessions[i] as T;
             }
             return null;
         }
 
-        public PlayerSession GetSession(NetConnection connection)
+        public T Get<T>(Predicate<T> predicate) where T : PlayerSession
         {
-            for (int i = 0; i < activeSessions.Count; i++)
+            for (var i = 0; i < sessions.Count; i++)
             {
-                if (activeSessions[i].Connection == connection) return activeSessions[i];
+                var t = sessions[i] as T;
+                if (t != null && predicate(t)) return t;
             }
             return null;
         }
 
-        public int GetSessionCount()
+        public int GetCount<T>() where T:PlayerSession
         {
-            return activeSessions.Count;
+            var count = 0;
+            for (int i = 0; i < sessions.Count; i++)
+            {
+                if (sessions[i] is T) count++;
+            }
+            return count;
         }
 
-        public void EndSession(PlayerSession session)
+        public void End(PlayerSession session)
         {
-            Debug.Log("EndSession not yet implemented");
+            if (!sessions.Remove(session)) throw new Exception("Session not yet begun");
+            session.OnEnd();
         }
 
         public void EndAllSessions()
         {
-            for (int i = 0; i < activeSessions.Count; i++)
+            for (var i = 0; i < sessions.Count; i++)
             {
-                EndSession(activeSessions[i]);
+                End(sessions[i]);
             }
         }
     }

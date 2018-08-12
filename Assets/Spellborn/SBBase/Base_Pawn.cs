@@ -8,57 +8,6 @@ namespace SBBase
     {
         public const float IDEAL_JUMP_SPEED_FOR_ANIM = 350F;
 
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_vtbl;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mRelevanceObjectID;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpRelevance;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpMatineeObject;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexX;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexY;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mVisibilityLevel;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbVisible;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbGM;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int mFramer;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool bIsFalling;
-
-        [NonSerialized, HideInInspector]
-        private float mTimeToFall;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mFallTimer;
-
         public Base_Pawn()
         {
         }

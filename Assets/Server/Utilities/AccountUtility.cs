@@ -8,7 +8,7 @@ namespace Utilities
     public static class AccountUtility
     {
 
-        static readonly HashSet<int> usedTransferkeys = new HashSet<int>();
+        static readonly HashSet<int> usedTransferTokens = new HashSet<int>();
 
         public static string CalculateHash(string input)
         {
@@ -23,14 +23,14 @@ namespace Utilities
             return hash.ToString();
         }
         
-        public static int GenerateTransferKey()
+        public static int GenerateTransferToken()
         {
-            var newKey = new Random(DateTime.Now.Minute).Next();
-            while (usedTransferkeys.Contains(newKey))
+            var newToken = new Random(DateTime.Now.Minute).Next();
+            while (usedTransferTokens.Contains(newToken))
             {
-                newKey = new Random(DateTime.Now.Second).Next();
+                newToken = new Random(DateTime.Now.Second).Next();
             }
-            return newKey;
+            return newToken;
         }
     }
 }

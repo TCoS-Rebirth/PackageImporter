@@ -4,7 +4,7 @@ using Engine;
 
 namespace SBBase
 {
-    [Serializable] public class DB_SkillDeck : UObject
+    [Serializable] public class DB_SkillDeck: Base_DBObject
     {
         public int Id;
 

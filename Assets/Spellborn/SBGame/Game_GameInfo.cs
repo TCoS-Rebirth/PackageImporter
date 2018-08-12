@@ -8,9 +8,6 @@ namespace SBGame
 {
     [Serializable] public class Game_GameInfo : Base_GameInfo
     {
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int mhastransactionmanager_data;
 
         public SBClock mClock;
 

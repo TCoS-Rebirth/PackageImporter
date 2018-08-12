@@ -8,9 +8,6 @@ namespace SBGame
 {
     [Serializable] public class Game_Pawn : Base_Pawn
     {
-        public const int cHistoryEnd = -1;
-
-        public const int cLocationHistorySize = 40;
 
         [FieldConst()]
         [TypeProxyDefinition(TypeName = "Game_Appearance")]
@@ -92,18 +89,13 @@ namespace SBGame
 
         public Game_MiniGameProxy MiniGameProxy;
 
-        private byte mCurrentState;
+        private EPawnStates mCurrentState;
 
         private byte mNetState;
 
         public bool bInvulnerable;
 
         private bool bCheatInvulnerable;
-
-        public List<HistoryLocation> mLocationHistory = new List<HistoryLocation>();
-
-        [NonSerialized, HideInInspector]
-        public int mLocationHistoryCursor;
 
         public bool mTeleported;
 
@@ -117,33 +109,14 @@ namespace SBGame
 
         public CharacterIdentity mCharacterIdentityForBugReport;
 
-        [NonSerialized, HideInInspector]
-        public string mPawnShadow; //ShadowProjector
-
-        public bool mDebugDump;
-
         public bool mAlwaysHighQualityAppearance;
 
         public float mInteractionRange;
-
-        public float mMinDamageFallSpeed;
-
-        public float mMaxDamageFallSpeed;
-
-        [NonSerialized, HideInInspector]
-        public bool mIsUnderCursor;
-
-        [NonSerialized, HideInInspector]
-        public bool mIsSelected;
 
         [NonSerialized, HideInInspector]
         public bool mIsInteracting;
 
         public int mDebugFilters;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public List<RangeDisplayData> mSelectedRanges = new List<RangeDisplayData>();
 
         [NonSerialized, HideInInspector]
         public Vector mDesiredLocation;
@@ -152,10 +125,6 @@ namespace SBGame
         public Actor mTargetActor;
 
         public List<NameProperty> InteractionTags = new List<NameProperty>();
-
-        private bool mUseFadeInFadeOut;
-
-        private int mFadeOutEffectHandle;
 
         public float SkillRadius;
 
@@ -173,14 +142,6 @@ namespace SBGame
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
-        private Vector mLastLocation;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mNextLocationTime;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
         public Game_PetPawn Pet;
 
         [NonSerialized, HideInInspector]
@@ -189,21 +150,8 @@ namespace SBGame
 
         private bool mInvisible;
 
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool bJumpedFromLadder;
-
         public Game_Pawn()
         {
-        }
-
-        [Serializable] public struct RangeDisplayData
-        {
-            public FSkill_EffectClass_Range Range;
-
-            public Vector Location;
-
-            public float RemoveTime;
         }
 
         [Serializable] public struct CharacterIdentity
@@ -215,19 +163,6 @@ namespace SBGame
             public int TransferCharacterID;
 
             public int TransferAccountID;
-        }
-
-        [Serializable] public struct HistoryLocation
-        {
-            public Vector Location;
-
-            public Rotator Rotation;
-
-            public float Time;
-
-            public byte Physics;
-
-            public bool Teleport;
         }
 
         public enum EPetAttackState

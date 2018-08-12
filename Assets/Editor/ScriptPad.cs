@@ -2,6 +2,7 @@
 using System.Text;
 using Engine;
 using Mono.CSharp;
+using SBBase;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace Editor
             var settings = new CompilerSettings();
             settings.AssemblyReferences.Add(typeof(Application).Assembly.FullName);
             settings.AssemblyReferences.Add(typeof(EditorApplication).Assembly.FullName);
-            settings.AssemblyReferences.Add(typeof(GameEngine).Assembly.FullName);
+            settings.AssemblyReferences.Add(typeof(SBUniverse).Assembly.FullName);
             var printer = new ConsoleReportPrinter(new UnityMessageReporter());
             var context = new CompilerContext(settings, printer);
             evaluator = new Evaluator(context);

@@ -7,43 +7,6 @@ namespace SBBase
 {
     [Serializable] public class Base_GameInfo : GameInfo
     {
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_vtbl;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mRelevanceObjectID;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpRelevance;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mpMatineeObject;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexX;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mBlockIndexY;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mVisibilityLevel;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbVisible;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_relevance_object_mbGM;
-
-        public int HackFlags;
 
         public float mFixedRelativeTimeOfDay;
 

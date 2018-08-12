@@ -32,27 +32,7 @@ namespace SBGame
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
-        private float mLastUpdateTime;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
         private byte mCurrentFrameID;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private Vector mPrevLocation;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private Rotator mPrevRotation;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private Vector mPrevVelocity;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private byte mPrevPhysics;
 
         public byte mMoveFrameID;
 
@@ -86,8 +66,6 @@ namespace SBGame
 
         public LevelAreaVolume mCurrentShard;
 
-        private float mLastLevelAreaUpdate;
-
         private int mCurrentShardID;
 
         private int mCurrentMapSectionID;
@@ -101,12 +79,6 @@ namespace SBGame
         public PvPSettings mPvPSettings;
 
         public float mPvPTimer;
-
-        public EventNotification PetRelevancyLost;
-
-        public EventNotification PetRelevancyFound;
-
-        public bool LostPet;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]

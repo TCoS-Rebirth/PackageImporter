@@ -6,7 +6,6 @@ namespace Engine
 {
     [Serializable] public class LevelInfo : ZoneInfo
     {
-        public static event Action<LevelInfo> OnLevelLoaded;
 
         public float TimeDilation;
 
@@ -78,11 +77,6 @@ namespace Engine
 
         [FieldConst()]
         public NavigationPoint NavigationPointList;
-
-        void Awake()
-        {
-            if (OnLevelLoaded != null) OnLevelLoaded(this);
-        }
     }
 }
 /*

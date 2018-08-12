@@ -3,7 +3,7 @@ using Engine;
 
 namespace SBBase
 {
-    [Serializable] public class DB_Team : UObject
+    [Serializable] public class DB_Team : Base_DBObject
     {
         public DB_Team()
         {

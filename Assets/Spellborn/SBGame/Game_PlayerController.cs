@@ -13,15 +13,6 @@ namespace SBGame
 
         public const float SERVER_SYNC_TIME = 1F;
 
-        [TypeProxyDefinition(TypeName = "Game_PlayerInput")]
-        public Type InputClass;
-
-        [TypeProxyDefinition(TypeName = "Game_Camera")]
-        public Type CameraClass;
-
-        [TypeProxyDefinition(TypeName = "Game_GUI")]
-        public Type GUIClass;
-
         [TypeProxyDefinition(TypeName = "Game_Chat")]
         public Type ChatClass;
 
@@ -40,11 +31,7 @@ namespace SBGame
         [TypeProxyDefinition(TypeName = "Game_PlayerGuilds")]
         public Type mGroupingGuildsClass;
 
-        public Game_PlayerInput Input;
-
         public Game_Chat Chat;
-
-        public Game_Camera Camera;
 
         public Game_Travel Travel;
 
@@ -90,30 +77,6 @@ namespace SBGame
 
         public FSkill_EffectClass_AudioVisual mDeathEffect;
 
-        public int mDeathEffectHandle;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public bool mOldFreeCamLock;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mPing;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mPingTime;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mPongTime;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private byte mPingState;
-
-        private float mPingInterval;
-
         public bool DBMuted;
 
         public string DBMutedScope = string.Empty;
@@ -130,15 +93,6 @@ namespace SBGame
 
         public Game_PlayerController()
         {
-        }
-
-        public enum EPingState
-        {
-            PIS_Idle,
-
-            PIS_WaitingPing,
-
-            PIS_WaitingPong,
         }
     }
 }

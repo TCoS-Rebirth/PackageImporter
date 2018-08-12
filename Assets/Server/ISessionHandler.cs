@@ -1,11 +1,12 @@
-﻿using Accounts;
+﻿using System;
+using Accounts;
 using Network;
 
 public interface ISessionHandler
 {
-    void StartSession(PlayerSession session);
-    PlayerSession GetSession(NetConnection connection);
-    PlayerSession GetSession(int transferKey);
-    int GetSessionCount();
-    void EndSession(PlayerSession session);
+    void Begin(PlayerSession session);
+    T Get<T>(NetConnection connection) where T:PlayerSession;
+    T Get<T>(Predicate<T> predicate) where T : PlayerSession;
+    int GetCount<T>() where T:PlayerSession;
+    void End(PlayerSession session);
 }

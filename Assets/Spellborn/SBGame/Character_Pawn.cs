@@ -13,10 +13,6 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         private int mLastUsedTimestamp;
 
-        private List<int> mSelectEmoteIndices = new List<int>();
-
-        private List<int> mDeleteEmoteIndices = new List<int>();
-
         public Game_PersistentData mPersistentData;
 
         public Character_Pawn()

@@ -8,9 +8,6 @@ namespace SBGame
 {
     [Serializable] public class Game_Controller : Base_Controller
     {
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int mhastransactionmanager_data;
 
         [TypeProxyDefinition(TypeName = "Game_DebugUtils")]
         public Type mDebugUtilsClass;
@@ -27,7 +24,7 @@ namespace SBGame
 
         public Game_Conversation ConversationControl;
 
-        public byte mCurrentState;
+        public EControllerStates mCurrentState;
 
         public List<Game_Hook> mContentHooks = new List<Game_Hook>();
 

@@ -60,6 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Server\Accounts\GameSession.cs" />
+    <Compile Include="Assets\Server\Accounts\LoginSession.cs" />
     <Compile Include="Assets\Server\Accounts\PlayerSession.cs" />
     <Compile Include="Assets\Server\Accounts\SessionHandler.cs" />
     <Compile Include="Assets\Server\Accounts\UserAccount.cs" />
@@ -74,10 +76,12 @@
     <Compile Include="Assets\Server\Network\NetConnector.cs" />
     <Compile Include="Assets\Server\Network\NetworkPacket.cs" />
     <Compile Include="Assets\Server\Network\NetworkPacket.Read.cs" />
+    <Compile Include="Assets\Server\Network\NetworkPacket.StructExtensions.cs" />
     <Compile Include="Assets\Server\Network\NetworkPacket.Write.cs" />
     <Compile Include="Assets\Server\Network\PacketDispatcher.cs" />
     <Compile Include="Assets\Server\Network\PacketExtensions.cs" />
     <Compile Include="Assets\Server\Network\PacketIDs.cs" />
+    <Compile Include="Assets\Server\Network\StructSerializer.cs" />
     <Compile Include="Assets\Server\ServiceRegistry.cs" />
     <Compile Include="Assets\Server\UniverseInfo.cs" />
     <Compile Include="Assets\Server\Utilities\AccountUtility.cs" />
@@ -126,7 +130,6 @@
     <Compile Include="Assets\Spellborn\Engine\EnvironmentManager.cs" />
     <Compile Include="Assets\Spellborn\Engine\EnvironmentSettings.cs" />
     <Compile Include="Assets\Spellborn\Engine\FlyingPathNode.cs" />
-    <Compile Include="Assets\Spellborn\Engine\GameEngine.cs" />
     <Compile Include="Assets\Spellborn\Engine\GameInfo.cs" />
     <Compile Include="Assets\Spellborn\Engine\Info.cs" />
     <Compile Include="Assets\Spellborn\Engine\Interaction.cs" />
@@ -403,9 +406,7 @@
     <Compile Include="Assets\Spellborn\SBBase\Base_Component.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_Controller.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_DBObject.cs" />
-    <Compile Include="Assets\Spellborn\SBBase\Base_GameClient.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_GameInfo.cs" />
-    <Compile Include="Assets\Spellborn\SBBase\Base_GameServer.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_InstanceType.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_Notification.cs" />
     <Compile Include="Assets\Spellborn\SBBase\Base_Pawn.cs" />
@@ -566,11 +567,9 @@
     <Compile Include="Assets\Spellborn\SBGame\Game_EmoteRotate.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_Emotes.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_EquippedAppearance.cs" />
-    <Compile Include="Assets\Spellborn\SBGame\Game_GameClient.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_GameInfo.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_GameMasterController.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_GameMasterUtils.cs" />
-    <Compile Include="Assets\Spellborn\SBGame\Game_GameServer.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_Hook.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_InstanceInfo.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_Item.cs" />
@@ -604,7 +603,6 @@
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerFriends.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerGuilds.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerInfo.cs" />
-    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerInput.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerItemManager.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerPawn.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_PlayerQuestLog.cs" />

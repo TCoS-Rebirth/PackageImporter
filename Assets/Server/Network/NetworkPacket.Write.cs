@@ -2,6 +2,7 @@
 using System.Text;
 using Engine;
 using UnityEngine;
+using Utilities;
 
 namespace Network
 {
@@ -90,6 +91,13 @@ namespace Network
             WriteInt32(rot.Pitch);
             WriteInt32(rot.Yaw);
             WriteInt32(rot.Roll);
+        }
+
+        public void WriteVector(Vector vec)
+        {
+            WriteFloat(vec.X);
+            WriteFloat(vec.Y);
+            WriteFloat(vec.Z);
         }
     }
 }
