@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Accounts;
+using Database;
 using SBBase;
-using Server;
-using Server.Accounts;
-using Server.Database;
-using Server.World;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using World;
 
 public class GameServer : MonoBehaviour
 {
@@ -58,6 +56,21 @@ public class GameServer : MonoBehaviour
         worldServer.Stop();
     }
 
+    [Button]
+    void FixSceneLighting()
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            var scene = SceneManager.GetSceneAt(i);
+            SceneManager.SetActiveScene(scene);
+            UnityEditor.Lightmapping.realtimeGI = false;
+            UnityEditor.Lightmapping.bakedGI = false;
+            RenderSettings.ambientMode = AmbientMode.Flat;
+            RenderSettings.skybox = null;
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);
+        }
+    }
+
     void LoadPersistentWorlds()
     {
         Debug.Log("Loading persistent worlds");
@@ -67,7 +80,7 @@ public class GameServer : MonoBehaviour
             if (sbWorld.WorldFile.Contains("\\")) continue;
             if (sbWorld.WorldType == SBWorld.eZoneWorldTypes.ZWT_PERSISTENT) mapHandler.LoadMap(sbWorld.worldID);
         }
-        Debug.Log("Loading persistent worlds finished in " + (Time.realtimeSinceStartup - loadingStartTime).ToString("00.0") + "s");
+        Debug.Log("Loading persistent worlds finished in " + (Time.realtimeSinceStartup - loadingStartTime).ToString("0.0") + "s");
     }
 
     void Update()

@@ -1,7 +1,7 @@
-﻿using Server.Network;
+﻿using Network;
 using UnityEngine;
 
-namespace Server.World
+namespace World
 {
     public class WorldServer: IWorldServer
     {

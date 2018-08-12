@@ -5,6 +5,6 @@ namespace Gameplay
 {
     [Serializable] public class Action_TRIGGEREVENT : LatentScriptedAction
     {
-        public NameProperty Event ="";
+        public NameProperty Event = "";
     }
 }

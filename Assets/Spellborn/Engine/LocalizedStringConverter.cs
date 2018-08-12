@@ -29,14 +29,14 @@ namespace Engine
             if (value is string)
             {
                 int val;
-                if (int.TryParse((string)value, out val))
+                if (int.TryParse((string) value, out val))
                 {
                     return new LocalizedString(val);
                 }
             }
             if (value is int)
             {
-                return new LocalizedString((int)value);
+                return new LocalizedString((int) value);
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -45,11 +45,11 @@ namespace Engine
         {
             if (destinationType == typeof(string))
             {
-                return ((LocalizedString)value).ToString();
+                return ((LocalizedString) value).ToString();
             }
             if (destinationType == typeof(int))
             {
-                return ((LocalizedString)value).GetID();
+                return ((LocalizedString) value).GetID();
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }

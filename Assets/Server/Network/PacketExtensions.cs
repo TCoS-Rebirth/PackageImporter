@@ -1,4 +1,4 @@
-﻿namespace Server.Network
+﻿namespace Network
 {
     static class PacketExtensions
     {

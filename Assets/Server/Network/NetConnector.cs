@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
-namespace Server.Network
+namespace Network
 {
     public class NetConnector
     {

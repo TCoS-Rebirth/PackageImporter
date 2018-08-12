@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Engine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Server.World
+namespace World
 {
     public class MapHandler: IMapHandler
     {
@@ -30,7 +29,7 @@ namespace Server.World
         {
             if (loadedLevels.Contains(info)) return;
             loadedLevels.Add(info);
-            Debug.Log(string.Format("Level loaded: {0} ({1})", info.gameObject.scene.name, info.Title.Length > 0 ? info.Title : info.Description));
+            Debug.Log(string.Format("Level loaded: {0}", info.gameObject.scene.name));
         }
 
         public void Update()

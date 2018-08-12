@@ -5,6 +5,5 @@ namespace Gameplay
 {
     [Serializable] public class ScriptedController : AIController
     {
-        
     }
 }

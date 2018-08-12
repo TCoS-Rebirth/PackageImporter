@@ -1,4 +1,4 @@
-﻿namespace Server.Database
+﻿namespace Database
 {
     public class TransientDatabase: IDatabase
     {

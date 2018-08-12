@@ -1,7 +1,7 @@
 ﻿using Engine;
 using UnityEngine;
 
-namespace Server.Utilities
+namespace Utilities
 {
     public static class UnitConversion
     {

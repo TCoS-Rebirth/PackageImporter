@@ -1,8 +1,5 @@
-﻿namespace Server
+﻿public interface IWorldServer
 {
-    public interface IWorldServer
-    {
-        string PublicIP { get; }
-        int Port { get; }
-    }
+    string PublicIP { get; }
+    int Port { get; }
 }

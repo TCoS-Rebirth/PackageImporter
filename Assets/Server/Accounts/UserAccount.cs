@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Server.Accounts
+namespace Accounts
 {
 
     public enum AccountPrivilege

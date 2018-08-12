@@ -1,8 +1,5 @@
-﻿namespace Server
+﻿public interface IMapHandler
 {
-    public interface IMapHandler
-    {
-        void LoadMap(MapIDs map);
-        void UnloadMap(MapIDs map);
-    }
+    void LoadMap(MapIDs map);
+    void UnloadMap(MapIDs map);
 }

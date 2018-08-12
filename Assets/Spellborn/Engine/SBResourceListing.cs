@@ -2,39 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SBResourceListing : ScriptableObject
+namespace Engine
 {
-
-    [SerializeField, HideInInspector] List<ResourceIndex> resources = new List<ResourceIndex>();
+    public class SBResourceListing : ScriptableObject
+    {
+        [SerializeField, HideInInspector] List<ResourceIndex> resources = new List<ResourceIndex>();
 
 #if UNITY_EDITOR
-    public void EditorAddResource(int id, string resource)
-    {
-        resources.Add(new ResourceIndex { ID = id, Resource = resource });
-    }
+        public void EditorAddResource(int id, string resource)
+        {
+            resources.Add(new ResourceIndex {ID = id, Resource = resource});
+        }
 #endif
 
-    public Dictionary<string, int> GetIDs(bool useFirstOccurences = false)
-    {
-        var indexedCache = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        for (var i = 0; i < resources.Count; i++)
+        public Dictionary<string, int> GetIDs(bool useFirstOccurences = false)
         {
-            if (indexedCache.ContainsKey(resources[i].Resource))
+            var indexedCache = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            for (var i = 0; i < resources.Count; i++)
             {
-                var res = resources[i].Resource;
-                if (useFirstOccurences) continue;
-                indexedCache[res] = resources[i].ID;
-                continue;
+                if (indexedCache.ContainsKey(resources[i].Resource))
+                {
+                    var res = resources[i].Resource;
+                    if (useFirstOccurences) continue;
+                    indexedCache[res] = resources[i].ID;
+                    continue;
+                }
+                indexedCache.Add(resources[i].Resource, resources[i].ID);
             }
-            indexedCache.Add(resources[i].Resource, resources[i].ID);
+            return indexedCache;
         }
-        return indexedCache;
-    }
 
-    [Serializable]
-    class ResourceIndex
-    {
-        public int ID;
-        public string Resource;
+        [Serializable]
+        class ResourceIndex
+        {
+            public int ID;
+            public string Resource;
+        }
     }
 }

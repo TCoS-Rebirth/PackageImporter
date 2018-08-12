@@ -1,9 +1,6 @@
-﻿using System;
-
-namespace Gameplay
+﻿namespace Gameplay
 {
     public class LatentScriptedAction : ScriptedAction
     {
-
     }
 }

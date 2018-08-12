@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Server.Network;
+using Network;
 using UnityEngine;
 
-namespace Server.Accounts
+namespace Accounts
 {
     public class SessionHandler: ISessionHandler
     {

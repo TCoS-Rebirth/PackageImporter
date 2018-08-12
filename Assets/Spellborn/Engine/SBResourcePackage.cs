@@ -1,7 +1,6 @@
-﻿
-using Engine;
-
-public class SBResourcePackage: UObject
+﻿namespace Engine
 {
-        
+    public class SBResourcePackage : UObject
+    {
+    }
 }

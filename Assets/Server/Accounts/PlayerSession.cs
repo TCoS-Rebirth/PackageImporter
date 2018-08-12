@@ -1,7 +1,7 @@
-﻿using SBGame;
-using Server.Network;
+﻿using Network;
+using SBGame;
 
-namespace Server.Accounts
+namespace Accounts
 {
     public class PlayerSession
     {

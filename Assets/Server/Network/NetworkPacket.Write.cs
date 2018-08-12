@@ -3,7 +3,7 @@ using System.Text;
 using Engine;
 using UnityEngine;
 
-namespace Server.Network
+namespace Network
 {
     public partial class NetworkPacket
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Server.Network
+namespace Network
 {
     public class PacketDispatcher<THeader> where THeader: struct, IConvertible
     {

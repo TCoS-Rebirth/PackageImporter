@@ -1,4 +1,4 @@
-﻿namespace Server.Network
+﻿namespace Network
 {
     public enum LoginHeader : ushort
     {

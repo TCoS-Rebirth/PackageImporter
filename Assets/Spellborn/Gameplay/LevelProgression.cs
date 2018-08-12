@@ -10,12 +10,12 @@ namespace Gameplay
         [SerializeField, ReadOnly]
         List<ProgressData> progressData = new List<ProgressData>();
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public void EditorAddProgressData(ProgressData pd)
         {
             progressData.Add(pd);
         }
-        #endif
+#endif
 
         [SerializeField, ReadOnly]
         List<PePProgress> pepProgressData = new List<PePProgress>
@@ -26,7 +26,7 @@ namespace Gameplay
             new PePProgress(3, 35000),
             new PePProgress(4, 75000),
             new PePProgress(5, 150000)
-};
+        };
 
         public ProgressData GetDataForLevel(int level)
         {
@@ -60,7 +60,6 @@ namespace Gameplay
             }
             return pepProgressData[pepProgressData.Count - 1];
         }
-
     }
 
     [Serializable]

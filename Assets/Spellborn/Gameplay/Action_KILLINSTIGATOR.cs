@@ -4,6 +4,5 @@ namespace Gameplay
 {
     [Serializable] public class Action_KILLINSTIGATOR : LatentScriptedAction
     {
-        
     }
 }

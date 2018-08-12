@@ -4,7 +4,6 @@ namespace Engine
 {
     public class PackageObjectPropertyAttribute : Attribute
     {
-
     }
 
     //public class ReadOnlyAttribute: PropertyAttribute
@@ -23,32 +22,26 @@ namespace Engine
 
     public class FieldConstAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class FieldConfigAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class FieldGlobalConfigAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class FieldTransientAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class FieldTravelAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class FieldDeprecatedAttribute : PackageObjectPropertyAttribute
     {
-
     }
 
     public class ArraySizeForExtractionAttribute : PackageObjectPropertyAttribute
