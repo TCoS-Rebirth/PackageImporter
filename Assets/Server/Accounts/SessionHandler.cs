@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Server.Network;
+using UnityEngine;
 
 namespace Server.Accounts
 {
@@ -17,7 +18,11 @@ namespace Server.Accounts
 
         public PlayerSession GetSession(int transferKey)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < activeSessions.Count; i++)
+            {
+                if (activeSessions[i].TransferKey == transferKey) return activeSessions[i];
+            }
+            return null;
         }
 
         public PlayerSession GetSession(NetConnection connection)
@@ -36,7 +41,15 @@ namespace Server.Accounts
 
         public void EndSession(PlayerSession session)
         {
-            throw new NotImplementedException();
+            Debug.Log("EndSession not yet implemented");
+        }
+
+        public void EndAllSessions()
+        {
+            for (int i = 0; i < activeSessions.Count; i++)
+            {
+                EndSession(activeSessions[i]);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Server.Network
 
         void LogOverflow()
         {
-            UnityEngine.Debug.Log("buffer read overflow");
+            Debug.Log("buffer read overflow");
         }
 
         public byte ReadByte()

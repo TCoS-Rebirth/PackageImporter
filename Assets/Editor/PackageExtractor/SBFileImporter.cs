@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Engine;
+using Gameplay;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using NUnit.Framework;
-using SBAssemblies;
 
 namespace Framework.PackageExtractor
 {

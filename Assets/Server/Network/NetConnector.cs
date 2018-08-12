@@ -15,7 +15,8 @@ namespace Server.Network
         readonly Queue<NetworkPacket> packetQueu = new Queue<NetworkPacket>();
         readonly int port;
 
-        readonly ManualResetEvent waitHandler = new ManualResetEvent(false);
+        readonly ManualResetEvent messageWaitEvent = new ManualResetEvent(false);
+        AutoResetEvent workerDoneEvent = new AutoResetEvent(false);
 
         Socket listenSocket;
 
@@ -25,9 +26,9 @@ namespace Server.Network
 
         Thread _thread;
 
-        public NetConnector(int loginPort)
+        public NetConnector(int port)
         {
-            port = loginPort;
+            this.port = port;
         }
 
         public bool IsRunning
@@ -84,16 +85,18 @@ namespace Server.Network
 
         public void Shutdown()
         {
+            shutDownRequested = true;
             if (queueWorker != null)
             {
                 queueWorker.CancelAsync();
+                workerDoneEvent.WaitOne(1000);
             }
+            FlushSendQueue();
             if (_thread != null)
             {
-                shutDownRequested = true;
                 try
                 {
-                    listenSocket.Shutdown(SocketShutdown.Both);
+                    listenSocket.Shutdown(SocketShutdown.Receive);
                 }
                 catch { }
                 listenSocket.Close();
@@ -104,20 +107,16 @@ namespace Server.Network
                         HandleDisconnect(connections[i]);
                     }
                 }
-                waitHandler.Set();
+                messageWaitEvent.Set();
                 if (_thread != null)
                 {
+                    _thread.Abort();
                     _thread.Join(1000);
                 }
             }
             lock (connections)
             {
                 connections.Clear();
-            }
-            if (_thread != null)
-            {
-                _thread.Interrupt();
-                _thread.Abort();
             }
         }
 
@@ -136,28 +135,28 @@ namespace Server.Network
                         break;
                     }
                     if (shutDownRequested) break;
-                    waitHandler.Reset();
+                    messageWaitEvent.Reset();
                     try
                     {
                         listenSocket.BeginAccept(AcceptConnection, listenSocket);
                     }
                     catch (Exception e)
                     {
-                        Debug.Log("NetConnector (acceptRoutine): "+e.Message);
+                        Debug.LogException(e);
                         break;
                     }
-                    waitHandler.WaitOne();
+                    messageWaitEvent.WaitOne();
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("NetConnector: "+e.Message);
+                if (!(e is ThreadAbortException)) Debug.LogException(e);
             }
         }
 
         void AcceptConnection(IAsyncResult res)
         {
-            waitHandler.Set();
+            messageWaitEvent.Set();
             var listenerSocket = (Socket) res.AsyncState;
             lock (connections)
             {
@@ -177,7 +176,7 @@ namespace Server.Network
                 {
                     if (!(e is ObjectDisposedException))
                     {
-                        Debug.Log("NetConnector (accepting): " + e.Message);
+                        Debug.LogException(e);
                     }
                 }
             }
@@ -243,7 +242,7 @@ namespace Server.Network
             }
             catch (Exception e)
             {
-                Debug.Log("NetConnector (dispatchMessage): "+ e.Message);
+                Debug.LogException(e);
             }
         }
 
@@ -253,7 +252,7 @@ namespace Server.Network
             {
                 try
                 {
-                    connection.ClientSocket.Shutdown(SocketShutdown.Both);
+                    connection.ClientSocket.Shutdown(SocketShutdown.Receive);
                 }
                 catch { }
                 connection.ClientSocket.Close();
@@ -273,32 +272,35 @@ namespace Server.Network
             }
             while (!worker.CancellationPending & !shutDownRequested)
             {
-                lock (connections)
+                FlushSendQueue();
+                Thread.Sleep(50);
+            } //while
+            workerDoneEvent.Set();
+        }
+
+        void FlushSendQueue()
+        {
+            lock (connections)
+            {
+                for (var i = connections.Count; i-- > 0;)
                 {
-                    for (var i = connections.Count; i-- > 0;)
+                    lock (connections[i].MessageQueue)
                     {
                         if (connections[i].MessageQueue.Count <= 0) continue;
+                        if (!connections[i].ClientSocket.Connected) continue;
                         var messageBytes = new List<byte>();
-                        lock (connections[i].MessageQueue)
+                        while (connections[i].MessageQueue.Count > 0)
                         {
-                            while (connections[i].MessageQueue.Count > 0)
+                            var m = connections[i].MessageQueue.Dequeue();
+                            if (m != null)
                             {
-                                if (worker.CancellationPending || shutDownRequested)
-                                {
-                                    return;
-                                }
-                                var m = connections[i].MessageQueue.Dequeue();
-                                if (m != null)
-                                {
-                                    messageBytes.AddRange(m.FinalizeForSending());
-                                }
+                                messageBytes.AddRange(m.FinalizeForSending());
                             }
-                        }//networkPacket queue lock
+                        }
                         connections[i].ClientSocket.Send(messageBytes.ToArray());
-                    } //loop
-                } // connections lock
-                Thread.Sleep(100);
-            } //while
+                    }//networkPacket queue lock
+                } //loop
+            } // connections lock
         }
     }
 }

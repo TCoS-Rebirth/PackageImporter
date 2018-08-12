@@ -1,6 +1,4 @@
-﻿using Server.World;
-
-namespace Server
+﻿namespace Server
 {
     public interface IMapHandler
     {

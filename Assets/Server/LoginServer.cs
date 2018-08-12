@@ -25,9 +25,8 @@ namespace Server
             LRR_DISABLED_ACCOUNT
         }
 
-        PacketDispatcher<LoginHeader> dispatcher;
-
         NetConnector server;
+        PacketDispatcher<LoginHeader> dispatcher;
 
         const int SupportedClientVersion = 28430;
 
@@ -35,10 +34,6 @@ namespace Server
         {
             server = new NetConnector(port);
             dispatcher = new PacketDispatcher<LoginHeader>();
-            dispatcher.RegisterHandler(LoginHeader.C2L_USER_LOGIN, HandleAuthChallenge);
-            dispatcher.RegisterHandler(LoginHeader.C2L_QUERY_UNIVERSE_LIST, HandleQueryUniverseList);
-            dispatcher.RegisterHandler(LoginHeader.C2L_UNIVERSE_SELECTED, HandleUniverseSelection);
-            dispatcher.RegisterHandler(LoginHeader.DISCONNECT, HandleDisconnect);
         }
 
         public int GetConnectionCount()
@@ -48,17 +43,19 @@ namespace Server
 
         public void Start()
         {
+            RegisterHandlers();
             server.Start();
         }
 
         public void Stop()
         {
-            Debug.Log("Shutting down LoginServer");
+            
             if (server != null)
             {
+                Debug.Log("Shutting down LoginServer");
                 server.Shutdown();
+                Debug.Log("LoginServer shut down");
             }
-            Debug.Log("LoginServer shut down");
         }
 
         public void Update()
@@ -67,11 +64,19 @@ namespace Server
             while (server.TryGetPacket(out packet)) dispatcher.Dispatch(packet);
         }
 
+        void RegisterHandlers()
+        {
+            dispatcher.RegisterHandler(LoginHeader.C2L_USER_LOGIN, HandleAuthChallenge);
+            dispatcher.RegisterHandler(LoginHeader.C2L_QUERY_UNIVERSE_LIST, HandleQueryUniverseList);
+            dispatcher.RegisterHandler(LoginHeader.C2L_UNIVERSE_SELECTED, HandleUniverseSelection);
+            dispatcher.RegisterHandler(LoginHeader.DISCONNECT, HandleDisconnect);
+        }
+
         #region Handler
 
         void HandleAuthChallenge(NetworkPacket m)
         {
-            var db = ServiceLocator.GetService<IDatabase>();
+            var db = ServiceRegistry.GetService<IDatabase>();
             var clientVersion = (int) m.ReadUInt32();
             var name = m.ReadString();
             var password = m.ReadString();
@@ -107,7 +112,7 @@ namespace Server
                     var session = new PlayerSession(m.Connection, acc, AccountUtility.GenerateTransferKey());
                     Debug.Log("Player authenticated: " + acc.Name);
                     SendAuthResult(m.Connection, eLoginRequestResult.LRR_NONE);
-                    ServiceLocator.GetService<ISessionHandler>().StartSession(session);
+                    ServiceRegistry.GetService<ISessionHandler>().StartSession(session);
                 }
                 else
                 {
@@ -132,14 +137,14 @@ namespace Server
         void HandleUniverseSelection(NetworkPacket m)
         {
             /*var selectedID = */m.ReadInt32();
-            var session = ServiceLocator.GetService<ISessionHandler>().GetSession(m.Connection);
+            var session = ServiceRegistry.GetService<ISessionHandler>().GetSession(m.Connection);
             var msg = L2C_UNIVERSE_SELECTED_ACK(session.TransferKey);
             m.Connection.SendMessage(msg);
         }
 
         static void HandleDisconnect(NetworkPacket m)
         {
-            var sessionHandler = ServiceLocator.GetService<ISessionHandler>();
+            var sessionHandler = ServiceRegistry.GetService<ISessionHandler>();
             var session = sessionHandler.GetSession(m.Connection);
             if (session != null) Debug.Log(session.Account.Name + " disconnected");
             sessionHandler.EndSession(session);
@@ -166,13 +171,13 @@ namespace Server
             m.WriteString(GameServer.UniverseInfo.Name);
             m.WriteString(GameServer.UniverseInfo.Language);
             m.WriteString(GameServer.UniverseInfo.Type);
-            m.WriteString(ServiceLocator.GetService<ISessionHandler>().GetSessionCount().ToString());
+            m.WriteString(ServiceRegistry.GetService<ISessionHandler>().GetSessionCount().ToString());
             return m;
         }
 
         static NetworkPacket L2C_UNIVERSE_SELECTED_ACK(int transferKey)
         {
-            var worldServer = ServiceLocator.GetService<IWorldServer>();
+            var worldServer = ServiceRegistry.GetService<IWorldServer>();
             var m = LoginHeader.L2C_UNIVERSE_SELECTED_ACK.CreatePacket();
             m.WriteInt32((int) PacketStatusCode.NO_ERROR);
             m.WriteInt32(0);
