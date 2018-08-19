@@ -8,10 +8,6 @@ namespace SBGame
     {
         [NonSerialized, HideInInspector]
         private Vector mTargetLocation;
-
-        public Character_PlayerController()
-        {
-        }
     }
 }
 /*

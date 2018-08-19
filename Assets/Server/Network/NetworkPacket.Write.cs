@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Engine;
 using UnityEngine;
@@ -6,7 +7,8 @@ using Utilities;
 
 namespace Network
 {
-    public partial class NetworkPacket
+
+    public partial class NetworkPacket: IPacketWriter
     {
         void EnsureBuffersize(int more)
         {
@@ -98,6 +100,43 @@ namespace Network
             WriteFloat(vec.X);
             WriteFloat(vec.Y);
             WriteFloat(vec.Z);
+        }
+
+        public void WriteQuaternion(Quaternion q)
+        {
+            WriteRotator(UnitConversion.ToUnreal(q));
+        }
+
+        public void Write(IPacketWritable writable)
+        {
+            writable.Write(this);
+        }
+
+        public void Write<T>(List<T> writables) where T:IPacketWritable
+        {
+            WriteInt32(writables.Count);
+            for (int i = 0; i < writables.Count; i++)
+            {
+                Write(writables[i]);
+            }
+        }
+
+        public void Write<T>(List<T> items, Action<T> customWritehHandler)
+        {
+            WriteInt32(items.Count);
+            for (int i = 0; i < items.Count; i++)
+            {
+                customWritehHandler(items[i]);
+            }
+        }
+
+        public void Write<T>(List<T> items, Action<int, T> customWritehHandler)
+        {
+            WriteInt32(items.Count);
+            for (int i = 0; i < items.Count; i++)
+            {
+                customWritehHandler(i, items[i]);
+            }
         }
     }
 }

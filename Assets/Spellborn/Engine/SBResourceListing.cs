@@ -13,6 +13,19 @@ namespace Engine
         {
             resources.Add(new ResourceIndex {ID = id, Resource = resource});
         }
+
+        [ContextMenu("Export to file")]
+        void ExportTextFile()
+        {
+            var path = UnityEditor.EditorUtility.SaveFilePanel("Save", "", "Resources", "txt");
+            if (string.IsNullOrEmpty(path)) return;
+            var strings = new string[resources.Count];
+            for (var i = 0; i < strings.Length; i++)
+            {
+                strings[i] = string.Format("{0} - {1}", resources[i].ID, resources[i].Resource);
+            }
+            System.IO.File.WriteAllLines(path, strings);
+        }
 #endif
 
         public Dictionary<string, int> GetIDs(bool useFirstOccurences = false)
@@ -22,12 +35,12 @@ namespace Engine
             {
                 if (indexedCache.ContainsKey(resources[i].Resource))
                 {
-                    var res = resources[i].Resource;
                     if (useFirstOccurences) continue;
+                    var res = resources[i].Resource;
                     indexedCache[res] = resources[i].ID;
                     continue;
                 }
-                indexedCache.Add(resources[i].Resource, resources[i].ID);
+                indexedCache.Add(resources[i].Resource.Trim(), resources[i].ID);
             }
             return indexedCache;
         }

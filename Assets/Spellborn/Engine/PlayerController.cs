@@ -1,22 +1,14 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Engine
 {
-    [Serializable] public class PlayerController : Controller
+    [Serializable] public abstract class PlayerController : Controller
     {
         public const int UNREAL_UNIT_PI = 32768;
 
-        [FieldConst()]
-        public Player Player;
-
-        [FieldConst()]
-        public Actor ViewTarget;
-
+        [NonSerialized, HideInInspector]
         public int SBShowFlags;
-
-        public PlayerController()
-        {
-        }
     }
 }
 /*

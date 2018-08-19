@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics;
-using Accounts;
+using User;
 using Database;
 using SBBase;
-using SBGamePlay;
+using SBGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 using World;
 using Debug = UnityEngine.Debug;
 
@@ -24,25 +21,20 @@ public class GameServer : MonoBehaviour
 
     WorldServer worldServer;
     LoginServer loginServer;
-
-    [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)] SBUniverse universe;
-
-    static void RegisterServices()
-    {
-        sessionHandler = new SessionHandler();
-        mapHandler = new MapHandler();
-        database = new TransientDatabase();
-
-        ServiceRegistry.AddService<ISessionHandler>(sessionHandler);
-        ServiceRegistry.AddService<IMapHandler>(mapHandler);
-        ServiceRegistry.AddService<IDatabase>(database);
-    }
+    [SerializeField] GameResources resources;
 
     void Awake()
     {
-        RegisterServices();
+        if (resources == null) resources = GetComponent<GameResources>();
+        ServiceContainer.AddService<IGameResources>(resources);
+        database = new TransientDatabase();
+        ServiceContainer.AddService<IDatabase>(database);
+        sessionHandler = new SessionHandler();
+        ServiceContainer.AddService<ISessionHandler>(sessionHandler);
+        mapHandler = new MapHandler();
+        ServiceContainer.AddService<IMapHandler>(mapHandler);
         worldServer = new WorldServer(worldIP, worldPort);
-        ServiceRegistry.AddService<IWorldServer>(worldServer);
+        ServiceContainer.AddService<IWorldServer>(worldServer);
         loginServer = new LoginServer(loginPort);
     }
 
@@ -64,7 +56,7 @@ public class GameServer : MonoBehaviour
     [Button(ButtonSizes.Small, Expanded = false)]
     void LaunchClient()
     {
-        Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe");
+        Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe", "--show_console --packet_log");
     }
     #endif
 
@@ -72,10 +64,10 @@ public class GameServer : MonoBehaviour
     {
         Debug.Log("Loading persistent worlds");
         var loadingStartTime = Time.realtimeSinceStartup;
-        foreach (var sbWorld in universe.Worlds)
+        foreach (var sbWorld in resources.Universe.Worlds)
         {
             if (sbWorld.WorldFile.Contains("\\")) continue;
-            if (sbWorld.WorldType == SBWorld.eZoneWorldTypes.ZWT_PERSISTENT) mapHandler.LoadMap(sbWorld.worldID);
+            if (sbWorld.WorldType == SBWorld.eZoneWorldTypes.ZWT_PERSISTENT) mapHandler.LoadPersistentMap(sbWorld.worldID);
         }
         Debug.Log("Loading persistent worlds finished in " + (Time.realtimeSinceStartup - loadingStartTime).ToString("0.0") + "s");
     }

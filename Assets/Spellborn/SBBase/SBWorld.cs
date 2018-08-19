@@ -9,12 +9,13 @@ namespace SBBase
     [Serializable]
     public class SBWorld : UObject
     {
+        [ReadOnly]
         public MapIDs worldID;
 
-        [FoldoutGroup("world")]
+        [FoldoutGroup("world"), ReadOnly]
         public string WorldName = string.Empty;
 
-        [FoldoutGroup("world")]
+        [FoldoutGroup("world"), ReadOnly]
         public string WorldFile = string.Empty;
 
         [FoldoutGroup("world")]
@@ -23,7 +24,7 @@ namespace SBBase
         [FoldoutGroup("world")]
         public SBWorldRules GameRules;
 
-        [FoldoutGroup("world")]
+        [FoldoutGroup("world"), ReadOnly]
         public eZoneWorldTypes WorldType;
 
         [FoldoutGroup("world")]
@@ -41,10 +42,13 @@ namespace SBBase
         [FoldoutGroup("world")]
         public bool FreeToPlayAllowed;
 
+        [ReadOnly]
         public List<SBRoute> ExitRoutes = new List<SBRoute>();
 
+        [ReadOnly]
         public List<SBPortal> EntryPortals = new List<SBPortal>();
 
+        [ReadOnly]
         public List<SBTravel> TravelNPCs = new List<SBTravel>();
 
         [FoldoutGroup("world")]

@@ -4,9 +4,7 @@ namespace SBGame
 {
     [Serializable] public class Game_PlayerSkills : Game_Skills
     {
-        public Game_PlayerSkills()
-        {
-        }
+        
     }
 }
 /*

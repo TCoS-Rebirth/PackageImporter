@@ -7,85 +7,75 @@ namespace SBGame
     [Serializable] public class Appearance_MainWeapon : Appearance_Base
     {
         [FoldoutGroup("MainWeapon")]
-        public byte WeaponType;
+        public EAppMainWeaponType WeaponType;
 
         [FoldoutGroup("MainWeapon")]
-        public byte WeaponClassification;
+        public EWeaponClassification WeaponClassification;
 
         [FoldoutGroup("MainWeapon")]
-        public byte WeaponTracerType;
-
-        [FoldoutGroup("MainWeapon")]
-        public Vector WeaponTracerBeginOffset;
-
-        [FoldoutGroup("MainWeapon")]
-        public Vector WeaponTracerEndOffset;
-
-        public Appearance_MainWeapon()
-        {
-        }
+        public EWeaponTracerType WeaponTracerType;
 
         public enum EWeaponTracerType
         {
-            EWTT_Custom,
+            EWTT_Custom = 0,
 
-            EWTT_NoTracer,
+            EWTT_NoTracer = 1,
 
-            EWTT_Sword_sh,
+            EWTT_Sword_sh = 2,
 
-            EWTT_Sword_dh,
+            EWTT_Sword_dh = 3,
 
-            EWTT_Axe_sh,
+            EWTT_Axe_sh = 4,
 
-            EWTT_Axe_dh,
+            EWTT_Axe_dh = 5,
 
-            EWTT_Mace_sh,
+            EWTT_Mace_sh = 6,
 
-            EWTT_Mace_dh,
+            EWTT_Mace_dh = 7,
 
-            EWTT_Dag_sh,
+            EWTT_Dag_sh = 8,
 
-            EWTT_Pole_sh,
+            EWTT_Pole_sh = 9,
         }
 
         public enum EWeaponClassification
         {
-            EWC_Undetermined,
+            EWC_Undetermined = 0,
 
-            EWC_Axe,
+            EWC_Axe = 1,
 
-            EWC_DoubleHandedAxe,
+            EWC_DoubleHandedAxe = 2,
 
-            EWC_Sword,
+            EWC_Sword = 3,
 
-            EWC_DoubleHandedSword,
+            EWC_DoubleHandedSword = 4,
 
-            EWC_Mace,
+            EWC_Mace = 5,
 
-            EWC_DoubleHandedMace,
+            EWC_DoubleHandedMace = 6,
 
-            EWC_Hammer,
+            EWC_Hammer = 7,
 
-            EWC_DoubleHandedHammer,
+            EWC_DoubleHandedHammer = 8,
 
-            EWC_Dagger,
+            EWC_Dagger = 9,
 
-            EWC_Bow,
+            EWC_Bow = 10,
 
-            EWC_Shields,
+            EWC_Shields = 11,
         }
 
         public enum EAppMainWeaponType
         {
-            EMW_Undetermined,
+            EMW_Undetermined = 0,
 
-            EMW_SingleHanded,
+            EMW_SingleHanded = 1,
 
-            EMW_DoubleHanded,
+            EMW_DoubleHanded = 2,
 
-            EMW_DualWielding,
+            EMW_DualWielding = 3,
 
-            EMW_Ranged,
+            EMW_Ranged = 4,
         }
     }
 }

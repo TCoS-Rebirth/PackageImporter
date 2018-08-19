@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using Accounts;
+using User;
 using SBBase;
 
 public interface IDatabase
@@ -26,7 +26,10 @@ public interface IAccountDatabase
 
 public interface ICharacterDatabase
 {
-    DB_Character GetCharacter(int uid);
+    int AllocateCharacterID();
+    int AllocateSkillDeckID();
+    int AllocateItemID();
+    DB_Character GetCharacter(int uid, int accountID);
     bool Save(Tuple<DB_Character, DB_CharacterSheet> character);
     DB_CharacterSheet GetSheet(int uid);
     IList<Tuple<DB_Character, DB_CharacterSheet>> GetCharacters(int accountID);
@@ -36,4 +39,6 @@ public interface ICharacterDatabase
     bool Save(DB_Skill skill);
     DB_SkillDeck GetSkillDeck(int uid);
     bool Save(DB_SkillDeck deck);
+
+    bool DeleteCharacter(int uid, int accountID);
 }

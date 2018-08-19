@@ -1,5 +1,7 @@
-﻿public interface IMapHandler
+﻿using UnityEngine.SceneManagement;
+using World;
+
+public interface IMapHandler
 {
-    void LoadMap(MapIDs map);
-    void UnloadMap(MapIDs map);
+    GameMap GetPersistentMap(MapIDs map);
 }

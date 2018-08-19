@@ -2,7 +2,8 @@
 
 namespace SBGame
 {
-    [Serializable] public class Game_GameMasterController : Game_PlayerController
+    [Serializable]
+    public class Game_GameMasterController: Game_PlayerController
     {
         public int mAuthorityLevel;
 
@@ -14,18 +15,18 @@ namespace SBGame
 
         private bool mShield;
 
-        public Game_GameMasterController()
+        public override int GetAuthorityLevel()
         {
+            return mAuthorityLevel;
+        }
+        public void SetAuthorityLevel(int aLevel)
+        {
+            mAuthorityLevel = aLevel;
         }
     }
 }
 /*
-function int GetAuthorityLevel() {
-return mAuthorityLevel;                                                     
-}
-function SetAuthorityLevel(int aLevel) {
-mAuthorityLevel = aLevel;                                                   
-}
+
 event cl_OnInit() {
 local int Index;
 local int helpSpeed;

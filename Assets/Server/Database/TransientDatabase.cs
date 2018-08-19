@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using Accounts;
+using User;
 using SBBase;
 using Utilities;
 
@@ -72,11 +72,31 @@ namespace Database
             List<DB_Skill> skillData = new List<DB_Skill>();
             List<DB_SkillDeck> skillDecks = new List<DB_SkillDeck>();
 
-            public DB_Character GetCharacter(int uid)
+            public int AllocateCharacterID()
+            {
+                var id = 0;
+                for (var i = 0; i < characterData.Count; i++)
+                {
+                    if (characterData[i].Item1.Id >= id) id = characterData[i].Item1.Id + 1;
+                }
+                return id;
+            }
+
+            public int AllocateSkillDeckID()
+            {
+                return AllocateCharacterID();
+            }
+
+            public int AllocateItemID()
+            {
+                return AllocateCharacterID();
+            }
+
+            public DB_Character GetCharacter(int uid, int accountID)
             {
                 for (var i = 0; i < characterData.Count; i++)
                 {
-                    if (characterData[i].Item1.Id == uid) return characterData[i].Item1;
+                    if (characterData[i].Item1.Id == uid && characterData[i].Item1.AccountID == accountID) return characterData[i].Item1;
                 }
                 throw new NullReferenceException("Character does not exist: " + uid);
             }
@@ -85,6 +105,29 @@ namespace Database
             {
                 if (!characterData.Contains(character)) characterData.Add(character);
                 return true;
+            }
+
+            public bool DeleteCharacter(int uid, int accountID)
+            {
+                for (var c = characterData.Count; c-->0;)
+                {
+                    if (characterData[c].Item1.Id != uid) continue;
+                    if (characterData[c].Item1.AccountID != accountID) continue;
+                    for (var i = itemData.Count; i-->0;)
+                    {
+                        if (itemData[i].CharacterID == uid) itemData.RemoveAt(i);
+                    }
+                    for (var i = skillDecks.Count; i-->0;)
+                    {
+                        if (skillDecks[i].mName == characterData[c].Item1.Name) //TODO replace
+                        {
+                            skillDecks.RemoveAt(i);
+                        }
+                    }
+                    characterData.RemoveAt(c);
+                    return true;
+                }
+                return false;
             }
 
             public DB_CharacterSheet GetSheet(int uid)

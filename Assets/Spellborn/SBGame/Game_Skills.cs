@@ -105,22 +105,6 @@ namespace SBGame
 
         private List<ShareApplicantData> ShareApplicantEffects = new List<ShareApplicantData>();
 
-        //public delegate<OnRollToFirstTier> @__OnRollToFirstTier__Delegate;
-
-        //public delegate<OnRollToNextTier> @__OnRollToNextTier__Delegate;
-
-        //public delegate<OnSkilldeckChanged> @__OnSkilldeckChanged__Delegate;
-
-        //public delegate<OnCharacterSkillsChanged> @__OnCharacterSkillsChanged__Delegate;
-
-        //public delegate<OnComboStringChanged> @__OnComboStringChanged__Delegate;
-
-        //public delegate<OnSkillLog> @__OnSkillLog__Delegate;
-
-        //public delegate<OnSkillReceivedTokenSlot> @__OnSkillReceivedTokenSlot__Delegate;
-
-        //public delegate<RemoveDuffFilter> @__RemoveDuffFilter__Delegate;
-
         private int mSkillSessionTable;
 
         private int mSkillTokenMap;

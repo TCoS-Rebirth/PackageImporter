@@ -5,7 +5,8 @@ using Sirenix.OdinInspector;
 
 namespace SBGame
 {
-    [Serializable] public class Quest_Target : Content_Type
+    [Serializable]
+    public class Quest_Target: Content_Type
     {
         [FoldoutGroup("Target")]
         public List<Quest_Target> Pretargets = new List<Quest_Target>();
@@ -19,11 +20,18 @@ namespace SBGame
         [FoldoutGroup("Target")]
         public LocalizedString Description;
 
-        public Quest_Target()
+        public bool Active(int aValue)
         {
+            throw new NotImplementedException();
         }
 
-        [Serializable] public struct QuestInventory
+        public void RadialMenuCollect(Game_Pawn aPlayerPawn, object aObject, Game_RadialMenuOptions.ERadialMenuOptions aMainOption, out List<Game_RadialMenuOptions.ERadialMenuOptions> aSubOptions)
+        {
+            throw new NotImplementedException();
+        }
+
+        [Serializable]
+        public struct QuestInventory
         {
             public Item_Type Item;
 
@@ -33,8 +41,6 @@ namespace SBGame
 }
 /*
 final native function int GetCompletedProgressValue();
-event RadialMenuCollect(Game_Pawn aPlayerPawn,Object aObject,byte aMainOption,out array<byte> aSubOptions) {
-}
 protected function AppendProgressText(out string aDescription,int aProgress) {
 }
 event string GetActiveText(Game_ActiveTextItem aItem) {
@@ -91,7 +97,6 @@ return True;
 }
 final native function Quest_Type GetQuest();
 final native function int GetIndex();
-final native function bool Active(int aValue);
 final native function bool NearlyDone(int aValue);
 final native function bool Failed(int aValue);
 final native function bool Check(int aValue);

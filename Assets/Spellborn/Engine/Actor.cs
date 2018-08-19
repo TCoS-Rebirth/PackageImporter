@@ -5,12 +5,14 @@ using UnityEngine;
 
 namespace Engine
 {
-    [Serializable] public class Actor : UObject
+    [Serializable]
+    public class Actor : UObject
     {
         public const float MINFLOORZ = 0.7F;
 
         public const float MAXSTEPHEIGHT = 25F;
 
+        [HideInInspector]
         public eSBNetworkRoles SBRole;
 
         [FoldoutGroup("Advanced")]
@@ -21,6 +23,7 @@ namespace Engine
         [FieldConst()]
         public EPhysics Physics;
 
+        [HideInInspector]
         public ENetRole Role;
 
         [FieldConst()]
@@ -43,11 +46,9 @@ namespace Engine
 
         [FieldConst()]
         [NonSerialized, HideInInspector]
-        public List<Actor> Touching = new List<Actor>();
-
-        [FieldConst()]
-        //[TCosReborn.Framework.Attributes.IgnoreFieldExtractionAttribute()]
         public PhysicsVolume PhysicsVolume;
+
+        public Actor Owner;
 
         [FoldoutGroup("Movement")]
         [NonSerialized, HideInInspector]
@@ -67,10 +68,15 @@ namespace Engine
         [ArraySizeForExtraction(Size = 10)]
         public string[] StatsGroups = new string[0];
 
-        public Actor()
-        {
-        }
+        #region Unity Events
 
+        void OnDestroyed()
+        {
+            Destroyed();
+        }
+        #endregion
+
+        #region Enums
         public enum EOwningDepartmentType
         {
             ODT_None,
@@ -219,6 +225,48 @@ namespace Engine
 
             sbROLE_ClientLocal,
         }
+        #endregion
+
+        public void SetOwner(Actor newOwner)
+        {
+            if (Owner != null) Owner.LostChild(this);
+            if (newOwner != null) newOwner.GainedChild(this);
+            Owner = newOwner;
+        }
+
+        protected virtual void GainedChild(Actor other) { }
+        protected virtual void LostChild(Actor Other) { }
+
+        public virtual void SetInitialState()
+        {
+            //bScriptInitialized = True;                                                  
+            if (InitialState != "None") GotoState(InitialState);
+            else GotoState("Auto");
+        }
+
+        public virtual void SetPhysics(EPhysics newPhysics)
+        {
+            Physics = newPhysics;
+        }
+
+        public int GetRelevanceID()
+        {
+            return gameObject.GetInstanceID();
+        }
+
+        public virtual void PreBeginPlay() { }
+
+        public virtual void BeginPlay() { }
+
+        public virtual void PostBeginPlay() { }
+
+        public virtual void Tick(float deltaTime) { }
+
+        protected virtual void GotoState(string state) { }
+
+        public virtual void OnCreateComponents(){}
+
+        public virtual void Destroyed() { }
     }
 }
 /*
@@ -231,7 +279,6 @@ return None;
 }
 event RadialMenuCollect(Pawn aPlayerPawn,byte aMainOption,out array<byte> aMainOptions) {
 }
-event OnSettingsChanged();
 function bool BlocksShotAt(Actor Other) {
 return False;                                                               
 }
@@ -291,9 +338,7 @@ return bResult;
 simulated function bool CheckMaxEffectDistance(PlayerController P,Vector SpawnLocation) {
 return !P.BeyondViewDistance(SpawnLocation,0.00000000);                     
 }
-static function Crash() {
-assert(False);                                                              
-}
+
 function Vector GetCollisionExtent() {
 local Vector Extent;
 Extent = CollisionRadius * vect(1.000000, 1.000000, 0.000000);              
@@ -350,282 +395,7 @@ return False;
 dir.Z = 0.00000000;                                                         
 return VSize(dir) <= CollisionRadius;                                       
 }
-simulated function DisplayDebug(Canvas Canvas,out float YL,out float YPos) {
-local string t;
-local float XL;
-local int i;
-local Actor A;
-local name Anim;
-local float frame;
-local float Rate;
-Canvas.Style = 1;                                                           
-Canvas.StrLen("TEST",XL,YL);                                                
-YPos = YPos + YL;                                                           
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.SetDrawColor(255,0,0);                                               
-t = "";                                                                     
-if (bDeleteMe) {                                                            
-t = t $ " DELETED (bDeleteMe == true)";                                   
-}
-Canvas.DrawText(t,False);                                                   
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.SetDrawColor(255,255,255);                                           
-if (Level.NetMode != 0) {                                                   
-t = "ROLE ";                                                              
-switch (Role) {                                                           
-case 0 :                                                                
-t = t $ "None";                                                       
-break;                                                                
-case 1 :                                                                
-t = t $ "DumbProxy";                                                  
-break;                                                                
-case 2 :                                                                
-t = t $ "SimulatedProxy";                                             
-break;                                                                
-case 3 :                                                                
-t = t $ "AutonomousProxy";                                            
-break;                                                                
-case 4 :                                                                
-t = t $ "Authority";                                                  
-break;                                                                
-default:                                                                
-}
-t = t $ " REMOTE ROLE ";                                                  
-if (bTearOff) {                                                           
-t = t $ " Tear Off";                                                    
-}
-Canvas.DrawText(t,False);                                                 
-YPos += YL;                                                               
-Canvas.SetPos(4.00000000,YPos);                                           
-}
-t = "Physics ";                                                             
-switch (Physics) {                                                          
-case 0 :                                                                  
-t = t $ "None";                                                         
-break;                                                                  
-case 1 :                                                                  
-t = t $ "Walking";                                                      
-break;                                                                  
-case 2 :                                                                  
-t = t $ "Falling";                                                      
-break;                                                                  
-case 3 :                                                                  
-t = t $ "Swimming";                                                     
-break;                                                                  
-case 4 :                                                                  
-t = t $ "Flying";                                                       
-break;                                                                  
-case 5 :                                                                  
-t = t $ "Rotating";                                                     
-break;                                                                  
-case 6 :                                                                  
-t = t $ "Projectile";                                                   
-break;                                                                  
-case 7 :                                                                  
-t = t $ "Interpolating";                                                
-break;                                                                  
-case 8 :                                                                  
-t = t $ "MovingBrush";                                                  
-break;                                                                  
-case 9 :                                                                  
-t = t $ "Spider";                                                       
-break;                                                                  
-case 10 :                                                                 
-t = t $ "Trailer";                                                      
-break;                                                                  
-case 11 :                                                                 
-t = t $ "Ladder";                                                       
-break;                                                                  
-case 13 :                                                                 
-t = t $ "Karma";                                                        
-break;                                                                  
-case 18 :                                                                 
-t = t $ "Jumping";                                                      
-break;                                                                  
-case 19 :                                                                 
-t = t $ "SittingOnGround";                                              
-break;                                                                  
-case 20 :                                                                 
-t = t $ "SittingOnChair";                                               
-break;                                                                  
-default:                                                                  
-}
-t = t $ " in physicsvolume "
-$ GetItemName(string(PhysicsVolume))
-$ " on base "
-$ GetItemName(string(Base));
-if (bBounce) {                                                              
-t = t $ " - will bounce";                                                 
-}
-Canvas.DrawText(t,False);                                                   
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Location: " $ string(Location)
-$ " Rotation "
-$ string(Rotation),False);
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Velocity: " $ string(Velocity)
-$ " Speed "
-$ string(VSize(Velocity))
-$ " Speed2D "
-$ string(VSize(Velocity - Velocity.Z * vect(0.000000, 0.000000, 1.000000))),False);
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Acceleration: " $ string(Acceleration),False);             
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawColor.B = 0;                                                     
-Canvas.DrawText("Collision Radius " $ string(CollisionRadius)
-$ " Height "
-$ string(CollisionHeight));
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Collides with Actors " $ string(bCollideActors)
-$ ", world "
-$ string(bCollideWorld)
-$ ", proj. target "
-$ string(bProjTarget));
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Blocks Actors " $ string(bBlockActors));                   
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-t = "Touching ";                                                            
-foreach TouchingActors(Class'Actor',A) {                                    
-t = t $ GetItemName(string(A)) $ " ";                                     
-}
-if (t == "Touching ") {                                                     
-t = "Touching nothing";                                                   
-}
-Canvas.DrawText(t,False);                                                   
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawColor.R = 0;                                                     
-t = "Rendered: ";                                                           
-switch (Style) {                                                            
-case 0 :                                                                  
-t = t;                                                                  
-break;                                                                  
-case 1 :                                                                  
-t = t $ "Normal";                                                       
-break;                                                                  
-case 2 :                                                                  
-t = t $ "Masked";                                                       
-break;                                                                  
-case 3 :                                                                  
-t = t $ "Translucent";                                                  
-break;                                                                  
-case 4 :                                                                  
-t = t $ "Modulated";                                                    
-break;                                                                  
-case 5 :                                                                  
-t = t $ "Alpha";                                                        
-break;                                                                  
-default:                                                                  
-}
-switch (DrawType) {                                                         
-case 0 :                                                                  
-t = t $ " None";                                                        
-break;                                                                  
-case 1 :                                                                  
-t = t $ " Sprite ";                                                     
-break;                                                                  
-case 2 :                                                                  
-t = t $ " Mesh ";                                                       
-break;                                                                  
-case 3 :                                                                  
-t = t $ " Brush ";                                                      
-break;                                                                  
-case 4 :                                                                  
-t = t $ " RopeSprite ";                                                 
-break;                                                                  
-case 5 :                                                                  
-t = t $ " VerticalSprite ";                                             
-break;                                                                  
-case 6 :                                                                  
-t = t $ " Terraform ";                                                  
-break;                                                                  
-case 7 :                                                                  
-t = t $ " SpriteAnimOnce ";                                             
-break;                                                                  
-case 8 :                                                                  
-t = t $ " StaticMesh ";                                                 
-break;                                                                  
-default:                                                                  
-}
-if (DrawType == 2) {                                                        
-t = t $ GetItemName(string(Mesh));                                        
-if (Skins.Length > 0) {                                                   
-t = t $ " skins: ";                                                     
-i = 0;                                                                  
-while (i < Skins.Length) {                                              
-if (Skins[i] == None) {                                               
-break;                                                              
-} else {                                                              
-t = t $ GetItemName(string(Skins[i]))
-$ ", ";         
-}
-i++;                                                                  
-}
-}
-Canvas.DrawText(t,False);                                                 
-YPos += YL;                                                               
-Canvas.SetPos(4.00000000,YPos);                                           
-GetAnimParams(0,Anim,frame,Rate);                                         
-t = "AnimSequence " $ string(Anim) $ " Frame "
-$ string(frame)
-$ " Rate "
-$ string(Rate);
-if (bAnimByOwner) {                                                       
-t = t $ " Anim by Owner";                                               
-}
-} else {                                                                    
-if (DrawType == 1 || DrawType == 7) {                                     
-t = t $ string(Texture);                                                
-} else {                                                                  
-if (DrawType == 3) {                                                    
-t = t $ string(Brush);                                                
-}
-}
-}
-Canvas.DrawText(t,False);                                                   
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawColor.B = 255;                                                   
-Canvas.DrawText("Tag: " $ string(Tag) $ " Event: "
-$ string(Event)
-$ " STATE: "
-$ string(GetStateName()),False);
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Instigator "
-$ GetItemName(string(Instigator))
-$ " Owner "
-$ GetItemName(string(Owner)));
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-Canvas.DrawText("Timer: " $ string(TimerCounter)
-$ " LifeSpan "
-$ string(LifeSpan)
-$ " AmbientSound "
-$ string(AmbientSound)
-$ " volume "
-$ string(SoundVolume));
-YPos += YL;                                                                 
-Canvas.SetPos(4.00000000,YPos);                                             
-}
-function SetDefaultDisplayProperties() {
-Style = default.Style;                                                      
-Texture = default.Texture;                                                  
-bUnlit = default.bUnlit;                                                    
-}
-function SetDisplayProperties(byte NewStyle,Material NewTexture,bool bLighting) {
-Style = NewStyle;                                                           
-Texture = NewTexture;                                                       
-bUnlit = bLighting;                                                         
-}
+
 simulated function string GetHumanReadableName() {
 return GetItemName(string(Class));                                          
 }
@@ -657,47 +427,7 @@ Victims.TakeDamage(damageScale * DamageAmount,Instigator,Victims.Location - 0.50
 }
 bHurtEntry = False;                                                         
 }
-simulated function UpdatePrecacheStaticMeshes() {
-if (DrawType == 8 && !bStatic && !bNoDelete) {                              
-Log("Calling AddPrecacheStaticMesh for "
-$ string(StaticMesh));   
-Level.AddPrecacheStaticMesh(StaticMesh);                                  
-}
-}
-simulated function UpdatePrecacheMaterials() {
-local int i;
-if (Skins.Length > 0) {                                                     
-i = 0;                                                                    
-while (i < Skins.Length) {                                                
-if (Skins[i] != None) {                                                 
-Level.AddPrecacheMaterial(Skins[i]);                                  
-}
-i++;                                                                    
-}
-}
-}
-simulated event SetInitialState() {
-bScriptInitialized = True;                                                  
-if (InitialState != 'None') {                                               
-GotoState(InitialState);                                                  
-} else {                                                                    
-GotoState('Auto');                                                        
-}
-}
-event PostBeginPlay();
-event PreBeginPlay() {
-if (Level.DetailMode == 0
-&& CullDistance == default.CullDistance) {  
-CullDistance *= 0.80000001;                                               
-}
-}
-event RenderTexture(ScriptedTexture Tex);
-function RenderOverlays(Canvas Canvas);
-event RecoverFromBadStateCode();
-final static native(552) operator(16) Color *(Color A,float B);
-final static native(551) operator(20) Color +(Color A,Color B);
-final static native(550) operator(16) Color *(float A,Color B);
-final static native(549) operator(20) Color -(Color A,Color B);
+
 final native(321) iterator function CollidingActors(class<Actor> BaseClass,out Actor Actor,float Radius,optional Vector loc);
 final native(312) iterator function VisibleCollidingActors(class<Actor> BaseClass,out Actor Actor,float Radius,optional Vector loc,optional bool bIgnoreHidden);
 final native(311) iterator function VisibleActors(class<Actor> BaseClass,out Actor Actor,optional float Radius,optional Vector loc);
@@ -710,21 +440,15 @@ final native(313) iterator function DynamicActors(class<Actor> BaseClass,out Act
 final native(304) iterator function AllActors(class<Actor> BaseClass,out Actor Actor,optional name MatchTag);
 final native function GameInfo GetGameInfo();
 final native function ResetStaticFilterState();
-event BeginPlay();
 event PostTeleport(Teleporter OutTeleporter);
 event bool PreTeleport(Teleporter InTeleporter);
 final native function Vector SuggestFallVelocity(Vector Destination,Vector Start,float MaxZ,float MaxXYSpeed);
 final native(532) function bool PlayerCanSeeMe();
 final native(512) function MakeNoise(float Loudness);
-final native function bool ForceFeedbackSupported(optional bool Enable);
 final native(569) function ChangeBaseParamsFeedbackEffect(string EffectName,optional float DirectionX,optional float DirectionY,optional float Gain);
 final native(568) function ChangeSpringFeedbackEffect(string EffectName,float CenterX,float CenterY);
 final native(567) function StopFeedbackEffect(optional string EffectName);
 final native(566) function PlayFeedbackEffect(string EffectName);
-final native function float GetSoundDuration(Sound Sound);
-native simulated event DemoPlaySound(Sound Sound,optional byte Slot,optional float Volume,optional bool bNoOverride,optional float Radius,optional float Pitch,optional bool Attenuate);
-final native function PlayOwnedSound(Sound Sound,optional byte Slot,optional float Volume,optional bool bNoOverride,optional float Radius,optional float Pitch,optional bool Attenuate);
-final native(264) function PlaySound(Sound Sound,optional byte Slot,optional float Volume,optional bool bNoOverride,optional float Radius,optional float Pitch,optional bool Attenuate);
 native function StopSBSoundTypes(byte aSoundType);
 native function StopAudio(int aTrackHandle,optional Actor aOwner,optional float aFadeOutTime);
 native function int PlaySBSound(Sound Sound,float Volume,float Pitch,float Radius,optional Vector SoundSourceOffset,optional byte AudioType);
@@ -772,68 +496,30 @@ event BeginEvent();
 event UnTrigger(Actor Other,Pawn EventInstigator);
 event Trigger(Actor Other,Pawn EventInstigator);
 event PostNetReceive();
-event Tick(float DeltaTime);
-event LostChild(Actor Other);
-event GainedChild(Actor Other);
-event Destroyed();
-final native event float GetAllowedAudioRepeatTime(int aSoundType);
-final native event NotifySoundStopped(Sound aSoundStopped);
-final native function StopAllMusic(optional float FadeOutTime);
-final native function StopMusic(int SongHandle,optional float FadeOutTime);
-final native function int PlayMusic(string Song,optional float FadeInTime);
-final native function bool PauseStream(int Handle);
-final native function bool AdjustVolume(int Handle,float NewVolume);
-final native function int SeekStream(int Handle,float Seconds);
-final native function StopStream(int Handle,optional float FadeOutTime);
-final native function int PlayStream(string Song,optional bool UseMusicVolume,optional float Volume,optional float FadeInTime,optional float SeekTime);
-final native function AllowMusicPlayback(bool Allow);
+
+
 final native function UnClock(out float Time);
 final native function Clock(out float Time);
 final native function OnlyAffectPawns(bool B);
-final native(3970) function SetPhysics(byte newPhysics);
-final native(301) latent function FinishInterpolation();
 final native function DebugUnclock();
 final native function DebugClock();
-final native function ClearStayingDebugLines();
-final native function DrawDebugCapsule(Vector Base,float AxisLength,float Radius,byte R,byte G,byte B);
-final native function DrawDebugSphere(Vector Base,float Radius,int NumDivisions,byte R,byte G,byte B);
-final native function DrawDebugCircle(Vector Base,Vector X,Vector Y,float Radius,int NumSides,byte R,byte G,byte B);
-final native function DrawStayingDebugLine(Vector LineStart,Vector LineEnd,byte R,byte G,byte B);
-final native function DrawDebugLine(Vector LineStart,Vector LineEnd,byte R,byte G,byte B);
-final native function Plane GetRenderBoundingSphere();
-final native function string GetUrlOption(string Option);
 final native function UpdateURL(string NewOption,string NewValue,bool bSaveDefault);
 final native function name GetClosestBone(Vector loc,Vector ray,out float boneDist,optional name BiasBone,optional float BiasDistance);
 final native function bool AnimIsInGroup(int Channel,name GroupName);
 final native function GetAnimParams(int Channel,out name OutSeqName,out float OutAnimFrame,out float OutAnimRate);
-final native function SetBoneRotation(name BoneName,optional Rotator BoneTurn,optional int Space,optional float Alpha);
-final native function SetBoneLocation(name BoneName,optional Vector BoneTrans,optional float Alpha);
-final native function SetBoneDirection(name BoneName,Rotator BoneTurn,optional Vector BoneTrans,optional float Alpha,optional int Space);
-final native function SetBoneScale(int Slot,optional float BoneScale,optional name BoneName);
 final native function LockRootMotion(int Lock);
 final native function Actor FindAttachment(name ActorName,name BoneName);
-final native function bool DetachFromBone(Actor Attachment);
-final native function bool AttachToBone(Actor Attachment,name BoneName);
 final native function Rotator GetRootRotationDelta();
 final native function Vector GetRootLocationDelta();
 final native function Rotator GetRootRotation();
 final native function Vector GetRootLocation();
-final native function Rotator GetBoneRotation(name BoneName,optional int Space);
-final native function Coords GetBoneCoords(name BoneName);
 final native function AnimBlendToAlpha(int Stage,float TargetAlpha,float TimeInterval);
 final native function AnimBlendParams(int Stage,optional float BlendAlpha,optional float InTime,optional float OutTime,optional name BoneName,optional bool bGlobalPose);
-final native function BoneRefresh();
 final native function LinkMesh(Mesh NewMesh,optional bool bKeepAnim);
 final native function LinkSkelAnim(MeshAnimation Anim,optional Mesh NewMesh);
 final native function int GetNotifyChannel();
 final native function EnableChannelNotify(int Channel,int Switch);
 event AnimEnd(int Channel);
-event LIPSincAnimEnd();
-final native function string CurrentLIPSincAnim();
-final native function bool IsPlayingLIPSincAnim();
-final native function bool HasLIPSincAnim(name LIPSincAnimName);
-final native function StopLIPSincAnim();
-final native function PlayLIPSincAnim(name LIPSincAnimName,optional float Volume,optional float Radius,optional float Pitch);
 final native function AnimStopLooping(optional int Channel);
 final native function bool IsTweening(int Channel);
 final native function SetAnimFrame(float Time,optional int Channel,optional int UnitFlag);
@@ -848,18 +534,15 @@ final native(259) function bool PlayAnim(name Sequence,optional float Rate,optio
 final native function string GetMeshName();
 native function bool IsBehind(Actor Other,optional int MinYaw,optional int MaxYaw);
 final native function bool IsJoinedTo(Actor Other);
-final native(272) function SetOwner(Actor NewOwner);
 final native(298) function SetBase(Actor NewBase,optional Vector NewFloor);
 native function bool IsGrounded();
 native function MoveNoChecks(Vector DeltaLocation);
-final native(3971) function AutonomousPhysics(float DeltaSeconds);
 final native(3969) function bool MoveSmooth(Vector delta);
 final native function bool SetRelativeLocation(Vector NewLocation);
 final native function bool SetRelativeRotation(Rotator NewRotation);
 final native event bool SetRotation(Rotator NewRotation);
 final native(267) function bool SetLocation(Vector NewLocation);
 final native(266) function bool Move(Vector delta);
-final native function SetSkeletalMesh(Mesh NewSkeletalMesh);
 final native function SetDrawType(byte NewDrawType);
 final native function SetStaticMesh(StaticMesh NewStaticMesh);
 final native function SetDrawScale3D(Vector NewScale3D);
@@ -870,8 +553,6 @@ final native function EndLatentFunction();
 final native(256) latent function Sleep(float Seconds);
 final static native function bool ShouldBeHidden();
 final native(233) function Error(coerce string s);
-native function SetAmbientGlow(int aNewGlow);
-native function TextToSpeech(string Text,float Volume);
 native function CopyObjectToClipboard(Object Obj);
 native function string ConsoleCommand(string Command,optional bool bWriteToLog);
 function bool IsValidActor() {
@@ -880,7 +561,6 @@ return True;
 event bool ShouldTickPhysics() {
 return True;                                                                
 }
-event OnCreateComponents();
 event cl_OnGroupChange(int newGroupFlags);
 event cl_OnUpdate();
 event cl_OnBaseline();

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_Controller : Base_Controller
+    [Serializable] public abstract class Game_Controller : Base_Controller
     {
 
         [TypeProxyDefinition(TypeName = "Game_DebugUtils")]
@@ -24,20 +24,28 @@ namespace SBGame
 
         public Game_Conversation ConversationControl;
 
+        [NonSerialized, HideInInspector]
         public EControllerStates mCurrentState;
 
+        [NonSerialized, HideInInspector]
         public List<Game_Hook> mContentHooks = new List<Game_Hook>();
 
+        [NonSerialized, HideInInspector]
         public Vector mTargetDestination;
 
+        [NonSerialized, HideInInspector]
         public Vector mTargetFocus;
 
+        [NonSerialized, HideInInspector]
         public Rotator mTargetRotation;
 
+        [NonSerialized, HideInInspector]
         public float mMaxDistanceToTarget;
 
+        [NonSerialized, HideInInspector]
         public float mMaxTimeToMove;
 
+        [NonSerialized, HideInInspector]
         public float mMoveSpeed;
 
         [NonSerialized, HideInInspector]
@@ -48,59 +56,67 @@ namespace SBGame
         [FieldTransient()]
         public float mStateTimer;
 
-        public List<StateListener> mStateListeners = new List<StateListener>();
-
+        [NonSerialized, HideInInspector]
         public DB_Character DBCharacter;
 
+        [NonSerialized, HideInInspector]
         public DB_CharacterSheet DBCharacterSheet;
 
+        [NonSerialized, HideInInspector]
         public List<int> DBCharacterSkills = new List<int>();
 
+        [NonSerialized, HideInInspector]
         public List<DBSkillToken> DBSkillTokens = new List<DBSkillToken>();
 
+        [NonSerialized, HideInInspector]
         public List<DB_SkillDeck> DBSkilldecks = new List<DB_SkillDeck>();
 
+        [NonSerialized, HideInInspector]
         public List<DB_Item> DBItems = new List<DB_Item>();
 
+        [NonSerialized, HideInInspector]
         public int DBPersistentVariables;
 
-        public Game_Controller()
-        {
-        }
-
-        [Serializable] public struct DBSkillToken
+        [Serializable] public struct DBSkillToken: IPacketWritable
         {
             public int SkillID;
 
             public int TokenSlots;
+
+            public void Write(IPacketWriter writer)
+            {
+                writer.WriteInt32(SkillID);
+                writer.WriteByte((byte)TokenSlots);
+            }
         }
 
         public enum EControllerStates
         {
-            CPS_PAWN_NONE,
+            CPS_PAWN_NONE = 0,
 
-            CPS_PAWN_ALIVE,
+            CPS_PAWN_ALIVE = 1,
 
-            CPS_PAWN_DEAD,
+            CPS_PAWN_DEAD = 2,
 
-            CPS_AI_ALERT,
+            CPS_AI_ALERT = 3,
 
-            CPS_AI_AGGRO,
+            CPS_AI_AGGRO = 4,
 
-            CPS_AI_FOLLOW,
+            CPS_AI_FOLLOW = 5,
 
-            CPS_AI_IDLE,
+            CPS_AI_IDLE = 6,
 
-            CPS_AI_REGROUP,
+            CPS_AI_REGROUP = 7,
 
-            CPS_MOVE_PAWN,
+            CPS_MOVE_PAWN = 8,
 
-            CPS_ROTATE_PAWN,
+            CPS_ROTATE_PAWN = 9,
 
-            CPS_PAWN_SITTING,
+            CPS_PAWN_SITTING = 10,
 
-            CPS_PAWN_FROZEN,
+            CPS_PAWN_FROZEN = 11,
         }
+
     }
 }
 /*
@@ -268,18 +284,6 @@ if (ConversationControl != None) {
 ConversationControl.sv_OnShutdown();                                      
 }
 Super.sv_OnShutdown();                                                      
-}
-event OnCreateComponents() {
-Super.OnCreateComponents();                                                 
-if (mDebugUtilsClass != None) {                                             
-DebugUtils = new (self) mDebugUtilsClass;                                 
-}
-if (TextParserClass != None) {                                              
-TextParser = new (self) TextParserClass;                                  
-}
-if (ConversationControlClass != None) {                                     
-ConversationControl = new (self) ConversationControlClass;                
-}
 }
 state PawnFrozen {
 event cl_OnPlayerTick(float DeltaTime) {

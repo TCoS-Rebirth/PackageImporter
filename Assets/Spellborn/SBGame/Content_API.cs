@@ -11,333 +11,333 @@ namespace SBGame
 
         public enum EContentEmote
         {
-            ECE_None,
+            ECE_None = 0,
 
-            ECE_wave,
+            ECE_wave = 1,
 
-            ECE_salute,
+            ECE_salute = 2,
 
-            ECE_great,
+            ECE_great = 3,
 
-            ECE_lol,
+            ECE_lol = 4,
 
-            ECE_huh,
+            ECE_huh = 5,
 
-            ECE_dance,
+            ECE_dance = 6,
 
-            ECE_enemies,
+            ECE_enemies = 7,
 
-            ECE_getready,
+            ECE_getready = 8,
 
-            ECE_charge,
+            ECE_charge = 9,
 
-            ECE_attack,
+            ECE_attack = 10,
 
-            ECE_retreat,
+            ECE_retreat = 11,
 
-            ECE_follow,
+            ECE_follow = 12,
 
-            ECE_wait,
+            ECE_wait = 13,
 
-            ECE_comeon,
+            ECE_comeon = 14,
 
-            ECE_assistance,
+            ECE_assistance = 15,
 
-            ECE_overhere,
+            ECE_overhere = 16,
 
-            ECE_backoff,
+            ECE_backoff = 17,
 
-            ECE_north,
+            ECE_north = 18,
 
-            ECE_east,
+            ECE_east = 19,
 
-            ECE_west,
+            ECE_west = 20,
 
-            ECE_south,
+            ECE_south = 21,
 
-            ECE_flank,
+            ECE_flank = 22,
 
-            ECE_goround,
+            ECE_goround = 23,
 
-            ECE_no,
+            ECE_no = 24,
 
-            ECE_yes,
+            ECE_yes = 25,
 
-            ECE_greet,
+            ECE_greet = 26,
 
-            ECE_bye,
+            ECE_bye = 27,
 
-            ECE_thanks,
+            ECE_thanks = 28,
 
-            ECE_pony,
+            ECE_pony = 29,
 
-            ECE_pwnie,
+            ECE_pwnie = 30,
 
-            ECE_trade,
+            ECE_trade = 31,
 
-            ECE_excuse,
+            ECE_excuse = 32,
 
-            ECE_waitup,
+            ECE_waitup = 33,
 
-            ECE_veto,
+            ECE_veto = 34,
 
-            ECE_sarcasm,
+            ECE_sarcasm = 35,
 
-            ECE_hey,
+            ECE_hey = 36,
 
-            ECE_oldskool,
+            ECE_oldskool = 37,
 
-            ECE_outfit,
+            ECE_outfit = 38,
 
-            ECE_fashionpolice,
+            ECE_fashionpolice = 39,
 
-            ECE_jazz,
+            ECE_jazz = 40,
 
-            ECE_clap,
+            ECE_clap = 41,
 
-            ECE_kiss,
+            ECE_kiss = 42,
 
-            ECE_sigh,
+            ECE_sigh = 43,
 
-            ECE_bored,
+            ECE_bored = 44,
 
-            ECE_pain,
+            ECE_pain = 45,
 
-            ECE_pst,
+            ECE_pst = 46,
 
-            ECE_angry,
+            ECE_angry = 47,
 
-            ECE_cry,
+            ECE_cry = 48,
 
-            ECE_maniacal,
+            ECE_maniacal = 49,
 
-            ECE_laugh,
+            ECE_laugh = 50,
 
-            ECE_cough,
+            ECE_cough = 51,
 
-            ECE_cheer,
+            ECE_cheer = 52,
 
-            ECE_whistlehappy,
+            ECE_whistlehappy = 53,
 
-            ECE_whistleattention,
+            ECE_whistleattention = 54,
 
-            ECE_whistlemusic,
+            ECE_whistlemusic = 55,
 
-            ECE_whistlenote,
+            ECE_whistlenote = 56,
 
-            ECE_ahh,
+            ECE_ahh = 57,
 
-            ECE_gasp,
+            ECE_gasp = 58,
 
-            ECE_stretch,
+            ECE_stretch = 59,
 
-            ECE_huf,
+            ECE_huf = 60,
 
-            ECE_bah,
+            ECE_bah = 61,
 
-            ECE_oracle,
+            ECE_oracle = 62,
 
-            ECE_battle,
+            ECE_battle = 63,
 
-            ECE_praise,
+            ECE_praise = 64,
 
-            ECE_mock,
+            ECE_mock = 65,
 
-            ECE_attention,
+            ECE_attention = 66,
 
-            ECE_death,
+            ECE_death = 67,
 
-            ECE_stop,
+            ECE_stop = 68,
 
-            ECE_admireroom,
+            ECE_admireroom = 69,
 
-            ECE_victory,
+            ECE_victory = 70,
 
-            ECE_survive,
+            ECE_survive = 71,
 
-            ECE_again,
+            ECE_again = 72,
 
-            ECE_try,
+            ECE_try = 73,
 
-            ECE_letsgo,
+            ECE_letsgo = 74,
 
-            ECE_rtfm,
+            ECE_rtfm = 75,
 
-            ECE_unique,
+            ECE_unique = 76,
         }
 
         public enum EContentOperator
         {
-            ECO_Equals,
+            ECO_Equals = 0,
 
-            ECO_NotEquals,
+            ECO_NotEquals = 1,
 
-            ECO_Less,
+            ECO_Less = 2,
 
-            ECO_More,
+            ECO_More = 3,
 
-            ECO_EqualOrLess,
+            ECO_EqualOrLess = 4,
 
-            ECO_EqualOrMore,
+            ECO_EqualOrMore = 5,
 
-            ECO_Mask,
+            ECO_Mask = 6,
 
-            ECO_NotMask,
+            ECO_NotMask = 7,
         }
 
         public enum NPCBodytype
         {
-            ENB_Skinny,
+            ENB_Skinny = 0,
 
-            ENB_Athletic,
+            ENB_Athletic = 1,
 
-            ENB_Fat,
+            ENB_Fat = 2,
 
-            ENB_Hulky,
+            ENB_Hulky = 3,
 
-            ENB_Child,
+            ENB_Child = 4,
 
-            ENB_Monstrous,
+            ENB_Monstrous = 5,
         }
 
         public enum NPCRace
         {
-            ENR_Human,
+            ENR_Human = 0,
 
-            ENR_Daevi,
+            ENR_Daevi = 1,
 
-            ENR_Monster,
+            ENR_Monster = 2,
 
-            ENR_Arionite,
+            ENR_Arionite = 3,
 
-            ENR_SpeyrFolk,
+            ENR_SpeyrFolk = 4,
 
-            ENR_DemonArmy,
+            ENR_DemonArmy = 5,
 
-            ENR_BotG,
+            ENR_BotG = 6,
 
-            ENR_ForgeOfWisdom,
+            ENR_ForgeOfWisdom = 7,
 
-            ENR_Ousted,
+            ENR_Ousted = 8,
 
-            ENR_Urvhail,
+            ENR_Urvhail = 9,
 
-            ENR_Vhuul,
+            ENR_Vhuul = 10,
 
-            ENR_Urgarut,
+            ENR_Urgarut = 11,
 
-            ENR_Shunned,
+            ENR_Shunned = 12,
         }
 
         public enum NPCGender
         {
-            ENG_Male,
+            ENG_Male = 0,
 
-            ENG_Female,
+            ENG_Female = 1,
 
-            ENG_Neuter,
+            ENG_Neuter = 2,
 
-            ENG_Hermaphrodite,
+            ENG_Hermaphrodite = 3,
         }
 
         public enum ENPCClassType
         {
-            CT_HeavyMelee,
+            CT_HeavyMelee = 0,
 
-            CT_HeavyRanged,
+            CT_HeavyRanged = 1,
 
-            CT_ModerateMelee,
+            CT_ModerateMelee = 2,
 
-            CT_ModerateRanged,
+            CT_ModerateRanged = 3,
 
-            CT_LightMelee,
+            CT_LightMelee = 4,
 
-            CT_LightRanged,
+            CT_LightRanged = 5,
 
-            CT_DOT,
+            CT_DOT = 6,
 
-            CT_Healer,
+            CT_Healer = 7,
 
-            CT_Slower,
+            CT_Slower = 8,
 
-            CT_Buffer,
+            CT_Buffer = 9,
 
-            CT_Alerter,
+            CT_Alerter = 10,
 
-            CT_Supporter,
+            CT_Supporter = 11,
 
-            CT_Rezzer,
+            CT_Rezzer = 12,
 
-            CT_Debuffer,
+            CT_Debuffer = 13,
 
-            CT_Blinder,
+            CT_Blinder = 14,
         }
 
         public enum EContentClass
         {
-            ECC_NoClass,
+            ECC_NoClass = 0,
 
-            ECC_Rogue,
+            ECC_Rogue = 1,
 
-            ECC_Warrior,
+            ECC_Warrior = 2,
 
-            ECC_Spellcaster,
+            ECC_Spellcaster = 3,
 
-            ECC_Trickster,
+            ECC_Trickster = 4,
 
-            ECC_SkinShifter,
+            ECC_SkinShifter = 5,
 
-            ECC_DeathHand,
+            ECC_DeathHand = 6,
 
-            ECC_Bloodwarrior,
+            ECC_Bloodwarrior = 7,
 
-            ECC_FuryHammer,
+            ECC_FuryHammer = 8,
 
-            ECC_WrathGuard,
+            ECC_WrathGuard = 9,
 
-            ECC_RuneMage,
+            ECC_RuneMage = 10,
 
-            ECC_VoidSeer,
+            ECC_VoidSeer = 11,
 
-            ECC_AncestralMage,
+            ECC_AncestralMage = 12,
 
-            ECC_Gadgeteer,
+            ECC_Gadgeteer = 13,
 
-            ECC_Entertainer,
+            ECC_Entertainer = 14,
 
-            ECC_Assassin,
+            ECC_Assassin = 15,
 
-            ECC_ShapeChanger,
+            ECC_ShapeChanger = 16,
 
-            ECC_Consumer,
+            ECC_Consumer = 17,
 
-            ECC_Alchemist,
+            ECC_Alchemist = 18,
 
-            ECC_Bodyguard,
+            ECC_Bodyguard = 19,
 
-            ECC_Flagellant,
+            ECC_Flagellant = 20,
 
-            ECC_Visionary,
+            ECC_Visionary = 21,
 
-            ECC_MartialArtist,
+            ECC_MartialArtist = 22,
 
-            ECC_PossessedOne,
+            ECC_PossessedOne = 23,
 
-            ECC_FrontMan,
+            ECC_FrontMan = 24,
 
-            ECC_Nuker,
+            ECC_Nuker = 25,
 
-            ECC_RuneMaster,
+            ECC_RuneMaster = 26,
 
-            ECC_Priest,
+            ECC_Priest = 27,
 
-            ECC_AntiMage,
+            ECC_AntiMage = 28,
 
-            ECC_Summoner,
+            ECC_Summoner = 29,
 
-            ECC_Infuser,
+            ECC_Infuser = 30,
 
-            ECC_AnyClass,
+            ECC_AnyClass = 31,
         }
     }
 }

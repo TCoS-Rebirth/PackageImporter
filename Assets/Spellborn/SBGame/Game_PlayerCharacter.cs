@@ -14,8 +14,9 @@ namespace SBGame
 
         public EventNotification mMoneyChanged;
 
-        public Game_PlayerCharacter()
+        public override void WriteLoginStream(IPacketWriter writer)
         {
+            //writer.Write()
         }
     }
 }

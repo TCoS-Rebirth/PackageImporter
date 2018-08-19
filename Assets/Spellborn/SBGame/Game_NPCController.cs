@@ -10,8 +10,9 @@ namespace SBGame
 
         public bool BreakAI;
 
-        public Game_NPCController()
+        public override void WriteLoginStream(IPacketWriter packetWriter)
         {
+            throw new NotImplementedException();
         }
     }
 }

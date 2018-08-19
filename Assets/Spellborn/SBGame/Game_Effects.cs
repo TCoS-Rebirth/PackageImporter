@@ -7,7 +7,7 @@ namespace SBGame
 {
 #pragma warning disable 414     
 
-    [Serializable] public class Game_Effects : Base_Component
+    [Serializable] public class Game_Effects : Base_Component, IActorPacketStream
     {
         public const int MAX_NUM_REPLICATED_EFFECTS = 5;
 
@@ -39,14 +39,13 @@ namespace SBGame
 
         private byte mWantedTargetInteractionEffect;
 
-        private int mEffectQueueHack1;
-
-        private int mEffectQueueHack2;
-
-        private int mEffectQueueHack3;
-
-        public Game_Effects()
+        public void WriteLoginStream(IPacketWriter writer)
         {
+            writer.WriteInt32(mReplicatedEffects.Count);
+            for (int i = 0; i < mReplicatedEffects.Count; i++)
+            {
+                writer.WriteInt32(mReplicatedEffects[i]);
+            }
         }
 
         [Serializable] public struct mTaggedEffect
@@ -59,16 +58,13 @@ namespace SBGame
         public enum ETargetInteractionEffect
         {
             TIE_None,
-
             TIE_Selected,
         }
 
         public enum EInteractionEffect
         {
             IE_None,
-
             IE_Hover,
-
             IE_Selected,
         }
     }

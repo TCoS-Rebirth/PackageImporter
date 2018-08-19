@@ -5,13 +5,9 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Appearance_Set : UObject
+    [Serializable]
+    public class Appearance_Set : UObject
     {
-        public List<string> HeadSet = new List<string>();
-
-        [NonSerialized, HideInInspector]
-        [ArraySizeForExtraction(Size = 5)]
-        public string[] BodyPalette = new string[0];
 
         public List<Appearance_Base> ChestClothesSet = new List<Appearance_Base>();
 
@@ -61,90 +57,98 @@ namespace SBGame
 
         private bool mInitialized;
 
-        public Appearance_Set()
+        static void SheathArray(List<Appearance_Base> orgArray, out List<Appearance_Base> outArray)
         {
+            outArray = new List<Appearance_Base>(orgArray.Count);
+            var i = 0;
+            while (i < orgArray.Count)
+            {
+                if (orgArray[i] != null)
+                {
+                    outArray[i] = Instantiate(orgArray[i]);
+                    switch (orgArray[i].Part)
+                    {
+                        case Appearance_Base.AppearancePart.AP_MainWeapon:
+                            outArray[i].Part = Appearance_Base.AppearancePart.AP_MainSheath;
+                            break;
+                        case Appearance_Base.AppearancePart.AP_OffhandWeapon:
+                            outArray[i].Part = Appearance_Base.AppearancePart.AP_OffhandSheath;
+                            break;
+                    }
+                    var aI = 0;
+                    while (aI < orgArray[i].Attachments.Count)
+                    {
+                        var attachment = outArray[i].Attachments[aI];
+                        switch (orgArray[i].Attachments[aI].SocketId)
+                        {
+                            case Appearance_Base.AppearanceSocket.AS_RightHandHolster:
+                                attachment.SocketId = Appearance_Base.AppearanceSocket.AS_MainShoulderSheath;
+                                attachment.Covers = Appearance_Base.CoverageFlag.Covers_Nothing;
+                                break;
+                            case Appearance_Base.AppearanceSocket.AS_LeftHandHolster:
+                                attachment.SocketId = Appearance_Base.AppearanceSocket.AS_OffhandShoulderSheath;
+                                attachment.Covers = Appearance_Base.CoverageFlag.Covers_Nothing;
+                                break;
+                            case Appearance_Base.AppearanceSocket.AS_Shield:
+                                attachment.SocketId = Appearance_Base.AppearanceSocket.AS_ShieldSheath;
+                                attachment.Covers = Appearance_Base.CoverageFlag.Covers_Nothing;
+                                break;
+                        }
+                        outArray[i].Attachments[aI] = attachment;
+                        aI++;
+                    }
+                    break;
+                }
+                outArray[i] = null;
+                i++;
+            }
+        }
+
+        static void InitArray(List<Appearance_Base> OutArray)
+        {
+            var i = 0;
+            while (i < OutArray.Count)
+            {
+                if (OutArray[i] != null)
+                {
+                    OutArray[i]._AS_Index = i;
+                    OutArray[i]._AS_Set = true;
+                }
+                i++;
+            }
+        }
+
+        void OnInit()
+        {
+            if (mInitialized) return;
+            mInitialized = true;
+            InitArray(ChestClothesSet);
+            InitArray(LeftGloveSet);                                                    
+            InitArray(RightGloveSet);                                                   
+            InitArray(PantsSet);                                                        
+            InitArray(ShoesSet);                                                        
+            InitArray(HeadGearSet);                                                     
+            InitArray(LeftShoulderSet);                                                 
+            InitArray(RightShoulderSet);                                                
+            InitArray(LeftGauntletSet);                                                 
+            InitArray(RightGauntletSet);                                                
+            InitArray(ChestSet);                                                        
+            InitArray(BeltSet);                                                         
+            InitArray(LeftThighSet);                                                    
+            InitArray(RightThighSet);                                                   
+            InitArray(LeftShinSet);                                                     
+            InitArray(RightShinSet);                                                    
+            InitArray(MainWeaponSet);                                                   
+            InitArray(OffhandWeaponSet);
+            if (!Application.isEditor)
+            {
+                SheathArray(MainWeaponSet, out MainSheathSet);
+                SheathArray(OffhandWeaponSet, out OffhandSheathSet);
+            }
+            InitArray(HairSet);
         }
     }
 }
 /*
 native function UnloadResources();
-private function SheathArray(array<Appearance_Base> orgArray,out array<Appearance_Base> OutArray) {
-local int i;
-local int aI;
-i = 0;                                                                      
-while (i < orgArray.Length) {                                               
-if (orgArray[i] != None) {                                                
-OutArray[i] = Appearance_Base(orgArray[i].Clone(True));                 
-if (orgArray[i].Part == 16) {                                           
-OutArray[i].Part = 19;                                                
-} else {                                                                
-if (orgArray[i].Part == 17) {                                         
-OutArray[i].Part = 20;                                              
-goto jl00C1;                                                        
-}
-}
-aI = 0;                                                                 
-while (aI < orgArray[i].Attachments.Length) {                           
-if (orgArray[i].Attachments[aI].SocketId == Class'Appearance_Base'.6) {
-OutArray[i].Attachments[aI].SocketId = Class'Appearance_Base'.15;   
-OutArray[i].Attachments[aI].Covers = 16;                            
-} else {                                                              
-if (orgArray[i].Attachments[aI].SocketId == Class'Appearance_Base'.5) {
-OutArray[i].Attachments[aI].SocketId = Class'Appearance_Base'.16; 
-OutArray[i].Attachments[aI].Covers = 16;                          
-goto jl026D;                                                      
-}
-if (orgArray[i].Attachments[aI].SocketId == Class'Appearance_Base'.17) {
-OutArray[i].Attachments[aI].SocketId = Class'Appearance_Base'.18; 
-OutArray[i].Attachments[aI].Covers = 16;                          
-}
-}
-aI++;                                                                 
-}
-break;                                                                  
-}
-OutArray[i] = None;                                                       
-++i;                                                                      
-}
-}
-private function InitArray(out array<Appearance_Base> OutArray) {
-local int i;
-i = 0;                                                                      
-while (i < OutArray.Length) {                                               
-if (OutArray[i] != None) {                                                
-OutArray[i]._AS_Index = i;                                              
-OutArray[i]._AS_Set = True;                                             
-}
-++i;                                                                      
-}
-}
-event OnInit() {
-if (mInitialized) {                                                         
-return;                                                                   
-}
-mInitialized = True;                                                        
-InitArray(ChestClothesSet);                                                 
-InitArray(LeftGloveSet);                                                    
-InitArray(RightGloveSet);                                                   
-InitArray(PantsSet);                                                        
-InitArray(ShoesSet);                                                        
-InitArray(HeadGearSet);                                                     
-InitArray(LeftShoulderSet);                                                 
-InitArray(RightShoulderSet);                                                
-InitArray(LeftGauntletSet);                                                 
-InitArray(RightGauntletSet);                                                
-InitArray(ChestSet);                                                        
-InitArray(BeltSet);                                                         
-InitArray(LeftThighSet);                                                    
-InitArray(RightThighSet);                                                   
-InitArray(LeftShinSet);                                                     
-InitArray(RightShinSet);                                                    
-InitArray(MainWeaponSet);                                                   
-InitArray(OffhandWeaponSet);                                                
-if (!IsEditor()) {                                                          
-SheathArray(MainWeaponSet,MainSheathSet);                                 
-SheathArray(OffhandWeaponSet,OffhandSheathSet);                           
-}
-InitArray(HairSet);                                                         
-}
 */

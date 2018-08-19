@@ -1,23 +1,27 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Engine
 {
-    [Serializable] public class Controller : Actor
+    public abstract class Controller : Actor, IActorPacketStream
     {
         public const int LATENT_MOVETOWARD = 503;
 
         public Pawn Pawn;
 
-        public bool bGodMode;
-
+        [NonSerialized, HideInInspector]
         public Actor MoveTarget;
 
+        [NonSerialized, HideInInspector]
         public Vector Destination;
 
+        [NonSerialized, HideInInspector]
         public Vector FocalPoint;
 
+        [NonSerialized, HideInInspector]
         public Mover PendingMover;
 
+        [NonSerialized, HideInInspector]
         public NavigationPoint home;
 
         [TypeProxyDefinition(TypeName = "Pawn")]
@@ -26,14 +30,13 @@ namespace Engine
         [TypeProxyDefinition(TypeName = "Pawn")]
         public Type PreviousPawnClass;
 
+        [NonSerialized, HideInInspector]
         public NavigationPoint StartSpot;
 
         [ArraySizeForExtraction(Size = 2)]
         public AvoidMarker[] FearSpots = new AvoidMarker[0];
 
-        public Controller()
-        {
-        }
+        public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
     }
 }
 /*

@@ -14,35 +14,29 @@ namespace SBGame
 
         public const float LEVEL_AREA_UPDATE_TIME = 1F;
 
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_QuestLog")]
-        public Type QuestLogClass;
-
         public Game_QuestLog questLog;
 
+        [NonSerialized, HideInInspector]
         public DB_Guild mGuild;
 
+        [NonSerialized, HideInInspector]
         public DB_Team mTeam;
 
+        [NonSerialized, HideInInspector]
         public Vector mNetVelocity;
 
+        [NonSerialized, HideInInspector]
         public Vector mNetLocation;
 
-        public byte mNetPhysics;
+        [NonSerialized, HideInInspector]
+        public EPhysics mNetPhysics;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
         private byte mCurrentFrameID;
 
+        [NonSerialized, HideInInspector]
         public byte mMoveFrameID;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private byte mLastMoveFrameID;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float mWorkSpeed;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
@@ -53,40 +47,56 @@ namespace SBGame
         private float mCurrentMoveTimer;
 
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool mReached;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool mMayJump;
-
-        private float mUpdateInterval;
-
         public LevelAreaVolume mCurrentLevelArea;
 
+        [NonSerialized, HideInInspector]
         public LevelAreaVolume mCurrentShard;
 
+        [NonSerialized, HideInInspector]
         private int mCurrentShardID;
 
+        [NonSerialized, HideInInspector]
         private int mCurrentMapSectionID;
 
-        private List<MapNote> mMapNotes = new List<MapNote>();
-
-        private ZoneInfo mPreviousZone;
-
-        private ZoneInfo mCurrentMusicZone;
-
+        [NonSerialized, HideInInspector]
         public PvPSettings mPvPSettings;
 
+        [NonSerialized, HideInInspector]
         public float mPvPTimer;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
         private int mUser;
 
-        public Game_PlayerPawn()
+        //        event OnCreateComponents() {
+        //            local Game_GameInfo GameInfo;
+        //            local class<Game_MiniGameProxy> miniGameProxyClass;
+        //            GameInfo = Game_GameInfo(GetGameInfo());                                    
+        //            Super.OnCreateComponents();                                                 
+        //            if (QuestLogClass != None) {                                                
+        //                questLog = new (self) QuestLogClass;                                      
+        //            }
+        //            if (GameInfo != None && GameInfo.HaveMiniGameProxy) {                       
+        //                miniGameProxyClass = Class<Game_MiniGameProxy>(static.DynamicLoadObject("SBMiniGames.MGame_MiniGameProxy",Class'Class',True));
+        //        MiniGameProxy = new (self) miniGameProxyClass;                            
+        //          }
+        //        }
+
+        public override void WriteLoginStream(IPacketWriter writer)
         {
+            writer.WriteVector3(Velocity);
+            writer.WriteVector3(transform.position);
+            writer.WriteByte((byte)Physics);
+            writer.WriteByte(mMoveFrameID);
+            writer.WriteByte((byte)GetState());
+            writer.WriteInt32(bInvulnerable ? 1 : 0);
+            writer.WriteFloat(GroundSpeed);
+            writer.WriteInt32(mDebugFilters);
+            writer.WriteInt32(Visibility);
+            CharacterStats.WriteLoginStream(writer);
+            Effects.WriteLoginStream(writer);
         }
+
     }
 }
 /*
@@ -193,44 +203,8 @@ SendDesktopMessage("",Class'StringReferences'.default.Enabling_PvP_in_.Text
 }
 }
 native function ResetPvPTimer();
-native function UpdateAreaAudio(float aDeltaTime);
 function DB_Guild GetGuild() {
 return mGuild;                                                              
-}
-function MapNote GetMapNote(int Id) {
-if (Id < mMapNotes.Length) {                                                
-return mMapNotes[Id];                                                     
-}
-return None;                                                                
-}
-function RemoveMapNote(int Id) {
-if (Id < mMapNotes.Length) {                                                
-mMapNotes.Remove(Id,1);                                                   
-}
-}
-function UpdateMapNoteLocation(int Id,float X,float Y) {
-if (Id < mMapNotes.Length) {                                                
-mMapNotes[Id].X = X;                                                      
-mMapNotes[Id].Y = Y;                                                      
-}
-}
-function AddMapNote(string aTitle,string aLevel,string anInformation,string aTarget,float X,float Y,int Id) {
-local MapNote aNote;
-if (Id < 0) {                                                               
-aNote = new Class'MapNote';                                               
-aNote.Title.Text = aTitle;                                                
-aNote.Level.Text = aLevel;                                                
-aNote.Information.Text = anInformation;                                   
-aNote.X = X;                                                              
-aNote.Y = Y;                                                              
-aNote.Id = mMapNotes.Length;                                              
-mMapNotes.Length = mMapNotes.Length + 1;                                  
-mMapNotes[mMapNotes.Length - 1] = aNote;                                  
-} else {                                                                    
-mMapNotes[Id].Title.Text = aTitle;                                        
-mMapNotes[Id].Level.Text = aLevel;                                        
-mMapNotes[Id].Information.Text = anInformation;                           
-}
 }
 final native function UpdateLevelInfo();
 function RadialMenuSelect(Pawn aPlayerPawn,byte aMainOption,byte aSubOption) {

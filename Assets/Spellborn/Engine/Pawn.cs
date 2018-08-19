@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Engine
 {
-    [Serializable] public class Pawn : Actor
+    [Serializable] public class Pawn : Actor, IActorPacketStream
     {
         public Controller Controller;
 
@@ -12,44 +12,63 @@ namespace Engine
         [NonSerialized, HideInInspector]
         public bool bReducedSpeed;
 
+        [NonSerialized, HideInInspector]
         public bool bUseCompressedPosition = true;
 
+        [NonSerialized, HideInInspector]
         public byte Visibility;
 
+        [NonSerialized, HideInInspector]
         public float DesiredSpeed;
 
+        [NonSerialized, HideInInspector]
         public float MaxDesiredSpeed;
 
         [FoldoutGroup("aI")]
+        [NonSerialized, HideInInspector]
         public NameProperty AIScriptTag;
 
         [FoldoutGroup("Pawn")]
+        [NonSerialized, HideInInspector]
         public float SkillModifier;
 
+        [NonSerialized, HideInInspector]
         public float MeleeRange;
 
+        [NonSerialized, HideInInspector]
         public float NavigationPointRange;
 
+        [NonSerialized, HideInInspector]
         public NavigationPoint Anchor;
 
+        [NonSerialized, HideInInspector]
         public float GroundSpeed = 320;
 
+        [NonSerialized, HideInInspector]
         public float WaterSpeed = 200;
 
+        [NonSerialized, HideInInspector]
         public float AirSpeed;
 
+        [NonSerialized, HideInInspector]
         public float AccelRate = 500;
 
+        [NonSerialized, HideInInspector]
         public float JumpZ = 325;
 
+        [NonSerialized, HideInInspector]
         public float AirControl = 0.05f;
 
+        [NonSerialized, HideInInspector]
         public float WalkingPct;
 
+        [NonSerialized, HideInInspector]
         public float CrouchedPct;
 
+        [NonSerialized, HideInInspector]
         public float MaxFallSpeed;
 
+        [NonSerialized, HideInInspector]
         public string OwnerName = string.Empty;
 
         [TypeProxyDefinition(TypeName = "AIController")]
@@ -59,11 +78,11 @@ namespace Engine
         [FieldTransient()]
         public CompressedPosition PawnPosition;
 
+        [NonSerialized, HideInInspector]
         public float MaxRotation;
 
-        public Pawn()
-        {
-        }
+        public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
+
     }
 }
 /*

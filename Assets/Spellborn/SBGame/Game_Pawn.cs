@@ -89,33 +89,40 @@ namespace SBGame
 
         public Game_MiniGameProxy MiniGameProxy;
 
+        [NonSerialized, HideInInspector]
         private EPawnStates mCurrentState;
 
-        private byte mNetState;
+        [NonSerialized, HideInInspector]
+        private EPawnStates mNetState;
 
+        [NonSerialized, HideInInspector]
         public bool bInvulnerable;
 
+        [NonSerialized, HideInInspector]
         private bool bCheatInvulnerable;
 
-        public bool mTeleported;
-
+        [NonSerialized, HideInInspector]
         public float ForwardSpeedModifier;
 
+        [NonSerialized, HideInInspector]
         public float SideSpeedModifier;
 
+        [NonSerialized, HideInInspector]
         public float BackwardSpeedModifier;
 
+        [NonSerialized, HideInInspector]
         public float GroundSpeedModifier;
 
+        [NonSerialized, HideInInspector]
         public CharacterIdentity mCharacterIdentityForBugReport;
 
-        public bool mAlwaysHighQualityAppearance;
-
+        [NonSerialized, HideInInspector]
         public float mInteractionRange;
 
         [NonSerialized, HideInInspector]
         public bool mIsInteracting;
 
+        [NonSerialized, HideInInspector]
         public int mDebugFilters;
 
         [NonSerialized, HideInInspector]
@@ -124,21 +131,11 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public Actor mTargetActor;
 
+        [NonSerialized, HideInInspector]
         public List<NameProperty> InteractionTags = new List<NameProperty>();
 
+        [NonSerialized, HideInInspector]
         public float SkillRadius;
-
-        public EventNotification ShiftStateChanged;
-
-        [NonSerialized, HideInInspector]
-        private bool mPrevCombatReady;
-
-        [NonSerialized, HideInInspector]
-        private bool mPrevInCombat;
-
-        public EventNotification CombatStateChanged;
-
-        public EventNotification PetSummoned;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
@@ -149,10 +146,6 @@ namespace SBGame
         public bool HasPet;
 
         private bool mInvisible;
-
-        public Game_Pawn()
-        {
-        }
 
         [Serializable] public struct CharacterIdentity
         {
@@ -165,113 +158,167 @@ namespace SBGame
             public int TransferAccountID;
         }
 
+        #region enums
         public enum EPetAttackState
         {
-            PAS_Aggressive,
+            PAS_Aggressive = 0,
 
-            PAS_Defensive,
+            PAS_Defensive = 1,
 
-            PAS_Assist,
+            PAS_Assist = 2,
 
-            PAS_Passive,
+            PAS_Passive = 3,
 
-            PAS_MAX,
+            PAS_MAX = 4,
         }
 
         public enum EPetMoveState
         {
-            PMS_Stay,
+            PMS_Stay = 0,
 
-            PMS_FollowOwner,
+            PMS_FollowOwner = 1,
 
-            PMS_MAX,
+            PMS_MAX = 2,
         }
 
         public enum ELateralMove
         {
-            ELM_None,
+            ELM_None = 0,
 
-            ELM_Left,
+            ELM_Left = 1,
 
-            ELM_Right,
+            ELM_Right = 2,
         }
 
         public enum EParallelMove
         {
-            EPM_None,
+            EPM_None = 0,
 
-            EPM_Forwards,
+            EPM_Forwards = 1,
 
-            EPM_Backwards,
+            EPM_Backwards = 2,
         }
 
         public enum EDebugDrawFilters
         {
-            EDD_Position,
+            EDD_Position = 0,
 
-            EDD_Location,
+            EDD_Location = 1,
 
-            EDD_Cell,
+            EDD_Cell = 2,
 
-            EDD_Move,
+            EDD_Move = 3,
 
-            EDD_Path,
+            EDD_Path = 4,
 
-            EDD_Target,
+            EDD_Target = 5,
 
-            EDD_Tactical,
+            EDD_Tactical = 6,
 
-            EDD_Relevant,
+            EDD_Relevant = 7,
 
-            EDD_History,
+            EDD_History = 8,
 
-            EDD_Skill,
+            EDD_Skill = 9,
 
-            EDD_Threat,
+            EDD_Threat = 10,
 
-            EDD_Astar,
+            EDD_Astar = 11,
 
-            EDD_Max,
+            EDD_Max = 12,
         }
 
         public enum EPawnEffectType
         {
-            EPET_LevelUp,
+            EPET_LevelUp = 0,
 
-            EPET_RankUp,
+            EPET_RankUp = 1,
 
-            EPET_QuestCompleted,
+            EPET_QuestCompleted = 2,
 
-            EPET_FadeIn,
+            EPET_FadeIn = 3,
 
-            EPET_FadeOut,
+            EPET_FadeOut = 4,
 
-            EPET_Visible,
+            EPET_Visible = 5,
 
-            EPET_Invisible,
+            EPET_Invisible = 6,
 
-            EPET_PetSpawn,
+            EPET_PetSpawn = 7,
 
-            EPET_PetDestroy,
+            EPET_PetDestroy = 8,
 
-            EPET_ShapeShift,
+            EPET_ShapeShift = 9,
 
-            EPET_ShapeUnshift,
+            EPET_ShapeUnshift = 10,
 
-            EPET_ArenaTeam0,
+            EPET_ArenaTeam0 = 11,
 
-            EPET_ArenaTeam1,
+            EPET_ArenaTeam1 = 12,
 
-            EPET_SimpleCameraShake,
+            EPET_SimpleCameraShake = 13,
         }
 
         public enum EPawnStates
         {
-            PS_NONE,
+            PS_NONE = 0,
 
-            PS_ALIVE,
+            PS_ALIVE = 1,
 
-            PS_DEAD,
+            PS_DEAD = 2,
+        }
+        #endregion
+
+        public override void OnCreateComponents() 
+        {
+            base.OnCreateComponents();                                                 
+            //if (ShiftableAppearanceClass != null) {                                     
+            //    Appearance = new (self) ShiftableAppearanceClass;                         
+            //}
+            //if (BaseAppearanceClass != null) {                                          
+            //    BaseAppearance = new (self) BaseAppearanceClass;                          
+            //}
+            //if (CharacterClass != null) {                                               
+            //Character = new (self) CharacterClass;                                    
+            //}
+            //if (CharacterStatsClass != null) {                                          
+            //CharacterStats = new (self) CharacterStatsClass;                          
+            //}
+            //if (CombatStateClass != null) {                                             
+            //combatState = new (self) CombatStateClass;                                
+            //}
+            //if (CombatStatsClass != null) {                                             
+            //CombatStats = new (self) CombatStatsClass;                                
+            //}
+            //if (EffectsClass != null) {                                                 
+            //Effects = new (self) EffectsClass;                                        
+            //}
+            //if (EmotesClass != null) {                                                  
+            //Emotes = new (self) EmotesClass;                                          
+            //}
+            //if (LootingClass != null) {                                                 
+            //Looting = new (self) LootingClass;                                        
+            //}
+            //if (SkillsClass != null) {                                                  
+            //Skills = new (self) SkillsClass;                                          
+            //}
+            //if (TradingClass != null) {                                                 
+            //Trading = new (self) TradingClass;                                        
+            //}
+            //if (ItemManagerClass != null) {                                             
+            //itemManager = new (self) ItemManagerClass;                                
+            //}
+            //if (BodySlotsClass != null) {                                               
+            //BodySlots = new (self) BodySlotsClass;                                    
+            //}
+            //if (Appearance != null) {                                                   
+            //Appearance.OnConstruct();                                                 
+            //}
+        }
+
+        public EPawnStates GetState()
+        {
+            return mCurrentState;
         }
     }
 }
@@ -1641,51 +1688,7 @@ cl_PlayPawnEffect(6);
 cl_PlayPawnEffect(3);                                                     
 }
 }
-event OnCreateComponents() {
-Super.OnCreateComponents();                                                 
-if (ShiftableAppearanceClass != None) {                                     
-Appearance = new (self) ShiftableAppearanceClass;                         
-}
-if (BaseAppearanceClass != None) {                                          
-BaseAppearance = new (self) BaseAppearanceClass;                          
-}
-if (CharacterClass != None) {                                               
-Character = new (self) CharacterClass;                                    
-}
-if (CharacterStatsClass != None) {                                          
-CharacterStats = new (self) CharacterStatsClass;                          
-}
-if (CombatStateClass != None) {                                             
-combatState = new (self) CombatStateClass;                                
-}
-if (CombatStatsClass != None) {                                             
-CombatStats = new (self) CombatStatsClass;                                
-}
-if (EffectsClass != None) {                                                 
-Effects = new (self) EffectsClass;                                        
-}
-if (EmotesClass != None) {                                                  
-Emotes = new (self) EmotesClass;                                          
-}
-if (LootingClass != None) {                                                 
-Looting = new (self) LootingClass;                                        
-}
-if (SkillsClass != None) {                                                  
-Skills = new (self) SkillsClass;                                          
-}
-if (TradingClass != None) {                                                 
-Trading = new (self) TradingClass;                                        
-}
-if (ItemManagerClass != None) {                                             
-itemManager = new (self) ItemManagerClass;                                
-}
-if (BodySlotsClass != None) {                                               
-BodySlots = new (self) BodySlotsClass;                                    
-}
-if (Appearance != None) {                                                   
-Appearance.OnConstruct();                                                 
-}
-}
+
 protected native function class<Game_HUD> GetGameHUDClass();
 event OnSettingsChanged() {
 if (bActorShadows && IsClient() && !IsServer()) {                           

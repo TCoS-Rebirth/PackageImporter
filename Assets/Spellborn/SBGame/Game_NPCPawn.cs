@@ -17,13 +17,9 @@ namespace SBGame
 
         public List<int> RelatedQuestsIds = new List<int>();
 
-        public bool mDebugInfo;
-
-        public Vector mDebugNetLocation;
-
         public Vector mNetDestination;
 
-        public byte mMovementFlags;
+        public ENPCMovementFlags mMovementFlags;
 
         public Game_Pawn mNetFocus;
 
@@ -36,34 +32,15 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public Game_Pawn ClientFocus;
 
-        public bool Moving;
-
-        private float mNoPathTime;
-
-        private float mLastKnownSpeed;
-
         public int MovingTurnLimit;
-
-        public bool bTouching;
 
         public float timerMain;
 
         public float bannerTimer;
 
-        public bool playerInRange;
-
         public Conversation_Topic Topic;
 
         public Actor TopicEmitter;
-
-        [NonSerialized, HideInInspector]
-        public string mDebugStateStr = string.Empty;
-
-        [NonSerialized, HideInInspector]
-        public string mDebugInfoStr = string.Empty;
-
-        [NonSerialized, HideInInspector]
-        public string mDebugPathStr = string.Empty;
 
         public float LootTimeout;
 
@@ -72,15 +49,6 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         [FieldTransient()]
         public Game_Pawn mScavenger;
-
-        [NonSerialized, HideInInspector]
-        public int mDebugging;
-
-        public bool BreakMovement;
-
-        public Game_NPCPawn()
-        {
-        }
 
         [Serializable] public struct NetMovement
         {

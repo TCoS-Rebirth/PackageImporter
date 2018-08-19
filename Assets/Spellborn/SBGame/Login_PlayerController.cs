@@ -8,10 +8,6 @@ namespace SBGame
     {
         public List<UniverseInfo> mUniverses = new List<UniverseInfo>();
 
-        public Login_PlayerController()
-        {
-        }
-
         [Serializable] public struct UniverseInfo
         {
             public int Id;
@@ -23,6 +19,11 @@ namespace SBGame
             public string Type;
 
             public string Population;
+        }
+
+        public override void WriteLoginStream(IPacketWriter packetWriter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

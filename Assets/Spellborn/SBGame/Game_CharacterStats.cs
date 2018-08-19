@@ -8,7 +8,8 @@ namespace SBGame
 {
 #pragma warning disable 414   
 
-    [Serializable] public class Game_CharacterStats : Base_Component
+    [Serializable]
+    public class Game_CharacterStats: Base_Component, IActorPacketStream
     {
         public const int EFF_Stats = 8;
 
@@ -270,24 +271,6 @@ namespace SBGame
         [ArraySizeForExtraction(Size = 6)]
         public float[] mDamagePepLvlBonus = new float[0];
 
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool @__Recalculate;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private bool @__UpdateModifiers;
-
-        [FieldConst()]
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int @__UpdateCounter;
-
-        [FieldConst()]
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private float @__UpdateTimeElapsed;
-
         private List<FreezeData> mMovementFreezeTimers = new List<FreezeData>();
 
         private List<FreezeData> mRotationFreezeTimers = new List<FreezeData>();
@@ -296,70 +279,75 @@ namespace SBGame
 
         private List<FreezeData> mStatsFreezeTimers = new List<FreezeData>();
 
-        public Game_CharacterStats()
-        {
-        }
+        public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
 
-        [Serializable] public struct FreezeData
+        [Serializable]
+        public struct FreezeData
         {
             public float Start;
 
             public float Duration;
         }
 
-        [Serializable] public struct CharacterStatsRecord
+        [Serializable]
+        public struct CharacterStatsRecord: IPacketWritable
         {
             public int Body;
-
             public int Mind;
-
             public int Focus;
-
             public float Physique;
-
             public float Morale;
-
             public float Concentration;
-
             public int FameLevel;
-
             public int PePRank;
-
             public float RuneAffinity;
-
             public float SpiritAffinity;
-
             public float SoulAffinity;
-
             public float MeleeResistance;
-
             public float RangedResistance;
-
             public float MagicResistance;
-
             public int MaxHealth;
-
             public float PhysiqueRegeneration;
-
             public float PhysiqueDegeneration;
-
             public float MoraleRegeneration;
-
             public float MoraleDegeneration;
-
             public float ConcentrationRegeneration;
-
             public float ConcentrationDegeneration;
-
             public float HealthRegeneration;
-
             public float AttackSpeedBonus;
-
             public float MovementSpeedBonus;
-
             public float DamageBonus;
-
             public float CopyHealth;
+
+            public void Write(IPacketWriter writer)
+            {
+                writer.WriteInt32(Body);
+                writer.WriteInt32(Mind);
+                writer.WriteInt32(Focus);
+                writer.WriteFloat(Physique);
+                writer.WriteFloat(Morale);
+                writer.WriteFloat(Concentration);
+                writer.WriteInt32(FameLevel);
+                writer.WriteInt32(PePRank);
+                writer.WriteFloat(RuneAffinity);
+                writer.WriteFloat(SpiritAffinity);
+                writer.WriteFloat(SoulAffinity);
+                writer.WriteFloat(MeleeResistance);
+                writer.WriteFloat(RangedResistance);
+                writer.WriteFloat(MagicResistance);
+                writer.WriteInt32(MaxHealth);
+                writer.WriteFloat(PhysiqueRegeneration);
+                writer.WriteFloat(PhysiqueDegeneration);
+                writer.WriteFloat(MoraleRegeneration);
+                writer.WriteFloat(MoraleDegeneration);
+                writer.WriteFloat(ConcentrationRegeneration);
+                writer.WriteFloat(ConcentrationDegeneration);
+                writer.WriteFloat(HealthRegeneration);
+                writer.WriteFloat(AttackSpeedBonus);
+                writer.WriteFloat(MovementSpeedBonus);
+                writer.WriteFloat(DamageBonus);
+                writer.WriteFloat(CopyHealth);
+            }
         }
 
         public enum ECharacterStatsCharacterState

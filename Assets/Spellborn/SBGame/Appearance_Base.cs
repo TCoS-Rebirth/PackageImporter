@@ -33,18 +33,16 @@ namespace SBGame
         public byte SortHelp;
 
         [FoldoutGroup("_LowLevel")]
-        public byte Part;
+        public AppearancePart Part;
 
         [FoldoutGroup("Base")]
         public bool SelectableInCharacterCreation;
 
         [FoldoutGroup("Base")]
-        public byte ColorMode;
+        public EColorizeMode ColorMode;
 
         [FoldoutGroup("Base")]
         public bool ShowGuildLogo;
-
-        public byte Specular;
 
         [FoldoutGroup("Attachments")]
         public List<Attachment> Attachments = new List<Attachment>();
@@ -113,185 +111,161 @@ namespace SBGame
         [FieldTransient()]
         public bool _AS_Set;
 
-        public Appearance_Base()
-        {
-        }
-
         [Serializable] public struct Attachment
         {
             public string MeshGroup;
 
-            public byte SocketId;
+            public AppearanceSocket SocketId;
 
-            public byte Covers;
+            public CoverageFlag Covers;
 
             public string AlternativeTexture;
         }
 
-        [Serializable] public struct SubTextureLocation
-        {
-            public int Angle;
-
-            public float Scale;
-
-            public float CenterU;
-
-            public float CenterV;
-        }
-
-        public enum ESpecularMode
-        {
-            Specular_None,
-
-            Specular_Metal,
-
-            Specular_Hair,
-        }
-
         public enum EColorizeMode
         {
-            Colorize_None,
+            Colorize_None = 0,
 
-            Colorize_OneColor,
+            Colorize_OneColor = 1,
 
-            Colorize_TwoColor,
+            Colorize_TwoColor = 2,
 
-            Colorize_Unreal,
+            Colorize_Unreal = 3,
 
-            Colorize_Skin,
+            Colorize_Skin = 4,
         }
 
         public enum CoverageFlag
         {
-            Covers_LeftAnkle,
+            Covers_LeftAnkle = 0,
 
-            Covers_Belt,
+            Covers_Belt = 1,
 
-            Covers_Chest,
+            Covers_Chest = 2,
 
-            Covers_Head,
+            Covers_Head = 3,
 
-            Covers_HipLeft,
+            Covers_HipLeft = 4,
 
-            Covers_HipRight,
+            Covers_HipRight = 5,
 
-            Covers_LeftLowerArm,
+            Covers_LeftLowerArm = 6,
 
-            Covers_LeftShoulder,
+            Covers_LeftShoulder = 7,
 
-            Covers_LeftUpperArm,
+            Covers_LeftUpperArm = 8,
 
-            Covers_LeftLowerLeg,
+            Covers_LeftLowerLeg = 9,
 
-            Covers_LeftUpperLeg,
+            Covers_LeftUpperLeg = 10,
 
-            Covers_RightLowerArm,
+            Covers_RightLowerArm = 11,
 
-            Covers_RightShoulder,
+            Covers_RightShoulder = 12,
 
-            Covers_RightUpperArm,
+            Covers_RightUpperArm = 13,
 
-            Covers_RightLowerLeg,
+            Covers_RightLowerLeg = 14,
 
-            Covers_RightUpperLeg,
+            Covers_RightUpperLeg = 15,
 
-            Covers_Nothing,
+            Covers_Nothing = 16,
 
-            Covers_RightAnkle,
+            Covers_RightAnkle = 17,
         }
 
         public enum AppearanceSocket
         {
-            AS_Head,
+            AS_Head = 0,
 
-            AS_RightPauldron,
+            AS_RightPauldron = 1,
 
-            AS_LeftPauldron,
+            AS_LeftPauldron = 2,
 
-            AS_Chest,
+            AS_Chest = 3,
 
-            AS_BackMain,
+            AS_BackMain = 4,
 
-            AS_LeftHandHolster,
+            AS_LeftHandHolster = 5,
 
-            AS_RightHandHolster,
+            AS_RightHandHolster = 6,
 
-            AS_LeftBracer,
+            AS_LeftBracer = 7,
 
-            AS_RightBracer,
+            AS_RightBracer = 8,
 
-            AS_LeftCalf,
+            AS_LeftCalf = 9,
 
-            AS_RightCalf,
+            AS_RightCalf = 10,
 
-            AS_LeftThigh,
+            AS_LeftThigh = 11,
 
-            AS_RightThigh,
+            AS_RightThigh = 12,
 
-            AS_Base,
+            AS_Base = 13,
 
-            AS_Belt,
+            AS_Belt = 14,
 
-            AS_MainShoulderSheath,
+            AS_MainShoulderSheath = 15,
 
-            AS_OffhandShoulderSheath,
+            AS_OffhandShoulderSheath = 16,
 
-            AS_Shield,
+            AS_Shield = 17,
 
-            AS_ShieldSheath,
+            AS_ShieldSheath = 18,
         }
 
         public enum AppearancePart
         {
-            AP_ChestClothes,
+            AP_ChestClothes = 0,
 
-            AP_LeftGlove,
+            AP_LeftGlove = 1,
 
-            AP_RightGlove,
+            AP_RightGlove = 2,
 
-            AP_Pants,
+            AP_Pants = 3,
 
-            AP_Shoes,
+            AP_Shoes = 4,
 
-            AP_HeadGearArmour,
+            AP_HeadGearArmour = 5,
 
-            AP_LeftShoulderArmour,
+            AP_LeftShoulderArmour = 6,
 
-            AP_RightShoulderArmour,
+            AP_RightShoulderArmour = 7,
 
-            AP_LeftGauntlet,
+            AP_LeftGauntlet = 8,
 
-            AP_RightGauntlet,
+            AP_RightGauntlet = 9,
 
-            AP_ChestArmour,
+            AP_ChestArmour = 10,
 
-            AP_Belt,
+            AP_Belt = 11,
 
-            AP_LeftThigh,
+            AP_LeftThigh = 12,
 
-            AP_RightThigh,
+            AP_RightThigh = 13,
 
-            AP_LeftShin,
+            AP_LeftShin = 14,
 
-            AP_RightShin,
+            AP_RightShin = 15,
 
-            AP_MainWeapon,
+            AP_MainWeapon = 16,
 
-            AP_OffhandWeapon,
+            AP_OffhandWeapon = 17,
 
-            AP_Hair,
+            AP_Hair = 18,
 
-            AP_MainSheath,
+            AP_MainSheath = 19,
 
-            AP_OffhandSheath,
+            AP_OffhandSheath = 20,
 
-            AP_Body,
+            AP_Body = 21,
 
-            AP_Head,
+            AP_Head = 22,
 
-            AP_Tattoo,
+            AP_Tattoo = 23,
 
-            AP_ClassTattoo,
+            AP_ClassTattoo = 24,
         }
     }
 }

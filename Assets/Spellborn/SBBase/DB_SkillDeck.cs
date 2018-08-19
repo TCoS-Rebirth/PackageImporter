@@ -4,7 +4,7 @@ using Engine;
 
 namespace SBBase
 {
-    [Serializable] public class DB_SkillDeck: Base_DBObject
+    [Serializable] public class DB_SkillDeck: Base_DBObject, IPacketWritable
     {
         public int Id;
 
@@ -14,6 +14,11 @@ namespace SBBase
 
         public DB_SkillDeck()
         {
+        }
+
+        public void Write(IPacketWriter writer)
+        {
+            writer.WriteInt32(Id);
         }
     }
 }

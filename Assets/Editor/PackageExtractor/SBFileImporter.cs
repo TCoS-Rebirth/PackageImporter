@@ -173,14 +173,14 @@ namespace Framework.PackageExtractor
                             Debug.LogWarning("null?:" + children[i].name);
                         }
                         int resID;
-                        if (!resIDs.TryGetValue(path, out resID) && !(children[i] is SBResourcePackage))
-                        {
-                            Debug.LogWarning("ID not found: " + path);
-                        }
-                        else
+                        if (resIDs.TryGetValue(path, out resID))
                         {
                             children[i].ResourceID = resID;
                             assigned += 1;
+                        }
+                        else
+                        {
+                            Debug.LogWarning("ID not found: " + path);
                         }
                     }
                     EditorUtility.SetDirty(package.gameObject);

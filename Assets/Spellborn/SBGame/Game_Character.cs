@@ -3,7 +3,7 @@ using SBBase;
 
 namespace SBGame
 {
-    [Serializable] public class Game_Character : Base_Component
+    [Serializable] public class Game_Character : Base_Component, IActorPacketStream
     {
         public NPC_Taxonomy mFaction;
 
@@ -11,9 +11,7 @@ namespace SBGame
 
         public NPC_Taxonomy mOldFaction;
 
-        public Game_Character()
-        {
-        }
+        public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
     }
 }
 /*

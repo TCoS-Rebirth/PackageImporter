@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Fasterflect;
 using UnityEngine;
 
 namespace Network
@@ -13,6 +14,7 @@ namespace Network
         readonly List<NetConnection> connections = new List<NetConnection>();
 
         readonly Queue<NetworkPacket> packetQueu = new Queue<NetworkPacket>();
+        readonly Queue<NetConnection> disconnections = new Queue<NetConnection>();
         readonly int port;
 
         readonly ManualResetEvent messageWaitEvent = new ManualResetEvent(false);
@@ -70,6 +72,20 @@ namespace Network
                 }
             }
             networkPacket = null;
+            return false;
+        }
+
+        public bool CheckDisconnected(out NetConnection connection)
+        {
+            lock (disconnections)
+            {
+                if (disconnections.Count > 0)
+                {
+                    connection = disconnections.Dequeue();
+                    return true;
+                }
+            }
+            connection = null;
             return false;
         }
 
@@ -260,6 +276,10 @@ namespace Network
             lock (connections)
             {
                 connections.Remove(connection);
+            }
+            lock (disconnections)
+            {
+                disconnections.Enqueue(connection);
             }
         }
 

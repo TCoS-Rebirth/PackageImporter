@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Engine
 {
@@ -15,6 +16,11 @@ namespace Engine
             Pitch = pitch;
             Yaw = yaw;
             Roll = roll;
+        }
+
+        public static implicit operator Quaternion(Rotator rot)
+        {
+            return Utilities.UnitConversion.ToUnreal(rot);
         }
     }
 }

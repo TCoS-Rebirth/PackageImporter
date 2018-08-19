@@ -16,201 +16,201 @@ namespace Engine
         [FieldTransient()]
         public bool bAnimationPaused;
 
-        public SBAnimatedPawn()
-        {
-        }
-
+        #region enums
         public enum SBAnimationType
         {
-            SBAnimType_None,
+            SBAnimType_None = 0,
 
-            SBAnimType_Idle,
+            SBAnimType_Idle = 1,
 
-            SBAnimType_Emote,
+            SBAnimType_Emote = 2,
 
-            SBAnimType_Movement,
+            SBAnimType_Movement = 3,
 
-            SBAnimType_LightWound,
+            SBAnimType_LightWound = 4,
 
-            SBAnimType_Action,
+            SBAnimType_Action = 5,
 
-            SBAnimType_SpecialAction,
+            SBAnimType_SpecialAction = 6,
 
-            SBAnimType_HeavyWound,
+            SBAnimType_HeavyWound = 7,
 
-            SBAnimType_Death,
+            SBAnimType_Death = 8,
 
-            SBAnimType_AlwaysPlayed,
+            SBAnimType_AlwaysPlayed = 9,
 
-            SBAnimType_Turning,
+            SBAnimType_Turning = 10,
 
-            SBAnimType_Emerging,
+            SBAnimType_Emerging = 11,
         }
 
         public enum EPawnSound
         {
-            EPS_Command_Enemies,
+            EPS_Command_Enemies = 0,
 
-            EPS_Command_GetReady,
+            EPS_Command_GetReady = 1,
 
-            EPS_Command_Charge,
+            EPS_Command_Charge = 2,
 
-            EPS_Command_Attack,
+            EPS_Command_Attack = 3,
 
-            EPS_Command_Retreat,
+            EPS_Command_Retreat = 4,
 
-            EPS_Command_Follow,
+            EPS_Command_Follow = 5,
 
-            EPS_Command_Wait,
+            EPS_Command_Wait = 6,
 
-            EPS_Command_ComeOn,
+            EPS_Command_ComeOn = 7,
 
-            EPS_Command_Assistance,
+            EPS_Command_Assistance = 8,
 
-            EPS_Command_OverHere,
+            EPS_Command_OverHere = 9,
 
-            EPS_Command_BackOff,
+            EPS_Command_BackOff = 10,
 
-            EPS_Command_North,
+            EPS_Command_North = 11,
 
-            EPS_Command_East,
+            EPS_Command_East = 12,
 
-            EPS_Command_West,
+            EPS_Command_West = 13,
 
-            EPS_Command_South,
+            EPS_Command_South = 14,
 
-            EPS_Command_Flank,
+            EPS_Command_Flank = 15,
 
-            EPS_Command_GoRound,
+            EPS_Command_GoRound = 16,
 
-            EPS_Action,
+            EPS_Action = 17,
 
-            EPS_CriticalWound,
+            EPS_CriticalWound = 18,
 
-            EPS_Death,
+            EPS_Death = 19,
 
-            EPS_Interaction_No,
+            EPS_Interaction_No = 20,
 
-            EPS_Interaction_Yes,
+            EPS_Interaction_Yes = 21,
 
-            EPS_Interaction_Greet,
+            EPS_Interaction_Greet = 22,
 
-            EPS_Interaction_Bye,
+            EPS_Interaction_Bye = 23,
 
-            EPS_Interaction_Thanks,
+            EPS_Interaction_Thanks = 24,
 
-            EPS_Interaction_PwnieQues,
+            EPS_Interaction_PwnieQues = 25,
 
-            EPS_Interaction_PwnieExcl,
+            EPS_Interaction_PwnieExcl = 26,
 
-            EPS_Interaction_Trade,
+            EPS_Interaction_Trade = 27,
 
-            EPS_Interaction_Excuse,
+            EPS_Interaction_Excuse = 28,
 
-            EPS_Interaction_Wait,
+            EPS_Interaction_Wait = 29,
 
-            EPS_Interaction_Veto,
+            EPS_Interaction_Veto = 30,
 
-            EPS_Interaction_Sarcasm,
+            EPS_Interaction_Sarcasm = 31,
 
-            EPS_Interaction_Hey,
+            EPS_Interaction_Hey = 32,
 
-            EPS_Interaction_Oldskool,
+            EPS_Interaction_Oldskool = 33,
 
-            EPS_Interaction_Outfit,
+            EPS_Interaction_Outfit = 34,
 
-            EPS_Interaction_FashionPolice,
+            EPS_Interaction_FashionPolice = 35,
 
-            EPS_Interaction_Jazz,
+            EPS_Interaction_Jazz = 36,
 
-            EPS_Sound_Clap,
+            EPS_Sound_Clap = 37,
 
-            EPS_Sound_Kiss,
+            EPS_Sound_Kiss = 38,
 
-            EPS_Sound_Sigh,
+            EPS_Sound_Sigh = 39,
 
-            EPS_Sound_Bored,
+            EPS_Sound_Bored = 40,
 
-            EPS_Sound_Pain,
+            EPS_Sound_Pain = 41,
 
-            EPS_Sound_Pst,
+            EPS_Sound_Pst = 42,
 
-            EPS_Sound_Angry,
+            EPS_Sound_Angry = 43,
 
-            EPS_Sound_Cry,
+            EPS_Sound_Cry = 44,
 
-            EPS_Sound_Maniacal,
+            EPS_Sound_Maniacal = 45,
 
-            EPS_Sound_Laugh,
+            EPS_Sound_Laugh = 46,
 
-            EPS_Sound_Cough,
+            EPS_Sound_Cough = 47,
 
-            EPS_Sound_Cheer,
+            EPS_Sound_Cheer = 48,
 
-            EPS_Sound_WhistleHappy,
+            EPS_Sound_WhistleHappy = 49,
 
-            EPS_Sound_WhistleAttention,
+            EPS_Sound_WhistleAttention = 50,
 
-            EPS_Sound_WhistleMusic,
+            EPS_Sound_WhistleMusic = 51,
 
-            EPS_Sound_WhistleNote,
+            EPS_Sound_WhistleNote = 52,
 
-            EPS_Sound_Ahh,
+            EPS_Sound_Ahh = 53,
 
-            EPS_Sound_Gasp,
+            EPS_Sound_Gasp = 54,
 
-            EPS_Sound_Stretch,
+            EPS_Sound_Stretch = 55,
 
-            EPS_Sound_Huf,
+            EPS_Sound_Huf = 56,
 
-            EPS_Sound_Bah,
+            EPS_Sound_Bah = 57,
 
-            EPS_Sound_Dismiss,
+            EPS_Sound_Dismiss = 58,
 
-            EPS_Taunt_Oracle,
+            EPS_Taunt_Oracle = 59,
 
-            EPS_Taunt_Battle,
+            EPS_Taunt_Battle = 60,
 
-            EPS_Taunt_Praise,
+            EPS_Taunt_Praise = 61,
 
-            EPS_Taunt_Mock,
+            EPS_Taunt_Mock = 62,
 
-            EPS_Taunt_Attention,
+            EPS_Taunt_Attention = 63,
 
-            EPS_Taunt_Death,
+            EPS_Taunt_Death = 64,
 
-            EPS_Taunt_Stop,
+            EPS_Taunt_Stop = 65,
 
-            EPS_Taunt_AdmireRoom,
+            EPS_Taunt_AdmireRoom = 66,
 
-            EPS_Taunt_Victory,
+            EPS_Taunt_Victory = 67,
 
-            EPS_Taunt_Survive,
+            EPS_Taunt_Survive = 68,
 
-            EPS_Taunt_Again,
+            EPS_Taunt_Again = 69,
 
-            EPS_Taunt_Try,
+            EPS_Taunt_Try = 70,
 
-            EPS_Taunt_LetsGo,
+            EPS_Taunt_LetsGo = 71,
 
-            EPS_Taunt_RTFM,
+            EPS_Taunt_RTFM = 72,
 
-            EPS_Taunt_Unique,
+            EPS_Taunt_Unique = 73,
 
-            EPS_Wound,
+            EPS_Wound = 74,
 
-            EPS_Goodbye,
+            EPS_Goodbye = 75,
 
-            EPS_Greet,
+            EPS_Greet = 76,
 
-            EPS_Thanks,
+            EPS_Thanks = 77,
 
-            EPS_Yay,
+            EPS_Yay = 78,
 
-            EPS_Weee,
+            EPS_Weee = 79,
 
-            EPS_NONE,
+            EPS_NONE = 80,
         }
+        #endregion
+
+
     }
 }
 /*

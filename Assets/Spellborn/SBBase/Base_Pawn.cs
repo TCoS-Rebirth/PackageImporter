@@ -7,10 +7,6 @@ namespace SBBase
     [Serializable] public class Base_Pawn : SBAnimatedPawn
     {
         public const float IDEAL_JUMP_SPEED_FOR_ANIM = 350F;
-
-        public Base_Pawn()
-        {
-        }
     }
 }
 /*

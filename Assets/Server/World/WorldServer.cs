@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using Accounts;
+using User;
 using Network;
 using SBGame;
 using UnityEngine;
@@ -45,28 +45,30 @@ namespace World
                 switch (packet.Header)
                 {
                     case (ushort)GameHeader.CONNECT: break;
-                    case (ushort)GameHeader.DISCONNECT: HandleDisconnect(packet);
+                    case (ushort)GameHeader.DISCONNECT: /*HandleDisconnect(packet.Connection);*/
                         break;
                     case (ushort)GameHeader.C2S_TRAVEL_CONNECT: HandleTravelConnect(packet);
                         break;
                     default:
-                        var session = ServiceRegistry.GetService<ISessionHandler>().Get<GameSession>(packet.Connection);
+                        var session = ServiceContainer.GetService<ISessionHandler>().Get<GameSession>(packet.Connection);
                         if (session != null) session.HandlePacket(packet);
                         else
                         {
-                            throw new Exception("Packet sender has not active session");
+                            throw new Exception("Packet sender has no active session");
                         }
                         break;
                 }
             }
+            NetConnection disconnected;
+            while (server.CheckDisconnected(out disconnected)) HandleDisconnect(disconnected);
         }
 
         void HandleTravelConnect(NetworkPacket m)
         {
             var token = m.ReadInt32();
             var ipAddress = (m.Connection.ClientSocket.RemoteEndPoint as IPEndPoint).Address;
-            var sessionHandler = ServiceRegistry.GetService<ISessionHandler>();
-            var account = ServiceRegistry.GetService<IDatabase>().Accounts.Get(token, ipAddress);
+            var sessionHandler = ServiceContainer.GetService<ISessionHandler>();
+            var account = ServiceContainer.GetService<IDatabase>().Accounts.Get(token, ipAddress);
             if (account != null)
             {
                 Debug.Log(string.Format("User '{0}' connected", account.Name));
@@ -80,12 +82,15 @@ namespace World
             }
         }
 
-        static void HandleDisconnect(NetworkPacket m)
+        static void HandleDisconnect(NetConnection con)
         {
-            var sessionHandler = ServiceRegistry.GetService<ISessionHandler>();
-            var session = sessionHandler.Get<LoginSession>(m.Connection);
-            if (session != null) Debug.Log(session.Account.Name + " disconnected");
-            sessionHandler.End(session);
+            var sessionHandler = ServiceContainer.GetService<ISessionHandler>();
+            var session = sessionHandler.Get<LoginSession>(con);
+            if (session != null)
+            {
+                Debug.Log(session.Account.Name + " disconnected");
+                sessionHandler.End(session);
+            }
         }
     }
 }

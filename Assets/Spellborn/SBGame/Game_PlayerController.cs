@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_PlayerController : Game_Controller
+    [Serializable]
+    public class Game_PlayerController : Game_Controller
     {
         public const string MUTE_GLOBAL = "\"global\"";
 
@@ -45,55 +46,71 @@ namespace SBGame
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
-        public bool mMoveForwards;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public bool mMoveBackwards;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public bool mMoveRight;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public bool mMoveLeft;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public bool mJump;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
         public float ServerTime;
 
         [NonSerialized, HideInInspector]
         [FieldTransient()]
         public float mUnstuckTime;
 
+        [NonSerialized, HideInInspector]
         public byte mNetState;
 
         public Game_Conversation mConversation;
 
+        [NonSerialized, HideInInspector]
         public FSkill_EffectClass_AudioVisual mDeathEffect;
 
+        [NonSerialized, HideInInspector]
         public bool DBMuted;
 
+        [NonSerialized, HideInInspector]
         public string DBMutedScope = string.Empty;
 
+        [NonSerialized, HideInInspector]
         public List<int> DBFinishedQuests = new List<int>();
 
+        [NonSerialized, HideInInspector]
         public List<int> DBQuestObjectiveIds = new List<int>();
 
+        [NonSerialized, HideInInspector]
         public List<int> DBQuestObjectiveValues = new List<int>();
 
-        //public delegate<OnSitDown> @__OnSitDown__Delegate;
-
-        //public delegate<OnPong> @__OnPong__Delegate;
-
-        public Game_PlayerController()
+        public override void WriteLoginStream(IPacketWriter writer)
         {
+            writer.WriteInt32(GetRelevanceID());
+            writer.WriteFloat(Time.realtimeSinceStartup);
+            writer.WriteByte(mNetState);
+            Pawn.WriteLoginStream(writer);
+            writer.Write(DBCharacter);
+            writer.Write(DBCharacterSheet);
+            writer.Write(DBItems);
+            writer.Write(DBSkilldecks);
+            writer.Write(DBSkillTokens);
+            writer.Write(DBCharacterSkills, (index, _) => //activeskilldeck
+            {
+                writer.WriteInt32(0);//skilldeck ID?
+                writer.WriteInt32(DBCharacterSkills[index]);//resourceid
+                writer.WriteByte((byte)index);//deckslot
+            });
+            writer.Write(DBFinishedQuests, writer.WriteInt32);
+            var qLog = (Pawn as Game_PlayerPawn).questLog;
+            writer.Write(qLog.Quests, (index, item) =>
+            {
+                for (int i = 0; i < item.Targets.Count; i++)
+                {
+                    writer.WriteInt32(0);
+                    writer.WriteInt32(0);
+                    writer.WriteInt32(item.Targets[i].ResourceID);
+                    writer.WriteInt32(qLog.targetProgress[index]);
+                }
+            });
+            writer.WriteInt32(0);//num persistentVars
+            //foreach var int32:contextID, int32:varID, int32:value
+
+            writer.WriteInt32(GetAuthorityLevel());
         }
+
+        public virtual int GetAuthorityLevel() { return 0; }
     }
 }
 /*
@@ -364,36 +381,6 @@ if (GroupingGuilds != None) {
 GroupingGuilds.sv_OnShutdown();                                           
 }
 Super.sv_OnShutdown();                                                      
-}
-event OnCreateComponents() {
-Super.OnCreateComponents();                                                 
-if (InputClass != None) {                                                   
-Input = new (self) InputClass;                                            
-}
-if (CameraClass != None) {                                                  
-Camera = new (self) CameraClass;                                          
-}
-if (GUIClass != None) {                                                     
-GUI = new (self) GUIClass;                                                
-}
-if (ChatClass != None) {                                                    
-Chat = new (self) ChatClass;                                              
-}
-if (TravelClass != None) {                                                  
-Travel = new (self) TravelClass;                                          
-}
-if (MailClass != None) {                                                    
-Mail = new (self) MailClass;                                              
-}
-if (mGroupingFriendsClass != None) {                                        
-GroupingFriends = new (self) mGroupingFriendsClass;                       
-}
-if (mGroupingTeamsClass != None) {                                          
-GroupingTeams = new (self) mGroupingTeamsClass;                           
-}
-if (mGroupingGuildsClass != None) {                                         
-GroupingGuilds = new (self) mGroupingGuildsClass;                         
-}
 }
 state PawnSitting {
 function EndState() {

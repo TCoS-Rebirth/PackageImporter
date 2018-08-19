@@ -5,7 +5,7 @@ namespace SBGame
 {
     [Serializable] public class Game_Hook : UObject
     {
-        public byte HookType;
+        public Content_Type.EContentHook HookType;
 
         public Content_Type Owner;
 

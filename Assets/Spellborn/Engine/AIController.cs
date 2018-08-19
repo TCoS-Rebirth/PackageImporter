@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    [Serializable] public class AIController : Controller
+    [Serializable] public abstract class AIController : Controller
     {
         public bool bHunting;
 
@@ -14,9 +14,6 @@ namespace Engine
 
         public float Skill;
 
-        public AIController()
-        {
-        }
     }
 }
 /*

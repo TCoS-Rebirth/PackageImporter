@@ -3,24 +3,27 @@ using System.Collections.Generic;
 
 namespace Network
 {
+
+    public delegate void PacketHandlerDelegate(NetworkPacket packet);
+
     public class PacketDispatcher<THeader> where THeader: struct, IConvertible
     {
 
-        readonly Dictionary<ushort, Action<NetworkPacket>> _dispatchTable = new Dictionary<ushort, Action<NetworkPacket>>();
+        readonly Dictionary<ushort, PacketHandlerDelegate> _dispatchTable = new Dictionary<ushort, PacketHandlerDelegate>();
 
         public PacketDispatcher()
         {
             if (!typeof(THeader).IsEnum) throw new ArgumentException("THeader must be enum");
         }
 
-        public void Add(THeader header, Action<NetworkPacket> handler)
+        public void Add(THeader header, PacketHandlerDelegate handler)
         {
             _dispatchTable.Add((ushort)(object)header, handler);
         }
 
         public bool Dispatch(NetworkPacket packet)
         {
-            Action<NetworkPacket> handler;
+            PacketHandlerDelegate handler;
             if (_dispatchTable.TryGetValue(packet.Header, out handler))
             {
                 handler(packet);

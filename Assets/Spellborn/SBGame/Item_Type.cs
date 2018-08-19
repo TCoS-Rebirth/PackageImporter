@@ -29,9 +29,9 @@ namespace SBGame
         [FieldTransient()]
         private bool RequiresTicksDetermined;
 
-        [FoldoutGroup("ReadOnly")]
+        [FoldoutGroup("ReadOnly"), ReadOnly]
         [FieldConst()]
-        public byte ItemType;
+        public EItemType ItemType;
 
         [FoldoutGroup("General")]
         [FieldConst()]
@@ -49,9 +49,9 @@ namespace SBGame
         [FieldConst()]
         public bool Sellable;
 
-        [FoldoutGroup("General")]
+        [FoldoutGroup("General"), ReadOnly]
         [FieldConst()]
-        public byte EquipmentSlot;
+        public SBGameEnums.EquipmentSlot EquipmentSlot;
 
         [FoldoutGroup("General")]
         [FieldConst()]
@@ -65,9 +65,9 @@ namespace SBGame
         [FieldConst()]
         public bool BindOnEquip;
 
-        [FoldoutGroup("General")]
+        [FoldoutGroup("General"), ReadOnly]
         [FieldConst()]
-        public byte ItemRarity;
+        public EItemRarity ItemRarity;
 
         [FoldoutGroup("General")]
         [FieldConst()]
@@ -105,106 +105,129 @@ namespace SBGame
         [FieldTransient()]
         public List<Content_Event> UseEvents = new List<Content_Event>();
 
-        public Item_Type()
+        public T GetItemComponent<T>() where T : Item_Component
         {
+            for (var i = 0; i < Components.Count; i++)
+            {
+                var ic = Components[i] as T;
+                if (ic != null) return ic;
+            }
+            return null;
         }
 
+        public T GetItemComponent<T>(Predicate<T> predicate) where T : Item_Component
+        {
+            for (var i = 0; i < Components.Count; i++)
+            {
+                var ic = Components[i] as T;
+                if (ic != null && predicate(ic)) return ic;
+            }
+            return null;
+        }
+
+        #region enums
         public enum EItemType
         {
-            IT_BodySlot,
+            IT_BodySlot = 0,
 
-            IT_JewelryRing,
+            IT_JewelryRing = 1,
 
-            IT_JewelryNecklace,
+            IT_JewelryNecklace = 2,
 
-            IT_JewelryQualityToken,
+            IT_JewelryQualityToken = 3,
 
-            IT_WeaponQualityToken,
+            IT_WeaponQualityToken = 4,
 
-            IT_SkillToken,
+            IT_SkillToken = 5,
 
-            IT_QuestItem,
+            IT_QuestItem = 6,
 
-            IT_Trophy,
+            IT_Trophy = 7,
 
-            IT_ContainerSuitBag,
+            IT_ContainerSuitBag = 8,
 
-            IT_ContainerExtraInventory,
+            IT_ContainerExtraInventory = 9,
 
-            IT_Resource,
+            IT_Resource = 10,
 
-            IT_WeaponOneHanded,
+            IT_WeaponOneHanded = 11,
 
-            IT_WeaponDoublehanded,
+            IT_WeaponDoublehanded = 12,
 
-            IT_WeaponDualWielding,
+            IT_WeaponDualWielding = 13,
 
-            IT_WeaponRanged,
+            IT_WeaponRanged = 14,
 
-            IT_WeaponShield,
+            IT_WeaponShield = 15,
 
-            IT_ArmorHeadGear,
+            IT_ArmorHeadGear = 16,
 
-            IT_ArmorLeftShoulder,
+            IT_ArmorLeftShoulder = 17,
 
-            IT_ArmorRightShoulder,
+            IT_ArmorRightShoulder = 18,
 
-            IT_ArmorLeftGauntlet,
+            IT_ArmorLeftGauntlet = 19,
 
-            IT_ArmorRightGauntlet,
+            IT_ArmorRightGauntlet = 20,
 
-            IT_ArmorChest,
+            IT_ArmorChest = 21,
 
-            IT_ArmorBelt,
+            IT_ArmorBelt = 22,
 
-            IT_ArmorLeftThigh,
+            IT_ArmorLeftThigh = 23,
 
-            IT_ArmorLeftShin,
+            IT_ArmorLeftShin = 24,
 
-            IT_ClothChest,
+            IT_ClothChest = 25,
 
-            IT_ClothLeftGlove,
+            IT_ClothLeftGlove = 26,
 
-            IT_ClothRightGlove,
+            IT_ClothRightGlove = 27,
 
-            IT_ClothPants,
+            IT_ClothPants = 28,
 
-            IT_ClothShoes,
+            IT_ClothShoes = 29,
 
-            IT_MiscellaneousTickets,
+            IT_MiscellaneousTickets = 30,
 
-            IT_MiscellaneousKey,
+            IT_MiscellaneousKey = 31,
 
-            IT_MiscellaneousLabyrinthKey,
+            IT_MiscellaneousLabyrinthKey = 32,
 
-            IT_Recipe,
+            IT_Recipe = 33,
 
-            IT_ArmorRightThigh,
+            IT_ArmorRightThigh = 34,
 
-            IT_ArmorRightShin,
+            IT_ArmorRightShin = 35,
 
-            IT_ItemToken,
+            IT_ItemToken = 36,
 
-            IT_Consumable,
+            IT_Consumable = 37,
 
-            IT_Broken,
+            IT_Broken = 38,
         }
 
         public enum EItemRarity
         {
-            IR_Trash,
+            IR_Trash = 0,
 
-            IR_Resource,
+            IR_Resource = 1,
 
-            IR_Common,
+            IR_Common = 2,
 
-            IR_Uncommon,
+            IR_Uncommon = 3,
 
-            IR_Rare,
+            IR_Rare = 4,
 
-            IR_Ancestral,
+            IR_Ancestral = 5,
 
-            IR_Mumian,
+            IR_Mumian = 6,
+        }
+        #endregion
+
+        public virtual Appearance_MainWeapon.EAppMainWeaponType GetWeaponType() 
+        {
+            return Appearance_MainWeapon.EAppMainWeaponType.EMW_Undetermined;                                                                   
         }
     }
 }
@@ -218,327 +241,7 @@ return SellPriceValue;
 final event int GetBuyPrice() {
 return BuyPriceValue;                                                       
 }
-event Material GetDragLogo(Game_Pawn aPawn) {
-local Shader tempShader;
-local Combiner tempCombiner;
-if (ItemType == 5) {                                                        
-if (ShouldUseSecondaryLogo(aPawn)) {                                      
-return SecondaryLogo;                                                   
-} else {                                                                  
-return Logo;                                                            
-}
-} else {                                                                    
-if (ItemType == 36) {                                                     
-tempCombiner = new Class'Combiner';                                     
-tempCombiner.CombineOperation = 5;                                      
-tempCombiner.AlphaOperation = 0;                                        
-tempCombiner.Material1 = Logo;                                          
-tempCombiner.Material2 = SecondaryLogo;                                 
-tempCombiner.Mask = SecondaryLogo;                                      
-tempShader = new Class'Shader';                                         
-tempShader.Diffuse = tempCombiner;                                      
-tempShader.Opacity = Logo;                                              
-return tempShader;                                                      
-} else {                                                                  
-return GetLogo(aPawn);                                                  
-}
-}
-}
-function Material GetLogo(Game_Pawn aPawn) {
-local Material itemMaterial;
-local export editinline IC_Broken componentBroken;
-local export editinline IC_Recipe componentRecipe;
-local Combiner Combiner01;
-local Combiner combiner02;
-if (aPawn != None) {                                                        
-if (ShouldUseSecondaryLogo(aPawn)) {                                      
-itemMaterial = SecondaryLogo;                                           
-} else {                                                                  
-itemMaterial = Logo;                                                    
-}
-if (itemMaterial.IsA('Texture')) {                                        
-Texture(itemMaterial).UClampMode = 2;                                   
-Texture(itemMaterial).VClampMode = 2;                                   
-}
-if (ItemType == 38) {                                                     
-componentBroken = IC_Broken(GetComponentByClass(Class'IC_Broken'));     
-if (componentBroken != None && componentBroken.Recipe != None) {        
-componentRecipe = IC_Recipe(componentBroken.Recipe.GetComponentByClass(Class'IC_Recipe'));
-if (componentRecipe != None
-&& componentRecipe.ProducedItem != None) {
-itemMaterial = componentRecipe.ProducedItem.GetLogo(aPawn);         
-}
-}
-Combiner01 = new Class'Combiner';                                       
-Combiner01.CombineOperation = 2;                                        
-Combiner01.AlphaOperation = 2;                                          
-Combiner01.Material1 = itemMaterial;                                    
-switch (GetResourceId() % 8) {                                          
-case 0.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-01';                           
-break;                                                              
-case 1.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-02';                           
-break;                                                              
-case 2.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-03';                           
-break;                                                              
-case 3.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-04';                           
-break;                                                              
-case 4.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-05';                           
-break;                                                              
-case 5.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-06';                           
-break;                                                              
-case 6.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-07';                           
-break;                                                              
-case 7.00000000 :                                                     
-Combiner01.Material2 = Texture'crack-08';                           
-break;                                                              
-default:                                                              
-}
-Combiner01.Mask = itemMaterial;                                         
-return Combiner01;                                                      
-}
-if (ItemType == 33) {                                                     
-componentRecipe = IC_Recipe(GetComponentByClass(Class'IC_Recipe'));     
-if (componentRecipe != None
-&& componentRecipe.ProducedItem != None) {
-itemMaterial = componentRecipe.ProducedItem.GetLogo(aPawn);           
-}
-Combiner01 = new Class'Combiner';                                       
-Combiner01.CombineOperation = 5;                                        
-Combiner01.AlphaOperation = 0;                                          
-Combiner01.Material1 = itemMaterial;                                    
-Combiner01.Material2 = Texture'Recipe_Overlay';                         
-Combiner01.Mask = Texture'Recipe_Overlay';                              
-return Combiner01;                                                      
-}
-if (ItemType == 5) {                                                      
-Combiner01 = new Class'Combiner';                                       
-Combiner01.CombineOperation = 5;                                        
-Combiner01.AlphaOperation = 0;                                          
-Combiner01.Material1 = Texture'SigilSlot_B';                            
-Combiner01.Material2 = itemMaterial;                                    
-Combiner01.Mask = itemMaterial;                                         
-return Combiner01;                                                      
-}
-if (ItemType == 36) {                                                     
-Combiner01 = new Class'Combiner';                                       
-Combiner01.CombineOperation = 5;                                        
-Combiner01.AlphaOperation = 0;                                          
-Combiner01.Material1 = Logo;                                            
-Combiner01.Material2 = SecondaryLogo;                                   
-Combiner01.Mask = SecondaryLogo;                                        
-combiner02 = new Class'Combiner';                                       
-combiner02.CombineOperation = 5;                                        
-combiner02.AlphaOperation = 0;                                          
-combiner02.Material1 = Texture'SigilBackplate';                         
-combiner02.Material2 = Combiner01;                                      
-combiner02.Mask = Logo;                                                 
-return combiner02;                                                      
-}
-return itemMaterial;                                                      
-}
-return None;                                                                
-}
-function string GetTypeName() {
-switch (ItemType) {                                                         
-case 0 :                                                                  
-return Class'StringReferences'.default.BodySlot.Text;                   
-case 34 :                                                                 
-return Class'StringReferences'.default.Right_Thigh_Armour.Text;         
-case 35 :                                                                 
-return Class'StringReferences'.default.Right_Shin_Armour.Text;          
-case 16 :                                                                 
-return Class'StringReferences'.default.Head_Gear.Text;                  
-case 17 :                                                                 
-return Class'StringReferences'.default.Left_Shoulder_Armour.Text;       
-case 18 :                                                                 
-return Class'StringReferences'.default.Right_Shoulder_Armour.Text;      
-case 19 :                                                                 
-return Class'StringReferences'.default.Left_Gauntlet.Text;              
-case 20 :                                                                 
-return Class'StringReferences'.default.Right_Gauntlet.Text;             
-case 21 :                                                                 
-return Class'StringReferences'.default.Chest_Armour.Text;               
-case 22 :                                                                 
-return Class'StringReferences'.default.Belt.Text;                       
-case 23 :                                                                 
-return Class'StringReferences'.default.Left_Thigh_Armour.Text;          
-case 24 :                                                                 
-return Class'StringReferences'.default.Left_Shin_Armour.Text;           
-case 25 :                                                                 
-return Class'StringReferences'.default.Chest_Clothing.Text;             
-case 26 :                                                                 
-return Class'StringReferences'.default.Left_Glove.Text;                 
-case 27 :                                                                 
-return Class'StringReferences'.default.Right_Glove.Text;                
-case 28 :                                                                 
-return Class'StringReferences'.default.Pants.Text;                      
-case 29 :                                                                 
-return Class'StringReferences'.default.Shoes.Text;                      
-case 11 :                                                                 
-return Class'StringReferences'.default.Single_Handed_Weapon.Text;       
-case 12 :                                                                 
-return Class'StringReferences'.default.Double_Handed_Weapon.Text;       
-case 13 :                                                                 
-return Class'StringReferences'.default.Dual_Wielding_Weapon.Text;       
-case 14 :                                                                 
-return Class'StringReferences'.default.Ranged_Weapon.Text;              
-case 15 :                                                                 
-return Class'StringReferences'.default.Shield.Text;                     
-case 1 :                                                                  
-return Class'StringReferences'.default.Ring.Text;                       
-case 2 :                                                                  
-return Class'StringReferences'.default.Necklace.Text;                   
-case 36 :                                                                 
-return Class'StringReferences'.default.Item_Sigil.Text;                 
-case 5 :                                                                  
-return Class'StringReferences'.default.Skill_Sigil.Text;                
-case 3 :                                                                  
-return "Sigil";                                                         
-case 4 :                                                                  
-return "Sigil";                                                         
-case 33 :                                                                 
-return Class'StringReferences'.default.Recipe.Text;                     
-case 10 :                                                                 
-if (ItemRarity == 0) {                                                  
-return Class'StringReferences'.default.Waste_Item.Text;               
-} else {                                                                
-return Class'StringReferences'.default.Resource.Text;                 
-}
-case 7 :                                                                  
-return Class'StringReferences'.default.Trophy.Text;                     
-case 6 :                                                                  
-return Class'StringReferences'.default.Quest_Item.Text;                 
-case 30 :                                                                 
-return Class'StringReferences'.default.Ticket.Text;                     
-case 31 :                                                                 
-return Class'StringReferences'.default.Key.Text;                        
-case 32 :                                                                 
-return Class'StringReferences'.default.Labyrinth_Key.Text;              
-case 37 :                                                                 
-return Class'StringReferences'.default.Consumable.Text;                 
-case 8 :                                                                  
-return Class'StringReferences'.default.Bag.Text;                        
-case 9 :                                                                  
-return Class'StringReferences'.default.Extra_Inventory.Text;            
-case 38 :                                                                 
-return Class'StringReferences'.default.Broken_Item.Text;                
-default:                                                                  
-return "";                                                              
-}
-}
-}
-final function string GetTooltipType() {
-switch (ItemType) {                                                         
-case 0 :                                                                  
-return "HUD_ItemBodySlotTooltip";                                       
-case 16 :                                                                 
-case 21 :                                                                 
-return "HUD_ItemWithSigilsTooltip";                                     
-case 34 :                                                                 
-case 35 :                                                                 
-case 17 :                                                                 
-case 18 :                                                                 
-case 19 :                                                                 
-case 20 :                                                                 
-case 22 :                                                                 
-case 23 :                                                                 
-case 24 :                                                                 
-return "HUD_ItemAttunedTooltip";                                        
-case 25 :                                                                 
-case 26 :                                                                 
-case 27 :                                                                 
-case 28 :                                                                 
-case 29 :                                                                 
-return "HUD_ItemAttunedTooltip";                                        
-case 36 :                                                                 
-return "HUD_ItemSigilTooltip";                                          
-case 5 :                                                                  
-return "HUD_ItemAttunedTooltip";                                        
-case 15 :                                                                 
-return "HUD_ItemAttunedTooltip";                                        
-case 14 :                                                                 
-case 11 :                                                                 
-case 12 :                                                                 
-case 13 :                                                                 
-return "HUD_ItemWithSigilsTooltip";                                     
-case 1 :                                                                  
-case 2 :                                                                  
-return "HUD_ItemWithSigilsTooltip";                                     
-case 33 :                                                                 
-return "HUD_ItemRecipeTooltip";                                         
-case 38 :                                                                 
-return "HUD_ItemBrokenTooltip";                                         
-case 10 :                                                                 
-case 7 :                                                                  
-case 6 :                                                                  
-case 30 :                                                                 
-case 31 :                                                                 
-case 32 :                                                                 
-case 37 :                                                                 
-case 8 :                                                                  
-case 9 :                                                                  
-default:                                                                  
-return "HUD_ItemTooltip";                                               
-}
-}
-}
-event Color GetRarityColor() {
-local Color Result;
-Result.A = 255;                                                             
-switch (ItemRarity) {                                                       
-case 0 :                                                                  
-Result.R = 183;                                                         
-Result.G = 183;                                                         
-Result.B = 183;                                                         
-break;                                                                  
-case 1 :                                                                  
-Result.R = 102;                                                         
-Result.G = 214;                                                         
-Result.B = 76;                                                          
-break;                                                                  
-case 2 :                                                                  
-Result.R = 184;                                                         
-Result.G = 182;                                                         
-Result.B = 189;                                                         
-break;                                                                  
-case 3 :                                                                  
-Result.R = 199;                                                         
-Result.G = 218;                                                         
-Result.B = 152;                                                         
-break;                                                                  
-case 4 :                                                                  
-Result.R = 204;                                                         
-Result.G = 135;                                                         
-Result.B = 75;                                                          
-break;                                                                  
-case 5 :                                                                  
-Result.R = 212;                                                         
-Result.G = 63;                                                          
-Result.B = 63;                                                          
-break;                                                                  
-case 6 :                                                                  
-Result.R = 179;                                                         
-Result.G = 100;                                                         
-Result.B = 182;                                                         
-break;                                                                  
-default:                                                                  
-Result.R = 184;                                                         
-Result.G = 182;                                                         
-Result.B = 189;                                                         
-break;                                                                  
-}
-return Result;                                                              
-}
-event string GetActiveText(Game_ActiveTextItem aItem) {
-return GetName();                                                           
-}
+
 function bool IsNPCType() {
 local int i;
 i = 0;                                                                      
@@ -561,9 +264,6 @@ final native function IC_EquipEffects GetEquipEffectsTokenComponent();
 final native function IC_TokenItem GetItemTokenComponent();
 final native function IC_TokenSkill GetSkillTokenComponent();
 final native function Appearance_Base GetAppearance();
-event byte GetWeaponType() {
-return 0;                                                                   
-}
 event int GetComponent(class<Object> ComponentClass) {
 local int i;
 i = 0;                                                                      
@@ -653,6 +353,5 @@ return True;
 }
 final native function byte GetItemLevel();
 final native function bool ShouldUseSecondaryLogo(Game_Pawn aPawn);
-final native function Item_Component GetComponentByClass(class<Item_Component> aComponentClass);
 static native function LoadAllItems();
 */

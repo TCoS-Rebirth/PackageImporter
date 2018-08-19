@@ -12,10 +12,6 @@ namespace SBGame
 
         [FieldConfig()]
         public int mCurrentShardID;
-
-        public Game_PersistentData()
-        {
-        }
     }
 }
 /*

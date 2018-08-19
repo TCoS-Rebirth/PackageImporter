@@ -20,8 +20,20 @@ namespace SBGame
         [FieldConst()]
         public byte mAvailableAttributePoints;
 
-        public Game_PlayerStats()
+        public override void WriteLoginStream(IPacketWriter writer)
         {
+            writer.WriteFloat(mFamePoints);
+            writer.WriteFloat(mPePPoints);
+            writer.WriteInt32(0); //mMayChooseClass ? (bitfield):0
+            writer.WriteByte(mAvailableAttributePoints);
+            writer.WriteFloat(mHealth);
+            writer.WriteByte(0); //Camera mode (?)
+            writer.WriteInt32(mMovementSpeed);
+            writer.Write(mRecord);
+            writer.WriteInt32(mStateRankShift);
+            writer.WriteInt32(mExtraBodyPoints);//not sure
+            writer.WriteInt32(mExtraMindPoints);//not sure
+            writer.WriteInt32(mExtraFocusPoints);//not sure
         }
     }
 }

@@ -8,10 +8,14 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public float NextPositionStoreTime;
 
+        [NonSerialized, HideInInspector]
         public Game_PersistentData mPersistentData;
 
-        public Game_PersistentPawn()
-        {
+        public override void OnCreateComponents() {
+            base.OnCreateComponents();                                                 
+            //if (IsClient()) {                                                           
+                //mPersistentData = new (self) Class'Game_PersistentData';                  
+            //}
         }
     }
 }
@@ -26,10 +30,5 @@ event cl_OnInit() {
 Super.cl_OnInit();                                                          
 mPersistentData.Read();                                                     
 }
-event OnCreateComponents() {
-Super.OnCreateComponents();                                                 
-if (IsClient()) {                                                           
-mPersistentData = new (self) Class'Game_PersistentData';                  
-}
-}
+
 */

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Engine
 {
@@ -15,6 +16,16 @@ namespace Engine
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public static implicit operator Vector3(Vector v)
+        {
+            return Utilities.UnitConversion.ToUnity(v);
+        }
+
+        public static implicit operator Vector(Vector3 v)
+        {
+            return Utilities.UnitConversion.ToUnreal(v);
         }
     }
 }
