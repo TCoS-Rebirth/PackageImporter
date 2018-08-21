@@ -17,17 +17,17 @@ public class GameServer : MonoBehaviour
     public static readonly UniverseInfo UniverseInfo = new UniverseInfo("TCoSReborn", "Any", "PVE");
     static SessionHandler sessionHandler;
     static MapHandler mapHandler;
-    static TransientDatabase database;
 
     WorldServer worldServer;
     LoginServer loginServer;
     [SerializeField] GameResources resources;
 
+    [SerializeField] TransientDatabase database;
+
     void Awake()
     {
         if (resources == null) resources = GetComponent<GameResources>();
         ServiceContainer.AddService<IGameResources>(resources);
-        database = new TransientDatabase();
         ServiceContainer.AddService<IDatabase>(database);
         sessionHandler = new SessionHandler();
         ServiceContainer.AddService<ISessionHandler>(sessionHandler);
@@ -56,7 +56,7 @@ public class GameServer : MonoBehaviour
     [Button(ButtonSizes.Small, Expanded = false)]
     void LaunchClient()
     {
-        Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe", "--show_console --packet_log");
+        Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe", "--show_console --packet_log --world 1");
     }
     #endif
 

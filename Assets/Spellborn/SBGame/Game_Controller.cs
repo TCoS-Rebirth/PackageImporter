@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public abstract class Game_Controller : Base_Controller
+    [Serializable]
+    public abstract class Game_Controller: Base_Controller
     {
 
         [TypeProxyDefinition(TypeName = "Game_DebugUtils")]
@@ -77,7 +78,25 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public int DBPersistentVariables;
 
-        [Serializable] public struct DBSkillToken: IPacketWritable
+        UnrealScriptState<Game_Controller> ActiveState = new Auto_Controller_PawnAlive();
+
+        protected override void GotoState(string state)
+        {
+            if (state == "Auto" || state == "PawnAlive")
+            {
+                if (ActiveState != null) ActiveState.EndState(this);
+                ActiveState = new Auto_Controller_PawnAlive();
+            }
+            else if (state == "PawnDead")
+            {
+                if (ActiveState != null) ActiveState.EndState(this);
+                ActiveState = new Controller_PawnDead();
+            }
+            if (ActiveState != null) ActiveState.BeginState(this);
+        }
+
+        [Serializable]
+        public struct DBSkillToken: IPacketWritable
         {
             public int SkillID;
 
@@ -117,25 +136,113 @@ namespace SBGame
             CPS_PAWN_FROZEN = 11,
         }
 
+        public virtual void SBGotoState(EControllerStates aState)
+        {
+            if (aState != mCurrentState)
+            {
+                switch (aState)
+                {
+                    case (EControllerStates)1:
+                        mCurrentState = aState;
+                        GotoState("PawnAlive");
+                        break;
+                    case (EControllerStates)2:
+                        mCurrentState = aState;
+                        GotoState("PawnDead");
+                        break;
+                    case (EControllerStates)10:
+                        mCurrentState = aState;
+                        GotoState("PawnSitting");
+                        break;
+                    case (EControllerStates)11:
+                        mCurrentState = aState;
+                        GotoState("PawnFrozen");
+                        break;
+                }
+            }
+        }
+
+        public void sv_FireHook(Content_Type.EContentHook aHookType, object aObjParam, int aNumParam)
+        {
+            int hookI;
+            Game_Hook prevHook;
+            Game_PlayerPawn playerPawn;
+            hookI = 0;
+            while (hookI < mContentHooks.Count)
+            {
+                if (mContentHooks[hookI].HookType == aHookType)
+                {
+                    mContentHooks[hookI].Fire = true;
+                }
+                else
+                {
+                    mContentHooks[hookI].Fire = false;
+                }
+                hookI++;
+            }
+            playerPawn = (Game_PlayerPawn)Pawn;
+            hookI = 0;
+            while (hookI < mContentHooks.Count)
+            {
+                if (mContentHooks[hookI].Fire)
+                {
+                    mContentHooks[hookI].Fire = false;
+                    prevHook = mContentHooks[hookI];
+                    if (playerPawn != null)
+                    {
+                        mContentHooks[hookI].Owner.sv_OnHook(playerPawn, aHookType, aObjParam, aNumParam);
+                    }
+                    if (hookI >= mContentHooks.Count)
+                    {
+                        break;
+                    }
+                    if (mContentHooks[hookI] != prevHook)
+                    {
+                        hookI--;
+                    }
+                }
+                hookI++;
+            }
+            hookI = 0;
+            while (hookI < mContentHooks.Count)
+            {
+                if (mContentHooks[hookI].Fire)
+                {
+                }
+                else hookI++;
+            }
+        }
+
+        public void sv_SetPersistentVariable(int ContextID, int VariableID, int Value)
+        {
+            if (DBCharacter != null && DBCharacter.Id > 0)
+            {
+                if (sv_GetPersistentVariable(ContextID, VariableID) == Value)
+                {
+                    return;
+                }
+                sv_SetPersistentVariableNative(ContextID, VariableID, Value);
+                SBDBAsync.SetPersistentPlayerVariable(Pawn, DBCharacter.Id, ContextID, VariableID, Value);
+            }
+        }
+
+        int sv_GetPersistentVariable(int ContextID,int VariableID)
+        {
+            throw new NotImplementedException();
+        }
+
+        void sv_SetPersistentVariableNative(int ContextID,int VariableID,int Value)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
 /*
-native function int sv_GetPersistentVariable(int ContextID,int VariableID);
 protected native function cl2sv_SetPersistentVariable_CallStub();
 private native event cl2sv_SetPersistentVariable(int VariableID,int Value);
 protected native function sv2cl_SetPersistentVariable_CallStub();
 private native event sv2cl_SetPersistentVariable(int ContextID,int VariableID,int Value);
-private native function sv_SetPersistentVariableNative(int ContextID,int VariableID,int Value);
-event sv_SetPersistentVariable(int ContextID,int VariableID,int Value) {
-if (DBCharacter != None && DBCharacter.Id > 0) {                            
-if (sv_GetPersistentVariable(ContextID,VariableID) == Value) {            
-return;                                                                 
-}
-sv_SetPersistentVariableNative(ContextID,VariableID,Value);               
-Class'SBDBAsync'.SetPersistentPlayerVariable(Pawn,DBCharacter.Id,ContextID,VariableID,Value);
-goto jl0086;                                                              
-}
-}
 function sv_PetCallBack();
 function sv_PetAttack(Game_Pawn Target);
 function byte sv_GetPetAttackState();
@@ -169,71 +276,8 @@ native function bool IsDead();
 event bool IsIdle() {
 return mCurrentState == 1;                                                  
 }
-event SBGotoState(byte aState) {
-if (aState != mCurrentState) {                                              
-switch (aState) {                                                         
-case 1 :                                                                
-mCurrentState = aState;                                               
-GotoState('PawnAlive');                                               
-break;                                                                
-case 2 :                                                                
-mCurrentState = aState;                                               
-GotoState('PawnDead');                                                
-break;                                                                
-case 10 :                                                               
-mCurrentState = aState;                                               
-GotoState('PawnSitting');                                             
-break;                                                                
-case 11 :                                                               
-mCurrentState = aState;                                               
-GotoState('PawnFrozen');                                              
-break;                                                                
-default:                                                                
-break;                                                                
-}
-}
-}
 final native function bool CanSeePawn(Game_Pawn aOther);
 final native function sv_RemoveHooks(export editinline Content_Type aOwner);
-event sv_FireHook(byte aHookType,Object aObjParam,int aNumParam) {
-local int hookI;
-local Game_Hook prevHook;
-local Game_PlayerPawn playerPawn;
-hookI = 0;                                                                  
-while (hookI < mContentHooks.Length) {                                      
-if (mContentHooks[hookI].HookType == aHookType) {                         
-mContentHooks[hookI].Fire = True;                                       
-} else {                                                                  
-mContentHooks[hookI].Fire = False;                                      
-}
-hookI++;                                                                  
-}
-playerPawn = Game_PlayerPawn(Pawn);                                         
-hookI = 0;                                                                  
-while (hookI < mContentHooks.Length) {                                      
-if (mContentHooks[hookI].Fire) {                                          
-mContentHooks[hookI].Fire = False;                                      
-prevHook = mContentHooks[hookI];                                        
-if (playerPawn != None) {                                               
-mContentHooks[hookI].Owner.sv_OnHook(playerPawn,aHookType,aObjParam,aNumParam);
-}
-if (hookI >= mContentHooks.Length) {                                    
-break;                                                                
-goto jl014A;                                                          
-}
-if (mContentHooks[hookI] != prevHook) {                                 
-hookI--;                                                              
-}
-}
-hookI++;                                                                  
-}
-hookI = 0;                                                                  
-while (hookI < mContentHooks.Length) {                                      
-if (mContentHooks[hookI].Fire) {                                          
-}
-hookI++;                                                                  
-}
-}
 event bool sv_OnAttack(Game_Pawn aPawn,export editinline FSkill_EffectClass aEffect,bool WasNegativeEffect,float aValue) {
 return False;                                                               
 }

@@ -6,10 +6,11 @@ using UnityEngine;
 
 namespace SBGame
 {
+    [TypeInfoBox("$RootName")]
     [Serializable] public class Appearance_Base : UObject
     {
-        //[TCosReborn.Framework.Attributes.FieldCategoryAttribute(Category="Base")]
-        //public LocalizedString Name;
+
+        string RootName { get { return transform.root.name; } }
 
         [FoldoutGroup("Base")]
         public LocalizedString Description;

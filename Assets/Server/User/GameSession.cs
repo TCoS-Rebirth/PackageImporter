@@ -3,13 +3,16 @@ using System.Reflection;
 using Network;
 using SBGame;
 using UnityEngine;
+using System.Linq;
+using World;
 
 namespace User
 {
     public partial class GameSession: PlayerSession
     {
         PacketDispatcher<GameHeader> dispatcher;
-        public MapIDs ActiveMap { get; private set; }
+        public MapIDs ActiveClientMap { get; private set; }
+        public GameMap ActiveCharacterMap { get; private set; }
         public Game_PlayerController ActiveCharacter { get; private set; }
 
         public GameSession(NetConnection connection, UserAccount account) : base(connection, account)
@@ -32,12 +35,12 @@ namespace User
             for (var i = 0; i < methods.Length; i++)
             {
                 if (methods[i].ReturnType != typeof(void)) continue;
-                var attribute = methods[i].GetCustomAttribute<HandlesPacketAttribute>();
+                var attribute = methods[i].GetCustomAttributes(typeof(HandlesPacketAttribute), false).FirstOrDefault() as HandlesPacketAttribute;
                 if (attribute == null) continue;
                 var parameters = methods[i].GetParameters();
                 if (parameters.Length != 1 || parameters[0].ParameterType != typeof(NetworkPacket))
                 {
-                    throw new Exception(string.Format("Method {0} requires exactly 1 parameter of type {1}", methods[i].Name, nameof(NetworkPacket)));
+                    throw new Exception(string.Format("Method {0} requires exactly 1 parameter of type {1}", methods[i].Name, typeof(NetworkPacket).Name));
                 }
                 var handler = (PacketHandlerDelegate)Delegate.CreateDelegate(typeof(PacketHandlerDelegate), this, methods[i]);
                 dispatcher.Add(attribute.HeaderType, handler);
@@ -59,7 +62,7 @@ namespace User
             m.WriteInt32((int) PacketStatusCode.NO_ERROR);
             m.WriteInt32((int) newMap);
             Connection.SendMessage(m);
-            ActiveMap = newMap;
+            ActiveClientMap = newMap;
         }
 
         public override void OnBegin()
@@ -70,14 +73,27 @@ namespace User
 
         public override void OnEnd()
         {
+            if (ActiveCharacter != null)
+            {
+                Debug.Log("TODO save character after logout");
+                ActiveCharacterMap.Remove(ActiveCharacter);
+                GameObject.Destroy(ActiveCharacter.gameObject);
+            }
             Log("Ended");
+        }
+
+        [HandlesPacket(GameHeader.C2S_WORLD_LOGOUT)]
+        void C2S_WORLD_LOGOUT(NetworkPacket packet)
+        {
+            Connection.SendMessage(GameHeader.S2C_WORLD_LOGOUT_ACK.CreatePacket());
+            Connection.Disconnect();
         }
 
         [HandlesPacket(GameHeader.C2S_WORLD_PRE_LOGIN_ACK)]
         void C2S_WORLD_PRE_LOGIN_ACK(NetworkPacket packet)
         {
             /*var status = */packet.ReadInt32();
-            if (ActiveMap == MapIDs.CHARACTER_SELECTION)
+            if (ActiveClientMap == MapIDs.CHARACTER_SELECTION)
             {
                 var charDB = ServiceContainer.GetService<IDatabase>().Characters;
                 var chars = charDB.GetCharacters(Account.UID);
@@ -85,15 +101,15 @@ namespace User
                 outMsg.WriteInt32(chars.Count);
                 for (var i = 0; i < chars.Count; i++)
                 {
-                    outMsg.Write(chars[i].Item1);
-                    outMsg.Write(chars[i].Item2);
-                    var items = charDB.GetItems(chars[i].Item1.Id);
+                    outMsg.Write(chars[i].Character);
+                    outMsg.Write(chars[i].Sheet);
+                    var items = charDB.GetItems(chars[i].Character.Id);
                     outMsg.Write(items);
                 }
                 outMsg.WriteInt32(chars.Count);
                 for (int i = 0; i < chars.Count; i++)
                 {
-                    outMsg.WriteInt32(chars[i].Item1.Id);
+                    outMsg.WriteInt32(chars[i].Character.Id);
                     outMsg.WriteInt32(0); //TODO fame value
                 }
                 Connection.SendMessage(outMsg);
@@ -108,6 +124,7 @@ namespace User
                 var msg = GameHeader.S2C_WORLD_LOGIN.CreatePacket();
                 msg.WriteInt32((int)PacketStatusCode.NO_ERROR);
                 msg.WriteLoginStream(ActiveCharacter);
+                Connection.SendMessage(msg);
             }
         }
     }

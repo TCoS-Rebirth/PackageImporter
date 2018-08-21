@@ -6,6 +6,7 @@ namespace Network
     public class NetConnection
     {
         public readonly Queue<NetworkPacket> MessageQueue = new Queue<NetworkPacket>();
+        internal volatile bool PendingDisconnect;
 
         public NetConnection(Socket socket)
         {
@@ -18,7 +19,8 @@ namespace Network
         {
             if (ClientSocket.Connected)
             {
-                ClientSocket.Disconnect(false);
+                PendingDisconnect = true;
+                //ClientSocket.Disconnect(false);
             }
         }
 

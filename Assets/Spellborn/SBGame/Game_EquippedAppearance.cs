@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_EquippedAppearance : Game_Appearance
+    [Serializable]
+    public class Game_EquippedAppearance: Game_Appearance
     {
         public byte mHead;
 
@@ -118,26 +119,34 @@ namespace SBGame
 
         public bool mIgnoreCoversFlags;
 
-        [NonSerialized, HideInInspector]
-        private string mMetalEnvironmentMap;
-
-        [NonSerialized, HideInInspector]
-        private string mHairEnvironmentMap;
-
-        public Game_EquippedAppearance()
+        public bool GetDisplayLogo()
         {
+            return mDisplayLogo;
+        }
+        public byte GetHead()
+        {
+            return mHead;
+        }
+        public void SetDisplayLogo(bool aNewVal)
+        {
+            mDisplayLogo = aNewVal;
+        }
+        public void SetHead(byte aNewVal)
+        {
+            mHead = aNewVal;
         }
 
-        [Serializable] public struct Appearance_Skin
+        public override void cl_OnFrame(float DeltaTime)
         {
-            //texture
-            public string Torso;
-
-            //texture
-            public string Legs;
-
-            //texture
-            public string Head;
+            if (mFreezeTime > 0)
+            {
+                if (Time.realtimeSinceStartup - mFreezeStart >= mFreezeTime)
+                {
+                    mFreezeTime = 0f;
+                    (Outer as Game_Pawn).CharacterStats.FreezeMovement(false);
+                }
+            }
+            base.cl_OnFrame(DeltaTime);
         }
     }
 }
@@ -169,18 +178,7 @@ native function SetColorValue(byte aPart,byte aNewValue,byte aIndex);
 native function int GetValue(byte aPart,optional byte aIndex);
 native function SneakySetValue(byte aPart,int aNewValue,optional byte aIndex);
 native function SetValue(byte aPart,int aNewValue,optional byte aIndex);
-function bool GetDisplayLogo() {
-return mDisplayLogo;                                                        
-}
-function byte GetHead() {
-return mHead;                                                               
-}
-function SetDisplayLogo(bool aNewVal) {
-mDisplayLogo = aNewVal;                                                     
-}
-function SetHead(byte aNewVal) {
-mHead = aNewVal;                                                            
-}
+
 function app(int A) {
 local byte appPart;
 local int maxIndex;
@@ -252,15 +250,7 @@ return False;
 }
 return Super.Check();                                                       
 }
-event cl_OnFrame(float DeltaTime) {
-if (mFreezeTime > 0) {                                                      
-if (Outer.Level.TimeSeconds - mFreezeStart >= mFreezeTime) {              
-mFreezeTime = 0.00000000;                                               
-Outer.CharacterStats.FreezeMovement(False);                             
-}
-}
-Super.cl_OnFrame(DeltaTime);                                                
-}
+
 event OnConstruct() {
 Super.OnConstruct();                                                        
 InitAppearanceSet();                                                        

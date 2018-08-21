@@ -48,7 +48,7 @@ namespace SBGame
 
         public float mHealth;
 
-        public byte mState;
+        public ECharacterStatsCharacterState mState;
 
         public byte mFrozenFlags;
 
@@ -60,10 +60,9 @@ namespace SBGame
 
         public int mFreezeStatsCount;
 
-        public int mBaseMovementSpeed;
+        public int mBaseMovementSpeed = 160;
 
-        [FieldConst()]
-        public int mMovementSpeed;
+        public int mMovementSpeed = 160;
 
         public float mRearDamageIncrease;
 
@@ -353,14 +352,23 @@ namespace SBGame
         public enum ECharacterStatsCharacterState
         {
             CSCS_IDLE,
-
             CSCS_COMBATREADY,
-
             CSCS_INCOMBAT,
-
             ECharacterStatsCharacterState_RESERVED_3,
-
             CSCS_SITTING,
+        }
+
+        public void FreezeMovement(bool aFreeze) { throw new NotImplementedException(); }
+
+        public void IncreaseMeleeResistanceDelta(float aDelta) { throw new NotImplementedException(); }
+        public void IncreaseMagicResistanceDelta(float aDelta) { throw new NotImplementedException(); }
+        public void IncreaseRangedResistanceDelta(float aDelta) { throw new NotImplementedException(); }
+
+        public byte GetCharacterClass() { return mCharacterClass; }
+
+        public virtual void SetCharacterClass(byte ClassId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
@@ -368,8 +376,6 @@ namespace SBGame
 native function SetConcentration(float Value);
 native function SetMorale(float Value);
 native function SetPhysique(float Value);
-native function byte GetCharacterClass();
-native function SetCharacterClass(byte ClassId);
 final native function byte GetArchetype();
 final native function int GetPePRank();
 final native function int GetFameLevel();
@@ -433,16 +439,12 @@ native function FreezeAnimation(bool aFreeze);
 native function FreezeRotationTimed(float aDuration);
 native function FreezeRotation(bool aFreeze);
 native function FreezeMovementTimed(float aDuration);
-native function FreezeMovement(bool aFreeze);
 native function sv_Resurrect();
 native function ResetAttributes();
 native function SetAttributes(int Body,int Mind,int Focus);
 native function UnsetStatsState(byte aNewState);
 native function SetStatsState(byte aNewState);
 native function ForceCalculationUpdate();
-native function IncreaseMagicResistanceDelta(float aDelta);
-native function IncreaseRangedResistanceDelta(float aDelta);
-native function IncreaseMeleeResistanceDelta(float aDelta);
 native function IncreaseHealthRegenerationDelta(float aDelta);
 native function IncreaseConcentrationDegenerationDelta(float aDelta);
 native function IncreaseConcentrationRegenerationDelta(float aDelta);

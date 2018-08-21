@@ -20,7 +20,7 @@ namespace Engine
 
         public static implicit operator Quaternion(Rotator rot)
         {
-            return Utilities.UnitConversion.ToUnreal(rot);
+            return Utilities.UnitConversion.ToUnity(rot);
         }
     }
 }

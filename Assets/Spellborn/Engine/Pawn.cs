@@ -1,4 +1,5 @@
 ﻿using System;
+using SBGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -41,14 +42,14 @@ namespace Engine
         [NonSerialized, HideInInspector]
         public NavigationPoint Anchor;
 
-        [NonSerialized, HideInInspector]
-        public float GroundSpeed = 320;
+        [FoldoutGroup("Movement")]
+        public float GroundSpeed = 220;
 
         [NonSerialized, HideInInspector]
         public float WaterSpeed = 200;
 
         [NonSerialized, HideInInspector]
-        public float AirSpeed;
+        public float AirSpeed = 200;
 
         [NonSerialized, HideInInspector]
         public float AccelRate = 500;

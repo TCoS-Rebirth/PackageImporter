@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using User;
 using SBBase;
+using Database;
 
 public interface IDatabase
 {
@@ -30,9 +31,9 @@ public interface ICharacterDatabase
     int AllocateSkillDeckID();
     int AllocateItemID();
     DB_Character GetCharacter(int uid, int accountID);
-    bool Save(Tuple<DB_Character, DB_CharacterSheet> character);
+    bool Save(DBPlayerCharacter character);
     DB_CharacterSheet GetSheet(int uid);
-    IList<Tuple<DB_Character, DB_CharacterSheet>> GetCharacters(int accountID);
+    IList<DBPlayerCharacter> GetCharacters(int accountID);
     List<DB_Item> GetItems(int characterID);
     bool Save(List<DB_Item> items);
     DB_Skill GetSkill(int uid);

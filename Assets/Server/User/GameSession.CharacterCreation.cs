@@ -12,7 +12,7 @@ namespace User
     public partial class GameSession : PlayerSession
     {
 
-        DB_Item CreateDBItemFromItemSet<T>(IReadOnlyList<T> set, int setIndex, int characterID, byte color1, byte color2) where T:Item_Type
+        DB_Item CreateDBItemFromItemSet<T>(List<T> set, int setIndex, int characterID, byte color1, byte color2) where T:Item_Type
         {
             var item = new DB_Item();
             var gameItem = set[setIndex];
@@ -178,7 +178,7 @@ namespace User
 		        SelectedSkilldeckID = skillDeck.Id
 		    };
 
-		    if (!db.Characters.Save(new Tuple<DB_Character, DB_CharacterSheet>(dbChar, charSheet)) ||
+		    if (!db.Characters.Save(new Database.DBPlayerCharacter(dbChar, charSheet)) ||
 		        !db.Characters.Save(skillDeck) ||
 		        !db.Characters.Save(items))
 		    {
@@ -225,8 +225,8 @@ namespace User
             }
             else
             {
-                var map = ServiceContainer.GetService<IMapHandler>().GetPersistentMap((MapIDs)character.worldID); //TODO change to instanceID / handle instances when needed
-                ActiveCharacter = map.Spawn(ServiceContainer.GetService<IGameResources>().PlayerPrefab, character.Location, character.Rotation, controller => 
+                ActiveCharacterMap = ServiceContainer.GetService<IMapHandler>().GetPersistentMap((MapIDs)character.worldID); //TODO change to instanceID / handle instances when needed
+                ActiveCharacter = ActiveCharacterMap.Spawn(ServiceContainer.GetService<IGameResources>().PlayerPrefab, character.Location, character.Rotation, controller => 
                 {
                     controller.AccountID = Account.UID;
                     controller.DBCharacter = character;
@@ -240,7 +240,7 @@ namespace User
                     //controller.DBPersistentVariables = TODO
                     controller.DBItems = db.GetItems(character.Id);   
                 });
-                LoadClientMap(map.ID);
+                LoadClientMap(ActiveCharacterMap.ID);
             }
         }
     }

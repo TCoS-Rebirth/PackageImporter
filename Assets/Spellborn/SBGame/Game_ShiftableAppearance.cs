@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_ShiftableAppearance : Base_Component
+    [Serializable]
+    public class Game_ShiftableAppearance: Base_Component
     {
         [NonSerialized, HideInInspector]
         [FieldTransient()]
@@ -22,11 +23,10 @@ namespace SBGame
 
         public bool mInvalidatedDressup;
 
-        public Game_ShiftableAppearance()
-        {
-        }
+        public void DressUp() { Debug.LogWarning("DressUp not implemented"); }
 
-        [Serializable] public struct PhysicState
+        [Serializable]
+        public struct PhysicState
         {
             public byte Physics;
 
@@ -73,6 +73,25 @@ namespace SBGame
             public float CollisionRadius;
 
             public float TerminalVelocity;
+        }
+
+        public virtual void OnConstruct()
+        {
+            TestInvariant();
+            var outer = Outer as Game_Pawn;
+            if (outer.BaseAppearance != null)
+            {
+                outer.BaseAppearance.OnConstruct();
+            }
+        }
+
+        void TestInvariant() 
+        {
+            var outer = Outer as Game_Pawn;                                   
+            UnityEngine.Assertions.Assert.IsTrue(outer.BaseAppearance != null);                                     
+            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType == null || mShiftedAppearance != null);            
+            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType != null || mShiftedAppearance == null);            
+            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType == null || mShiftedNPCTypeID == mShiftedNPCType.ResourceID);
         }
     }
 }
@@ -178,19 +197,12 @@ ShiftToNPCTypeID(aShiftedNPCTypeID);
 }
 TestInvariant();                                                            
 }
-function OnConstruct() {
-TestInvariant();                                                            
-if (Outer.BaseAppearance != None) {                                         
-Outer.BaseAppearance.OnConstruct();                                       
-}
-}
 function app(int A) {
 GetCurrent().app(A);                                                        
 }
 event InvalidateDressup() {
 mInvalidatedDressup = True;                                                 
 }
-final native function DressUp();
 function bool UnshiftAppearance() {
 return ShiftAppearance(None);                                               
 }
@@ -238,15 +250,6 @@ if (mShiftedAppearance != None) {
 return mShiftedAppearance;                                                
 } else {                                                                    
 return Outer.BaseAppearance;                                              
-}
-}
-event TestInvariant() {
-if (Outer.BaseAppearanceClass != None) {                                    
-assert(Outer.BaseAppearance != None);                                     
-assert(mShiftedNPCType == None || mShiftedAppearance != None);            
-assert(mShiftedNPCType != None || mShiftedAppearance == None);            
-assert(mShiftedNPCType == None
-|| mShiftedNPCTypeID == mShiftedNPCType.GetResourceId());
 }
 }
 native function RestoreMovementPhysics();

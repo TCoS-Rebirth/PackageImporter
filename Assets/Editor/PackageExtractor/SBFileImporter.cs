@@ -33,12 +33,13 @@ namespace Framework.PackageExtractor
             pauseForDebugger = EditorGUILayout.Toggle("Pause for debugger", pauseForDebugger);
             if (GUILayout.Button("Import Gameplay packages")) ImportGameplayPackages();
             if (GUILayout.Button("Import Maps")) ImportMapPackages();
+            if (GUILayout.Button("Post process imported maps")) ProcessMaps();
             if (GUILayout.Button("Import LevelProgression file")) ImportLevelProgressData();
             if (GUILayout.Button("Import Resource Listing file")) ImportResourceList();
             if (GUILayout.Button("Assign ResourceIDs")) AssignResourceIDs();
             if (GUILayout.Button("Import CompleteUniverse package")) ImportCompleteUniverses();
             GUILayout.Space(20);
-            if (GUILayout.Button("ReSerialize All assets (!)"))
+            if (GUILayout.Button("Re-Serialize All assets (careful !)"))
             {
                 AssetDatabase.ForceReserializeAssets();
             }
@@ -71,6 +72,55 @@ namespace Framework.PackageExtractor
             var importLocator = new HybridBaseFolderImportLocator("Packages");
             LoadAllPackages(GetMapPackagePaths(), false, "Maps", importLocator);
             Debug.Log("Loading took: " + (Time.realtimeSinceStartup - start)/60f+" minutes");
+        }
+
+        void ProcessMaps()
+        {
+            var currentScene = EditorSceneManager.GetActiveScene().path;
+            var buildScenes = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+            buildScenes.Clear();
+            try
+            {   
+                foreach (var item in AssetDatabase.FindAssets("t:" + typeof(SceneAsset).Name))
+                {
+                    EditorUtility.DisplayProgressBar("Loading scenes", string.Empty, 5);
+                    var asset = AssetDatabase.GUIDToAssetPath(item);
+                    if (string.IsNullOrEmpty(asset)) continue;
+                    buildScenes.Add(new EditorBuildSettingsScene(asset, true));
+                }
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+            try
+            {
+                EditorBuildSettings.scenes = buildScenes.ToArray();
+                for (int i = 0; i < buildScenes.Count; i++)
+                {
+                    EditorUtility.DisplayProgressBar("Processing scene", buildScenes[i].path, Mathf.Clamp01((float)i / buildScenes.Count));
+                    var scene = EditorSceneManager.OpenScene(buildScenes[i].path, OpenSceneMode.Single);
+                    EditorSceneManager.SetActiveScene(scene);
+                    foreach(var actor in FindObjectsOfType<Actor>())
+                    {
+                        actor.transform.position = actor.Location;
+                        EditorUtility.SetDirty(actor);
+                    }
+                    RenderSettings.skybox = null;
+                    RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+                    RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Custom;
+                    Lightmapping.bakedGI = false;
+                    Lightmapping.realtimeGI = false;
+                    Lightmapping.Clear();
+                    EditorSceneManager.MarkSceneDirty(scene);
+                    EditorSceneManager.SaveScene(scene);
+                }
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+            EditorSceneManager.OpenScene(currentScene, OpenSceneMode.Single);
         }
         
         void ImportLevelProgressData()
@@ -111,7 +161,7 @@ namespace Framework.PackageExtractor
                     };
                     lpd.EditorAddProgressData(pd);
                 }
-                AssetDatabase.CreateAsset(lpd, "Assets/Packages/LevelProgression.asset");
+                AssetDatabase.CreateAsset(lpd, "Assets/Data/LevelProgression.asset");
             }
         }
 
@@ -141,7 +191,7 @@ namespace Framework.PackageExtractor
                     var stringValue = Encoding.UTF8.GetString(stringBytes);
                     rl.EditorAddResource(resID, stringValue);
                 }
-                AssetDatabase.CreateAsset(rl, "Assets/Packages/ResourceListing.asset");
+                AssetDatabase.CreateAsset(rl, "Assets/Data/ResourceListing.asset");
             }
         }
 

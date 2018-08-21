@@ -6,80 +6,114 @@ using UnityEngine;
 namespace SBGame
 {
     [Serializable]
-    public class Game_PlayerController : Game_Controller
+    public class Game_PlayerController: Game_Controller
     {
         public const string MUTE_GLOBAL = "\"global\"";
-
         public const string MUTE_ALL = "\"all\"";
-
         public const float SERVER_SYNC_TIME = 1F;
 
-        [TypeProxyDefinition(TypeName = "Game_Chat")]
-        public Type ChatClass;
-
-        [TypeProxyDefinition(TypeName = "Game_Travel")]
-        public Type TravelClass;
-
-        [TypeProxyDefinition(TypeName = "Game_Mail")]
-        public Type MailClass;
-
-        [TypeProxyDefinition(TypeName = "Game_PlayerFriends")]
-        public Type mGroupingFriendsClass;
-
-        [TypeProxyDefinition(TypeName = "Game_PlayerTeams")]
-        public Type mGroupingTeamsClass;
-
-        [TypeProxyDefinition(TypeName = "Game_PlayerGuilds")]
-        public Type mGroupingGuildsClass;
-
         public Game_Chat Chat;
-
         public Game_Travel Travel;
-
         public Game_Mail Mail;
-
         public Game_PlayerFriends GroupingFriends;
-
         public Game_PlayerTeams GroupingTeams;
-
         public Game_PlayerGuilds GroupingGuilds;
 
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public float ServerTime;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
         public float mUnstuckTime;
-
-        [NonSerialized, HideInInspector]
-        public byte mNetState;
-
+        public EControllerStates mNetState;
         public Game_Conversation mConversation;
-
         [NonSerialized, HideInInspector]
         public FSkill_EffectClass_AudioVisual mDeathEffect;
-
         [NonSerialized, HideInInspector]
         public bool DBMuted;
-
         [NonSerialized, HideInInspector]
         public string DBMutedScope = string.Empty;
-
         [NonSerialized, HideInInspector]
         public List<int> DBFinishedQuests = new List<int>();
-
         [NonSerialized, HideInInspector]
         public List<int> DBQuestObjectiveIds = new List<int>();
-
         [NonSerialized, HideInInspector]
         public List<int> DBQuestObjectiveValues = new List<int>();
+
+        public void sv2cl_UpdateNetState(EControllerStates aNetState)
+        {
+            mNetState = aNetState;
+            if (mCurrentState != mNetState && mNetState != 0) SBGotoState(mNetState);
+        }
+
+        public override void SBGotoState(EControllerStates aState)
+        {
+            if (aState != mCurrentState)
+            {
+                switch (aState)
+                {
+                    case (EControllerStates)1:
+                        mCurrentState = aState;
+                        GotoState("PawnAlive");
+                        break;
+                    case (EControllerStates)2:
+                        mCurrentState = aState;
+                        GotoState("PawnDead");
+                        break;
+                    case (EControllerStates)8:
+                        mCurrentState = aState;
+                        GotoState("MoveState");
+                        break;
+                    case (EControllerStates)9:
+                        mCurrentState = aState;
+                        GotoState("RotatePawn");
+                        break;
+                    default:
+                        base.SBGotoState(aState);
+                        break;
+                }
+                //if (IsServer())
+                //{
+                mNetState = mCurrentState;
+                if (ControllerInitialized)
+                {
+                    //sv2cl_UpdateNetState_CallStub(mNetState);
+                    Debug.LogWarning("TODO Update client with netstate");
+                }
+                //}
+            }
+        }
+
+        public override void OnCreateComponents()
+        {
+            base.OnCreateComponents();
+
+            Pawn.OnCreateComponents();
+        }
+
+        public override void PreBeginPlay()
+        {
+            SetInitialState();
+            base.PreBeginPlay();
+            CalculateMovementSpeed();
+            mNetState = EControllerStates.CPS_PAWN_ALIVE; //TODO insert real value
+            Pawn.PreBeginPlay();
+        }
+
+        public override void BeginPlay()
+        {
+            base.BeginPlay();
+            Pawn.BeginPlay();
+        }
+
+        public override void PostBeginPlay()
+        {
+            base.PostBeginPlay();
+
+            Pawn.PostBeginPlay();
+        }
 
         public override void WriteLoginStream(IPacketWriter writer)
         {
             writer.WriteInt32(GetRelevanceID());
             writer.WriteFloat(Time.realtimeSinceStartup);
-            writer.WriteByte(mNetState);
+            writer.WriteByte((byte)mNetState);
             Pawn.WriteLoginStream(writer);
             writer.Write(DBCharacter);
             writer.Write(DBCharacterSheet);
@@ -107,10 +141,37 @@ namespace SBGame
             writer.WriteInt32(0);//num persistentVars
             //foreach var int32:contextID, int32:varID, int32:value
 
-            writer.WriteInt32(GetAuthorityLevel());
+            writer.WriteInt32(2/*GetAuthorityLevel()*/);
         }
 
         public virtual int GetAuthorityLevel() { return 0; }
+
+        public void TickMovement(float aDeltaTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void OnSitDown(bool aSitDown) { throw new NotImplementedException(); }
+
+        public void CalculateMovementSpeed()
+        {
+            Game_Pawn gamePawn = Pawn as Game_Pawn;
+            if (gamePawn != null)
+            {
+                mMoveSpeed = 160;
+                if (mMaxTimeToMove > 0)
+                {
+                    mMoveSpeed = Vector3.Distance(gamePawn.transform.position, mTargetDestination) / mMaxTimeToMove;
+                }
+                else
+                {
+                    if (gamePawn.CharacterStats != null)
+                    {
+                        mMoveSpeed = gamePawn.CharacterStats.mMovementSpeed * gamePawn.GroundSpeedModifier;
+                    }
+                }
+            }
+        }
     }
 }
 /*
@@ -159,7 +220,6 @@ cl_Ping();
 delegate OnPong(float aPing);
 protected native function cl2sv_Unstuck_CallStub();
 final native event cl2sv_Unstuck();
-final native function TickMovement(float aDeltaTime);
 function Unshift() {
 Game_PlayerPawn(Pawn).Appearance.sv_UnshiftAppearance();                    
 }
@@ -193,47 +253,9 @@ Game_PlayerPawn(Pawn).Appearance.sv_ShiftAppearance(Type);
 Game_PlayerPawn(Pawn).Appearance.sv_UnshiftAppearance();                  
 }
 }
-delegate OnSitDown(bool aSitDown);
 native function bool ReachedTarget();
 native function bool UpdateMovement();
 protected native function sv2cl_UpdateNetState_CallStub();
-protected event sv2cl_UpdateNetState(byte aNetState) {
-mNetState = aNetState;                                                      
-if (mCurrentState != mNetState && mNetState != 0) {                         
-SBGotoState(mNetState);                                                   
-}
-}
-event SBGotoState(byte aState) {
-if (aState != mCurrentState) {                                              
-switch (aState) {                                                         
-case 1 :                                                                
-mCurrentState = aState;                                               
-GotoState('PawnAlive');                                               
-break;                                                                
-case 2 :                                                                
-mCurrentState = aState;                                               
-GotoState('PawnDead');                                                
-break;                                                                
-case 8 :                                                                
-mCurrentState = aState;                                               
-GotoState('MoveState');                                               
-break;                                                                
-case 9 :                                                                
-mCurrentState = aState;                                               
-GotoState('RotatePawn');                                              
-break;                                                                
-default:                                                                
-Super.SBGotoState(aState);                                            
-break;                                                                
-}
-if (IsServer()) {                                                         
-mNetState = mCurrentState;                                              
-if (ControllerInitialized) {                                            
-sv2cl_UpdateNetState_CallStub(mNetState);                             
-}
-}
-}
-}
 protected native function sv2cl_UpdateServerTime_CallStub();
 protected event sv2cl_UpdateServerTime(float aServerTime) {
 ServerTime = aServerTime;                                                   
@@ -382,33 +404,6 @@ GroupingGuilds.sv_OnShutdown();
 }
 Super.sv_OnShutdown();                                                      
 }
-state PawnSitting {
-function EndState() {
-OnSitDown(False);                                                       
-Super.EndState();                                                       
-}
-event cl_OnPlayerTick(float aDeltaTime) {
-local Game_PlayerPawn gpp;
-gpp = Game_PlayerPawn(Pawn);                                            
-PlayerInput.PlayerInput(aDeltaTime);                                    
-Input.cl_OnPlayerTick(aDeltaTime);                                      
-if (Camera != None) {                                                   
-Camera.cl_Tick(aDeltaTime);                                           
-}
-TickMovement(aDeltaTime);                                               
-}
-function BeginState() {
-local Game_PlayerPawn gpp;
-gpp = Game_PlayerPawn(Pawn);                                            
-if (gpp != None) {                                                      
-if (!IsServer() && gpp.Physics != gpp.mNetPhysics) {                  
-gpp.SetPhysics(gpp.mNetPhysics);                                    
-}
-}
-Super.BeginState();                                                     
-OnSitDown(True);                                                        
-}
-}
 state RotatePawn {
 exec function Jump(optional float JumpModifier) {
 cl2sv_ForwardCancelState_CallStub();                                    
@@ -440,20 +435,6 @@ bRotateToDesired = True;
 state MoveState {
 exec function Jump(optional float JumpModifier) {
 cl2sv_ForwardCancelState_CallStub();                                    
-}
-function CalculateMovementSpeed() {
-local Game_Pawn gamePawn;
-gamePawn = Game_Pawn(Pawn);                                             
-if (gamePawn != None) {                                                 
-mMoveSpeed = 160.00000000;                                            
-if (mMaxTimeToMove > 0.00000000) {                                    
-mMoveSpeed = VSize(gamePawn.Location - mTargetDestination) / mMaxTimeToMove;
-} else {                                                              
-if (gamePawn.CharacterStats != None) {                              
-mMoveSpeed = gamePawn.CharacterStats.mMovementSpeed * gamePawn.GroundSpeedModifier;
-}
-}
-}
 }
 function bool UpdatePawnMovement(float DeltaTime) {
 local Game_Pawn gamePawn;
@@ -499,54 +480,6 @@ mStateTimer = mMaxTimeToMove;
 mStateTimer = 0.00000000;                                             
 }
 CalculateMovementSpeed();                                               
-}
-}
-state PawnDead {
-event cl_OnPlayerFrame(float DeltaTime) {
-}
-exec function Jump(optional float JumpModifier) {
-}
-event cl_OnPlayerTick(float DeltaTime) {
-cl_OnPlayerTick(DeltaTime);                                             
-Camera.cl_Tick(DeltaTime);                                              
-}
-function EndState() {
-local Game_Pawn gamePawn;
-gamePawn = Game_Pawn(Pawn);                                             
-if (gamePawn != None) {                                                 
-gamePawn.ClearPawnAnims();                                            
-gamePawn.PlayIdle();                                                  
-gamePawn.Effects.cl_Stop(mDeathEffectHandle);                         
-}
-mDeathEffectHandle = 0;                                                 
-}
-function BeginState() {
-local Game_Pawn gamePawn;
-if (Class'Actor'.static.GetGameEngine().GGameInfo.PlayerDied(self) == False) {
-if (IsClient() && GUI != None) {                                      
-gamePawn = Game_Pawn(Pawn);                                         
-if (gamePawn != None && gamePawn.Trading != None) {                 
-gamePawn.Trading.cl_HandleDeath();                                
-}
-if (GroupingTeams != None) {                                        
-GroupingTeams.HandleDeath();                                      
-}
-GUI.HandleDeath();                                                  
-}
-}
-Input.cl_SetAutoRun(False);                                             
-Input.cl_SetTargetActor(None);                                          
-if (mDeathEffect == None) {                                             
-mDeathEffect = FSkill_EffectClass_AudioVisual(static.DynamicLoadObject("EffectsNPCTypeAVGP.Death.Death_Blur",Class'FSkill_EffectClass_AudioVisual',True));
-}
-mDeathEffectHandle = Game_Pawn(Pawn).Effects.cl_Start(mDeathEffect);    
-}
-}
-auto state PawnAlive {
-function BeginState() {
-if (IsClient() && Pawn != None) {                                       
-GUI.HideDeathRespawn();                                               
-}
 }
 }
 */

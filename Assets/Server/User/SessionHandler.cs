@@ -11,7 +11,7 @@ namespace User
 
         public void Begin(PlayerSession session)
         {
-            if (session == null) throw new ArgumentException("Session must not be null", nameof(session));
+            if (session == null) throw new ArgumentException("Session must not be null", "session");
             if (Get<PlayerSession>(session.Connection) != null) throw new Exception("Duplicate session begin");
             sessions.Add(session);
             session.OnBegin();

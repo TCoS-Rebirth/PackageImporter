@@ -64,10 +64,6 @@ namespace SBGame
 
         public Game_Pawn mLastAttackedPawn;
 
-        public Game_CombatStats()
-        {
-        }
-
         [Serializable] public struct SocialStruct
         {
             public Game_CombatStats LinkedStats;
@@ -88,6 +84,11 @@ namespace SBGame
             public float FirstContributionTime;
 
             public bool ScriptedClaim;
+        }
+
+        public Game_Pawn sv_GetKiller()
+        {
+            throw new NotImplementedException();
         }
     }
 }
@@ -238,7 +239,6 @@ partI++;
 }
 return False;                                                               
 }
-final native function Game_Pawn sv_GetKiller();
 final native function sv_AddParticipants(out array<Game_Pawn> oParticipants);
 native function sv_ScriptedClaim(Game_Pawn aClaimer);
 native function sv_CombatParticipation(Game_Pawn aParticipant,float Contribution);

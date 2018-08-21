@@ -7,6 +7,14 @@ namespace SBBase
     [Serializable] public class Base_Pawn : SBAnimatedPawn
     {
         public const float IDEAL_JUMP_SPEED_FOR_ANIM = 350F;
+
+        public virtual void cl_OnInit() { }
+
+        public bool sv_CanReplicate()
+        {
+            Debug.LogWarning("TODO test for real CanReplicate");
+            return true;
+        }
     }
 }
 /*
@@ -76,7 +84,6 @@ PlayEmote(emoteNr,AnimSpeed);
 event bool IsInCombat() {
 return False;                                                               
 }
-native function bool sv_CanReplicate();
 protected native function sv2cl_GotoState_CallStub();
 event sv2cl_GotoState(string aState) {
 GotoState(name(aState));                                                    
@@ -88,7 +95,6 @@ final native event sv_OnSpawn(Base_Controller aController);
 event cl_OnFrame(float delta);
 native event cl_OnTick(float delta);
 native event cl_OnShutdown();
-native event cl_OnInit();
 final native event sv_OnShutdown();
 final native event sv_OnInit();
 */

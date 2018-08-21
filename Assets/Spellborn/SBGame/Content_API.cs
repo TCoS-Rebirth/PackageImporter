@@ -3,166 +3,88 @@ using Engine;
 
 namespace SBGame
 {
-    [Serializable] public class Content_API : UObject
+    [Serializable]
+    public class Content_API: UObject
     {
-        public Content_API()
-        {
-        }
 
         public enum EContentEmote
         {
             ECE_None = 0,
-
             ECE_wave = 1,
-
             ECE_salute = 2,
-
             ECE_great = 3,
-
             ECE_lol = 4,
-
             ECE_huh = 5,
-
             ECE_dance = 6,
-
             ECE_enemies = 7,
-
             ECE_getready = 8,
-
             ECE_charge = 9,
-
             ECE_attack = 10,
-
             ECE_retreat = 11,
-
             ECE_follow = 12,
-
             ECE_wait = 13,
-
             ECE_comeon = 14,
-
             ECE_assistance = 15,
-
             ECE_overhere = 16,
-
             ECE_backoff = 17,
-
             ECE_north = 18,
-
             ECE_east = 19,
-
             ECE_west = 20,
-
             ECE_south = 21,
-
             ECE_flank = 22,
-
             ECE_goround = 23,
-
             ECE_no = 24,
-
             ECE_yes = 25,
-
             ECE_greet = 26,
-
             ECE_bye = 27,
-
             ECE_thanks = 28,
-
             ECE_pony = 29,
-
             ECE_pwnie = 30,
-
             ECE_trade = 31,
-
             ECE_excuse = 32,
-
             ECE_waitup = 33,
-
             ECE_veto = 34,
-
             ECE_sarcasm = 35,
-
             ECE_hey = 36,
-
             ECE_oldskool = 37,
-
             ECE_outfit = 38,
-
             ECE_fashionpolice = 39,
-
             ECE_jazz = 40,
-
             ECE_clap = 41,
-
             ECE_kiss = 42,
-
             ECE_sigh = 43,
-
             ECE_bored = 44,
-
             ECE_pain = 45,
-
             ECE_pst = 46,
-
             ECE_angry = 47,
-
             ECE_cry = 48,
-
             ECE_maniacal = 49,
-
             ECE_laugh = 50,
-
             ECE_cough = 51,
-
             ECE_cheer = 52,
-
             ECE_whistlehappy = 53,
-
             ECE_whistleattention = 54,
-
             ECE_whistlemusic = 55,
-
             ECE_whistlenote = 56,
-
             ECE_ahh = 57,
-
             ECE_gasp = 58,
-
             ECE_stretch = 59,
-
             ECE_huf = 60,
-
             ECE_bah = 61,
-
             ECE_oracle = 62,
-
             ECE_battle = 63,
-
             ECE_praise = 64,
-
             ECE_mock = 65,
-
             ECE_attention = 66,
-
             ECE_death = 67,
-
             ECE_stop = 68,
-
             ECE_admireroom = 69,
-
             ECE_victory = 70,
-
             ECE_survive = 71,
-
             ECE_again = 72,
-
             ECE_try = 73,
-
             ECE_letsgo = 74,
-
             ECE_rtfm = 75,
-
             ECE_unique = 76,
         }
 
@@ -339,17 +261,20 @@ namespace SBGame
 
             ECC_AnyClass = 31,
         }
+
+        public int GetPersistentVariable(Game_Pawn aPawn, int aId) { throw new NotImplementedException(); }
+
+        public void SetPersistentVariable(Game_Pawn aPawn, int aId, int aValue)
+        {
+            Game_Controller cont = ((Game_Controller)aPawn.Controller);
+            if (cont != null)
+            {
+                cont.sv_SetPersistentVariable(0, aId, aValue);
+            }
+        }
     }
 }
 /*
-final native function int GetPersistentVariable(Game_Pawn aPawn,int aId);
-function SetPersistentVariable(Game_Pawn aPawn,int aId,int aValue) {
-local Game_Controller cont;
-cont = Game_Controller(aPawn.Controller);                                   
-if (cont != None) {                                                         
-cont.sv_SetPersistentVariable(0,aId,aValue);                              
-}
-}
 final native function bool LearnSkill(Game_Pawn aPawn,export editinline FSkill_Type aSkill);
 final native function bool CanLearnSkill(Game_Pawn aPawn,export editinline FSkill_Type aSkill);
 function bool RemoveMoney(Game_Pawn aPawn,int aAmount) {

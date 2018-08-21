@@ -6,60 +6,9 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_Pawn : Base_Pawn
+    [Serializable]
+    public class Game_Pawn: Base_Pawn
     {
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Appearance")]
-        public Type BaseAppearanceClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Character")]
-        public Type CharacterClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_CharacterStats")]
-        public Type CharacterStatsClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_CombatState")]
-        public Type CombatStateClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_CombatStats")]
-        public Type CombatStatsClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_ItemManager")]
-        public Type ItemManagerClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_ShiftableAppearance")]
-        public Type ShiftableAppearanceClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Skills")]
-        public Type SkillsClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Effects")]
-        public Type EffectsClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Emotes")]
-        public Type EmotesClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Looting")]
-        public Type LootingClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_Trading")]
-        public Type TradingClass;
-
-        [FieldConst()]
-        [TypeProxyDefinition(TypeName = "Game_BodySlots")]
-        public Type BodySlotsClass;
 
         public Game_ShiftableAppearance Appearance;
 
@@ -89,17 +38,14 @@ namespace SBGame
 
         public Game_MiniGameProxy MiniGameProxy;
 
-        [NonSerialized, HideInInspector]
-        private EPawnStates mCurrentState;
+        //[NonSerialized, HideInInspector]
+        public EPawnStates mCurrentState;
 
-        [NonSerialized, HideInInspector]
-        private EPawnStates mNetState;
+        //[NonSerialized, HideInInspector]
+        public EPawnStates mNetState;
 
         [NonSerialized, HideInInspector]
         public bool bInvulnerable;
-
-        [NonSerialized, HideInInspector]
-        private bool bCheatInvulnerable;
 
         [NonSerialized, HideInInspector]
         public float ForwardSpeedModifier;
@@ -110,8 +56,8 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public float BackwardSpeedModifier;
 
-        [NonSerialized, HideInInspector]
-        public float GroundSpeedModifier;
+        [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+        public float GroundSpeedModifier = 0.1f;
 
         [NonSerialized, HideInInspector]
         public CharacterIdentity mCharacterIdentityForBugReport;
@@ -147,7 +93,10 @@ namespace SBGame
 
         private bool mInvisible;
 
-        [Serializable] public struct CharacterIdentity
+        protected UnrealScriptState<Game_Pawn> ActiveState = new Auto_Pawn_PawnAlive();
+
+        [Serializable]
+        public struct CharacterIdentity
         {
             public int TransferWorldID;
 
@@ -269,57 +218,172 @@ namespace SBGame
         }
         #endregion
 
-        public override void OnCreateComponents() 
+        protected override void GotoState(string state)
         {
-            base.OnCreateComponents();                                                 
-            //if (ShiftableAppearanceClass != null) {                                     
-            //    Appearance = new (self) ShiftableAppearanceClass;                         
-            //}
-            //if (BaseAppearanceClass != null) {                                          
-            //    BaseAppearance = new (self) BaseAppearanceClass;                          
-            //}
-            //if (CharacterClass != null) {                                               
-            //Character = new (self) CharacterClass;                                    
-            //}
-            //if (CharacterStatsClass != null) {                                          
-            //CharacterStats = new (self) CharacterStatsClass;                          
-            //}
-            //if (CombatStateClass != null) {                                             
-            //combatState = new (self) CombatStateClass;                                
-            //}
-            //if (CombatStatsClass != null) {                                             
-            //CombatStats = new (self) CombatStatsClass;                                
-            //}
-            //if (EffectsClass != null) {                                                 
-            //Effects = new (self) EffectsClass;                                        
-            //}
-            //if (EmotesClass != null) {                                                  
-            //Emotes = new (self) EmotesClass;                                          
-            //}
-            //if (LootingClass != null) {                                                 
-            //Looting = new (self) LootingClass;                                        
-            //}
-            //if (SkillsClass != null) {                                                  
-            //Skills = new (self) SkillsClass;                                          
-            //}
-            //if (TradingClass != null) {                                                 
-            //Trading = new (self) TradingClass;                                        
-            //}
-            //if (ItemManagerClass != null) {                                             
-            //itemManager = new (self) ItemManagerClass;                                
-            //}
-            //if (BodySlotsClass != null) {                                               
-            //BodySlots = new (self) BodySlotsClass;                                    
-            //}
-            //if (Appearance != null) {                                                   
-            //Appearance.OnConstruct();                                                 
-            //}
+            if (state == "Alive" || state == "Auto")
+            {
+                ActiveState = new Auto_Pawn_PawnAlive();
+            }
+            else if (state == "Dead")
+            {
+                ActiveState = new Pawn_PawnDead();
+            }
+            if (ActiveState != null) ActiveState.BeginState(this);
+        }
+
+        public override void OnCreateComponents()
+        {
+            base.OnCreateComponents();
+            if (Appearance != null)
+            {
+                Appearance.OnConstruct();
+            }
+        }
+
+        public override void PreBeginPlay()
+        {
+            SetInitialState();
+            Debug.LogWarning("TODO find out how stats are loaded correctly");
+            base.PreBeginPlay();
         }
 
         public EPawnStates GetState()
         {
             return mCurrentState;
         }
+
+        public virtual void SBGotoState(EPawnStates aState)
+        {
+            if (aState != mCurrentState)
+            {
+                switch (aState)
+                {
+                    case (EPawnStates)1:
+                        GotoState("Alive");
+                        break;
+                    case (EPawnStates)2:
+                        GotoState("Dead");
+                        break;
+                }
+            }
+        }
+
+        public override void cl_OnInit()
+        {
+            Game_PlayerAppearance gpa;
+            base.cl_OnInit();
+            if (Appearance != null)
+            {
+                Appearance.cl_OnInit();
+            }
+            if (CharacterStats != null)
+            {
+                CharacterStats.cl_OnInit();
+            }
+            if (Character != null)
+            {
+                Character.cl_OnInit();
+            }
+            if (combatState != null)
+            {
+                combatState.cl_OnInit();
+            }
+            if (Skills != null)
+            {
+                Skills.cl_OnInit();
+            }
+            if (Effects != null)
+            {
+                Effects.cl_OnInit();
+            }
+            if (MiniGameProxy != null)
+            {
+                MiniGameProxy.cl_OnInit();
+            }
+            if (itemManager != null)
+            {
+                itemManager.cl_OnInit();
+            }
+            if (/*IsLocalPlayer()*/true)
+            {
+                if (BodySlots != null)
+                {
+                    BodySlots.cl_OnInit();
+                }
+                if (CombatStats != null)
+                {
+                    CombatStats.cl_OnInit();
+                }
+                if (Emotes != null)
+                {
+                    Emotes.cl_OnInit();
+                }
+                if (Looting != null)
+                {
+                    Looting.cl_OnInit();
+                }
+                if (Trading != null)
+                {
+                    Trading.cl_OnInit();
+                }
+            }
+            gpa = (BaseAppearance as Game_PlayerAppearance);
+            if (gpa != null/* && IsLocalPlayer()*/)
+            {
+                gpa.SetBaseAppearance(((Game_PlayerController)Controller).DBCharacter.AppearancePart1, ((Game_PlayerController)Controller).DBCharacter.AppearancePart2);
+                gpa.RepackLodDataAll();
+            }
+            if (Appearance != null)
+            {
+                Appearance.DressUp();
+            }
+        }
+
+        public bool IsPlayerPawn()
+        {
+            return this is Game_PlayerPawn;
+        }
+
+        public void sv2clrel_UpdateNetState_CallStub(EPawnStates netState/*added*/) { throw new NotImplementedException(); }
+
+        public void StopMoving()
+        {
+            Velocity = new Vector(0, 0, 0);
+        }
+
+        public void sv_DestroyPet(bool IsUserControlledAction)
+        {
+            if (HasPet)
+            {
+                HasPet = false;
+                ((Game_NPCController)Pet.Controller).sv_Despawn();
+                sv2clrel_RemovePet_CallStub();
+                if (BodySlots != null && CharacterStats != null && CharacterStats.GetCharacterClass() == 12)
+                {
+                    BodySlots.sv_SetMode(1);
+                }
+            }
+        }
+
+        void sv2clrel_RemovePet_CallStub() { throw new NotImplementedException(); }
+
+        public virtual int GetCharacterID()
+        {
+            return 0;
+        }
+
+        public void sv2rel_CombatMessageDeath_CallStub(Game_Pawn aKiller, Game_Pawn aTarget /*added*/) { throw new NotImplementedException(); }
+        //public void sv2rel_CombatMessageDeath(Game_Pawn aKiller, Game_Pawn aTarget)
+        //{
+        //    if (aKiller != null && aKiller.IsLocalPlayer())
+        //    {
+        //        cl_CombatLogMessage(/*Class'StringReferences'.default.EffectYouText.Text*/, /*Class'StringReferences'.default.CombatSlainText.Text*/, 0, 0, aKiller, aTarget);
+        //    }
+        //    else
+        //    {
+        //        cl_CombatLogMessage(/*Class'StringReferences'.default.EffectSourceText.Text*/, /*Class'StringReferences'.default.CombatSlainSourceText.Text*/, 0, 0, aKiller, aTarget);
+        //    }
+        //}
     }
 }
 /*
@@ -387,20 +451,7 @@ sv2clrel_SetInvisible_CallStub(aInvisibleFlag);
 final event Game_PetPawn GetPet() {
 return Pet;                                                                 
 }
-final event sv_DestroyPet(bool IsUserControlledAction) {
-if (HasPet) {                                                               
-HasPet = False;                                                           
-Game_NPCController(Pet.Controller).sv_Despawn();                          
-sv2clrel_RemovePet_CallStub();                                            
-if (BodySlots != None
-&& Game_PlayerPawn(self).CharacterStats != None
-&& Game_PlayerPawn(self).CharacterStats.GetCharacterClass() == 12) {
-BodySlots.sv_SetMode(1);                                                
-}
-}
-}
 native function class<Game_NPCController> sv_GetPetControllerClass();
-protected native function sv2clrel_RemovePet_CallStub();
 event sv2clrel_RemovePet() {
 cl_SetPet(None);                                                            
 }
@@ -634,14 +685,6 @@ cl_CombatMessage(aSkillResourceID,aDuffResourceID,aEffectResourceID,aSource,self
 protected native function sv2cl_CombatMessageOutputReturnReflectDamage_CallStub();
 private event sv2cl_CombatMessageOutputReturnReflectDamage(int aSkillResourceID,int aDuffResourceID,int aEffectResourceID,Game_Pawn aTarget,int aAmount,int aResistedAmount) {
 cl_CombatMessage(aSkillResourceID,aDuffResourceID,aEffectResourceID,self,aTarget,aAmount,aResistedAmount,0);
-}
-protected native function sv2rel_CombatMessageDeath_CallStub();
-event sv2rel_CombatMessageDeath(Game_Pawn aKiller,Game_Pawn aTarget) {
-if (aKiller != None && aKiller.IsLocalPlayer()) {                           
-cl_CombatLogMessage(Class'StringReferences'.default.EffectYouText.Text,Class'StringReferences'.default.CombatSlainText.Text,0,0,aKiller,aTarget);
-} else {                                                                    
-cl_CombatLogMessage(Class'StringReferences'.default.EffectSourceText.Text,Class'StringReferences'.default.CombatSlainSourceText.Text,0,0,aKiller,aTarget);
-}
 }
 protected native function sv2cl_CombatMessageDeath_CallStub();
 event sv2cl_CombatMessageDeath(Game_Pawn aKiller) {
@@ -1078,25 +1121,11 @@ return Class'SBAnimationFlags'.0;
 }
 }
 final native event bool IsDead();
-protected native function sv2clrel_UpdateNetState_CallStub();
 event sv2clrel_UpdateNetState(byte aState) {
 if (aState != mNetState) {                                                  
 mNetState = aState;                                                       
 if (mNetState != mCurrentState) {                                         
 SBGotoState(mNetState);                                                 
-}
-}
-}
-event SBGotoState(byte aState) {
-if (aState != mCurrentState) {                                              
-switch (aState) {                                                         
-case 1 :                                                                
-GotoState('Alive');                                                   
-break;                                                                
-case 2 :                                                                
-GotoState('Dead');                                                    
-break;                                                                
-default:                                                                
 }
 }
 }
@@ -1327,7 +1356,6 @@ sv2rel_SetInvulnerable_CallStub(aInvulnerable);
 native function SetHealth(float aHealth);
 native function IncreaseHealth(float aDelta);
 native function float GetHealth();
-final native function int GetCharacterID();
 event string GetCharacterName() {
 if (IsClient()) {                                                           
 return Character.cl_GetName();                                            
@@ -1339,10 +1367,6 @@ native function Vector GetHistoryLocation(float aServerTime);
 native function UpdateMovementVariables();
 native function PredictMovement(float aDeltaTime);
 final native function float GetServerTime();
-event StopMoving() {
-Acceleration = vect(0.000000, 0.000000, 0.000000);                          
-Velocity = vect(0.000000, 0.000000, 0.000000);                              
-}
 function DestroyShadow() {
 if (mPawnShadow != None) {                                                  
 mPawnShadow.DetachProjector(True);                                        
@@ -1392,9 +1416,6 @@ if (Game_GameInfo(GetGameInfo()) != None) {
 return Game_GameInfo(GetGameInfo()).mClock;                               
 }
 return None;                                                                
-}
-event bool IsPlayerPawn() {
-return Game_PlayerPawn(self) != None;                                       
 }
 protected native function sv2clrel_UpdateGroundSpeedModifier_CallStub();
 event sv2clrel_UpdateGroundSpeedModifier(float aModifier) {
@@ -1594,69 +1615,6 @@ if (!IsLocalPlayer()) {
 UpdateMovementVariables();                                                
 }
 }
-event cl_OnInit() {
-local export editinline Game_PlayerAppearance gpa;
-Super.cl_OnInit();                                                          
-if (Appearance != None) {                                                   
-Appearance.cl_OnInit();                                                   
-}
-if (CharacterStats != None) {                                               
-CharacterStats.cl_OnInit();                                               
-}
-if (Character != None) {                                                    
-Character.cl_OnInit();                                                    
-}
-if (combatState != None) {                                                  
-combatState.cl_OnInit();                                                  
-}
-if (Skills != None) {                                                       
-Skills.cl_OnInit();                                                       
-}
-if (Effects != None) {                                                      
-Effects.cl_OnInit();                                                      
-}
-if (MiniGameProxy != None) {                                                
-MiniGameProxy.cl_OnInit();                                                
-}
-if (itemManager != None) {                                                  
-itemManager.cl_OnInit();                                                  
-}
-if (IsLocalPlayer()) {                                                      
-if (BodySlots != None) {                                                  
-BodySlots.cl_OnInit();                                                  
-}
-if (CombatStats != None) {                                                
-CombatStats.cl_OnInit();                                                
-}
-if (Emotes != None) {                                                     
-Emotes.cl_OnInit();                                                     
-}
-if (Looting != None) {                                                    
-Looting.cl_OnInit();                                                    
-}
-if (Trading != None) {                                                    
-Trading.cl_OnInit();                                                    
-}
-}
-gpa = Game_PlayerAppearance(BaseAppearance);                                
-if (gpa != None && IsLocalPlayer()) {                                       
-gpa.SetBaseAppearance(Game_PlayerController(Controller).DBCharacter.AppearancePart1,Game_PlayerController(Controller).DBCharacter.AppearancePart2);
-gpa.RepackLodDataAll();                                                   
-}
-if (Appearance != None) {                                                   
-Appearance.DressUp();                                                     
-}
-if (GetGameHUDClass() != None) {                                            
-HUD = new (self) GetGameHUDClass();                                       
-HUD.cl_OnInit();                                                          
-}
-ShiftStateChanged = new Class'EventNotification';                           
-CombatStateChanged = new Class'EventNotification';                          
-PetSummoned = new Class'EventNotification';                                 
-if (mSBSettings.ShowPawnShadowsOnEnvironment) {                             
-CreateShadow();                                                           
-}
-}
 protected native function sv2cl_RequestIdentification_CallStub();
 event sv2cl_RequestIdentification(int worldID,int universeID,int CharacterID,int AccountID) {
 mCharacterIdentityForBugReport.TransferAccountID = AccountID;               
@@ -1686,80 +1644,6 @@ if (mInvisible) {
 cl_PlayPawnEffect(6);                                                     
 } else {                                                                    
 cl_PlayPawnEffect(3);                                                     
-}
-}
-
-protected native function class<Game_HUD> GetGameHUDClass();
-event OnSettingsChanged() {
-if (bActorShadows && IsClient() && !IsServer()) {                           
-if (mSBSettings.ShowPawnShadowsOnEnvironment != mPawnShadow != None) {    
-if (mSBSettings.ShowPawnShadowsOnEnvironment) {                         
-CreateShadow();                                                       
-} else {                                                                
-DestroyShadow();                                                      
-}
-}
-}
-}
-state Dead {
-function BeginState() {
-local Game_Pawn Killer;
-SetCollision(False,False);                                              
-if (SBRole == 1) {                                                      
-Skills.sv_FireCondition(None,6);                                      
-Game_Controller(Controller).sv_FireHook(Class'Content_Type'.8,None,0);
-if (CombatStats != None) {                                            
-Killer = CombatStats.sv_GetKiller();                                
-} else {                                                              
-Killer = None;                                                      
-}
-sv2rel_CombatMessageDeath_CallStub(Killer,self);                      
-if (IsPlayerPawn()) {                                                 
-sv2cl_CombatMessageDeath_CallStub(Killer);                          
-if (MiniGameProxy != None) {                                        
-MiniGameProxy.sv_PlayerDied();                                    
-}
-Game_PlayerStats(CharacterStats).DecreasePePRank();                 
-}
-Skills.sv_RemoveDuffs(None,False);                                    
-}
-combatState.RemovePreparedBonusConditional();                           
-PlayDeathAnim(Acceleration);                                            
-Skills.ResetAttacking();                                                
-Game_Controller(Controller).SBGotoState(2);                             
-mCurrentState = 2;                                                      
-mNetState = 2;                                                          
-if (SBRole == 1 && sv_CanReplicate()) {                                 
-sv2clrel_UpdateNetState_CallStub(mNetState);                          
-}
-SetPhysics(0);                                                          
-StopMoving();                                                           
-StaticPlaySound(19,1024.00000000);                                      
-if (SBRole == 1) {                                                      
-sv_DestroyPet(True);                                                  
-}
-}
-}
-auto state Alive {
-function BeginState() {
-SetCollision(True,False);                                               
-if (Controller != None) {                                               
-Game_Controller(Controller).SBGotoState(1);                           
-}
-mCurrentState = 1;                                                      
-mNetState = 1;                                                          
-if (SBRole == 1 && sv_CanReplicate()) {                                 
-sv2clrel_UpdateNetState_CallStub(mNetState);                          
-}
-if (CombatStats != None) {                                              
-CombatStats.sv_ExitCombat();                                          
-goto jl0079;                                                          
-}
-ClearPawnAnims();                                                       
-Acceleration = vect(0.000000, 0.000000, 0.000000);                      
-Velocity = vect(0.000000, 0.000000, 0.000000);                          
-SetPhysics(default.Physics);                                            
-BaseEyeHeight = default.BaseEyeHeight;                                  
 }
 }
 */

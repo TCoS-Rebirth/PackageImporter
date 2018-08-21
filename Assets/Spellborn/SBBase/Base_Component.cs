@@ -8,14 +8,6 @@ namespace SBBase
 
     [Serializable] public class Base_Component : UObject
     {
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int mhastransactionmanager_data;
-
-        [FieldConst()]
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int d_Component;
 
         [FieldConst()]
         public bool ComponentInitialized;
@@ -27,9 +19,11 @@ namespace SBBase
         [FieldTransient()]
         public int ExCleanIndex;
 
-        public Base_Component()
+        public virtual void cl_OnInit()
         {
+            ComponentInitialized = true;
         }
+
     }
 }
 /*
@@ -58,9 +52,6 @@ event cl_OnUpdate();
 event cl_OnBaseline();
 event cl_OnShutdown() {
 ComponentInitialized = False;                                               
-}
-event cl_OnInit() {
-ComponentInitialized = True;                                                
 }
 final native event sv_OnShutdown();
 final native event sv_OnLogin();

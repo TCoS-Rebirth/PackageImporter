@@ -2,7 +2,8 @@
 
 namespace SBGame
 {
-    [Serializable] public class Game_NPCController : Game_Controller
+    [Serializable]
+    public class Game_NPCController: Game_Controller
     {
         public NPC_Type NPCType;
 
@@ -14,16 +15,22 @@ namespace SBGame
         {
             throw new NotImplementedException();
         }
+
+        public Game_NPCPawn GetNPCPawn()
+        {
+            return Pawn as Game_NPCPawn;
+        }
+
+        public void sv_OnSpawn(int aFameLevel, int aPePRank, NPC_Taxonomy aFaction) { throw new NotImplementedException(); }
+
+        public LootTable sv_GetLootTable()
+        {
+            return null;
+        }
+
+        public void sv_Despawn() { throw new NotImplementedException(); }
     }
 }
 /*
 function sv_InitInternal();
-function Game_NPCPawn GetNPCPawn() {
-return Game_NPCPawn(Pawn);                                                  
-}
-function LootTable sv_GetLootTable() {
-return None;                                                                
-}
-final native function sv_Despawn();
-native function sv_OnSpawn(int aFameLevel,int aPePRank,export editinline NPC_Taxonomy aFaction);
 */

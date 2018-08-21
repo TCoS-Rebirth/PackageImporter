@@ -7,7 +7,8 @@ namespace SBGame
 {
 #pragma warning disable 414   
 
-    [Serializable] public class Game_Trading : Base_Component
+    [Serializable]
+    public class Game_Trading: Base_Component
     {
         public const int MAX_TRADE_ITEMS = 16;
 
@@ -25,37 +26,8 @@ namespace SBGame
         [FieldTransient()]
         private byte mShopOption;
 
-        //public delegate<OnSetPartnerItem> @__OnSetPartnerItem__Delegate;
-
-        //public delegate<OnRemovePartnerItem> @__OnRemovePartnerItem__Delegate;
-
-        //public delegate<OnSetPartnerMoney> @__OnSetPartnerMoney__Delegate;
-
-        //public delegate<OnResetPartnerOffer> @__OnResetPartnerOffer__Delegate;
-
-        //public delegate<OnSetPartnerOffered> @__OnSetPartnerOffered__Delegate;
-
-        //public delegate<OnAcceptCancelled> @__OnAcceptCancelled__Delegate;
-
-        //public delegate<OnSellComplete> @__OnSellComplete__Delegate;
-
-        //public delegate<OnBuyComplete> @__OnBuyComplete__Delegate;
-
-        //public delegate<OnPaintComplete> @__OnPaintComplete__Delegate;
-
-        //public delegate<OnCraftRecipeComplete> @__OnCraftRecipeComplete__Delegate;
-
-        //public delegate<OnCreateRecipeComplete> @__OnCreateRecipeComplete__Delegate;
-
-        //public delegate<OnForgeSigilComplete> @__OnForgeSigilComplete__Delegate;
-
-        //public delegate<OnRemoveSigilsComplete> @__OnRemoveSigilsComplete__Delegate;
-
-        public Game_Trading()
-        {
-        }
-
-        [Serializable] public struct PaintItem
+        [Serializable]
+        public struct PaintItem
         {
             public int DBID;
 
@@ -141,6 +113,21 @@ namespace SBGame
             CTS_OFFERED,
 
             CTS_FINALIZING,
+        }
+
+        public void cl_HandleDeath()
+        {
+            Debug.LogWarning("Game_Trading.cl_HandleDeath not implemented");
+            //if (mTradeState != 0) {                                                     
+            //    cl_ShowTradeRequestWindow(False);                                         
+            //    cl_ShowTradeWindow(False);                                                
+            //    cl_ReInit();                                                              
+            //    cl2sv_HandleDeath_CallStub();                                             
+            //} else {                                                                    
+            //if (mShop != None) {                                                      
+            //    Game_PlayerController(Outer.Controller).GUI.HideShop();                 
+            //}
+            //}
         }
     }
 }
@@ -814,16 +801,4 @@ delegate OnResetPartnerOffer();
 delegate OnSetPartnerMoney(int aMoney);
 delegate OnRemovePartnerItem(int aLocationSlot);
 delegate OnSetPartnerItem(Game_Item aItem,int aLocationSlot);
-function cl_HandleDeath() {
-if (mTradeState != 0) {                                                     
-cl_ShowTradeRequestWindow(False);                                         
-cl_ShowTradeWindow(False);                                                
-cl_ReInit();                                                              
-cl2sv_HandleDeath_CallStub();                                             
-} else {                                                                    
-if (mShop != None) {                                                      
-Game_PlayerController(Outer.Controller).GUI.HideShop();                 
-}
-}
-}
 */

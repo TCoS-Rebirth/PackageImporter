@@ -8,7 +8,8 @@ namespace SBGame
 {
 #pragma warning disable 414   
 
-    [Serializable] public class Game_PlayerPawn : Game_PersistentPawn
+    [Serializable]
+    public class Game_PlayerPawn: Game_PersistentPawn
     {
         public const float PVP_SETTINGS_UPDATE_TIME = 1F;
 
@@ -42,6 +43,8 @@ namespace SBGame
         [FieldTransient()]
         private float mMovementTime;
 
+        float mUpdateInterval;
+
         [NonSerialized, HideInInspector]
         [FieldTransient()]
         private float mCurrentMoveTimer;
@@ -68,33 +71,45 @@ namespace SBGame
         [FieldTransient()]
         private int mUser;
 
-        //        event OnCreateComponents() {
-        //            local Game_GameInfo GameInfo;
-        //            local class<Game_MiniGameProxy> miniGameProxyClass;
-        //            GameInfo = Game_GameInfo(GetGameInfo());                                    
-        //            Super.OnCreateComponents();                                                 
-        //            if (QuestLogClass != None) {                                                
-        //                questLog = new (self) QuestLogClass;                                      
-        //            }
-        //            if (GameInfo != None && GameInfo.HaveMiniGameProxy) {                       
-        //                miniGameProxyClass = Class<Game_MiniGameProxy>(static.DynamicLoadObject("SBMiniGames.MGame_MiniGameProxy",Class'Class',True));
-        //        MiniGameProxy = new (self) miniGameProxyClass;                            
-        //          }
-        //        }
+        public void SetMovementUpdateFrequency(int aFrequency)
+        {
+            if (aFrequency > 0 && aFrequency <= 16)
+            {
+                mUpdateInterval = 1f / aFrequency;
+            }
+            Debug.LogWarning("mUpdateInterval is currently unused");
+        }
 
         public override void WriteLoginStream(IPacketWriter writer)
         {
-            writer.WriteVector3(Velocity);
+            writer.WriteVector(Velocity);
             writer.WriteVector3(transform.position);
             writer.WriteByte((byte)Physics);
             writer.WriteByte(mMoveFrameID);
             writer.WriteByte((byte)GetState());
             writer.WriteInt32(bInvulnerable ? 1 : 0);
-            writer.WriteFloat(GroundSpeed);
+            writer.WriteFloat(GroundSpeedModifier);
             writer.WriteInt32(mDebugFilters);
             writer.WriteInt32(Visibility);
             CharacterStats.WriteLoginStream(writer);
             Effects.WriteLoginStream(writer);
+        }
+
+        public override void cl_OnInit()
+        {
+            base.cl_OnInit();
+            if (/*IsLocalPlayer()*/true)
+            {
+                if (questLog != null)
+                {
+                    questLog.cl_OnInit();
+                }
+            }
+        }
+
+        public override int GetCharacterID()
+        {
+            return (Controller as Game_PlayerController).DBCharacter.Id;
         }
 
     }
@@ -152,11 +167,6 @@ final native function bool sv_IsFreeToPlayCapped();
 final native function bool sv_IsPayingPlayer();
 exec function ShakeCombat() {
 Game_PlayerCombatStats(CombatStats).cl2sv_ShakeCombat_CallStub();           
-}
-exec function SetMovementUpdateFrequency(int aFrequency) {
-if (aFrequency > 0 && aFrequency <= 16) {                                   
-mUpdateInterval = 1.00000000 / aFrequency;                                
-}
 }
 function cl_SetPet(Game_PetPawn aPET) {
 Super.cl_SetPet(aPET);                                                      
@@ -346,27 +356,6 @@ Game_PlayerConversation(Game_Controller(Controller).ConversationControl).cl_Refr
 }
 UpdateTouchList();                                                          
 UpdateLevelInfo();                                                          
-}
-event cl_OnInit() {
-Super.cl_OnInit();                                                          
-if (IsLocalPlayer()) {                                                      
-if (questLog != None) {                                                   
-questLog.cl_OnInit();                                                   
-}
-}
-}
-event OnCreateComponents() {
-local Game_GameInfo GameInfo;
-local class<Game_MiniGameProxy> miniGameProxyClass;
-GameInfo = Game_GameInfo(GetGameInfo());                                    
-Super.OnCreateComponents();                                                 
-if (QuestLogClass != None) {                                                
-questLog = new (self) QuestLogClass;                                      
-}
-if (GameInfo != None && GameInfo.HaveMiniGameProxy) {                       
-miniGameProxyClass = Class<Game_MiniGameProxy>(static.DynamicLoadObject("SBMiniGames.MGame_MiniGameProxy",Class'Class',True));
-MiniGameProxy = new (self) miniGameProxyClass;                            
-}
 }
 event bool ShouldTickPhysics() {
 return IsLocalPlayer() || IsRemotePlayer();                                 

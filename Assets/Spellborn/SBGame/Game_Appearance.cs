@@ -5,7 +5,8 @@ namespace SBGame
 {
 #pragma warning disable 414   
 
-    [Serializable] public class Game_Appearance : Base_Component
+    [Serializable]
+    public class Game_Appearance: Base_Component
     {
         public const int RACE_DAEVIE = 1;
 
@@ -33,10 +34,6 @@ namespace SBGame
 
         private string mVoicePackage = string.Empty;
 
-        public Game_Appearance()
-        {
-        }
-
         public enum EPreviewCamera
         {
             PC_COMPLETE_FRONT,
@@ -49,6 +46,100 @@ namespace SBGame
 
             PC_TATTOOS,
         }
+
+        public override void cl_OnInit()
+        {
+            base.cl_OnInit();
+            mClientInitialized = true;
+        }
+        
+        public virtual void cl_OnFrame(float DeltaTime) { throw new NotImplementedException(); }
+        public virtual void OnConstruct() { throw new NotImplementedException(); }
+
+        protected virtual void Apply() { throw new NotImplementedException(); }
+
+        public bool GetStatue()
+        {
+            return mStatue > 0;
+        }
+
+        public void SetStatue(bool aOn)
+        {
+            if (aOn) mStatue++;
+            else mStatue--;
+        }
+
+        public bool GetGhost()
+        {
+            return mGhost > 0;
+        }
+
+        public void SetGhost(bool aOn)
+        {
+            if (aOn) mGhost++;
+            else if (mGhost > 0) mGhost--;
+        }
+
+        public float GetScale()
+        {
+            return mScale;
+        }
+        public byte GetBody()
+        {
+            return mBody;
+        }
+        public byte GetGender()
+        {
+            return mGender;
+        }
+        public byte GetRace()
+        {
+            return mRace;
+        }
+        public void SetScale(float aNewVal)
+        {
+            mScale = aNewVal;
+        }
+        public void SetBody(byte aNewVal)
+        {
+            mBody = aNewVal;
+        }
+        public void SetGender(byte aNewVal)
+        {
+            mGender = aNewVal;
+            mVoicePackage = "";
+        }
+        public void SetRace(byte aNewVal)
+        {
+            mRace = aNewVal;
+        }
+        public bool Check()
+        {
+            return true;
+        }
+        public bool IsNPC()
+        {
+            return !IsKid() && !IsPlayer();
+        }
+        public bool IsPlayer()
+        {
+            return (Outer is Game_PlayerPawn) || (Outer is Character_Pawn);
+        }
+        public bool IsKid()
+        {
+            return mBody == 4;
+        }
+        public byte GetVoice()
+        {
+            return mVoice;
+        }
+        public void SetVoice(byte aNewVal)
+        {
+            mVoice = aNewVal;
+            mVoicePackage = "";
+        }
+
+        public virtual bool ApplyToPawn(Game_Pawn aPawn) { throw new NotImplementedException(); }
     }
 }
 /*
@@ -56,7 +147,6 @@ protected native function string cl_GetHexAddress(Object aObject);
 protected function cl_ConsoleMessage(string aString) {
 PlayerController(Outer.Controller).Player.Console.Message(aString,0.00000000);
 }
-protected final native function bool ApplyToPawn(Game_Pawn aPawn);
 native function GetPreviewCamera(byte aPreviewCamera,out Vector Translation,out Rotator Rotation);
 function app(int A) {
 if (A == 0) {                                                               
@@ -66,62 +156,7 @@ cl_ConsoleMessage("Appearance == " $ cl_GetHexAddress(self));
 cl_ConsoleMessage("mClientInitialized == " $ string(mClientInitialized)); 
 }
 }
-function Material GetAvatarTexture() {
-return mAvatarTexture;                                                      
-}
-function SetAvatarTexture(Material aNewVal) {
-mAvatarTexture = aNewVal;                                                   
-}
-function bool GetStatue() {
-return mStatue > 0;                                                         
-}
-function SetStatue(bool aOn) {
-if (aOn) {                                                                  
-mStatue++;                                                                
-} else {                                                                    
-mStatue--;                                                                
-}
-}
-function bool GetGhost() {
-return mGhost > 0;                                                          
-}
-function SetGhost(bool aOn) {
-if (aOn) {                                                                  
-mGhost++;                                                                 
-} else {                                                                    
-if (mGhost <= 0) {                                                        
-}
-mGhost--;                                                                 
-}
-}
-function float GetScale() {
-return mScale;                                                              
-}
-function byte GetBody() {
-return mBody;                                                               
-}
-function byte GetGender() {
-return mGender;                                                             
-}
-function byte GetRace() {
-return mRace;                                                               
-}
-function SetScale(float aNewVal) {
-mScale = aNewVal;                                                           
-}
-function SetBody(byte aNewVal) {
-mBody = aNewVal;                                                            
-}
-function SetGender(byte aNewVal) {
-mGender = aNewVal;                                                          
-mVoicePackage = "";                                                         
-}
-function SetRace(byte aNewVal) {
-mRace = aNewVal;                                                            
-}
-event bool Check() {
-return True;                                                                
-}
+
 event string GetVoicePackage() {
 if (mVoice < 255) {                                                         
 if (Len(mVoicePackage) == 0 && mGender <= 1) {                            
@@ -144,33 +179,7 @@ mVoicePackage = "";
 }
 return mVoicePackage;                                                       
 }
-function bool IsNPC() {
-return !IsKid() && !IsPlayer();                                             
-}
-function bool IsPlayer() {
-return Game_PlayerPawn(Outer) != None || Game_EditorPawn(Outer) != None
-|| Character_Pawn(Outer) != None;
-}
-function bool IsKid() {
-return mBody == 4;                                                          
-}
-function byte GetVoice() {
-return mVoice;                                                              
-}
-function SetVoice(byte aNewVal) {
-mVoice = aNewVal;                                                           
-mVoicePackage = "";                                                         
-}
 function bool IsFullDetail() {
 return True;                                                                
-}
-final native function Apply();
-event cl_OnFrame(float DeltaTime) {
-}
-event cl_OnInit() {
-Super.cl_OnInit();                                                          
-mClientInitialized = True;                                                  
-}
-event OnConstruct() {
 }
 */

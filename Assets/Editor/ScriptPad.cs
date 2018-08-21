@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if NET_4_6
+using System.IO;
 using System.Text;
 using Engine;
 using Mono.CSharp;
@@ -66,3 +67,4 @@ namespace Editor
         }
     }
 }
+#endif

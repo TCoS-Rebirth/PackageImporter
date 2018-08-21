@@ -4,23 +4,37 @@ using System.Net;
 using User;
 using SBBase;
 using Utilities;
+using UnityEngine;
+using Sirenix.Serialization;
 
 namespace Database
 {
-    public class TransientDatabase: IDatabase
+    [UnityEngine.CreateAssetMenu]
+    public class TransientDatabase: Sirenix.OdinInspector.SerializedScriptableObject, IDatabase
     {
-        public IWorldDatabase World { get; private set; }
-        public IAccountDatabase Accounts { get; private set; }
-        public ICharacterDatabase Characters { get; private set; }
 
-        public TransientDatabase()
+        [SerializeField] WorldDatabase wdb;
+        [SerializeField] AccountDatabase adb;
+        [SerializeField] CharacterDatabase cdb;
+
+        public IWorldDatabase World { get { return wdb; } }
+        public IAccountDatabase Accounts { get { return adb; } }
+        public ICharacterDatabase Characters { get { return cdb; } }
+
+        [Sirenix.OdinInspector.Button]
+        public void Create()
         {
-            World = new WorldDatabase();
-            Accounts = new AccountDatabase();
-            Characters = new CharacterDatabase();
+            wdb = new WorldDatabase();
+            adb = new AccountDatabase();
+            cdb = new CharacterDatabase();
         }
 
-        class WorldDatabase: IWorldDatabase
+        void OnEnable()
+        {
+            adb.Reset();
+        }
+
+        [Serializable] class WorldDatabase: IWorldDatabase
         {
             public UniverseInfo LoadInfo()
             {
@@ -33,10 +47,15 @@ namespace Database
             }
         }
 
-        class AccountDatabase : IAccountDatabase
+        [Serializable] class AccountDatabase : IAccountDatabase
         {
 
-            List<UserAccount> accounts = new List<UserAccount>();
+            [SerializeField] List<UserAccount> accounts = new List<UserAccount>();
+
+            public void Reset()
+            {
+                accounts = new List<UserAccount>();
+            }
 
             public UserAccount Get(int loginToken, IPAddress loginIP)
             {
@@ -64,20 +83,20 @@ namespace Database
             }
         }
 
-        class CharacterDatabase : ICharacterDatabase
+        [Serializable] class CharacterDatabase : ICharacterDatabase
         {
 
-            List<Tuple<DB_Character, DB_CharacterSheet>> characterData = new List<Tuple<DB_Character, DB_CharacterSheet>>();
-            List<DB_Item> itemData = new List<DB_Item>();
-            List<DB_Skill> skillData = new List<DB_Skill>();
-            List<DB_SkillDeck> skillDecks = new List<DB_SkillDeck>();
+            [SerializeField] List<DBPlayerCharacter> characterData = new List<DBPlayerCharacter>();
+            [SerializeField] List<DB_Item> itemData = new List<DB_Item>();
+            [SerializeField] List<DB_Skill> skillData = new List<DB_Skill>();
+            [SerializeField] List<DB_SkillDeck> skillDecks = new List<DB_SkillDeck>();
 
             public int AllocateCharacterID()
             {
                 var id = 0;
                 for (var i = 0; i < characterData.Count; i++)
                 {
-                    if (characterData[i].Item1.Id >= id) id = characterData[i].Item1.Id + 1;
+                    if (characterData[i].Character.Id >= id) id = characterData[i].Character.Id + 1;
                 }
                 return id;
             }
@@ -96,12 +115,12 @@ namespace Database
             {
                 for (var i = 0; i < characterData.Count; i++)
                 {
-                    if (characterData[i].Item1.Id == uid && characterData[i].Item1.AccountID == accountID) return characterData[i].Item1;
+                    if (characterData[i].Character.Id == uid && characterData[i].Character.AccountID == accountID) return characterData[i].Character;
                 }
                 throw new NullReferenceException("Character does not exist: " + uid);
             }
 
-            public bool Save(Tuple<DB_Character, DB_CharacterSheet> character)
+            public bool Save(DBPlayerCharacter character)
             {
                 if (!characterData.Contains(character)) characterData.Add(character);
                 return true;
@@ -111,15 +130,15 @@ namespace Database
             {
                 for (var c = characterData.Count; c-->0;)
                 {
-                    if (characterData[c].Item1.Id != uid) continue;
-                    if (characterData[c].Item1.AccountID != accountID) continue;
+                    if (characterData[c].Character.Id != uid) continue;
+                    if (characterData[c].Character.AccountID != accountID) continue;
                     for (var i = itemData.Count; i-->0;)
                     {
                         if (itemData[i].CharacterID == uid) itemData.RemoveAt(i);
                     }
                     for (var i = skillDecks.Count; i-->0;)
                     {
-                        if (skillDecks[i].mName == characterData[c].Item1.Name) //TODO replace
+                        if (skillDecks[i].mName == characterData[c].Character.Name) //TODO replace
                         {
                             skillDecks.RemoveAt(i);
                         }
@@ -134,17 +153,17 @@ namespace Database
             {
                 for (var i = 0; i < characterData.Count; i++)
                 {
-                    if (characterData[i].Item1.Id == uid) return characterData[i].Item2;
+                    if (characterData[i].Character.Id == uid) return characterData[i].Sheet;
                 }
                 throw new NullReferenceException("Character sheet does not exist: " + uid);
             }
 
-            public IList<Tuple<DB_Character, DB_CharacterSheet>> GetCharacters(int accountID)
+            public IList<DBPlayerCharacter> GetCharacters(int accountID)
             {
-                var chars = new List<Tuple<DB_Character, DB_CharacterSheet>>();
+                var chars = new List<DBPlayerCharacter>();
                 for (var i = 0; i < characterData.Count; i++)
                 {
-                    if (characterData[i].Item1.AccountID == accountID) chars.Add(characterData[i]);
+                    if (characterData[i].Character.AccountID == accountID) chars.Add(characterData[i]);
                 }
                 return chars;
             }

@@ -5,9 +5,6 @@ namespace SBBase
 {
     [Serializable] public class SBDBAsync : UObject
     {
-        public SBDBAsync()
-        {
-        }
 
         [Serializable] public struct SetPersistentVariableParams
         {
@@ -32,10 +29,14 @@ namespace SBBase
 
             public int NativeFunction;
         }
+
+        public static void SetPersistentPlayerVariable(Pawn Pawn,int character_id,int context_id,int value_id,int Value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 /*
-static native function SetPersistentPlayerVariable(Pawn Pawn,int character_id,int context_id,int value_id,int Value);
 static native function UpdateStatueNewPlayerByTag(Pawn Pawn,string Tag,int new_character_id,string new_player_name,string new_title,string new_description,array<byte> new_loddata0,array<byte> new_loddata1,array<byte> new_loddata2,array<byte> new_loddata3,int new_awarded_timestamp,int new_pose);
 static native function GetStatueEnabledByTag(Pawn aPawn,string Tag,SBDBAsyncCallback callback);
 static native function SetQuestObjective(Pawn Pawn,int CharacterID,int objectiveID,int Value,SBDBAsyncCallback callback);

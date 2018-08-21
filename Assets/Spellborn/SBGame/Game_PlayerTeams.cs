@@ -6,7 +6,8 @@ namespace SBGame
 {
 #pragma warning disable 414   
 
-    [Serializable] public class Game_PlayerTeams : Base_Component
+    [Serializable]
+    public class Game_PlayerTeams: Base_Component
     {
         public const int NOTIFY_HUD_CLOSE_ALL = 0;
 
@@ -47,16 +48,6 @@ namespace SBGame
         public bool mPartyTravelInProgress;
 
         public bool mIsJoiningPartyTravel;
-
-        //public delegate<OnSetLootMode> @__OnSetLootMode__Delegate;
-
-        //public delegate<OnPartyTravelCancel> @__OnPartyTravelCancel__Delegate;
-
-        //public delegate<OnPartyTravelJoin> @__OnPartyTravelJoin__Delegate;
-
-        public Game_PlayerTeams()
-        {
-        }
 
         public enum eTeamRequestResult
         {
@@ -119,6 +110,91 @@ namespace SBGame
 
             TRMC_DISBAND,
         }
+
+        public void HandleDeath()
+        {
+            sv_CancelPartyTravel();
+        }
+
+        void sv_CancelPartyTravel()
+        {
+            if (mPartyTravelTargetWorld != 0)
+            {
+                sv_CancelPartyTravelForAll();
+            }
+            if (mPartyTravelInProgress)
+            {
+                sv_JoinPartyTravel(false);
+            }
+        }
+
+        void sv_JoinPartyTravel(bool aIsJoining)
+        {
+            List<Game_Pawn> team;
+            Game_PlayerPawn playerPawn;
+            Game_PlayerController PlayerController;
+            int idx;
+            if (mPartyTravelInProgress == false)
+            {
+                return;
+            }
+            mIsJoiningPartyTravel = aIsJoining;
+            sv_GetTeamMembersOrSolo(out team);
+            idx = 0;
+            while (idx < team.Count)
+            {
+                playerPawn = team[idx] as Game_PlayerPawn;
+                PlayerController = playerPawn.Controller as Game_PlayerController;
+                PlayerController.GroupingTeams.sv2cl_JoinPartyTravel_CallStub(((Outer as Game_Controller).Pawn as Game_PlayerPawn).GetCharacterID(), aIsJoining);
+                ++idx;
+            }
+        }
+
+        void sv2cl_JoinPartyTravel_CallStub(int characterID, bool aIsJoining /*added*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        void sv_CancelPartyTravelForAll()
+        {
+            List<Game_Pawn> team;
+            Game_PlayerPawn playerPawn;
+            Game_PlayerController PlayerController;
+            int idx;
+            sv_GetTeamMembersOrSolo(out team);
+            idx = 0;
+            while (idx < team.Count)
+            {
+                playerPawn = team[idx] as Game_PlayerPawn;
+                PlayerController = playerPawn.Controller as Game_PlayerController;
+                PlayerController.GroupingTeams.sv_CancelPartyTravelForOne();
+                ++idx;
+            }
+            mPartyTravelTargetWorld = 0;
+            mPartyTravelPortalName = "";
+            mPartyTravelTimeout = 0;
+        }
+
+        void sv2cl_CancelPartyTravel_CallStub() { throw new NotImplementedException(); }
+
+        void sv_CancelPartyTravelForOne()
+        {
+            mPartyTravelInProgress = false;
+            mIsJoiningPartyTravel = false;
+            sv2cl_CancelPartyTravel_CallStub();
+        }
+
+        void sv_GetTeamMembersOrSolo(out List<Game_Pawn> oTeam)
+        {
+            if (mTeam != null)
+            {
+                oTeam = mTeam.mMembers;
+            }
+            else
+            {
+                oTeam = new List<Game_Pawn>() { Outer as Game_Pawn };
+            }
+        }
     }
 }
 /*
@@ -147,14 +223,6 @@ ti++;
 }
 } else {                                                                    
 aMembers[0] = ownPawn;                                                    
-}
-}
-event sv_GetTeamMembersOrSolo(out array<Game_Pawn> oTeam) {
-if (mTeam != None) {                                                        
-oTeam = mTeam.mMembers;                                                   
-} else {                                                                    
-oTeam.Length = 1;                                                         
-oTeam[0] = Game_Pawn(Outer.Pawn);                                         
 }
 }
 event sv_GetTeamMembers(out array<Game_Pawn> oTeam) {
@@ -187,66 +255,17 @@ mPartyTravelTargetWorld = 0;
 mPartyTravelPortalName = "";                                                
 mPartyTravelTimeout = 0.00000000;                                           
 }
-protected native function sv2cl_CancelPartyTravel_CallStub();
 private event sv2cl_CancelPartyTravel() {
 OnPartyTravelCancel();                                                      
-}
-private function sv_CancelPartyTravelForOne() {
-mPartyTravelInProgress = False;                                             
-mIsJoiningPartyTravel = False;                                              
-sv2cl_CancelPartyTravel_CallStub();                                         
-}
-private function sv_CancelPartyTravelForAll() {
-local array<Game_Pawn> team;
-local Game_PlayerPawn playerPawn;
-local Game_PlayerController PlayerController;
-local int idx;
-sv_GetTeamMembersOrSolo(team);                                              
-idx = 0;                                                                    
-while (idx < team.Length) {                                                 
-playerPawn = Game_PlayerPawn(team[idx]);                                  
-PlayerController = Game_PlayerController(playerPawn.Controller);          
-PlayerController.GroupingTeams.sv_CancelPartyTravelForOne();              
-++idx;                                                                    
-}
-mPartyTravelTargetWorld = 0;                                                
-mPartyTravelPortalName = "";                                                
-mPartyTravelTimeout = 0.00000000;                                           
-}
-private event sv_CancelPartyTravel() {
-if (mPartyTravelTargetWorld != 0) {                                         
-sv_CancelPartyTravelForAll();                                             
-}
-if (mPartyTravelInProgress) {                                               
-sv_JoinPartyTravel(False);                                                
-}
 }
 protected native function cl2sv_CancelPartyTravel_CallStub();
 event cl2sv_CancelPartyTravel() {
 sv_CancelPartyTravel();                                                     
 }
-protected native function sv2cl_JoinPartyTravel_CallStub();
 private event sv2cl_JoinPartyTravel(int aMember,bool aIsJoining) {
 OnPartyTravelJoin(aMember,aIsJoining);                                      
 }
-private function sv_JoinPartyTravel(bool aIsJoining) {
-local array<Game_Pawn> team;
-local Game_PlayerPawn playerPawn;
-local Game_PlayerController PlayerController;
-local int idx;
-if (mPartyTravelInProgress == False) {                                      
-return;                                                                   
-}
-mIsJoiningPartyTravel = aIsJoining;                                         
-sv_GetTeamMembersOrSolo(team);                                              
-idx = 0;                                                                    
-while (idx < team.Length) {                                                 
-playerPawn = Game_PlayerPawn(team[idx]);                                  
-PlayerController = Game_PlayerController(playerPawn.Controller);          
-PlayerController.GroupingTeams.sv2cl_JoinPartyTravel_CallStub(Game_PlayerPawn(Outer.Pawn).GetCharacterID(),aIsJoining);
-++idx;                                                                    
-}
-}
+
 protected native function cl2sv_JoinPartyTravel_CallStub();
 event cl2sv_JoinPartyTravel(bool aIsJoining) {
 sv_JoinPartyTravel(aIsJoining);                                             
@@ -521,10 +540,6 @@ RefreshTeam();
 event TeamInviteReq(int teamID,string fromPawnName) {
 Outer.Player.GUIDesktop.ShowStdWindow(46,1);                                
 Outer.Player.GUIDesktop.UpdateStdWindow(46,1,None,fromPawnName,teamID);     
-}
-function HandleDeath() {
-sv_CancelPartyTravel();                                                     
-Outer.Player.GUIDesktop.UpdateStdWindow(46,0,None,"",0);                    
 }
 event OnFailResult(byte Code,optional string pawnName) {
 local string messageStr;

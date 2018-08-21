@@ -45,7 +45,7 @@ namespace World
                 switch (packet.Header)
                 {
                     case (ushort)GameHeader.CONNECT: break;
-                    case (ushort)GameHeader.DISCONNECT: /*HandleDisconnect(packet.Connection);*/
+                    case (ushort)GameHeader.DISCONNECT: HandleDisconnect(packet.Connection);
                         break;
                     case (ushort)GameHeader.C2S_TRAVEL_CONNECT: HandleTravelConnect(packet);
                         break;
@@ -85,7 +85,7 @@ namespace World
         static void HandleDisconnect(NetConnection con)
         {
             var sessionHandler = ServiceContainer.GetService<ISessionHandler>();
-            var session = sessionHandler.Get<LoginSession>(con);
+            var session = sessionHandler.Get<GameSession>(con);
             if (session != null)
             {
                 Debug.Log(session.Account.Name + " disconnected");

@@ -4,9 +4,10 @@ using SBBase;
 
 namespace SBGame
 {
-    [Serializable] public class Game_CombatState : Base_Component
+    [Serializable]
+    public class Game_CombatState: Base_Component
     {
-        public byte mCombatMode;
+        public ECombatMode mCombatMode;
 
         public int mMainWeapon;
 
@@ -40,31 +41,28 @@ namespace SBGame
         [FieldConst()]
         public bool CombatCollision;
 
-        public Game_CombatState()
-        {
-        }
-
         public enum ECombatMode
         {
             CBM_Idle,
-
             CBM_Melee,
-
             CBM_Ranged,
-
             CBM_Cast,
+        }
+
+        public void RemovePreparedBonusConditional()
+        {
+            if (mPreparedBonusGiven)
+            {
+                mPreparedBonusGiven = false;
+                var outer = Outer as Game_Pawn;
+                outer.CharacterStats.IncreaseMeleeResistanceDelta(-0.05f);
+                outer.CharacterStats.IncreaseRangedResistanceDelta(-0.05f);
+                outer.CharacterStats.IncreaseMagicResistanceDelta(-0.05f);
+            }
         }
     }
 }
 /*
-function RemovePreparedBonusConditional() {
-if (mPreparedBonusGiven) {                                                  
-mPreparedBonusGiven = False;                                              
-Outer.CharacterStats.IncreaseMeleeResistanceDelta(-0.05000000);           
-Outer.CharacterStats.IncreaseRangedResistanceDelta(-0.05000000);          
-Outer.CharacterStats.IncreaseMagicResistanceDelta(-0.05000000);           
-}
-}
 function GivePreparedBonusConditional() {
 if (!mPreparedBonusGiven) {                                                 
 mPreparedBonusGiven = True;                                               

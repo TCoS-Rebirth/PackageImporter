@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Engine
 {
     [Serializable]
-    public class Actor : UObject
+    public class Actor: UObject
     {
         public const float MINFLOORZ = 0.7F;
 
@@ -53,6 +53,9 @@ namespace Engine
         [FoldoutGroup("Movement")]
         [NonSerialized, HideInInspector]
         public Vector Velocity;
+
+        [FoldoutGroup("Movement")]
+        public Vector Location;
 
         [FoldoutGroup("Movement")]
         [FieldConst()]
@@ -239,8 +242,8 @@ namespace Engine
 
         public virtual void SetInitialState()
         {
-            //bScriptInitialized = True;                                                  
-            if (InitialState != "None") GotoState(InitialState);
+            //bScriptInitialized = True;
+            if (!string.IsNullOrEmpty(InitialState) && InitialState != "None") GotoState(InitialState);
             else GotoState("Auto");
         }
 
@@ -262,11 +265,19 @@ namespace Engine
 
         public virtual void Tick(float deltaTime) { }
 
-        protected virtual void GotoState(string state) { }
+        protected virtual void GotoState(string state)
+        {
+            Debug.LogWarning("TODO implement GoToState, called for: " + state);
+        }
 
-        public virtual void OnCreateComponents(){}
+        public virtual void OnCreateComponents() { }
 
         public virtual void Destroyed() { }
+
+        public void SetCollision(bool NewColActors = false, bool NewBlockActors = false)
+        {
+            Debug.LogWarning("SetCollision not implemented");
+        }
     }
 }
 /*
@@ -548,7 +559,6 @@ final native function SetStaticMesh(StaticMesh NewStaticMesh);
 final native function SetDrawScale3D(Vector NewScale3D);
 final native function SetDrawScale(float NewScale);
 final native(283) function bool SetCollisionSize(float NewRadius,float NewHeight);
-final native(262) function SetCollision(optional bool NewColActors,optional bool NewBlockActors);
 final native function EndLatentFunction();
 final native(256) latent function Sleep(float Seconds);
 final static native function bool ShouldBeHidden();

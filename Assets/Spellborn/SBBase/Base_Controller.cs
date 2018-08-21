@@ -279,6 +279,8 @@ namespace SBBase
 
             GID_SERVER = 128,
         }
+
+        public virtual void Sv_OnInit() { }
     }
 }
 /*
@@ -304,5 +306,4 @@ Player.GUIDesktop.OnLogin();
 ControllerInitialized = True;                                               
 }
 event sv_OnShutdown();
-native function sv_OnInit();
 */

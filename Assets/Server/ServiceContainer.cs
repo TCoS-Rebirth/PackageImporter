@@ -17,11 +17,11 @@ public static class ServiceContainer
 
     public static void AddService<T>(T service) where T:class
     {
-        if (service == null) throw new ArgumentNullException(nameof(service));
+        if (service == null) throw new ArgumentNullException("service");
         var type = typeof(T);
         lock (registeredServices)
         {
-            if (registeredServices.ContainsKey(type)) throw new ArgumentException("Service is already registered with this type", nameof(type));
+            if (registeredServices.ContainsKey(type)) throw new ArgumentException("Service is already registered with this type", type.Name);
             registeredServices.Add(type, service);
         }
     }

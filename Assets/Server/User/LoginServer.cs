@@ -57,7 +57,7 @@ public class LoginServer
             switch (packet.Header)
             {
                 case (ushort)LoginHeader.CONNECT: break;
-                case (ushort)LoginHeader.DISCONNECT: /*HandleDisconnect(packet.Connection);*/
+                case (ushort)LoginHeader.DISCONNECT: HandleDisconnect(packet.Connection);
                     break;
                 case (ushort) LoginHeader.C2L_USER_LOGIN: HandleAuthChallenge(packet);
                     break;

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace SBGame
@@ -15,13 +16,32 @@ namespace SBGame
 
         public List<byte> mLODData3 = new List<byte>();
 
-        public Game_PlayerAppearance()
+        public void SetBaseAppearance(int aAppearancePart1, int aAppearancePart2)
         {
+            UnpackBaseData(aAppearancePart1, aAppearancePart2);
+            Apply();
         }
+
+        public void UnpackBaseData(int aAppearancePart1,int aAppearancePart2)
+        {
+            Utilities.AppearancePackUtility.Unpack(aAppearancePart1, aAppearancePart2, 
+                out mRace, 
+                out mGender, 
+                out mBody, 
+                out mHead, 
+                out mBodyColor, 
+                out mTattoo[0], 
+                out mTattoo[1], 
+                out mTattoo[2],
+                out mHair,
+                out mHairColor, 
+                out mVoice);
+        }
+
+        public void RepackLodDataAll() { throw new NotImplementedException(); }
     }
 }
 /*
-protected native function UnpackBaseData(int aAppearancePart1,int aAppearancePart2);
 protected native function UnpackLodData(int aLevel);
 protected function UnpackLodDataAll() {
 UnpackLodData(0);                                                           
@@ -34,7 +54,6 @@ native function PackBaseData(out int outMSB,out int outLSB);
 function byte GetLowestReceivedLOD() {
 return mLowestReceivedLOD;                                                  
 }
-final native event RepackLodDataAll();
 function ConditionalUnpackLODData() {
 if (mLODData0.Length > 0) {                                                 
 UnpackLodData(0);                                                         
@@ -62,10 +81,6 @@ mLODData1 = aLOD1;
 mLODData2 = aLOD2;                                                          
 mLODData3 = aLOD3;                                                          
 ConditionalUnpackLODData();                                                 
-Apply();                                                                    
-}
-event SetBaseAppearance(int aAppearancePart1,int aAppearancePart2) {
-UnpackBaseData(aAppearancePart1,aAppearancePart2);                          
 Apply();                                                                    
 }
 function app(int A) {

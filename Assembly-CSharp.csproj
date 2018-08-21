@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>6</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{668A954D-1F03-9EDD-AC66-50AE4026C43C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
@@ -22,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_3;UNITY_2018_2;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;ODIN_INSPECTOR</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_4;UNITY_2018_2;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;ODIN_INSPECTOR</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,215 +50,1059 @@
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
-    <UnityVersion>2018.2.3f1</UnityVersion>
+    <UnityVersion>2018.2.4f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.3f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.3f1\Editor\Data\Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.4f1\Editor\Data\Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\UnitConversion.cs" />
+    <Compile Include="Assets\Server\Database\DBPlayerCharacter.cs" />
+    <Compile Include="Assets\Server\Database\TransientDatabase.cs" />
+    <Compile Include="Assets\Server\GameResources.cs" />
+    <Compile Include="Assets\Server\GameServer.cs" />
+    <Compile Include="Assets\Server\IDatabase.cs" />
+    <Compile Include="Assets\Server\IGameResources.cs" />
+    <Compile Include="Assets\Server\IMapHandler.cs" />
+    <Compile Include="Assets\Server\ISessionHandler.cs" />
+    <Compile Include="Assets\Server\IWorldServer.cs" />
+    <Compile Include="Assets\Server\Network\IPacketWritable.cs" />
+    <Compile Include="Assets\Server\Network\IPacketWriter.cs" />
+    <Compile Include="Assets\Server\Network\NetConnection.cs" />
+    <Compile Include="Assets\Server\Network\NetConnector.cs" />
+    <Compile Include="Assets\Server\Network\NetworkPacket.cs" />
+    <Compile Include="Assets\Server\Network\NetworkPacket.Read.cs" />
+    <Compile Include="Assets\Server\Network\NetworkPacket.Write.cs" />
+    <Compile Include="Assets\Server\Network\NetworkPacket.WriteExtensions.cs" />
+    <Compile Include="Assets\Server\Network\PacketDispatcher.cs" />
+    <Compile Include="Assets\Server\Network\PacketExtensions.cs" />
+    <Compile Include="Assets\Server\Network\PacketIDs.cs" />
+    <Compile Include="Assets\Server\ServiceContainer.cs" />
+    <Compile Include="Assets\Server\UniverseInfo.cs" />
+    <Compile Include="Assets\Server\User\GameSession.CharacterCreation.cs" />
+    <Compile Include="Assets\Server\User\GameSession.cs" />
+    <Compile Include="Assets\Server\User\LoginServer.cs" />
+    <Compile Include="Assets\Server\User\LoginSession.cs" />
+    <Compile Include="Assets\Server\User\PlayerSession.cs" />
+    <Compile Include="Assets\Server\User\SessionHandler.cs" />
+    <Compile Include="Assets\Server\User\UserAccount.cs" />
+    <Compile Include="Assets\Server\Utilities\AccountUtility.cs" />
+    <Compile Include="Assets\Server\Utilities\AppearancePackUtility.cs" />
+    <Compile Include="Assets\Server\Utilities\DatabaseUtility.cs" />
+    <Compile Include="Assets\Server\Utilities\LODPackUtility.cs" />
+    <Compile Include="Assets\Server\World\GameMap.cs" />
+    <Compile Include="Assets\Server\World\MapHandler.cs" />
+    <Compile Include="Assets\Server\World\WorldServer.cs" />
+    <Compile Include="Assets\Shared\IActorPacketStream.cs" />
+    <Compile Include="Assets\Shared\UnitConversion.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ActionMoveCamera.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ActionPause.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Actor.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ActorGroup.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AIController.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AIMarker.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AIScript.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Attributes.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AutoDoor.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AutoLadder.cs" />
+    <Compile Include="Assets\Spellborn\Engine\AvoidMarker.cs" />
+    <Compile Include="Assets\Spellborn\Engine\BoundingVolume.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Box.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Color.cs" />
+    <Compile Include="Assets\Spellborn\Engine\CompressedPosition.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Controller.cs" />
+    <Compile Include="Assets\Spellborn\Engine\DefaultPhysicsVolume.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Door.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Effects.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Engine.cs" />
+    <Compile Include="Assets\Spellborn\Engine\EnvironmentEffect.cs" />
+    <Compile Include="Assets\Spellborn\Engine\EnvironmentManager.cs" />
+    <Compile Include="Assets\Spellborn\Engine\EnvironmentSettings.cs" />
+    <Compile Include="Assets\Spellborn\Engine\FlyingPathNode.cs" />
+    <Compile Include="Assets\Spellborn\Engine\GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Info.cs" />
+    <Compile Include="Assets\Spellborn\Engine\InterpolationPoint.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Keypoint.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Ladder.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LadderVolume.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Level.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LevelBase.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LevelInfo.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LevelSummary.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LocalizedString.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LocalizedStringConverter.cs" />
+    <Compile Include="Assets\Spellborn\Engine\LookTarget.cs" />
+    <Compile Include="Assets\Spellborn\Engine\MatAction.cs" />
+    <Compile Include="Assets\Spellborn\Engine\MatObject.cs" />
+    <Compile Include="Assets\Spellborn\Engine\MatSubAction.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Mover.cs" />
+    <Compile Include="Assets\Spellborn\Engine\NameProperty.cs" />
+    <Compile Include="Assets\Spellborn\Engine\NavigationPoint.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Note.cs" />
+    <Compile Include="Assets\Spellborn\Engine\PathNode.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Pawn.cs" />
+    <Compile Include="Assets\Spellborn\Engine\PhysicsVolume.cs" />
+    <Compile Include="Assets\Spellborn\Engine\PlayerController.cs" />
+    <Compile Include="Assets\Spellborn\Engine\PlayerStart.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Primitive.cs" />
+    <Compile Include="Assets\Spellborn\Engine\PvPSettings.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Range.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ReachSpec.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Resource.cs" />
+    <Compile Include="Assets\Spellborn\Engine\RoadPathNode.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Rotator.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBActor.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBAnimatedPawn.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBAnimationFlags.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBAttachment.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBMover.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBResourceListing.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SBResourcePackage.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Scout.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SkyZoneInfo.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SmallNavigationPoint.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionCameraEffect.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionCameraShake.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionFade.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionFOV.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionGameSpeed.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionOrientation.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionSceneSpeed.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionSubTitle.cs" />
+    <Compile Include="Assets\Spellborn\Engine\SubActionTrigger.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Subsystem.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Teleporter.cs" />
+    <Compile Include="Assets\Spellborn\Engine\TerrainInfo.cs" />
+    <Compile Include="Assets\Spellborn\Engine\TerrainPrimitive.cs" />
+    <Compile Include="Assets\Spellborn\Engine\TerrainSector.cs" />
+    <Compile Include="Assets\Spellborn\Engine\TimedEnvironmentEffect.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Trigger.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Triggers.cs" />
+    <Compile Include="Assets\Spellborn\Engine\UObject.cs" />
+    <Compile Include="Assets\Spellborn\Engine\UseTrigger.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Vector.cs" />
+    <Compile Include="Assets\Spellborn\Engine\Volume.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ZoneInfo.cs" />
+    <Compile Include="Assets\Spellborn\Engine\ZoneTrigger.cs" />
+    <Compile Include="Assets\Spellborn\Extras\CharacterCreationItemSets.cs" />
+    <Compile Include="Assets\Spellborn\Extras\UnrealScriptState.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\Action_ENDSECTION.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_Freeze.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_GotoAction.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\Action_IFCONDITION.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\Action_IFRANDOMPCT.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\Action_KILLINSTIGATOR.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_MoveToPlayer.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\Action_TRIGGEREVENT.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_Untriggerevent.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_WaitForEvent.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_WaitForPlayer.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ACTION_WaitForTimer.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\LatentScriptedAction.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\LevelProgression.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\RockingSkyZoneInfo.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ScriptedAction.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ScriptedController.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ScriptedSequence.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ScriptedTrigger.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\ScriptedTriggerController.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\TriggeredCondition.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\TriggerLight.cs" />
+    <Compile Include="Assets\Spellborn\Gameplay\WaterVolume.cs" />
+    <Compile Include="Assets\Spellborn\MapIDs.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\ActionTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AI_MetaController.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AI_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIAggressiveMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIAlertState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIAnimalIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIBattleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIBossIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIBossMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AICitizenMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AICombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIConversationState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AICoverState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AICowerState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AICritterMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIDroneMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIFightState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIFleeState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIFollowState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIGruntAlertState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIGruntCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIGruntIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIGruntMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIGruntPatrolState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIHowlerMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIHumanoidCowerState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIHumanoidIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIHumanoidRetreatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIKidMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIKillingCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIKillingMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AILeaderAlertState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AILeaderCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AILeaderMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AINormalPatrolState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AINormalRetreatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPassiveMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPatrolState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPetBattleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPetFollowState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPetIdleState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPetLostState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPetMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPoint.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIPredatorMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIRetreatState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIReturnState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIScriptSubObject.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIStateMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AISubmergeState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AITestMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIWakingAlertState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIWakingMachine.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\AIWanderState.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\Annotation_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\ConversationComponent.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\FSkill_EffectClass_DirectTeleportAI.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\Game_AIController.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\Game_PetController.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\GroupMind.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\HiveMind.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\HormoneComponent.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\Meta_CombatStats.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\MetaControllerManagerComponent.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\MovementComponent.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\PathPlanningDebugActor.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\PatrolPoint.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\SquadMind.cs" />
+    <Compile Include="Assets\Spellborn\SBAI\TargetComponent.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_ApplySkillEffectsOnDamager.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_ApplySkillEffectsOnKiller.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_Conditional_Enemy.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_Conditional_ForceFriendly.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_ConditionalDespawn.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_HealthLevel_Trigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_LimitedInvulnerability.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_NPC_Chat.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_Script_Pusher.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_StateSwitch.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TimeScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TriggerActions.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TriggerEffects.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TriggerSkill.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TriggerSkillEffects.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AI_TutorialTargetPractice.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIAccompanyScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIDefeatScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIEscortFramework.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIEscortScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIOneWayPatrolScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIOnScreenMessages.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIPatrolScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIRegistered.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ActionsOnCollected.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AdjustHormones.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Generic_Mage.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_MarbleSealScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Nuke.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Ormoburu.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Ormoburu_Clearing.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Ormoburu_Climb.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Ormoburu_Lured.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_AQOrmo_Vhelgar_Hunter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ClaimAggro.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ClientsideTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_CoA_1_Becks_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_CoA_2_PoochAndTack_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_CoA_3_Amsell_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_CollectEventinstigators.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ConditionalFreeze.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ConditionalInvisibility.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_ConditionalTouching.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_CountCollected.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Counter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_DAF_Adin_Archer.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_DAF_Grome.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_DetectTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_EXA_ConfusingSmoke.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Exarchyon_FireballShooter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_FinalBlowTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Group_Event_Manager.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Interact.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_MatineeTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_OnDeath_Counter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PatrolGate.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PatrolPoint_ScriptPusher.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PeriodicSkillOnCollected.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Proto_PauseAI.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Proto_State.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Proto_TriggeredSkill.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PT_Trial15_Lezu_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PT_Trial15_script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_PT_Trial15_Siltor_Script.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_RandomTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_SequenceTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_SpellCaster.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_StatesignalTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Timeout.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_10_Sequence.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_2_Sequence.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_4_IceStatueScript.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_5_Judge.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_5_Sequence.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_6_Neighbours.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_6_Sequence.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_7_PlayerEffects.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TotA_8_Sequence.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial25_End_Boss.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial25_Graidlon.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial35_Wounded_Miner.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial45_Statue.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial45_StatueCollapse.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial50_DrainedMage.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial50_Uddathin.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trial50_Uddathin_Head.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_Trigger_Counter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TriggerAnimation.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScript_TriggerRange_Counter.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\AIScripted.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\QuestChallengeHookTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredAccompany.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredAI.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredAnimation.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredChatNPC.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredDespawn.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredEscort.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredFrozen.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredHealthLevel.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredPatrol.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredSkillPerformer.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredStateSwitch.cs" />
+    <Compile Include="Assets\Spellborn\SBAIScripts\RegisteredTouching.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_Component.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_Controller.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_DBObject.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_InstanceType.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_Notification.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\Base_Pawn.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_Character.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_CharacterSheet.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_CharacterSkill.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_Guild.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_Item.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_QuestRequirement.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_Skill.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_SkillDeck.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\DB_Team.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBBasePortal.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBClock.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBDBAsync.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBDBSync.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBFriendsMember.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBGuildMember.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBPortal.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBRoute.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBTeamMember.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBTravel.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBUniverse.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBUniverseRules.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBWorld.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBWorldRules.cs" />
+    <Compile Include="Assets\Spellborn\SBBase\SBZoneManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\AccessmapExplorer.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\AccessmapStartPoint.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\AnimatedLevelElement.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\AnnotationActor.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Base.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Belt.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Chest.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_ChestClothes.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Hair.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_HeadGear.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_LeftGauntlet.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_LeftGlove.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_LeftShin.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_LeftShoulder.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_LeftThigh.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_MainWeapon.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Pants.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_RightGauntlet.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_RightGlove.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_RightShin.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_RightShoulder.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_RightThigh.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_SecondaryWeapon.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Set.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Shoes.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Appearance_Tattoo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Arena_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Character_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Character_Pawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Character_PlayerController.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_API.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_Event.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_Inventory.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_Requirement.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_Trigger.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Content_Type.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Conversation_Continue.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Conversation_Node.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Conversation_Response.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Conversation_Topic.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Deadspell_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\DeadspellStormEffect.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\DS_Quest_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\EventNotification.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EdPaintLocationActor.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_AmbientGlow.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_Camera.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_CameraAmbient.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_CameraBlur.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_CameraFog.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_CameraLight.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_CameraShake.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_ChangeSkin.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_ColorModifier.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_Emitter.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_LocalView.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_Sound.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_AudioVisual_WeaponTracer.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_Direct.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectDamage.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectDrain.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectFireBodySlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectHeal.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectShapeShift.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DirectTeleport.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_Duff.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffAffinity.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffAlterEffectInOutput.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffAttackSpeed.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffAttribute.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffDegeneration.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffDirectionalDamage.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffDisableSkillUse.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffDrain.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffFreeze.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffGfx.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffImmunity.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffMaxHealth.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffMovementSpeed.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffPePRank.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffRegeneration.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffResistance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffReturnReflect.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffShare.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_DuffState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EffectClass_Range.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Enums.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_BodySlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Chain.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Direct.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_DirectAdvanced.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Duff.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Duff_CondEv.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Duff_DirectEff.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Duff_DuffEff.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_FX.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_FX_Advanced.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Summon.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Event_Target.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_EventGroup.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_PowerSystem.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_TargetingSettings.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Type.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Type_BodySlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Type_Combo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_Type_Consumable.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\FSkill_ValueSpecifier.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ActiveTextItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Actor.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Appearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_AppearanceListener.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_BodySlots.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Camera.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Character.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_CharacterStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Chat.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_CombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_CombatStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ConsoleCommand.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Controller.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Conversation.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ConversationState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_DebugUtils.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_EditorPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Effects.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Emote.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_EmoteRotate.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Emotes.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_EquippedAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_GameMasterController.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_GameMasterUtils.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Hook.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_InstanceInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Item.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ItemContainerListener.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ItemManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Looting.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Mail.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_MiniGameDescription.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_MiniGameManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_MiniGameProxy.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_MirroredAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCCharacter.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCCombatStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCController.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCItemManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCSkills.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_NPCStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Pawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Perception.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PersistentData.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PersistentPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PetPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerCharacter.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerCombatStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerController.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerConversation.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerFriends.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerGuilds.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerItemManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerQuestLog.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerSkills.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerStats.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PlayerTeams.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Portal.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PreviewAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_PropertyEditor.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_QuestLog.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_RadialMenuOptions.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Route.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_ShiftableAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_SkeletalAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Skills.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_StaticAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_StatueAppearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_StatueCharacter.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_StatuePawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Team.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_TeamMember.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_TeamMemberPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_TextParser.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_TradeManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Trading.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_TransientPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_Travel.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Game_UnarmedCombatState.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Help_Article.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Appearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_BodySlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Broken.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Consumable.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Container.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_EquipEffects.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Equipment.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Key.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_LabyrinthKey.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_RangedWeapon.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Recipe.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Resource.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Shield.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Ticket.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_TokenItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_TokenSkill.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_TokenSlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Use.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\IC_Weapon.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\InsideTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Interaction_Component.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\InteractiveLevelElement.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Item_Component.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Item_KeepReference.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Item_Type.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Item_TypeFilter.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\LevelAreaVolume.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Login_PlayerController.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Loot_Manager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Loot_Transaction.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\LootTable.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\MapNote.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\MapResolutionInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\MapSectionInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\MapSectionInfoInstances.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\MovingLevelElement.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AI.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Appearance.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AttackSheet.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AttackSheet_ClassBased.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AttackSheet_ClassBased_Settings.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AttackSheet_ConditionBased.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_AttackSheet_RoleBased.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_ClassSet.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Effects.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Equipment.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Group.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Habitat.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillCondition.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillCondition_And.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillCondition_Or.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillCondition_Self.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillCondition_Targets.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillDeck.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_SkillDeckTier.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Spawner.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_StatTable.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Taxonomy.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\NPC_Type.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\PathConfigurationActor.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quarterstone_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Chain.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Condition.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Reward.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Set.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Target.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Quest_Type.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\SBGameEnums.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\SBPath.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\SBPoint.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\SBWorldPortal.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\ScriptedProjectile.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Shop_Base.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\SourcedNotification.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\StateListener.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\StaticPawnSounds.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\StatueLocation.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\StringReferences.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\TimeManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Trade_Transaction.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\Travel_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\TriggeringLevelElement.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\ViewMap_Controller.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\ViewMap_GameInfo.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\ViewMap_Pawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\WeatherEffect.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\WorldResource.cs" />
+    <Compile Include="Assets\Spellborn\SBGame\WorldResourceManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\AnnotationTriggerable.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_FriendIgnore.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_FriendInvite.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_GuildDisband.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_GuildInvite.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_GuildKick.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_GuildLeave.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_Help.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_Location.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_TeamDisband.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_TeamInvite.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_TeamKick.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_TeamLeave.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CCom_Unstuck.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CR_Accept.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CR_Decline.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Chat.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Deliver.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_FinishQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Greeting.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_LastWords.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_MidQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_ProvideQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Quest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_TalkTarget.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Target.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Thanks.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\CT_Victory.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_AIAggro.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_AIFollow.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_AIIdle.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Claustroport.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_ClientEvent.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Conversation.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Die.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_EffectsApply.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_EffectsRemove.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Emote.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_FinishQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_GiveItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_GiveMoney.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_GiveQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_GiveSkill.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_NPC.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_ObtainQuest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Other.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Party.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_PartyProgress.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_PartyTeleport.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_PersistentValue.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_QuestProgress.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_RemoveItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_RemoveMoney.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Scenario.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Self.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SetClass.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SetFaction.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SetHealth.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_ShowTutorial.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Sit.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Skill.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SkillEffects.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SkillEffectsTargeted.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SkillEvent.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_SkillTargeted.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Stand.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Swap.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_Teleport.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_TriggerEvent.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\EV_UntriggerEvent.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Action.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Animation.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Attach.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_ChangeMesh.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_EffectOff.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_EffectOn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Enable.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_EnableCollision.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Event.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Freeze.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Loot.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Mailbox.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Move.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_MovePlayer.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_PartyTeleport.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Progress.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Quest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_RandomTimer.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Rotate.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_RotateToFace.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Shop.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Show.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_ShowTutorial.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Sit.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Teleport.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_TeleportToPosition.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Interaction_Unevent.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveBirthSign.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveChair.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveDoor.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveHatch.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveMailbox.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveQuestElement.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\InteractiveShop.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorBelt.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorChest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorHeadGear.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorLeftGauntlet.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorLeftShin.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorLeftShoulder.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorLeftThigh.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorRightGauntlet.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorRightShin.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorRightShoulder.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ArmorRightThigh.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_BodySlot.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_Broken.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ClothChest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ClothLeftGlove.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ClothPants.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ClothRightGlove.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ClothShoes.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_Consumable.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ContainerExtraInventory.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ContainerSuitBag.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_ItemToken.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_JewelryNecklace.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_JewelryQualityToken.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_JewelryRing.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_MiscellaneousKey.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_MiscellaneousLabyrinthKey.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_MiscellaneousTickets.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_QuestItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_Recipe.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_Resource.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_SkillToken.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_Trophy.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponDoubleHanded.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponDualWielding.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponOneHanded.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponQualityToken.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponRanged.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Item_WeaponShield.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\MessageFilter.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\MessageHandler.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\MessageSender.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NA_Equipped.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NA_Invisible.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NA_RaceBodyGender.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NA_Skeletal.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NA_Static.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NE_Slots.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NE_SlotsBase.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NE_SlotsFullColor.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NE_SlotsUniform.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NE_Standard.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NG_Boss.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NG_Hive.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Boss.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Character.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_CharacterPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Civilian.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_CivilianPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Class.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Humanoid.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_HumanoidPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Monster.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_MonsterClass.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_MonsterPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_NPNC.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_NPNCPawn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NPC_Quest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NS_Fixed.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\NS_Rotator.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QC_CarryItem.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QC_Protect.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QC_Stealth.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QC_Survival.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QC_Timed.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QR_Fame.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QR_Item.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QR_Money.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QR_QuestPoints.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QR_Skill.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_BeDefeated.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Challenge.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Defeat.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Deliver.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Destroy.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Escort.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Exterminate.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Fedex.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Gather.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Hunt.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Interactor.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Kill.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Place.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Reach.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Subquest.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Take.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Talk.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Use.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_UseAt.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_UseOn.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\QT_Wait.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Quest_Standard.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Quest_Trigger.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_And.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Area.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Chance.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Class.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Conditional.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Distance.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Equipment.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Faction.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_False.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_GameActorEnabled.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Gender.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Inventory.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Level.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Money.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Not.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_NPC.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_NPC_Exists.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_NPCType.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Or.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_PePRank.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_PersistentValue.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Player.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_QuestActive.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_QuestFinished.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_QuestRepeatable.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_QuestReq.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Race.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_TargetActive.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_TargetProgress.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Team.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_Time.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_True.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Req_World.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBAppearance_Set.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBDialogWindowTrigger.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBGamePlayStrings.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBInfluenceCapsule.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBInfluenceDoughnut.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBInfluenceSphere.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\SBInfluenceVolume.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Scenario.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\ScenarioManager.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Area.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Breeder.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Deployer.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Group.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_NPC.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Placed.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Timed.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Triggered.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\Spawn_Wildlife.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\TooltipActor.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\TriggerableBarrier.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\WR_Flower.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\WR_Gem.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\WR_Metal.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\WR_Stone.cs" />
+    <Compile Include="Assets\Spellborn\SBGamePlay\WR_Wood.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_BoardGame.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_Chess.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_Chess_Config.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_ChessConfig.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_Config.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_Draughts.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_DraughtsConfig.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_MiniGame.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_MiniGameManager.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_MiniGameProxy.cs" />
+    <Compile Include="Assets\Spellborn\SBMiniGames\MGame_Rules.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>H:/OtherRepositories/TCoSPackageImporter/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.AIModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.ARModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AccessibilityModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.BaselibModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.BaselibModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClothModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.BaselibModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CloudWebServicesModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.FacebookModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.FacebookModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.FacebookModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.FileSystemHttpModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GameCenterModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GridModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HotReloadModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.LocalizationModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ProfilerModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ProfilerModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ProfilerModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpriteShapeModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StreamingModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StyleSheetsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SubstanceModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TLSModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TerrainPhysicsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TimelineModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.TimelineModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TimelineModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UNETModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UmbraModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityConnectModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VRModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VehiclesModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VideoModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.WindModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XRModule">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Locator">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/Managed/Unity.Locator.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/Managed/Unity.Locator.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Timeline">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Fasterflect">
       <HintPath>H:/OtherRepositories/TCoSPackageImporter/Assets/Plugins/Fasterflect.dll</HintPath>
@@ -281,363 +1126,37 @@
       <HintPath>H:/OtherRepositories/TCoSPackageImporter/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Core.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Runtime.Serialization.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Runtime.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Xml.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Xml.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics.Vectors">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/Microsoft.Win32.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="netstandard">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/netstandard.dll</HintPath>
-    </Reference>
-    <Reference Include="System.AppContext">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.AppContext.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Concurrent">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Collections.Concurrent.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.NonGeneric">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Collections.NonGeneric.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Specialized">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Collections.Specialized.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Annotations">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ComponentModel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.EventBasedAsync">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ComponentModel.EventBasedAsync.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ComponentModel.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.TypeConverter">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ComponentModel.TypeConverter.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Console">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Console.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.Common">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Data.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.Contracts">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.Debug">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.Debug.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.FileVersionInfo">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.FileVersionInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.Process">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.Process.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.StackTrace">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.StackTrace.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.TextWriterTraceListener">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.TextWriterTraceListener.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.Tools">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.Tools.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.TraceSource">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Diagnostics.TraceSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Drawing.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Dynamic.Runtime">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Dynamic.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Globalization.Calendars">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Globalization.Calendars.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Globalization">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Globalization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Globalization.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Globalization.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Compression.ZipFile">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.Compression.ZipFile.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.FileSystem">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.FileSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.FileSystem.DriveInfo">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.FileSystem.DriveInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.FileSystem.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.FileSystem.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.FileSystem.Watcher">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.FileSystem.Watcher.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.IsolatedStorage">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.IsolatedStorage.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.MemoryMappedFiles">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.MemoryMappedFiles.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Pipes">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.Pipes.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.UnmanagedMemoryStream">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.IO.UnmanagedMemoryStream.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq.Expressions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Linq.Expressions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq.Parallel">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Linq.Parallel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Linq.Queryable">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Linq.Queryable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Rtc">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Http.Rtc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.NameResolution">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.NameResolution.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.NetworkInformation">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.NetworkInformation.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Ping">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Ping.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Requests">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Requests.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Security">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Sockets">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.Sockets.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.WebHeaderCollection">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.WebHeaderCollection.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.WebSockets.Client">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.WebSockets.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.WebSockets">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Net.WebSockets.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ObjectModel">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ObjectModel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Emit">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.Emit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Emit.ILGeneration">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.Emit.ILGeneration.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Emit.Lightweight">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.Emit.Lightweight.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Reflection.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Resources.Reader">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Resources.Reader.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Resources.ResourceManager">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Resources.ResourceManager.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Resources.Writer">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Resources.Writer.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.VisualC">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.CompilerServices.VisualC.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Handles">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Handles.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.InteropServices.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Numerics">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Formatters">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Serialization.Formatters.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Json">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Serialization.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Serialization.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Xml">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Runtime.Serialization.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Claims">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Claims.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Cryptography.Algorithms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Csp">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Cryptography.Csp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Cryptography.Encoding.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Cryptography.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Cryptography.X509Certificates.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.Principal.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.SecureString">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Security.SecureString.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Duplex">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ServiceModel.Duplex.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Http">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ServiceModel.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.NetTcp">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ServiceModel.NetTcp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Primitives">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ServiceModel.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Security">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ServiceModel.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encoding">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Text.Encoding.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encoding.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Text.Encoding.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.RegularExpressions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Text.RegularExpressions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Overlapped">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.Overlapped.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Parallel">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.Tasks.Parallel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Thread">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.Thread.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.ThreadPool">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.ThreadPool.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Timer">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Threading.Timer.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.ReaderWriter">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.ReaderWriter.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.XDocument">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XDocument.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.XmlDocument">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XmlDocument.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.XmlSerializer">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XmlSerializer.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.XPath">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XPath.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.XPath.XDocument">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XPath.XDocument.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="UnityScript">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/UnityScript.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.dll</HintPath>
     </Reference>
     <Reference Include="UnityScript.Lang">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/UnityScript.Lang.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Boo.Lang">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/Boo.Lang.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{79F3E491-17C0-CB7A-027B-AA3157D5B9C9}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Spellborn.csproj">
-      <Project>{F3B94CA5-CDEB-6FA8-34FB-B8C9F6615AE3}</Project>
-      <Name>Spellborn</Name>
-    </ProjectReference>
-    <ProjectReference Include="Server.csproj">
-      <Project>{856DFFBB-9058-5552-FCAF-49EBCE27434F}</Project>
-      <Name>Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

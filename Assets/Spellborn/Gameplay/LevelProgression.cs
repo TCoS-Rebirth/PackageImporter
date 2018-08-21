@@ -34,7 +34,7 @@ namespace Gameplay
             {
                 return progressData[level - 1];
             }
-            throw new ArgumentOutOfRangeException(nameof(level), "Level must be between 1 and 100");
+            throw new ArgumentOutOfRangeException("level", "Level must be between 1 and 100");
         }
 
         public ProgressData GetLevelbyFamepoints(int points)
@@ -95,8 +95,8 @@ namespace Gameplay
     [Serializable]
     public class PePProgress
     {
-        public readonly int Level;
-        public readonly int RequiredPoints;
+        public int Level;
+        public int RequiredPoints;
 
         public PePProgress(int level, int points)
         {

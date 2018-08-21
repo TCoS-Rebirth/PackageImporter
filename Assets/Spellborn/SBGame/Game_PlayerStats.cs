@@ -3,7 +3,8 @@ using Engine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_PlayerStats : Game_CharacterStats
+    [Serializable]
+    public class Game_PlayerStats: Game_CharacterStats
     {
         [FieldConst()]
         public float FreeToPlayMaxFamePoints;
@@ -34,6 +35,19 @@ namespace SBGame
             writer.WriteInt32(mExtraBodyPoints);//not sure
             writer.WriteInt32(mExtraMindPoints);//not sure
             writer.WriteInt32(mExtraFocusPoints);//not sure
+        }
+
+        public void DecreasePePRank()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void cl_OnInit()
+        {
+            base.cl_OnInit();
+            //if (Outer.IsLocalPlayer()) {                                                
+            SetCharacterClass((byte)(((Outer as Game_Pawn).Controller as Game_Controller).DBCharacterSheet.ClassId + 1));
+            //}
         }
     }
 }
@@ -117,16 +131,9 @@ Game_PlayerConversation(Controller.ConversationControl).cl_RefreshTopics();
 }
 }
 }
-native function DecreasePePRank();
 native function IncreasePePPoints(int aDelta);
 native function IncreaseFamePoints(int aDelta);
 native function cl_ClearMayChooseClass();
 native function cl_ClearAvailableAttributePoints();
 native function sv_UpdateStats();
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-if (Outer.IsLocalPlayer()) {                                                
-SetCharacterClass(Game_Controller(Outer.Controller).DBCharacterSheet.ClassId + 1);
-}
-}
 */

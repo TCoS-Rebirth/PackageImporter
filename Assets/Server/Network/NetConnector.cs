@@ -268,10 +268,10 @@ namespace Network
             {
                 try
                 {
-                    connection.ClientSocket.Shutdown(SocketShutdown.Receive);
+                    connection.ClientSocket.Shutdown(SocketShutdown.Both);
                 }
-                catch { }
-                connection.ClientSocket.Close();
+                catch { } //if already shutdown, ignore
+                connection.ClientSocket.Close(33);
             }
             lock (connections)
             {
@@ -319,6 +319,11 @@ namespace Network
                         }
                         connections[i].ClientSocket.Send(messageBytes.ToArray());
                     }//networkPacket queue lock
+                    if (connections[i].PendingDisconnect)
+                    {
+                        connections[i].PendingDisconnect = false;
+                        connections[i].ClientSocket.Disconnect(false);
+                    }
                 } //loop
             } // connections lock
         }

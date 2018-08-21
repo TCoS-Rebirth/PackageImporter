@@ -111,10 +111,7 @@ namespace SBGame
 
         private bool mHasTokenMapBeenModified;
 
-        public Game_Skills()
-        {
-        }
-
+        #region structs
         [Serializable] public struct ReturnReflectData
         {
             public int Id;
@@ -248,7 +245,7 @@ namespace SBGame
 
             public Game_Pawn SpecificTarget;
         }
-
+        #endregion
         public enum ESkillStartFailure
         {
             SSF_ALLOWED,
@@ -272,6 +269,21 @@ namespace SBGame
             SSF_DEAD,
 
             SSF_OUTOFRANGE,
+        }
+
+        public void sv_FireCondition(Game_Pawn aOriginPawn,byte aCondition,byte aAttackType = 0,byte aMagicType = 0,byte aEffectType = 0)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void sv_RemoveDuffs(object aParameter,bool aQueueAbort = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResetAttacking()
+        {
+            throw new NotImplementedException();
         }
     }
 }
@@ -386,7 +398,6 @@ DisableSkillUseEffects.Length = C + 1;
 DisableSkillUseEffects[C] = dsud;                                           
 }
 private final native function sv_UninstallDuffCompletely(out DuffStackData aDuffData);
-final native function sv_FireCondition(Game_Pawn aOriginPawn,byte aCondition,optional byte aAttackType,optional byte aMagicType,optional byte aEffectType);
 final native function sv_TriggerFireCondition(array<Game_Pawn> aConditionTriggerPawn,Game_Pawn aOriginPawn,byte aCondition,optional byte aAttackType,optional byte aMagicType,optional byte aEffectType);
 protected native function ProcessOldEvent(export editinline FSkill_Event aEvent);
 protected final event cl_StartSkillTracers(export editinline FSkill_Type aSkillType,export editinline Item_Type aTokenItem,int VarNr) {
@@ -531,7 +542,6 @@ goto jl00B4;
 }
 }
 final native function FSkill_Event RunEvent(export editinline FSkill_Event aEvent,int aFlags,export editinline FSkill_Type aSkill,Game_Pawn aSkillPawn,Game_Pawn aTriggerPawn,Game_Pawn aTargetPawn,Vector aTargetLocation,AimingInfo aAimingInfo,const out CharacterStatsRecord aState,int aSessionID,float aTime,byte aOriginCondition);
-native function sv_RemoveDuffs(Object aParameter,optional bool aQueueAbort);
 delegate bool RemoveDuffFilter(Object aParameter,export editinline FSkill_Event_Duff aDuffEvent);
 final native function sv_DirectSkillEffects(export editinline FSkill_Type Skill,Game_Pawn aTarget);
 final native function cl_OnEffectNotify(name NotifyName);
@@ -558,7 +568,6 @@ return True;
 }
 return False;                                                               
 }
-final native function ResetAttacking();
 native function float GetRelativeTierTimeout();
 final native function FSkill_Type GetActiveTierSlotSkill(int aSlot);
 final native function sv_LearnSkill(export editinline FSkill_Type aSkill);

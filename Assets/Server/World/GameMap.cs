@@ -58,7 +58,6 @@ namespace World
             t.Tag = spawnTag;
             t.BeginPlay();
             t.PostBeginPlay();
-            t.SetInitialState();
             return t;
         }
 

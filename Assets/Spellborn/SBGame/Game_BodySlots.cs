@@ -3,7 +3,8 @@ using SBBase;
 
 namespace SBGame
 {
-    [Serializable] public class Game_BodySlots : Base_Component
+    [Serializable]
+    public class Game_BodySlots: Base_Component
     {
         public const int MAX_BODYSLOT_ITEMS = 5;
 
@@ -11,26 +12,25 @@ namespace SBGame
 
         public int SelectedBodySlot;
 
-        //public delegate<OnModeChange> @__OnModeChange__Delegate;
-
-        //public delegate<OnFailedActivation> @__OnFailedActivation__Delegate;
-
-        public Game_BodySlots()
-        {
-        }
-
         public enum EBodySlotMode
         {
             BSM_None,
-
             BSM_PetSelectSystem,
-
             BSM_PetControlSystem,
-
             BSM_SkillUseItems,
-
             BSM_PlayerUseItems,
         }
+
+        public void sv_SetMode(byte aNewMode)
+        {
+            if (Mode != aNewMode)
+            {
+                Mode = aNewMode;
+                sv2cl_SetMode_CallStub(aNewMode);
+            }
+        }
+
+        void sv2cl_SetMode_CallStub(byte newMode/*added*/) { throw new NotImplementedException(); }
     }
 }
 /*
@@ -150,15 +150,8 @@ PlayerController.Player.GUIDesktop.ShowStdWindow(57,1);
 OnModeChange(self);                                                       
 }
 }
-protected native function sv2cl_SetMode_CallStub();
 final event sv2cl_SetMode(byte aNewMode) {
 cl_SetMode(aNewMode);                                                       
-}
-final function sv_SetMode(byte aNewMode) {
-if (Mode != aNewMode) {                                                     
-Mode = aNewMode;                                                          
-sv2cl_SetMode_CallStub(aNewMode);                                         
-}
 }
 final event byte GetBodySlotModeByClass() {
 switch (Outer.CharacterStats.GetCharacterClass()) {                         
