@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Engine;
-using Framework.Attributes;
-using TCosReborn;
 using UnityEngine;
 using Fasterflect;
+using SBBase;
 
 namespace Framework.PackageExtractor
 {
@@ -35,6 +33,27 @@ namespace Framework.PackageExtractor
         {
             "Engine.TerrainInfo",
             "Engine.TerrainSector",
+            "Engine.StaticMeshActor",
+            "Engine.Brush",
+            "Engine.BlockingVolume",
+            "SBGame.AccessmapBlock",
+            "SBGame.SBAccessMap",
+            "Engine.ColorModifier",
+            "Engine.SceneManager",
+            "Engine.ConvexVolume",
+            "Engine.LevelGrid",
+            "SBGamePlay.Interaction_Sound",
+            "SBGamePlay.SBBackgroundAudio",
+            "SBGame.DayNightCycleKeyframe",
+            "Engine.MaterialTrigger",
+            "SBGame.MaterialSwitchTrigger",
+            "Engine.FinalBlend",
+            "Engine.TexOscillator",
+            "Engine.StaticMesh",
+            "Engine.Palette",
+            "SBGame.Accessmap3DVolume",
+            "Engine.TexCoordSource",
+            "Engine.TexScaler",
 
             "SBGamePlay.TooltipActor",
             "SBEditor.GraphState",
@@ -111,7 +130,7 @@ namespace Framework.PackageExtractor
 
         static void CacheAssemblyTypes()
         {
-            var types = Assembly.GetAssembly(typeof(GameEngine)).GetTypes();
+            var types = Assembly.GetAssembly(typeof(SBUniverse)).GetTypes();
             cachedTypes.Clear();
             cachedTypes.AddRange(types.Where(type => sbNamespaces.Contains(type.Namespace)));
             for (var i = 0; i < types.Length; i++)
