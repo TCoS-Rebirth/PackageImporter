@@ -7,27 +7,16 @@ namespace SBGame
 {
     [Serializable] public class Game_DebugUtils : Base_Component
     {
-        public bool mTestTrace;
-
-        public int mLoadingScreenHandle;
-
+        [NonSerialized] public bool mTestTrace;
+        [NonSerialized] public int mLoadingScreenHandle;
         private bool mStartPoll;
-
         private float mLastPollTime;
-
         private byte mEquippedWeaponType;
-
         private bool mUseWeaponOVerride;
-
         private Game_NPCPawn mNPCViewTarget;
-
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
         public bool mLogARTimer;
 
-        public Game_DebugUtils()
-        {
-        }
     }
 }
 /*

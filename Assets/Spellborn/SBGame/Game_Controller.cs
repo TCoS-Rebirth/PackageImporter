@@ -10,19 +10,7 @@ namespace SBGame
     public abstract class Game_Controller: Base_Controller
     {
 
-        [TypeProxyDefinition(TypeName = "Game_DebugUtils")]
-        public Type mDebugUtilsClass;
-
-        [TypeProxyDefinition(TypeName = "Game_TextParser")]
-        public Type TextParserClass;
-
-        [TypeProxyDefinition(TypeName = "Game_Conversation")]
-        public Type ConversationControlClass;
-
         public Game_DebugUtils DebugUtils;
-
-        public Game_TextParser TextParser;
-
         public Game_Conversation ConversationControl;
 
         [NonSerialized, HideInInspector]
@@ -80,6 +68,42 @@ namespace SBGame
 
         UnrealScriptState<Game_Controller> ActiveState = new Auto_Controller_PawnAlive();
 
+        [Serializable]
+        public struct DBSkillToken: IPacketWritable
+        {
+            public int SkillID;
+            public int TokenSlots;
+
+            public void Write(IPacketWriter writer)
+            {
+                writer.WriteInt32(SkillID);
+                writer.WriteByte((byte)TokenSlots);
+            }
+        }
+
+        public enum EControllerStates
+        {
+            CPS_PAWN_NONE = 0,
+            CPS_PAWN_ALIVE = 1,
+            CPS_PAWN_DEAD = 2,
+            CPS_AI_ALERT = 3,
+            CPS_AI_AGGRO = 4,
+            CPS_AI_FOLLOW = 5,
+            CPS_AI_IDLE = 6,
+            CPS_AI_REGROUP = 7,
+            CPS_MOVE_PAWN = 8,
+            CPS_ROTATE_PAWN = 9,
+            CPS_PAWN_SITTING = 10,
+            CPS_PAWN_FROZEN = 11,
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            if (DebugUtils != null) DebugUtils.Initialize(this);
+            if (ConversationControl != null) ConversationControl.Initialize(this);
+        }
+
         protected override void GotoState(string state)
         {
             if (state == "Auto" || state == "PawnAlive")
@@ -93,47 +117,6 @@ namespace SBGame
                 ActiveState = new Controller_PawnDead();
             }
             if (ActiveState != null) ActiveState.BeginState(this);
-        }
-
-        [Serializable]
-        public struct DBSkillToken: IPacketWritable
-        {
-            public int SkillID;
-
-            public int TokenSlots;
-
-            public void Write(IPacketWriter writer)
-            {
-                writer.WriteInt32(SkillID);
-                writer.WriteByte((byte)TokenSlots);
-            }
-        }
-
-        public enum EControllerStates
-        {
-            CPS_PAWN_NONE = 0,
-
-            CPS_PAWN_ALIVE = 1,
-
-            CPS_PAWN_DEAD = 2,
-
-            CPS_AI_ALERT = 3,
-
-            CPS_AI_AGGRO = 4,
-
-            CPS_AI_FOLLOW = 5,
-
-            CPS_AI_IDLE = 6,
-
-            CPS_AI_REGROUP = 7,
-
-            CPS_MOVE_PAWN = 8,
-
-            CPS_ROTATE_PAWN = 9,
-
-            CPS_PAWN_SITTING = 10,
-
-            CPS_PAWN_FROZEN = 11,
         }
 
         public virtual void SBGotoState(EControllerStates aState)
@@ -226,12 +209,12 @@ namespace SBGame
             }
         }
 
-        int sv_GetPersistentVariable(int ContextID,int VariableID)
+        int sv_GetPersistentVariable(int ContextID, int VariableID)
         {
             throw new NotImplementedException();
         }
 
-        void sv_SetPersistentVariableNative(int ContextID,int VariableID,int Value)
+        void sv_SetPersistentVariableNative(int ContextID, int VariableID, int Value)
         {
             throw new NotImplementedException();
         }
@@ -298,18 +281,6 @@ if (ConversationControl != None) {
 ConversationControl.cl_OnShutdown();                                      
 }
 Super.cl_OnShutdown();                                                      
-}
-event cl_OnInit() {
-Super.cl_OnInit();                                                          
-if (DebugUtils != None) {                                                   
-DebugUtils.cl_OnInit();                                                   
-}
-if (TextParser != None) {                                                   
-TextParser.cl_OnInit();                                                   
-}
-if (ConversationControl != None) {                                          
-ConversationControl.cl_OnInit();                                          
-}
 }
 event cl_OnTick(float DeltaTime) {
 Super.cl_OnTick(DeltaTime);                                                 

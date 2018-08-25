@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Engine;
 using SBBase;
+using SBGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,17 +48,16 @@ namespace World
             return actors.Remove(actor);
         }
 
-        public T Spawn<T>(T prefab, Vector3 location, Quaternion rotation, Action<T> initCallback = null, Actor owner=null, string spawnTag="") where T:Controller
+        public T Spawn<T>(T prefab, Vector3 location, Quaternion rotation, Action<T> preSpawnInitCallback = null, Actor owner=null, string spawnTag="") where T:Game_Controller
         {
             var t = UnityEngine.Object.Instantiate(prefab);
             t.transform.SetPositionAndRotation(location, rotation);
+            if (preSpawnInitCallback != null) preSpawnInitCallback(t);
             actors.Add(t);
-            if (initCallback != null) initCallback(t);
-            t.SetOwner(owner);
-            t.PreBeginPlay();
+            if (owner != null) t.SetOwner(owner);
+            t.Initialize();
             t.Tag = spawnTag;
             t.BeginPlay();
-            t.PostBeginPlay();
             return t;
         }
 

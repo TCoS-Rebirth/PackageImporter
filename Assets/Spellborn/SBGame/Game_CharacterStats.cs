@@ -12,270 +12,105 @@ namespace SBGame
     public class Game_CharacterStats: Base_Component, IActorPacketStream
     {
         public const int EFF_Stats = 8;
-
         public const int EFF_Animation = 4;
-
         public const int EFF_Rotation = 2;
-
         public const int EFF_Movement = 1;
 
-        [FieldConst()]
-        public int mBaseBody;
-
-        [FieldConst()]
-        public int mBaseMind;
-
-        [FieldConst()]
-        public int mBaseFocus;
-
-        [FieldConst()]
-        public int mBaseMaxHealth;
-
-        [FieldConst()]
-        public float mBaseRuneAffinity;
-
-        [FieldConst()]
-        public float mBaseSpiritAffinity;
-
-        [FieldConst()]
-        public float mBaseSoulAffinity;
-
-        public int mExtraBodyPoints;
-
-        public int mExtraMindPoints;
-
-        public int mExtraFocusPoints;
-
-        public float mHealth;
-
-        public ECharacterStatsCharacterState mState;
-
-        public byte mFrozenFlags;
-
-        public int mFreezeMovementCount;
-
-        public int mFreezeRotationCount;
-
-        public int mFreezeAnimationCount;
-
-        public int mFreezeStatsCount;
-
-        public int mBaseMovementSpeed = 160;
-
-        public int mMovementSpeed = 160;
-
-        public float mRearDamageIncrease;
-
-        public float mFrontDamageIncrease;
-
-        public float mConcentrationAttackSpeedBonus;
-
-        public CharacterStatsRecord mRecord;
-
-        public byte mCharacterClass;
-
-        [FieldConst()]
-        public int mStateRankShift;
-
-        [FieldConst()]
-        public int mRegenPointShift;
-
-        [FieldConst()]
-        public int mPhysiqueLevel;
-
-        [FieldConst()]
-        public int mMoraleLevel;
-
-        [FieldConst()]
-        public int mConcentrationLevel;
-
-        [FieldConst()]
-        public int mBodyDelta;
-
-        [FieldConst()]
-        public int mMindDelta;
-
-        [FieldConst()]
-        public int mFocusDelta;
-
-        [FieldConst()]
-        public int mAttributesDeltaInternal;
-
-        [FieldConst()]
-        public float mRuneAffinityDelta;
-
-        [FieldConst()]
-        public float mSpiritAffinityDelta;
-
-        [FieldConst()]
-        public float mSoulAffinityDelta;
-
-        [FieldConst()]
-        public int mMaxHealthDelta;
-
-        [FieldConst()]
-        public float mPhysiqueRegenerationDelta;
-
-        [FieldConst()]
-        public float mPhysiqueDegenerationDelta;
-
-        [FieldConst()]
-        public float mMoraleRegenerationDelta;
-
-        [FieldConst()]
-        public float mMoraleDegenerationDelta;
-
-        [FieldConst()]
-        public float mConcentrationRegenerationDelta;
-
-        [FieldConst()]
-        public float mConcentrationDegenerationDelta;
-
-        [FieldConst()]
-        public float mHealthRegenerationDelta;
-
-        [FieldConst()]
-        public float mMeleeResistanceDelta;
-
-        [FieldConst()]
-        public float mRangedResistanceDelta;
-
-        [FieldConst()]
-        public float mMagicResistanceDelta;
-
-        [FieldConst()]
-        public int mPePRankDelta;
-
-        [FieldConst()]
-        public float mAttackSpeedBonusDelta;
-
-        [FieldConst()]
-        public float mMovementSpeedBonusDelta;
-
-        [FieldConst()]
-        public float mDamageBonusDelta;
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 11)]
-        public float[] mPhysiqueLevelBonus = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 11)]
-        public float[] mMoraleLevelBonus = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 11)]
-        public float[] mConcentrationLevelBonus = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public int[] mBodyDefaults = new int[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public int[] mMindDefaults = new int[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public int[] mFocusDefaults = new int[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public float[] mRuneAffinityDefaults = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public float[] mSpiritAffinityDefaults = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public float[] mSoulAffinityDefaults = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 12)]
-        public int[] mMaxHealthDefaults = new int[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mHealthRegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mPhysiqueRegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mMoraleRegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mConcentrationRegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mPhysiqueDegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mMoraleDegenerationDefault = new float[0];
-
-        [FieldConst()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mConcentrationDegenerationDefault = new float[0];
+        [NonSerialized] public int mBaseBody;
+        [NonSerialized] public int mBaseMind;
+        [NonSerialized] public int mBaseFocus;
+        [NonSerialized] public int mBaseMaxHealth;
+        [NonSerialized] public float mBaseRuneAffinity;
+        [NonSerialized] public float mBaseSpiritAffinity;
+        [NonSerialized] public float mBaseSoulAffinity;
+        [NonSerialized] public int mExtraBodyPoints;
+        [NonSerialized] public int mExtraMindPoints;
+        [NonSerialized] public int mExtraFocusPoints;
+        [NonSerialized] public float mHealth;
+        [NonSerialized] public ECharacterStatsCharacterState mState;
+        [NonSerialized] public byte mFrozenFlags; //EFF_X
+        [NonSerialized] public int mFreezeMovementCount;
+        [NonSerialized] public int mFreezeRotationCount;
+        [NonSerialized] public int mFreezeAnimationCount;
+        [NonSerialized] public int mFreezeStatsCount;
+        [NonSerialized] public int mBaseMovementSpeed;
+        [NonSerialized] public int mMovementSpeed;
+        [NonSerialized] public float mRearDamageIncrease;
+        [NonSerialized] public float mFrontDamageIncrease;
+        [NonSerialized] public float mConcentrationAttackSpeedBonus;
+        [NonSerialized] public CharacterStatsRecord mRecord;
+        [NonSerialized] public Content_API.EContentClass mCharacterClass;
+
+        [NonSerialized] public int mStateRankShift;
+        [NonSerialized] public int mRegenPointShift;
+        [NonSerialized] public int mPhysiqueLevel;
+        [NonSerialized] public int mMoraleLevel;
+        [NonSerialized] public int mConcentrationLevel;
+        [NonSerialized] public int mBodyDelta;
+        [NonSerialized] public int mMindDelta;
+        [NonSerialized] public int mFocusDelta;
+        [NonSerialized] public int mAttributesDeltaInternal;
+        [NonSerialized] public float mRuneAffinityDelta;
+        [NonSerialized] public float mSpiritAffinityDelta;
+        [NonSerialized] public float mSoulAffinityDelta;
+        [NonSerialized] public int mMaxHealthDelta;
+        [NonSerialized] public float mPhysiqueRegenerationDelta;
+        [NonSerialized] public float mPhysiqueDegenerationDelta;
+        [NonSerialized] public float mMoraleRegenerationDelta;
+        [NonSerialized] public float mMoraleDegenerationDelta;
+        [NonSerialized] public float mConcentrationRegenerationDelta;
+        [NonSerialized] public float mConcentrationDegenerationDelta;
+        [NonSerialized] public float mHealthRegenerationDelta;
+        [NonSerialized] public float mMeleeResistanceDelta;
+        [NonSerialized] public float mRangedResistanceDelta;
+        [NonSerialized] public float mMagicResistanceDelta;
+        [NonSerialized] public int mPePRankDelta;
+        [NonSerialized] public float mAttackSpeedBonusDelta;
+        [NonSerialized] public float mMovementSpeedBonusDelta;
+        [NonSerialized] public float mDamageBonusDelta;
+
+        public float[] mPhysiqueLevelBonus = new float[11];
+        public float[] mMoraleLevelBonus = new float[11];
+        public float[] mConcentrationLevelBonus = new float[11];
+        public int[] mBodyDefaults = new int[12];
+        public int[] mMindDefaults = new int[12];
+        public int[] mFocusDefaults = new int[12];
+        public float[] mRuneAffinityDefaults = new float[12];
+        public float[] mSpiritAffinityDefaults = new float[12];
+        public float[] mSoulAffinityDefaults = new float[12];
+        public int[] mMaxHealthDefaults = new int[12];
+        public float[] mHealthRegenerationDefault = new float[5];
+        public float[] mPhysiqueRegenerationDefault = new float[5];
+        public float[] mMoraleRegenerationDefault = new float[5];
+        public float[] mConcentrationRegenerationDefault = new float[5];
+        public float[] mPhysiqueDegenerationDefault = new float[5];
+        public float[] mMoraleDegenerationDefault = new float[5];
+        public float[] mConcentrationDegenerationDefault = new float[5];
 
         [FieldConfig()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mMovementSpeedMultiplier = new float[0];
-
-        [FieldConst()]
+        public float[] mMovementSpeedMultiplier = new float[5];
         [FieldConfig()]
-        [ArraySizeForExtraction(Size = 5)]
-        public float[] mDamageBonus = new float[0];
-
-        [FieldConst()]
+        public float[] mDamageBonus = new float[5];
         [FieldConfig()]
         public int mMovementSpeedDefault;
 
-        [FieldConst()]
-        public float mRegenerationEpoch;
+        [NonSerialized] public float mRegenerationEpoch;
+        [NonSerialized] public int mMaxHealthBonusPerFameLevel;
+        [NonSerialized] public float mMeleeResistanceModifier;
+        [NonSerialized] public float mRangedResistanceModifier;
+        [NonSerialized] public float mMagicResistanceModifier;
+        [NonSerialized] public float mRuneAffinityModifier;
+        [NonSerialized] public float mSpiritAffinityModifier;
+        [NonSerialized] public float mSoulAffinityModifier;
 
-        [FieldConst()]
-        public int mMaxHealthBonusPerFameLevel;
-
-        [FieldConst()]
-        public float mMeleeResistanceModifier;
-
-        [FieldConst()]
-        public float mRangedResistanceModifier;
-
-        [FieldConst()]
-        public float mMagicResistanceModifier;
-
-        [FieldConst()]
-        public float mRuneAffinityModifier;
-
-        [FieldConst()]
-        public float mSpiritAffinityModifier;
-
-        [FieldConst()]
-        public float mSoulAffinityModifier;
-
-        [FieldConst()]
         [FieldConfig()]
-        [ArraySizeForExtraction(Size = 6)]
-        public float[] mHealthPepLvlBonus = new float[0];
-
-        [FieldConst()]
+        public float[] mHealthPepLvlBonus = new float[6];
         [FieldConfig()]
-        [ArraySizeForExtraction(Size = 6)]
-        public float[] mDamagePepLvlBonus = new float[0];
+        public float[] mDamagePepLvlBonus = new float[6];
 
         private List<FreezeData> mMovementFreezeTimers = new List<FreezeData>();
-
         private List<FreezeData> mRotationFreezeTimers = new List<FreezeData>();
-
         private List<FreezeData> mAnimationFreezeTimers = new List<FreezeData>();
-
         private List<FreezeData> mStatsFreezeTimers = new List<FreezeData>();
 
         public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
@@ -358,29 +193,334 @@ namespace SBGame
             CSCS_SITTING,
         }
 
-        public void FreezeMovement(bool aFreeze) { throw new NotImplementedException(); }
+        public override void Initialize(Actor outer)
+        {
+            base.Initialize(outer);
+            mMovementSpeed = mMovementSpeedDefault;
+            mBaseMovementSpeed = mMovementSpeedDefault;
+            mBaseMaxHealth = mMaxHealthDefaults[GetFameLevel()];
+            mRecord.MaxHealth = mBaseMaxHealth;
+            Debug.LogWarning("TODO Calculate stats correctly");
+            //Outer.PauseAnim(IsAnimationFrozen());                                       
+        }
 
-        public void IncreaseMeleeResistanceDelta(float aDelta) { throw new NotImplementedException(); }
-        public void IncreaseMagicResistanceDelta(float aDelta) { throw new NotImplementedException(); }
-        public void IncreaseRangedResistanceDelta(float aDelta) { throw new NotImplementedException(); }
+        public void sv2clrel_FreezeAnimation(bool aFreeze)
+        {
+            if (aFreeze)
+            {
+                mFrozenFlags |= EFF_Animation;
+            }
+            else
+            {
+                mFrozenFlags = (byte)(mFrozenFlags & 255 - EFF_Animation);
+            }
+            //Outer.PauseAnim(aFreeze);                                                   
+        }
 
-        public byte GetCharacterClass() { return mCharacterClass; }
+        public void SetConcentration(float Value)
+        {
+            mConcentrationLevel = (int)Value;
+            mRecord.Concentration = mConcentrationLevel;
+        }
 
-        public virtual void SetCharacterClass(byte ClassId)
+        public void SetMorale(float Value)
+        {
+            mMoraleLevel = (int)Value;
+            mRecord.Morale = mMoraleLevel;
+        }
+
+        public void SetPhysique(float Value)
+        {
+            mPhysiqueLevel = (int)Value;
+        }
+
+        public Content_API.EContentClass GetCharacterClass()
+        {
+            return mCharacterClass;
+        }
+
+        public void SetCharacterClass(Content_API.EContentClass ClassId)
+        {
+            mCharacterClass = ClassId;
+        }
+
+        public byte GetArchetype()
         {
             throw new NotImplementedException();
         }
+
+        public virtual int GetPePRank()
+        {
+            return mRecord.PePRank;
+        }
+
+        public virtual int GetFameLevel()
+        {
+            return mRecord.FameLevel;
+        }
+
+        public int GetPrevFameLevelPoints(int aCurrentLevel)
+        {
+            throw new NotImplementedException("Use the Levelprogression data");
+        }
+
+        public int GetNextFameLevelPoints(int currentLevel)
+        {
+            throw new NotImplementedException("Use the Levelprogression data");
+        }
+
+        public bool AreStatsFrozen()
+        {
+            return (mFrozenFlags & EFF_Stats) == EFF_Stats;
+        }
+
+        public bool IsMovementLimited()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsAnimationFrozen()
+        {
+            return (mFrozenFlags & EFF_Animation) == EFF_Animation;
+        }
+
+        public bool IsRotationFrozen()
+        {
+            return (mFrozenFlags & EFF_Rotation) == EFF_Rotation;
+        }
+
+        public bool IsMovementFrozen()
+        {
+            return (mFrozenFlags & EFF_Movement) == EFF_Movement;
+        }
+
+        public void FreezeStatsTimed(float aDuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FreezeStats(bool aFreeze)
+        {
+            mFrozenFlags |= EFF_Stats;
+        }
+
+        public void FreezeAnimationTimed(float aDuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FreezeAnimation(bool aFreeze)
+        {
+            if (aFreeze)
+            {
+                mFrozenFlags |= EFF_Animation;
+            }
+            else
+            {
+                mFrozenFlags = (byte)(mFrozenFlags & ~EFF_Animation);
+            }
+        }
+
+        public void FreezeRotationTimed(float aDuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FreezeRotation(bool aFreeze)
+        {
+            if (aFreeze)
+            {
+                mFrozenFlags |= EFF_Rotation;
+            }
+            else
+            {
+                mFrozenFlags = (byte)(mFrozenFlags & ~EFF_Rotation);
+            }
+        }
+
+        public void FreezeMovementTimed(float aDuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FreezeMovement(bool aFreeze)
+        {
+            if (aFreeze)
+            {
+                mFrozenFlags |= EFF_Movement;
+            }
+            else
+            {
+                mFrozenFlags = (byte)(mFrozenFlags & ~EFF_Movement);
+            }
+        }
+
+        public void ResetAttributes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAttributes(int Body, int Mind, int Focus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnsetStatsState(ECharacterStatsCharacterState aNewState)
+        {
+            mState = aNewState;
+        }
+
+        public void SetStatsState(ECharacterStatsCharacterState aNewState)
+        {
+            mState = aNewState;
+        }
+
+        public void ForceCalculationUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IncreaseMeleeResistanceDelta(float f)
+        {
+            mMeleeResistanceDelta += f;
+        }
+
+        public void IncreaseRangedResistanceDelta(float f)
+        {
+            mRangedResistanceDelta += f;
+        }
+
+        public void IncreaseMagicResistanceDelta(float f)
+        {
+            mMagicResistanceDelta += f;
+        }
+
+        public void IncreaseHealthRegenerationDelta(float aDelta)
+        {
+            mHealthRegenerationDelta += aDelta;
+        }
+
+        public void IncreaseConcentrationDegenerationDelta(float aDelta)
+        {
+            mConcentrationDegenerationDelta += aDelta;
+        }
+
+        public void IncreaseConcentrationRegenerationDelta(float aDelta)
+        {
+            mConcentrationRegenerationDelta += aDelta;
+        }
+
+        public void IncreaseMoraleDegenerationDelta(float aDelta)
+        {
+            mMoraleDegenerationDelta += aDelta;
+        }
+
+        public void IncreaseMoraleRegenerationDelta(float aDelta)
+        {
+            mMoraleRegenerationDelta += aDelta;
+        }
+
+        public void IncreasePhysiqueDegenerationDelta(float aDelta)
+        {
+            mPhysiqueDegenerationDelta += aDelta;
+        }
+
+        public void IncreasePhysiqueRegenerationDelta(float aDelta)
+        {
+            mPhysiqueRegenerationDelta += aDelta;
+        }
+
+        public void IncreaseDamageBonusDelta(float aDelta)
+        {
+            mDamageBonusDelta += aDelta;
+        }
+
+        public void IncreaseMovementSpeedBonusDelta(float aDelta)
+        {
+            mMovementSpeedBonusDelta += aDelta;
+        }
+
+        public void IncreaseAttackSpeedBonusDelta(float aDelta)
+        {
+            mAttackSpeedBonusDelta += aDelta;
+        }
+
+        public void IncreaseConcentration(float aDelta)
+        {
+            Debug.Log("correct?");
+            mConcentrationLevel += (int)aDelta;
+        }
+
+        public void IncreaseMorale(float aDelta)
+        {
+            Debug.Log("correct?");
+            mMoraleLevel += (int)aDelta;
+        }
+
+        public void IncreasePhysique(float aDelta)
+        {
+            Debug.Log("correct?");
+            mPhysiqueLevel += (int)aDelta;
+        }
+
+        public void IncreasePePRankDelta(int aDelta)
+        {
+            mPePRankDelta += aDelta;
+        }
+
+        public void IncreaseMaxHealthDelta(int aDelta)
+        {
+            mMaxHealthDelta += aDelta;
+        }
+
+        public void IncreaseSoulAffinityDelta(float aDelta)
+        {
+            mSoulAffinityDelta += aDelta;
+        }
+
+        public void IncreaseSpiritAffinityDelta(float aDelta)
+        {
+            mSpiritAffinityDelta += aDelta;
+        }
+
+        public void IncreaseRuneAffinityDelta(float aDelta)
+        {
+            mRuneAffinityDelta += aDelta;
+        }
+
+        public void IncreaseFocusDelta(int aDelta)
+        {
+            mFocusDelta += aDelta;
+        }
+
+        public void IncreaseMindDelta(int aDelta)
+        {
+            mMindDelta += aDelta;
+        }
+
+        public void IncreaseBodyDelta(int aDelta)
+        {
+            mBodyDelta += aDelta;
+        }
+
+        public void IncreaseFrontDamageIncrease(float aDelta)
+        {
+            mFrontDamageIncrease += aDelta;
+        }
+
+        public void IncreaseRearDamageIncrease(float aDelta)
+        {
+            mRearDamageIncrease += aDelta;
+        }
+
+        public int GetAttributePoints(byte aAttribute)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
 /*
-native function SetConcentration(float Value);
-native function SetMorale(float Value);
-native function SetPhysique(float Value);
-final native function byte GetArchetype();
-final native function int GetPePRank();
-final native function int GetFameLevel();
-native event int GetPrevFameLevelPoints(int aCurrentLevel);
-native event int GetNextFameLevelPoints(int currentLevel);
 protected native function sv2clrel_UpdateStateRankShift_CallStub();
 protected native event sv2clrel_UpdateStateRankShift(int aStateRankShift);
 protected native function sv2clrel_UpdateMovementSpeed_CallStub();
@@ -418,59 +558,7 @@ native function sv_ResetFreezeStats();
 native function sv_ResetFreezeAnimation();
 native function sv_ResetFreezeRotation();
 native function sv_ResetFreezeMovement();
-final native function bool AreStatsFrozen();
-final native function bool IsMovementLimited();
-final native function bool IsAnimationFrozen();
-final native function bool IsRotationFrozen();
-final native function bool IsMovementFrozen();
-native function FreezeStatsTimed(float aDuration);
-native function FreezeStats(bool aFreeze);
-native function FreezeAnimationTimed(float aDuration);
 protected native function sv2clrel_FreezeAnimation_CallStub();
-protected event sv2clrel_FreezeAnimation(bool aFreeze) {
-if (aFreeze) {                                                              
-mFrozenFlags = mFrozenFlags | 4;                                          
-} else {                                                                    
-mFrozenFlags = mFrozenFlags & 255 - 4;                                    
-}
-Outer.PauseAnim(aFreeze);                                                   
-}
-native function FreezeAnimation(bool aFreeze);
-native function FreezeRotationTimed(float aDuration);
-native function FreezeRotation(bool aFreeze);
-native function FreezeMovementTimed(float aDuration);
 native function sv_Resurrect();
 native function ResetAttributes();
-native function SetAttributes(int Body,int Mind,int Focus);
-native function UnsetStatsState(byte aNewState);
-native function SetStatsState(byte aNewState);
-native function ForceCalculationUpdate();
-native function IncreaseHealthRegenerationDelta(float aDelta);
-native function IncreaseConcentrationDegenerationDelta(float aDelta);
-native function IncreaseConcentrationRegenerationDelta(float aDelta);
-native function IncreaseMoraleDegenerationDelta(float aDelta);
-native function IncreaseMoraleRegenerationDelta(float aDelta);
-native function IncreasePhysiqueDegenerationDelta(float aDelta);
-native function IncreasePhysiqueRegenerationDelta(float aDelta);
-native function IncreaseDamageBonusDelta(float aDelta);
-native function IncreaseMovementSpeedBonusDelta(float aDelta);
-native function IncreaseAttackSpeedBonusDelta(float aDelta);
-native function IncreaseConcentration(float aDelta);
-native function IncreaseMorale(float aDelta);
-native function IncreasePhysique(float aDelta);
-native function IncreasePePRankDelta(int aDelta);
-native function IncreaseMaxHealthDelta(int aDelta);
-native function IncreaseSoulAffinityDelta(float aDelta);
-native function IncreaseSpiritAffinityDelta(float aDelta);
-native function IncreaseRuneAffinityDelta(float aDelta);
-native function IncreaseFocusDelta(int aDelta);
-native function IncreaseMindDelta(int aDelta);
-native function IncreaseBodyDelta(int aDelta);
-native function IncreaseFrontDamageIncrease(float aDelta);
-native function IncreaseRearDamageIncrease(float aDelta);
-native function int GetAttributePoints(byte aAttribute);
-event cl_OnInit() {
-Super.cl_OnInit();                                                          
-Outer.PauseAnim(IsAnimationFrozen());                                       
-}
 */

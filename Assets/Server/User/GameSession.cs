@@ -5,6 +5,7 @@ using SBGame;
 using UnityEngine;
 using System.Linq;
 using World;
+using SBBase;
 
 namespace User
 {
@@ -75,7 +76,7 @@ namespace User
         {
             if (ActiveCharacter != null)
             {
-                Debug.Log("TODO save character after logout");
+                Debug.LogWarning("TODO save character after logout");
                 ActiveCharacterMap.Remove(ActiveCharacter);
                 GameObject.Destroy(ActiveCharacter.gameObject);
             }
@@ -110,7 +111,7 @@ namespace User
                 for (int i = 0; i < chars.Count; i++)
                 {
                     outMsg.WriteInt32(chars[i].Character.Id);
-                    outMsg.WriteInt32(0); //TODO fame value
+                    outMsg.WriteInt32(SBDBSync.GetFameLevelByPoints((int)chars[i].Sheet.FamePoints));
                 }
                 Connection.SendMessage(outMsg);
             }

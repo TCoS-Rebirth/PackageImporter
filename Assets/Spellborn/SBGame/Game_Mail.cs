@@ -7,84 +7,45 @@ namespace SBGame
     [Serializable] public class Game_Mail : Base_Component
     {
         public const int MAIL_CHECK_TIME = 300;
-
         public const int MAIL_MAX_ITEMS = 4;
-
         public const int MES_ATT3_REMOVED = 1024;
-
         public const int MES_ATT2_REMOVED = 512;
-
         public const int MES_ATT1_REMOVED = 256;
-
         public const int MES_ATT0_REMOVED = 128;
-
         public const int MES_SEND_DELETED = 32;
-
         public const int MES_RECI_DELETED = 16;
-
         public const int MES_FORWARDED = 8;
-
         public const int MES_REPLIED = 4;
-
         public const int MES_READ = 2;
-
         public const int MES_SENT = 1;
 
-        public List<MailEntry> mMailInbox = new List<MailEntry>();
+        [NonSerialized] public List<MailEntry> mMailInbox = new List<MailEntry>();
+        [NonSerialized] public List<MailEntry> mMailOutbox = new List<MailEntry>();
+        [NonSerialized] public bool mRequestingMails;
+        [NonSerialized] public int mLastCheckTime;
 
-        public List<MailEntry> mMailOutbox = new List<MailEntry>();
-
-        public bool mRequestingMails;
-
-        public int mLastCheckTime;
-
-        //public delegate<OnSendMailStatus> @__OnSendMailStatus__Delegate;
-
-        //public delegate<OnUpdateEntries> @__OnUpdateEntries__Delegate;
-
-        //public delegate<OnInboxMailDetails> @__OnInboxMailDetails__Delegate;
-
-        //public delegate<OnOutboxMailDetails> @__OnOutboxMailDetails__Delegate;
-
-        public Game_Mail()
-        {
-        }
 
         [Serializable] public struct MailAttachment
         {
             public int ItemTypeID;
-
             public int StackSize;
-
             public byte Color1;
-
             public byte Color2;
         }
 
         [Serializable] public struct MailEntry
         {
             public List<MailAttachment> Attachments;
-
             public Quest_Type quest;
-
             public string sender;
-
             public string Recipient;
-
             public string Subject;
-
             public string Body;
-
             public int MailID;
-
             public int Status;
-
             public int TimeStamp;
-
             public int Money;
-
             public bool Details;
-
             public bool Attached;
         }
     }

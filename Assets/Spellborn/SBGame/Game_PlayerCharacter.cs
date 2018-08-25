@@ -7,12 +7,10 @@ namespace SBGame
     [Serializable] public class Game_PlayerCharacter : Game_Character
     {
         private string mName = string.Empty;
-
         private int mMoney;
-
         private string mGuildName = string.Empty;
 
-        public EventNotification mMoneyChanged;
+        [NonSerialized] public EventNotification mMoneyChanged;
 
         public override void WriteLoginStream(IPacketWriter writer)
         {

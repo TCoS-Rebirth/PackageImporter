@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Database;
 using Engine;
+using Gameplay;
 using SBBase;
 using SBGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class GameResources : MonoBehaviour, IGameResources
+[CreateAssetMenu]
+public class GameResources : ScriptableObject
 {
 
     [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)] SBUniverse universe;
@@ -21,6 +23,25 @@ public class GameResources : MonoBehaviour, IGameResources
 
     [SerializeField] Game_PlayerController playerPrefab;
     [SerializeField] Game_NPCController npcPrefab;
+
+    [SerializeField] LevelProgression levelProgression;
+
+    static GameResources instance;
+
+    public static GameResources Instance
+    {
+        get
+        {
+            if (instance != null) return instance;
+            instance = Resources.FindObjectsOfTypeAll<GameResources>()[0];
+            return instance;
+        }
+    }
+
+    void OnEnable()
+    {
+        instance = this;
+    }
 
     public SBUniverse Universe
     {
@@ -40,6 +61,11 @@ public class GameResources : MonoBehaviour, IGameResources
     public Game_NPCController NPCPrefab
     {
         get { return npcPrefab; }
+    }
+
+    public LevelProgression LevelProgression
+    {
+        get { return levelProgression; }
     }
 
     public SBResourcePackage GetPackage(string packageName)

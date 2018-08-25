@@ -8,81 +8,52 @@ namespace SBGame
     [Serializable] public class Game_CombatStats : Base_Component
     {
         public Game_Pawn mScriptedClaim;
-
         public bool mInCombat;
-
         public float mCombatDuration;
-
         public float mIdleDuration;
-
         public List<ParticipantStruct> mParticipants = new List<ParticipantStruct>();
-
         public List<Game_Pawn> mAggroDistribution = new List<Game_Pawn>();
-
         public float mTotalPositiveContribution;
-
         public float mTotalNegativeContribution;
-
         public float mReceivedAggro;
-
         public bool mGatherStatistics;
-
         public int mSkillsExecuted;
-
         public int mSkillsHit;
-
         public int mSkillsMissed;
-
         public List<SocialStruct> mSocialStats = new List<SocialStruct>();
-
         [FieldConfig()]
         public float AggroDecay;
-
         [FieldConfig()]
         public float CreditRange;
-
         [FieldConfig()]
         public float CreditIdle;
-
         [FieldConfig()]
         public float BasePep;
-
         [FieldConfig()]
         public float LevelBonus;
-
         [FieldConfig()]
         public float MaxLevelBonus;
-
         [FieldConfig()]
         public float LevelPenalty;
-
         [FieldConfig()]
         public float MaxLevelPenalty;
-
         [FieldConfig()]
         public float DistributionFudge;
-
         public Game_Pawn mLastAttackedPawn;
 
         [Serializable] public struct SocialStruct
         {
             public Game_CombatStats LinkedStats;
-
             public float Weight;
         }
 
         [Serializable] public struct ParticipantStruct
         {
             public Game_Pawn Pwnie;
-
             public float PositiveContribution;
-
             public float NegativeContribution;
-
             public float LastContributionTime;
-
             public float FirstContributionTime;
-
             public bool ScriptedClaim;
         }
 

@@ -6,21 +6,12 @@ namespace SBGame
 {
     [Serializable] public class Game_ConversationState : UObject
     {
-        public Game_Pawn partner;
-
-        public Conversation_Topic CurrentTopic;
-
-        public Conversation_Node CurrentState;
-
-        public List<Conversation_Response> Responses = new List<Conversation_Response>();
-
-        public List<Conversation_Topic> Topics = new List<Conversation_Topic>();
-
-        public bool Failed;
-
-        public Game_ConversationState()
-        {
-        }
+        [NonSerialized] public Game_Pawn partner;
+        [NonSerialized] public Conversation_Topic CurrentTopic;
+        [NonSerialized] public Conversation_Node CurrentState;
+        [NonSerialized] public List<Conversation_Response> Responses = new List<Conversation_Response>();
+        [NonSerialized] public List<Conversation_Topic> Topics = new List<Conversation_Topic>();
+        [NonSerialized] public bool Failed;
     }
 }
 /*

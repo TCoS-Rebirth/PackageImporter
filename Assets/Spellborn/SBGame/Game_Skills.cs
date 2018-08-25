@@ -10,105 +10,54 @@ namespace SBGame
     [Serializable] public class Game_Skills : Base_Component
     {
         public const int MAX_TOKEN_SLOTS = 3;
-
         public const int MAX_STACK_COUNT = 10;
-
         public const float MAX_AIMING_DESYNC = 1F;
-
         public const int COMBO_FINISHING_MOVE_MINIMUM = 2;
-
         public const float COMBO_TIMEFRAME = 10F;
-
         public const float COMBO_VERSUS_TIMEFRAME = 5F;
-
         public const int COMBO_MAX_STRING_LENGTH = 9;
 
-        public int mTiers;
-
-        public int mTierSlots;
-
-        public float mTierTimeout;
-
-        public float mTierTimeoutStartTime;
-
-        public int mCurrentTier;
-
-        public int mLastSkillIndex;
-
-        public List<FSkill_Type> CharacterSkills = new List<FSkill_Type>();
-
-        public List<FSkill_Type> SkilldeckSkills = new List<FSkill_Type>();
-
-        private string DebugSkillIndentStr = string.Empty;
-
-        private bool DebugSkillEnabled;
-
-        public RunningSkillData LastSkill;
-
+        [NonSerialized] public int mTiers;
+        [NonSerialized] public int mTierSlots;
+        [NonSerialized] public float mTierTimeout;
+        [NonSerialized] public float mTierTimeoutStartTime;
+        [NonSerialized] public int mCurrentTier;
+        [NonSerialized] public int mLastSkillIndex;
+        [NonSerialized] public List<FSkill_Type> CharacterSkills = new List<FSkill_Type>();
+        [NonSerialized] public List<FSkill_Type> SkilldeckSkills = new List<FSkill_Type>();
+        [NonSerialized] public RunningSkillData LastSkill;
         private int NextNotifyIndex;
-
         private List<RunningSkillData> ActiveSkills = new List<RunningSkillData>();
-
         private List<FSkill_Event> RunningEvents = new List<FSkill_Event>();
-
         private int TargetFlags;
-
         private Vector TargetLocation;
-
         private int SessionID;
-
         private FSkill_Event.AimingInfo TargetAimingInfo;
-
-        [ArraySizeForExtraction(Size = 9)]
-        private ComboStringData[] mComboString = new ComboStringData[0];
-
+        private ComboStringData[] mComboString = new ComboStringData[9];
         private int mComboStringLength;
-
         private ComboStringData mPreviousLastComboEntry;
-
         private List<Game_Pawn> mComboTargets = new List<Game_Pawn>();
-
         private List<SpecialDuffEffect> SpecialDuffEffects = new List<SpecialDuffEffect>();
-
-        public FSkill_Event_Duff SpecialDuffEffectsEvent;
-
+        [NonSerialized] public FSkill_Event_Duff SpecialDuffEffectsEvent;
         private List<FSkill_Event_Duff> SpecialDuffEvents = new List<FSkill_Event_Duff>();
-
         [ArraySizeForExtraction(Size = 90)]
         private DuffStackData[] AppliedStackDuffs = new DuffStackData[0];
-
         private List<DuffStackData> AppliedNoStackDuffs = new List<DuffStackData>();
-
         private UObject SkillEffectsPackage;
-
         private bool DirtyDuffData;
-
-        public List<int> TeamDuffList = new List<int>();
-
-        public List<ClientDuffStackData> ClientDuffList = new List<ClientDuffStackData>();
-
-        public float mLastDuffUpdateTime;
-
+        [NonSerialized] public List<int> TeamDuffList = new List<int>();
+        [NonSerialized] public List<ClientDuffStackData> ClientDuffList = new List<ClientDuffStackData>();
+        [NonSerialized] public float mLastDuffUpdateTime;
         private List<ImmuneData> ImmuneEffects = new List<ImmuneData>();
-
         private List<DisableSkillUseData> DisableSkillUseEffects = new List<DisableSkillUseData>();
-
         private List<AlterEffectData> AlterEffectEffects = new List<AlterEffectData>();
-
         private List<ShareData> ShareEffects = new List<ShareData>();
-
         private List<ReturnReflectData> ReturnReflectEffects = new List<ReturnReflectData>();
-
         private List<Game_Pawn> Bloodlinks = new List<Game_Pawn>();
-
         private bool DirtyShareApplicantData;
-
         private List<ShareApplicantData> ShareApplicantEffects = new List<ShareApplicantData>();
-
         private int mSkillSessionTable;
-
         private int mSkillTokenMap;
-
         private bool mHasTokenMapBeenModified;
 
         #region structs
@@ -249,25 +198,15 @@ namespace SBGame
         public enum ESkillStartFailure
         {
             SSF_ALLOWED,
-
             SSF_INVALID_SKILL,
-
             SSF_FINISHERS_NOT_ALLOWED,
-
             SSF_OPENERS_NOT_ALLOWED,
-
             SSF_COOLING_DOWN,
-
             SSF_DEBUFF_DISABLED,
-
             SSF_INVALID_PAWN,
-
             SSF_STILL_EXECUTING_SKILL,
-
             SSF_FROZEN,
-
             SSF_DEAD,
-
             SSF_OUTOFRANGE,
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SBGame;
+using UnityEngine;
 
 namespace Utilities
 {
@@ -28,7 +29,7 @@ namespace Utilities
         }
 
         public static void Unpack(int part1, int part2, 
-            out byte race, out byte gender, out byte body, out byte head, 
+            out Content_API.NPCRace race, out Content_API.NPCGender gender, out Content_API.NPCBodytype body, out byte head, 
             out byte bodyColor, out byte chestTattoo,out byte leftTattoo,
             out byte rightTattoo,out byte hair,out byte hairColor, out byte voice)
         {

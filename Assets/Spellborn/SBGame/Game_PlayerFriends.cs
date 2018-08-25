@@ -1,67 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using Engine;
 using SBBase;
+using UnityEngine;
 
 namespace SBGame
 {
     [Serializable] public class Game_PlayerFriends : Base_Component
     {
-        public List<SBFriendsMember> FriendsMembers = new List<SBFriendsMember>();
-
-        //public delegate<OnRefreshView> @__OnRefreshView__Delegate;
-
-        //public delegate<OnFriendOnline> @__OnFriendOnline__Delegate;
-
-        //public delegate<OnAddMemberReq> @__OnAddMemberReq__Delegate;
-
-        public Game_PlayerFriends()
-        {
-        }
+        [NonSerialized] public List<SBFriendsMember> FriendsMembers = new List<SBFriendsMember>();
 
         public enum eFriendsResultCode
         {
             FRC_NONE,
-
             FRC_ACCEPT,
-
             FRC_DECLINE,
-
             FRC_OFFLINE,
-
             FRC_SELF_INVITE,
-
             FRC_BUSY,
-
             FRC_IGNORED_ME,
-
             FRC_INVITE_SUCCESS,
-
             FRC_MEMBER_ON_TRAVELING,
-
             FRC_RELATIONSHIP_ALREADY,
-
             FRC_UNKNOWN_CHARACTER,
-
             FRC_INCORRECT_INVITER,
-
             FRC_ADD_RELATIONSHIP_FAILED,
-
             FRC_REMOVE_RELATIONSHIP_FAILED,
-
             FRC_SET_RELATIONSHIP_FAILED,
-
             FRC_GET_RELATIONSHIP_INFO_FAILED,
         }
 
         public enum eFriendsListFlag
         {
             FLF_UNKNOWN,
-
             FLF_FRIEND,
-
             FLF_FRIEND_READY,
-
             FLF_IGNORE,
+        }
+
+        public override void Initialize(Actor outer)
+        {
+            base.Initialize(outer);
+            GetFriendList();
+        }
+
+        void GetFriendList()
+        {
+            Debug.LogWarning("TODO retrieve friendlist");
         }
     }
 }
@@ -267,13 +252,8 @@ OnRefreshView();
 delegate OnFriendOnline();
 delegate OnRefreshView();
 native function MemberInviteAck(string fromPawnName,byte resultCode);
-native function GetFriendList();
 native function RemoveIgnoreMember(string ignorePawnName);
 native function AddIgnoreMember(string ignorePawnName);
 native function RemoveFriendMember(string friendPawnName);
 native function AddFriendMember(string friendPawnName);
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-GetFriendList();                                                            
-}
 */

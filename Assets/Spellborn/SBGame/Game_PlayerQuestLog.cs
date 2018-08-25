@@ -1,11 +1,15 @@
 ﻿using System;
+using Engine;
+using UnityEngine;
 
 namespace SBGame
 {
     [Serializable] public class Game_PlayerQuestLog : Game_QuestLog
     {
-        public Game_PlayerQuestLog()
+        public override void Initialize(Actor outer)
         {
+            base.Initialize(outer);
+            Debug.LogWarning("TODO retrieve quest data");
         }
     }
 }
@@ -90,10 +94,4 @@ if (!sv_AbandonQuest(quest)) {
 goto jl003D;                                                              
 }
 }
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-Init();                                                                     
-Game_PlayerConversation(Game_PlayerController(Outer.Controller).ConversationControl).cl_RefreshTopics();
-}
-private final native function Init();
 */

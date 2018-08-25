@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SBBase;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,9 +28,9 @@ namespace World
             SceneManager.sceneUnloaded += OnLevelUnloaded;
         }
 
-        public void LoadPersistentMap(MapIDs map)
+        public void LoadPersistentMap(SBWorld map)
         {
-            SceneManager.LoadScene(map.ToString(), LoadSceneMode.Additive);
+            SceneManager.LoadScene(map.worldID.ToString(), LoadSceneMode.Additive);
         }
 
         public void UnloadPersistentMap(MapIDs map)
@@ -48,7 +49,7 @@ namespace World
             if (scene.name == "Main") return; //ignore
             Debug.Log(string.Format("Map loaded: {0}", scene.name));
             var mapID = (MapIDs) Enum.Parse(typeof(MapIDs), scene.name, true);
-            var universe = ServiceContainer.GetService<IGameResources>().Universe;
+            var universe = GameResources.Instance.Universe;
             var world = universe.Worlds.FirstOrDefault(sbWorld => sbWorld.worldID == mapID);
             if (world == null) throw new NullReferenceException("World is null");
             var map = new GameMap(scene, mapID, world, AllocateInstanceID());

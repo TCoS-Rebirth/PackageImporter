@@ -1,25 +1,17 @@
 ﻿using System;
 using Engine;
+using SBBase;
+using UnityEngine;
 
 namespace SBGame
 {
     [Serializable]
     public class Game_PlayerStats: Game_CharacterStats
     {
-        [FieldConst()]
-        public float FreeToPlayMaxFamePoints;
-
-        public bool mFreeToPlayLimitReached;
-
-        public int mFamePoints;
-
-        public int mPePPoints;
-
-        [FieldConst()]
-        public bool mMayChooseClass;
-
-        [FieldConst()]
-        public byte mAvailableAttributePoints;
+        [NonSerialized] public int mFamePoints;
+        [NonSerialized] public int mPePPoints;
+        [NonSerialized] public bool mMayChooseClass;
+        [NonSerialized] public byte mAvailableAttributePoints;
 
         public override void WriteLoginStream(IPacketWriter writer)
         {
@@ -42,34 +34,121 @@ namespace SBGame
             throw new NotImplementedException();
         }
 
-        public override void cl_OnInit()
+        public override void Initialize(Actor outer)
         {
-            base.cl_OnInit();
-            //if (Outer.IsLocalPlayer()) {                                                
-            SetCharacterClass((byte)(((Outer as Game_Pawn).Controller as Game_Controller).DBCharacterSheet.ClassId + 1));
-            //}
+            base.Initialize(outer);
+            var pawn = outer as Game_Pawn;
+            var controller = pawn.Controller as Game_Controller;
+            SetCharacterClass((Content_API.EContentClass)(controller.DBCharacterSheet.ClassId + 1));
+            mFamePoints = (int)controller.DBCharacterSheet.FamePoints;
+            mPePPoints = (int)controller.DBCharacterSheet.PepPoints;
+            mHealth = controller.DBCharacterSheet.Health;
+            mRecord.CopyHealth = mHealth;
+            mRecord.FameLevel = SBDBSync.GetFameLevelByPoints(mFamePoints);
+            mRecord.PePRank = SBDBSync.GetPepRankByPoints(mPePPoints);
+            mExtraBodyPoints = controller.DBCharacterSheet.ExtraBodyPoints;
+            mExtraMindPoints = controller.DBCharacterSheet.ExtraMindPoints;
+            mExtraFocusPoints = controller.DBCharacterSheet.ExtraFocusPoints;
+        }
+
+        public void sv_SetClass(Content_API.EContentClass aClass)
+        {
+            SetCharacterClass(aClass);
+            sv_UpdateStats();
+            sv2cl_SetClass_CallStub(aClass);
+            SBDBAsync.SetCharacterClass((Outer as Game_Pawn), (Outer as Game_Pawn).GetCharacterID(), (byte)aClass - 1);
+            if ((Outer as Game_Pawn).BodySlots != null)
+            {
+                (Outer as Game_Pawn).BodySlots.sv_SetMode((Outer as Game_Pawn).BodySlots.GetBodySlotModeByClass());
+            }
+            SetClassToUniverse(aClass);
+        }
+
+        void sv_UpdateStats()
+        {
+            throw new NotImplementedException();
+        }
+
+        void SetClassToUniverse(Content_API.EContentClass aClass)
+        {
+            throw new NotImplementedException();
+        }
+
+        void sv2cl_SetClass(Content_API.EContentClass aClass)
+        {
+            SetCharacterClass(aClass);
+        }
+
+        void sv2cl_SetClass_CallStub(Content_API.EContentClass aClass /*added*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        void cl2sv_SetClass_CallStub(Content_API.EContentClass aClass /*added*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IncreasePePPoints(int aDelta)
+        {
+            mPePPoints += aDelta;
+            Debug.LogWarning("TODO check for maximum");
+        }
+
+        public void IncreaseFamePoints(int aDelta)
+        {
+            mFamePoints += aDelta;
+            Debug.LogWarning("TODO check for maximum");
+        }
+
+        int GetMaximumPePRank()
+        {
+            throw new NotImplementedException();
+        }
+
+        int GetMinimumPePRank()
+        {
+            throw new NotImplementedException();
+        }
+
+        int GetMaximumFameLevel()
+        {
+            throw new NotImplementedException();
+        }
+
+        int GetMinimumFameLevel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void sv2clrel_OnLevelUp(int aNewLevel)
+        {
+            //Game_PlayerController Controller;
+            bool levelUp = aNewLevel > mRecord.FameLevel;
+            mRecord.FameLevel = aNewLevel;
+            if (levelUp)
+            {
+                (Outer as Game_Pawn).cl_PlayPawnEffect(0);
+                //if (Outer.IsLocalPlayer())
+                //{
+                //    Controller = Game_PlayerController(Outer.Controller);
+                //    Game_Desktop(Controller.Player.GUIDesktop).OnLevelUp(aNewLevel);
+                //    Game_PlayerConversation(Controller.ConversationControl).cl_RefreshTopics();
+                //}
+            }
+        }
+
+        public void sv2clrel_OnUpdatePePRank(int aNewPePRank)
+        {
+            if (aNewPePRank > mRecord.PePRank)
+            {
+                (Outer as Game_Pawn).cl_PlayPawnEffect((Game_Pawn.EPawnEffectType)1);
+            }
+            mRecord.PePRank = aNewPePRank;
         }
     }
 }
 /*
-function LocalizedString GetPePRankDescription() {
-local LocalizedString emptyLS;
-switch (mRecord.PePRank) {                                                  
-case 1 :                                                                  
-return Class'StringReferences'.default.PePRank1Description;             
-case 2 :                                                                  
-return Class'StringReferences'.default.PePRank2Description;             
-case 3 :                                                                  
-return Class'StringReferences'.default.PePRank3Description;             
-case 4 :                                                                  
-return Class'StringReferences'.default.PePRank4Description;             
-case 5 :                                                                  
-return Class'StringReferences'.default.PePRank5Description;             
-default:                                                                  
-return emptyLS;                                                         
-}
-}
-}
 protected native function sv2cl_UpdateFocusAndSoulAffinity_CallStub();
 protected native event sv2cl_UpdateFocusAndSoulAffinity(int aFocus,float aSoulAffinity);
 protected native function sv2cl_UpdateMindAndSpiritAffinity_CallStub();
@@ -82,58 +161,12 @@ protected native function sv2cl_UpdatePePPoints_CallStub();
 protected native event sv2cl_UpdatePePPoints(float aPePPoints);
 protected native function sv2cl_UpdateFamePoints_CallStub();
 protected native event sv2cl_UpdateFamePoints(float aFamePoints);
-protected native function sv2cl_SetClass_CallStub();
-protected event sv2cl_SetClass(byte aClass) {
-SetCharacterClass(aClass);                                                  
-}
-function sv_SetClass(byte aClass) {
-SetCharacterClass(aClass);                                                  
-sv_UpdateStats();                                                           
-sv2cl_SetClass_CallStub(aClass);                                            
-Class'SBDBAsync'.SetCharacterClass(Outer,Outer.GetCharacterID(),aClass - 1);
-if (Outer.BodySlots != None) {                                              
-Outer.BodySlots.sv_SetMode(Outer.BodySlots.GetBodySlotModeByClass());     
-}
-SetClassToUniverse(aClass);                                                 
-}
-protected native function cl2sv_SetClass_CallStub();
 event cl2sv_SetClass(byte aClass) {
 sv_SetClass(aClass);                                                        
 }
-native function SetClassToUniverse(byte aClass);
-native function int GetMaximumPePRank();
-native function int GetMinimumPePRank();
-native function int GetMaximumFameLevel();
-native function int GetMinimumFameLevel();
 native event int GetNextPePRankPoints(int rank);
 protected native function sv2clrel_OnUpdatePePRank_CallStub();
-event sv2clrel_OnUpdatePePRank(int aNewPePRank) {
-if (aNewPePRank > mRecord.PePRank) {                                        
-Outer.cl_PlayPawnEffect(1);                                               
-if (Outer.IsLocalPlayer()) {                                              
-Game_Desktop(Game_PlayerController(Outer.Controller).Player.GUIDesktop).OnRankUp(aNewPePRank);
-}
-}
-mRecord.PePRank = aNewPePRank;                                              
-}
 protected native function sv2clrel_OnLevelUp_CallStub();
-event sv2clrel_OnLevelUp(int aNewLevel) {
-local Game_PlayerController Controller;
-local bool levelUp;
-levelUp = aNewLevel > mRecord.FameLevel;                                    
-mRecord.FameLevel = aNewLevel;                                              
-if (levelUp) {                                                              
-Outer.cl_PlayPawnEffect(0);                                               
-if (Outer.IsLocalPlayer()) {                                              
-Controller = Game_PlayerController(Outer.Controller);                   
-Game_Desktop(Controller.Player.GUIDesktop).OnLevelUp(aNewLevel);        
-Game_PlayerConversation(Controller.ConversationControl).cl_RefreshTopics();
-}
-}
-}
-native function IncreasePePPoints(int aDelta);
-native function IncreaseFamePoints(int aDelta);
 native function cl_ClearMayChooseClass();
 native function cl_ClearAvailableAttributePoints();
-native function sv_UpdateStats();
 */

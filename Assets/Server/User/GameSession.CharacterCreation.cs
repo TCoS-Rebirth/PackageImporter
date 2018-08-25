@@ -32,8 +32,8 @@ namespace User
         void C2S_CS_CREATE_CHARACTER(NetworkPacket packet)
 		{
 		    var db = ServiceContainer.GetService<IDatabase>();
-		    var ccItems = ServiceContainer.GetService<IGameResources>().CCItemSets;
-		    var universe = ServiceContainer.GetService<IGameResources>().Universe;
+		    var ccItems = GameResources.Instance.CCItemSets;
+		    var universe = GameResources.Instance.Universe;
 		    var map = ServiceContainer.GetService<IMapHandler>().GetPersistentMap(universe.EntryWorld.worldID);
 		    var start = map.Find<PlayerStart>(playerStart => playerStart.NavigationTag.Equals(universe.EntryPortal.Tag));
 		    if (start == null) throw new NullReferenceException("Entry portal is null");
@@ -226,13 +226,16 @@ namespace User
             else
             {
                 ActiveCharacterMap = ServiceContainer.GetService<IMapHandler>().GetPersistentMap((MapIDs)character.worldID); //TODO change to instanceID / handle instances when needed
-                ActiveCharacter = ActiveCharacterMap.Spawn(ServiceContainer.GetService<IGameResources>().PlayerPrefab, character.Location, character.Rotation, controller => 
+                ActiveCharacter = ActiveCharacterMap.Spawn(GameResources.Instance.PlayerPrefab, character.Location, character.Rotation, controller => 
                 {
                     controller.AccountID = Account.UID;
                     controller.DBCharacter = character;
                     controller.DBCharacterSheet = db.GetSheet(character.Id);
-                    controller.DBSkilldecks.Add(db.GetSkillDeck(0));
-                    //controller.DBCharacterSkills = TODO
+                    Debug.LogWarning("TODO Properly handle multiple skilldecks & tokens");
+                    var skillDeck = db.GetSkillDeck(0);
+                    controller.DBSkilldecks.Add(skillDeck);
+                    controller.DBCharacterSkills = skillDeck.mSkills;
+                    Debug.LogWarning("TODO handle quests & persistent variables");
                     //controller.DBSkillTokens = TODO
                     //controller.DBFinishedQuests = TODO
                     //controller.DBQuestObjectiveIds = TODO

@@ -5,11 +5,9 @@ namespace SBGame
 {
     [Serializable] public class Game_Character : Base_Component, IActorPacketStream
     {
-        public NPC_Taxonomy mFaction;
-
-        public int mFactionId;
-
-        public NPC_Taxonomy mOldFaction;
+        [NonSerialized] public NPC_Taxonomy mFaction;
+        [NonSerialized] public int mFactionId;
+        [NonSerialized] public NPC_Taxonomy mOldFaction;
 
         public virtual void WriteLoginStream(IPacketWriter writer) { throw new NotImplementedException(); }
     }

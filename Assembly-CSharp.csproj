@@ -66,7 +66,6 @@
     <Compile Include="Assets\Server\GameResources.cs" />
     <Compile Include="Assets\Server\GameServer.cs" />
     <Compile Include="Assets\Server\IDatabase.cs" />
-    <Compile Include="Assets\Server\IGameResources.cs" />
     <Compile Include="Assets\Server\IMapHandler.cs" />
     <Compile Include="Assets\Server\ISessionHandler.cs" />
     <Compile Include="Assets\Server\IWorldServer.cs" />
@@ -610,7 +609,6 @@
     <Compile Include="Assets\Spellborn\SBGame\Game_Team.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_TeamMember.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_TeamMemberPawn.cs" />
-    <Compile Include="Assets\Spellborn\SBGame\Game_TextParser.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_TradeManager.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_Trading.cs" />
     <Compile Include="Assets\Spellborn\SBGame\Game_TransientPawn.cs" />

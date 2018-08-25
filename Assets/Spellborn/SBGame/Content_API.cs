@@ -91,74 +91,47 @@ namespace SBGame
         public enum EContentOperator
         {
             ECO_Equals = 0,
-
             ECO_NotEquals = 1,
-
             ECO_Less = 2,
-
             ECO_More = 3,
-
             ECO_EqualOrLess = 4,
-
             ECO_EqualOrMore = 5,
-
             ECO_Mask = 6,
-
             ECO_NotMask = 7,
         }
 
         public enum NPCBodytype
         {
             ENB_Skinny = 0,
-
             ENB_Athletic = 1,
-
             ENB_Fat = 2,
-
             ENB_Hulky = 3,
-
             ENB_Child = 4,
-
             ENB_Monstrous = 5,
         }
 
         public enum NPCRace
         {
             ENR_Human = 0,
-
             ENR_Daevi = 1,
-
             ENR_Monster = 2,
-
             ENR_Arionite = 3,
-
             ENR_SpeyrFolk = 4,
-
             ENR_DemonArmy = 5,
-
             ENR_BotG = 6,
-
             ENR_ForgeOfWisdom = 7,
-
             ENR_Ousted = 8,
-
             ENR_Urvhail = 9,
-
             ENR_Vhuul = 10,
-
             ENR_Urgarut = 11,
-
             ENR_Shunned = 12,
         }
 
         public enum NPCGender
         {
             ENG_Male = 0,
-
             ENG_Female = 1,
-
             ENG_Neuter = 2,
-
             ENG_Hermaphrodite = 3,
         }
 

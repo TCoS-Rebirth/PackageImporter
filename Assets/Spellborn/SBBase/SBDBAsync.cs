@@ -34,6 +34,11 @@ namespace SBBase
         {
             throw new NotImplementedException();
         }
+
+        public static void SetCharacterClass(Pawn Pawn,int Id,int class_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 /*
@@ -43,7 +48,6 @@ static native function SetQuestObjective(Pawn Pawn,int CharacterID,int objective
 static native function SetCharacterSkilldeckSkills(Pawn Pawn,int character_id,int skilldeck_id,array<int> skilldeck_skills);
 static native function LogCSCommand(int aCSAccountID,string aCSname,string aCommand,int aPlayerAccountID,optional string aPlayerName,optional string aMessage,optional string lootItems,optional coerce string muteScope,optional int muteDuration,optional string killDetails);
 static native function SetCharacterFaction(Pawn Pawn,int Id,int faction_id);
-static native function SetCharacterClass(Pawn Pawn,int Id,int class_id);
 static native function UpdateCharacterFamePep(Pawn Pawn,int Id,float fame_points,float pep_points);
 static native function UpdateCharacterHealth(Pawn Pawn,int Id,float Health);
 */

@@ -13,105 +13,65 @@ namespace SBGame
         public const int MAX_TRADE_ITEMS = 16;
 
         private byte mTradeState;
-
         private int mMoney;
-
         private string mPartnerName = string.Empty;
-
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
         private Shop_Base mShop;
-
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
         private byte mShopOption;
 
         [Serializable]
         public struct PaintItem
         {
             public int DBID;
-
             public byte Color1;
-
             public byte Color2;
         }
 
         public enum EItemForgeError
         {
             IFE_InternalError,
-
             IFE_WrongShopType,
-
             IFE_NoneForgableItem,
-
             IFE_SlotInvalid,
-
             IFE_NotAToken,
-
             IFE_IncompatibleSlotType,
-
             IFE_LevelTooLow,
-
             IFE_TokenRankTooHigh,
-
             IFE_NotEnoughMoney,
-
             IFE_NoTokensToRemove,
-
             IFE_NotEnoughInventorySpace,
         }
 
         public enum ETradingMessages
         {
             TM_REQ_BUSY_SELF,
-
             TM_REQ_BUSY_PARTNER,
-
             TM_REQ_IGNORED_ME,
-
             TM_REQ_FAILED,
-
             TM_DISCONNECT,
-
             TM_DIED,
-
             TM_REQ_CANCEL,
-
             TM_REQ_REJECT,
-
             TM_REQ_ACCEPTED,
-
             TM_TRADE_CANCELED,
-
             TM_OFFER_ACCEPTED,
-
             TM_OFFER_CANCELED,
-
             TM_INSUFFICIENT_SPACE,
-
             TM_PARTNER_INSUFFICIENT_SPACE,
-
             TM_FINALIZING,
-
             TM_FAILED,
-
             TM_DONE,
         }
 
         public enum EClientTradeStates
         {
             CTS_NONE,
-
             CTS_REQUESTING,
-
             CTS_RESPONSE,
-
             CTS_ACCEPTING,
-
             CTS_TRADING,
-
             CTS_OFFERED,
-
             CTS_FINALIZING,
         }
 

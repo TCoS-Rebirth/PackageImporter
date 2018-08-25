@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Engine;
 using SBBase;
+using UnityEngine;
 
 namespace SBGame
 {
@@ -10,104 +12,57 @@ namespace SBGame
     public class Game_PlayerTeams: Base_Component
     {
         public const int NOTIFY_HUD_CLOSE_ALL = 0;
-
         public const int NOTIFY_HUD_DISBAND = 3;
-
         public const int NOTIFY_HUD_KICK = 2;
-
         public const int NOTIFY_HUD_INVITE_REQ = 1;
-
         public const int TEAM_MEMBER_INFO_BASE_RATE = 10;
-
         public const float TEAM_MEMBER_INFO_UPDATE_TIME = 1F;
 
-        public int mTeamID;
-
-        public byte mLootMode;
-
-        public List<Game_TeamMember> mTeamMembers = new List<Game_TeamMember>();
-
-        public Game_Team mTeam;
-
-        public EventNotification mTeamChanged;
-
-        public int mLeaderID;
-
-        private int mLastTeamMemberInfoBase;
-
-        private float mLastTeamMemberInfoUpdate;
-
-        private List<byte> mLastLodData = new List<byte>();
-
+        [NonSerialized] public int mTeamID;
+        [NonSerialized] public byte mLootMode;
+        [NonSerialized] public List<Game_TeamMember> mTeamMembers = new List<Game_TeamMember>();
+        [NonSerialized] public Game_Team mTeam;
+        [NonSerialized] public EventNotification mTeamChanged;
+        [NonSerialized] public int mLeaderID;
         private float mPartyTravelTimeout;
-
         private int mPartyTravelTargetWorld;
-
         private string mPartyTravelPortalName = string.Empty;
-
-        public bool mPartyTravelInProgress;
-
-        public bool mIsJoiningPartyTravel;
+        [NonSerialized] public bool mPartyTravelInProgress;
+        [NonSerialized] public bool mIsJoiningPartyTravel;
 
         public enum eTeamRequestResult
         {
             TRR_NONE,
-
             TRR_ACCEPT,
-
             TRR_DECLINE,
-
             TRR_BUSY,
-
             TRR_FULL,
-
             TRR_INVITE_SUCCESS,
-
             TRR_MEMBER_IN_OTHER_TEAM,
-
             TRR_MEMBER_ON_TRAVELING,
-
             TRR_SELF_INVITE,
-
             TRR_INSUFFICIENT_RIGHTS,
-
             TRR_IGNORED_ME,
-
             TRR_UNKNOWN_CHARACTER,
-
             TRR_UNKNOWN_MEMBER_WORLD,
-
             TRR_UNKNOWN_TEAM,
-
             TRR_EMPTY_TEAM,
-
             TRR_CREATE_FAILED,
-
             TRR_INCORRECT_INVITER,
-
             TRR_KICK_FAILED,
-
             TRR_LEAVE_FAILED,
-
             TRR_DISBAND_FAILED,
-
             TRR_CHANGE_LEADER_FAILED,
-
             TRR_CHANGE_LOOTMODE_FAILED,
-
             TRR_GET_TEAM_INFO_FAILED,
         }
 
         public enum eTeamRemoveMemberCode
         {
             TRMC_NONE,
-
             TRMC_KICK,
-
             TRMC_LEAVE,
-
             TRMC_OFFLINE,
-
             TRMC_DISBAND,
         }
 
@@ -195,6 +150,18 @@ namespace SBGame
                 oTeam = new List<Game_Pawn>() { Outer as Game_Pawn };
             }
         }
+
+        public override void Initialize(Actor outer)
+        {
+            base.Initialize(outer);
+            GetTeamInfo();
+        }
+
+        void GetTeamInfo()
+        {
+            Debug.LogWarning("TODO retrieve team info");
+        }
+
     }
 }
 /*
@@ -651,7 +618,6 @@ function int GetPlayerCharacterID() {
 return Game_Pawn(Outer.Pawn).GetCharacterID();                              
 }
 native function TeamInviteAck(int teamID,string fromPawnName,byte _result);
-native function GetTeamInfo();
 native function TeamSetLootMode(byte LootMode);
 native function TeamDisband();
 native function TeamLeaderChange(int newLeaderPawnID);
@@ -666,15 +632,4 @@ RefreshTeam();
 }
 }
 delegate OnSetLootMode(byte oldLootMode,byte newlootMode);
-function cl_OnShutdown() {
-Super.cl_OnShutdown();                                                      
-mTeamChanged.Delete();                                                      
-}
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-GetTeamInfo();                                                              
-}
-function Init() {
-mTeamChanged = new Class'EventNotification';                                
-}
 */

@@ -7,147 +7,86 @@ namespace SBGame
     [Serializable]
     public class Game_EquippedAppearance: Game_Appearance
     {
-        public byte mHead;
-
-        public int mChestClothes;
-
-        public byte mLeftGlove;
-
-        public byte mRightGlove;
-
-        public byte mPants;
-
-        public byte mShoes;
-
-        public byte mHeadGearArmour;
-
-        public byte mLeftShoulderArmour;
-
-        public byte mRightShoulderArmour;
-
-        public byte mLeftGauntlet;
-
-        public byte mRightGauntlet;
-
-        public byte mChestArmour;
-
-        public byte mBelt;
-
-        public byte mLeftThigh;
-
-        public byte mRightThigh;
-
-        public byte mLeftShin;
-
-        public byte mRightShin;
-
-        public byte mMainWeapon;
-
-        public byte mOffhandWeapon;
-
-        public byte mHair;
-
-        public byte mMainSheath;
-
-        public byte mOffhandSheath;
-
-        [ArraySizeForExtraction(Size = 4)]
-        public byte[] mTattoo = new byte[0];
-
-        [ArraySizeForExtraction(Size = 4)]
-        public byte[] mClassTattoo = new byte[0];
-
-        public byte mBodyColor;
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mChestClothesColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mLeftGloveColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mRightGloveColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mPantsColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mShoesColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mHeadGearArmourColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mLeftShoulderArmourColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mRightShoulderArmourColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mLeftGauntletColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mRightGauntletColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mChestArmourColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mBeltColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mLeftThighColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mRightThighColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mLeftShinColors = new byte[0];
-
-        [ArraySizeForExtraction(Size = 2)]
-        public byte[] mRightShinColors = new byte[0];
-
-        public byte mHairColor;
-
-        public bool mDisplayLogo;
-
-        public Appearance_Set mAppearanceSet;
-
-        public float mFreezeTime;
-
-        public float mFreezeStart;
-
-        public bool mIgnoreCoversFlags;
+        [NonSerialized] public byte mHead;
+        [NonSerialized] public int mChestClothes;
+        [NonSerialized] public byte mLeftGlove;
+        [NonSerialized] public byte mRightGlove;
+        [NonSerialized] public byte mPants;
+        [NonSerialized] public byte mShoes;
+        [NonSerialized] public byte mHeadGearArmour;
+        [NonSerialized] public byte mLeftShoulderArmour;
+        [NonSerialized] public byte mRightShoulderArmour;
+        [NonSerialized] public byte mLeftGauntlet;
+        [NonSerialized] public byte mRightGauntlet;
+        [NonSerialized] public byte mChestArmour;
+        [NonSerialized] public byte mBelt;
+        [NonSerialized] public byte mLeftThigh;
+        [NonSerialized] public byte mRightThigh;
+        [NonSerialized] public byte mLeftShin;
+        [NonSerialized] public byte mRightShin;
+        [NonSerialized] public byte mMainWeapon;
+        [NonSerialized] public byte mOffhandWeapon;
+        [NonSerialized] public byte mHair;
+        [NonSerialized] public byte mMainSheath;
+        [NonSerialized] public byte mOffhandSheath;
+        [NonSerialized] public byte[] mTattoo = new byte[4];
+        [NonSerialized] public byte[] mClassTattoo = new byte[4];
+        [NonSerialized] public byte mBodyColor;
+        [NonSerialized] public byte[] mChestClothesColors = new byte[2];
+        [NonSerialized] public byte[] mLeftGloveColors = new byte[2];
+        [NonSerialized] public byte[] mRightGloveColors = new byte[2];
+        [NonSerialized] public byte[] mPantsColors = new byte[2];
+        [NonSerialized] public byte[] mShoesColors = new byte[2];
+        [NonSerialized] public byte[] mHeadGearArmourColors = new byte[2];
+        [NonSerialized] public byte[] mLeftShoulderArmourColors = new byte[2];
+        [NonSerialized] public byte[] mRightShoulderArmourColors = new byte[2];
+        [NonSerialized] public byte[] mLeftGauntletColors = new byte[2];
+        [NonSerialized] public byte[] mRightGauntletColors = new byte[2];
+        [NonSerialized] public byte[] mChestArmourColors = new byte[2];
+        [NonSerialized] public byte[] mBeltColors = new byte[2];
+        [NonSerialized] public byte[] mLeftThighColors = new byte[2];
+        [NonSerialized] public byte[] mRightThighColors = new byte[2];
+        [NonSerialized] public byte[] mLeftShinColors = new byte[2];
+        [NonSerialized] public byte[] mRightShinColors = new byte[2];
+        [NonSerialized] public byte mHairColor;
+        [NonSerialized] public bool mDisplayLogo;
+        [NonSerialized] public Appearance_Set mAppearanceSet;
+        [NonSerialized] public float mFreezeTime;
+        [NonSerialized] public float mFreezeStart;
+        [NonSerialized] public bool mIgnoreCoversFlags;
 
         public bool GetDisplayLogo()
         {
             return mDisplayLogo;
         }
+
         public byte GetHead()
         {
             return mHead;
         }
+
         public void SetDisplayLogo(bool aNewVal)
         {
             mDisplayLogo = aNewVal;
         }
+
         public void SetHead(byte aNewVal)
         {
             mHead = aNewVal;
         }
 
-        public override void cl_OnFrame(float DeltaTime)
-        {
-            if (mFreezeTime > 0)
-            {
-                if (Time.realtimeSinceStartup - mFreezeStart >= mFreezeTime)
-                {
-                    mFreezeTime = 0f;
-                    (Outer as Game_Pawn).CharacterStats.FreezeMovement(false);
-                }
-            }
-            base.cl_OnFrame(DeltaTime);
-        }
+        //public override void cl_OnFrame(float DeltaTime)
+        //{
+        //    if (mFreezeTime > 0)
+        //    {
+        //        if (Time.realtimeSinceStartup - mFreezeStart >= mFreezeTime)
+        //        {
+        //            mFreezeTime = 0f;
+        //            (Outer as Game_Pawn).CharacterStats.FreezeMovement(false);
+        //        }
+        //    }
+        //    base.cl_OnFrame(DeltaTime);
+        //}
     }
 }
 /*

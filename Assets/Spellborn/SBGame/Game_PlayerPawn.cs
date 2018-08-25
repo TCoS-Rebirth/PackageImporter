@@ -12,7 +12,6 @@ namespace SBGame
     public class Game_PlayerPawn: Game_PersistentPawn
     {
         public const float PVP_SETTINGS_UPDATE_TIME = 1F;
-
         public const float LEVEL_AREA_UPDATE_TIME = 1F;
 
         public Game_QuestLog questLog;
@@ -67,10 +66,6 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public float mPvPTimer;
 
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        private int mUser;
-
         public void SetMovementUpdateFrequency(int aFrequency)
         {
             if (aFrequency > 0 && aFrequency <= 16)
@@ -95,16 +90,10 @@ namespace SBGame
             Effects.WriteLoginStream(writer);
         }
 
-        public override void cl_OnInit()
+        public override void Initialize()
         {
-            base.cl_OnInit();
-            if (/*IsLocalPlayer()*/true)
-            {
-                if (questLog != null)
-                {
-                    questLog.cl_OnInit();
-                }
-            }
+            base.Initialize();
+            if (questLog != null) questLog.Initialize(this);
         }
 
         public override int GetCharacterID()

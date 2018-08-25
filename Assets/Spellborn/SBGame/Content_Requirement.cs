@@ -18,14 +18,17 @@ namespace SBGame
 
         public bool ValidForRelevant;
 
-        public Content_Requirement()
+        public virtual bool cl_IsValidFor(Game_Pawn aPawn)
         {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool CheckPawn(Game_Pawn aPawn)
+        {
+            throw new NotImplementedException();
         }
     }
 }
 /*
-event string ToString();
 native function GetActorRelations(Actor aSource,out array<ActorRelation> oRelations);
-final native function bool cl_IsValidFor(Game_Pawn aPawn);
-final native function bool CheckPawn(Game_Pawn aPawn);
 */

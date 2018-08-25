@@ -8,9 +8,8 @@ namespace SBGame
     {
         public const int MAX_BODYSLOT_ITEMS = 5;
 
-        public byte Mode;
-
-        public int SelectedBodySlot;
+        [NonSerialized] public EBodySlotMode Mode;
+        [NonSerialized] public int SelectedBodySlot;
 
         public enum EBodySlotMode
         {
@@ -21,7 +20,7 @@ namespace SBGame
             BSM_PlayerUseItems,
         }
 
-        public void sv_SetMode(byte aNewMode)
+        public void sv_SetMode(EBodySlotMode aNewMode)
         {
             if (Mode != aNewMode)
             {
@@ -30,7 +29,33 @@ namespace SBGame
             }
         }
 
-        void sv2cl_SetMode_CallStub(byte newMode/*added*/) { throw new NotImplementedException(); }
+        void sv2cl_SetMode_CallStub(EBodySlotMode newMode/*added*/) { throw new NotImplementedException(); }
+
+        public EBodySlotMode GetBodySlotModeByClass()
+        {
+            switch ((Outer as Game_Pawn).CharacterStats.GetCharacterClass())
+            {
+                case 0:
+                case (Content_API.EContentClass)2:
+                case (Content_API.EContentClass)1:
+                case (Content_API.EContentClass)3:
+                    return (EBodySlotMode)0;
+                case (Content_API.EContentClass)4:
+                case (Content_API.EContentClass)6:
+                    return (EBodySlotMode)3;
+                case (Content_API.EContentClass)5:
+                case (Content_API.EContentClass)7:
+                case (Content_API.EContentClass)8:
+                case (Content_API.EContentClass)9:
+                case (Content_API.EContentClass)10:
+                case (Content_API.EContentClass)11:
+                    return (EBodySlotMode)4;
+                case (Content_API.EContentClass)12:
+                    return (EBodySlotMode)1;
+                default:
+                    return (EBodySlotMode)0;
+            }
+        }
     }
 }
 /*
@@ -152,34 +177,6 @@ OnModeChange(self);
 }
 final event sv2cl_SetMode(byte aNewMode) {
 cl_SetMode(aNewMode);                                                       
-}
-final event byte GetBodySlotModeByClass() {
-switch (Outer.CharacterStats.GetCharacterClass()) {                         
-case 0 :                                                                  
-case 2 :                                                                  
-case 1 :                                                                  
-case 3 :                                                                  
-return 0;                                                               
-break;                                                                  
-case 4 :                                                                  
-case 6 :                                                                  
-return 3;                                                               
-break;                                                                  
-case 5 :                                                                  
-case 7 :                                                                  
-case 8 :                                                                  
-case 9 :                                                                  
-case 10 :                                                                 
-case 11 :                                                                 
-return 4;                                                               
-break;                                                                  
-case 12 :                                                                 
-return 1;                                                               
-break;                                                                  
-default:                                                                  
-return 0;                                                               
-break;                                                                  
-}
 }
 function cl_OnInit() {
 Super.cl_OnInit();                                                          

@@ -7,34 +7,16 @@ namespace SBGame
     {
         public const int MAX_CHAT_MESSAGE_LENGTH = 256;
 
-        //public delegate<OnChatMessageReceived> @__OnChatMessageReceived__Delegate;
-
-        //public delegate<OnBeginChatMessageEntry> @__OnBeginChatMessageEntry__Delegate;
-
-        //public delegate<OnBeginSlashChatMessageEntry> @__OnBeginSlashChatMessageEntry__Delegate;
-
-        public Game_Chat()
-        {
-        }
-
         public enum EGameChatRanges
         {
             GCR_LOCAL,
-
             GCR_WORLD,
-
             GCR_TRADE,
-
             GCR_TEAM,
-
             GCR_GUILD,
-
             GCR_PRIVATE,
-
             GCR_COMBAT,
-
             GCR_SYSTEM,
-
             GCR_BROADCAST,
         }
     }

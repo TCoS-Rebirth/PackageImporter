@@ -5,9 +5,7 @@ namespace SBGame
 {
     [Serializable] public class Game_PropertyEditor : Base_Component
     {
-        public Game_PropertyEditor()
-        {
-        }
+
     }
 }
 /*

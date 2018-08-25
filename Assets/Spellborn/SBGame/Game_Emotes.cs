@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Engine;
 using SBBase;
-using UnityEngine;
 
 namespace SBGame
 {
@@ -10,22 +8,10 @@ namespace SBGame
     {
         public List<Game_Emote> EmoteMappings = new List<Game_Emote>();
 
-        public float TimeBetweenSoundsFactor;
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public float SoundTimer;
-
-        public Game_Emotes()
-        {
-        }
-
         [Serializable] public struct EmoteMapping
         {
             public string Command;
-
             public int AnimIndex;
-
             public byte SoundIndex;
         }
     }

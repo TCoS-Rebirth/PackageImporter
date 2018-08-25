@@ -9,21 +9,11 @@ namespace SBGame
     [Serializable]
     public class Game_QuestLog: Base_Component
     {
-        public List<int> targetProgress = new List<int>();
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public List<Quest_Type> Quests = new List<Quest_Type>();
-
-        public List<int> TargetActivation = new List<int>();
-
-        public List<QuestTimerProgress> QuestTimers = new List<QuestTimerProgress>();
-
-        [NonSerialized, HideInInspector]
-        [FieldTransient()]
-        public List<CompleteQuest> CompletedQuests = new List<CompleteQuest>();
-
-        private int mQuestItems;
+        [NonSerialized] public List<int> targetProgress = new List<int>();
+        [NonSerialized, HideInInspector] public List<Quest_Type> Quests = new List<Quest_Type>();
+        [NonSerialized] public List<int> TargetActivation = new List<int>();
+        [NonSerialized] public List<QuestTimerProgress> QuestTimers = new List<QuestTimerProgress>();
+        [NonSerialized, HideInInspector] public List<CompleteQuest> CompletedQuests = new List<CompleteQuest>();
 
         public void RadialMenuCollect(object aObject, Game_RadialMenuOptions.ERadialMenuOptions aMainOption, out List<Game_RadialMenuOptions.ERadialMenuOptions> aSubOptions)
         {
@@ -53,7 +43,6 @@ namespace SBGame
         public struct CompleteQuest
         {
             public Quest_Type quest;
-
             public int TimesFinished;
         }
 
@@ -61,13 +50,9 @@ namespace SBGame
         public struct QuestTimerProgress
         {
             public Quest_Type quest;
-
             public int TargetIndex;
-
             public float Time;
-
             public int LastTime;
-
             public int GoalTime;
         }
     }

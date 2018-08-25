@@ -10,18 +10,12 @@ namespace SBGame
     public class Game_ShiftableAppearance: Base_Component
     {
         [NonSerialized, HideInInspector]
-        [FieldTransient()]
         private PhysicState mSavedPhysics;
-
-        public int mShiftedNPCTypeID;
-
-        public NPC_Type mShiftedNPCType;
-
-        public Game_Appearance mShiftedAppearance;
-
-        public List<Game_AppearanceListener> mAppearanceListeners = new List<Game_AppearanceListener>();
-
-        public bool mInvalidatedDressup;
+        [NonSerialized] public int mShiftedNPCTypeID;
+        [NonSerialized] public NPC_Type mShiftedNPCType;
+        [NonSerialized] public Game_Appearance mShiftedAppearance;
+        [NonSerialized] public List<Game_AppearanceListener> mAppearanceListeners = new List<Game_AppearanceListener>();
+        [NonSerialized] public bool mInvalidatedDressup;
 
         public void DressUp() { Debug.LogWarning("DressUp not implemented"); }
 
@@ -29,84 +23,112 @@ namespace SBGame
         public struct PhysicState
         {
             public byte Physics;
-
             public float GroundSpeed;
-
             public float BaseMovementSpeed;
-
             public float[] MovementSpeedMultiplier;
-
             public float AirSpeed;
-
             public float MinFlySpeed;
-
             public float AirControl;
-
             public bool CanStrafe;
-
             public bool CanRest;
-
             public bool CanWalkBackwards;
-
             public float WalkingPct;
-
             public float WaterSpeed;
-
             public float JumpSpeed;
-
             public float LadderSpeed;
-
             public float AccelRate;
-
             public float TurnSpeed;
-
             public bool bAlignToFloor;
-
             public bool bAlignToFloorRoll;
-
             public bool bAlignToFloorPitch;
-
             public bool bForceAttachmentUpdates;
-
             public float CollisionHeight;
-
             public float CollisionRadius;
-
             public float TerminalVelocity;
         }
 
-        public virtual void OnConstruct()
+        public override void Initialize(Actor outer)
         {
-            TestInvariant();
-            var outer = Outer as Game_Pawn;
-            if (outer.BaseAppearance != null)
+            base.Initialize(outer);
+            int aShiftedNPCTypeID;
+            var gp = outer as Game_Pawn;
+            gp.BaseAppearance.Initialize(outer);
+            if (mShiftedNPCTypeID != 0)
             {
-                outer.BaseAppearance.OnConstruct();
+                aShiftedNPCTypeID = mShiftedNPCTypeID;
+                mShiftedNPCTypeID = 0;
+                ShiftToNPCTypeID(aShiftedNPCTypeID);
             }
+            TestInvariant();
         }
 
-        void TestInvariant() 
+        void ShiftToNPCTypeID(int aNPCTypeID)
         {
-            var outer = Outer as Game_Pawn;                                   
-            UnityEngine.Assertions.Assert.IsTrue(outer.BaseAppearance != null);                                     
-            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType == null || mShiftedAppearance != null);            
-            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType != null || mShiftedAppearance == null);            
+            NPC_Type NPCType;
+            TestInvariant();
+            if (aNPCTypeID != 0)
+            {
+                NPCType = SBDBSync.GetResourceObject<NPC_Type>(aNPCTypeID);
+                ShiftAppearance(NPCType);
+            }
+            else
+            {
+                UnshiftAppearance();
+            }
+            TestInvariant();
+        }
+
+        bool ShiftAppearance(NPC_Type aOtherNPCType)
+        {
+            TestInvariant();
+            if (mShiftedNPCType == aOtherNPCType)
+            {
+                return false;
+            }
+            if (mShiftedNPCType != null)
+            {
+                mShiftedAppearance = null;
+                mShiftedNPCType = null;
+                mShiftedNPCTypeID = 0;
+            }
+            TestInvariant();
+            if (aOtherNPCType != null)
+            {
+                mShiftedNPCType = aOtherNPCType;
+                mShiftedNPCTypeID = mShiftedNPCType.GetResourceId();
+                mShiftedAppearance = aOtherNPCType.Appearance.CreateAppearance((Outer as Game_Pawn), mShiftedAppearance, true);
+            }
+            if (mShiftedAppearance != null
+            && mShiftedNPCType.Equipment != null)
+            {
+                mShiftedNPCType.Equipment.ApplyToAppearance(GetCurrent() as Game_EquippedAppearance);
+            }
+            GetCurrent().Apply();
+            TestInvariant();
+            return true;
+        }
+
+        bool UnshiftAppearance()
+        {
+            return ShiftAppearance(null);
+        }
+
+        Game_Appearance GetCurrent()
+        {
+            return mShiftedAppearance != null ? mShiftedAppearance : (Outer as Game_Pawn).BaseAppearance;
+        }
+
+        void TestInvariant()
+        {
+            var outer = Outer as Game_Pawn;
+            UnityEngine.Assertions.Assert.IsTrue(outer.BaseAppearance != null);
+            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType == null || mShiftedAppearance != null);
+            UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType != null || mShiftedAppearance == null);
             UnityEngine.Assertions.Assert.IsTrue(mShiftedNPCType == null || mShiftedNPCTypeID == mShiftedNPCType.ResourceID);
         }
     }
 }
 /*
-private function ShiftToNPCTypeID(int aNPCTypeID) {
-local export editinline NPC_Type NPCType;
-TestInvariant();                                                            
-if (aNPCTypeID != 0) {                                                      
-NPCType = NPC_Type(Class'SBDBSync'.GetResourceObject(aNPCTypeID));        
-ShiftAppearance(NPCType);                                                 
-} else {                                                                    
-UnshiftAppearance();                                                      
-}
-TestInvariant();                                                            
-}
 protected native function sv2clrel_ShiftAppearance_CallStub();
 protected event sv2clrel_ShiftAppearance(int aNPCTypeID) {
 local export editinline NPC_Type NPCType;
@@ -186,25 +208,11 @@ if (mInvalidatedDressup) {
 DressUp();                                                                
 }
 }
-function cl_OnInit() {
-local int aShiftedNPCTypeID;
-Super.cl_OnInit();                                                          
-Outer.BaseAppearance.cl_OnInit();                                           
-if (mShiftedNPCTypeID != 0) {                                               
-aShiftedNPCTypeID = mShiftedNPCTypeID;                                    
-mShiftedNPCTypeID = 0;                                                    
-ShiftToNPCTypeID(aShiftedNPCTypeID);                                      
-}
-TestInvariant();                                                            
-}
 function app(int A) {
 GetCurrent().app(A);                                                        
 }
 event InvalidateDressup() {
 mInvalidatedDressup = True;                                                 
-}
-function bool UnshiftAppearance() {
-return ShiftAppearance(None);                                               
 }
 event bool sv_UnshiftAppearance() {
 return sv_ShiftAppearance(None);                                            
@@ -217,40 +225,10 @@ ShiftAppearance(aOtherNPCType);
 sv2clrel_ShiftAppearance_CallStub(mShiftedNPCTypeID);                       
 return True;                                                                
 }
-function bool ShiftAppearance(export editinline NPC_Type aOtherNPCType) {
-TestInvariant();                                                            
-if (mShiftedNPCType == aOtherNPCType) {                                     
-return False;                                                             
-}
-if (mShiftedNPCType != None) {                                              
-mShiftedAppearance = None;                                                
-mShiftedNPCType = None;                                                   
-mShiftedNPCTypeID = 0;                                                    
-}
-TestInvariant();                                                            
-if (aOtherNPCType != None) {                                                
-mShiftedNPCType = aOtherNPCType;                                          
-mShiftedNPCTypeID = mShiftedNPCType.GetResourceId();                      
-mShiftedAppearance = aOtherNPCType.Appearance.CreateAppearance(Outer,mShiftedAppearance,True);
-}
-if (mShiftedAppearance != None
-&& mShiftedNPCType.Equipment != None) {
-mShiftedNPCType.Equipment.ApplyToAppearance(Game_EquippedAppearance(GetCurrent()));
-}
-GetCurrent().Apply();                                                       
-TestInvariant();                                                            
-}
 native function bool IsFeminine();
 native function bool IsShifted();
 event Game_Appearance GetBase() {
 return Outer.BaseAppearance;                                                
-}
-event Game_Appearance GetCurrent() {
-if (mShiftedAppearance != None) {                                           
-return mShiftedAppearance;                                                
-} else {                                                                    
-return Outer.BaseAppearance;                                              
-}
 }
 native function RestoreMovementPhysics();
 native function SaveMovementPhysics();

@@ -11,37 +11,21 @@ namespace SBGame
     {
 
         public Game_ShiftableAppearance Appearance;
-
         public Game_Appearance BaseAppearance;
-
         public Game_BodySlots BodySlots;
-
         public Game_Character Character;
-
         public Game_CharacterStats CharacterStats;
-
         public Game_ItemManager itemManager;
-
         public Game_CombatState combatState;
-
         public Game_CombatStats CombatStats;
-
         public Game_Effects Effects;
-
         public Game_Emotes Emotes;
-
         public Game_Looting Looting;
-
         public Game_Skills Skills;
-
         public Game_Trading Trading;
-
         public Game_MiniGameProxy MiniGameProxy;
 
-        //[NonSerialized, HideInInspector]
         public EPawnStates mCurrentState;
-
-        //[NonSerialized, HideInInspector]
         public EPawnStates mNetState;
 
         [NonSerialized, HideInInspector]
@@ -56,11 +40,8 @@ namespace SBGame
         [NonSerialized, HideInInspector]
         public float BackwardSpeedModifier;
 
-        [Sirenix.OdinInspector.FoldoutGroup("Movement")]
-        public float GroundSpeedModifier = 0.1f;
-
         [NonSerialized, HideInInspector]
-        public CharacterIdentity mCharacterIdentityForBugReport;
+        public float GroundSpeedModifier = 1f;
 
         [NonSerialized, HideInInspector]
         public float mInteractionRange;
@@ -91,21 +72,7 @@ namespace SBGame
         [FieldTransient()]
         public bool HasPet;
 
-        private bool mInvisible;
-
         protected UnrealScriptState<Game_Pawn> ActiveState = new Auto_Pawn_PawnAlive();
-
-        [Serializable]
-        public struct CharacterIdentity
-        {
-            public int TransferWorldID;
-
-            public int TransferUniverseID;
-
-            public int TransferCharacterID;
-
-            public int TransferAccountID;
-        }
 
         #region enums
         public enum EPetAttackState
@@ -231,22 +198,6 @@ namespace SBGame
             if (ActiveState != null) ActiveState.BeginState(this);
         }
 
-        public override void OnCreateComponents()
-        {
-            base.OnCreateComponents();
-            if (Appearance != null)
-            {
-                Appearance.OnConstruct();
-            }
-        }
-
-        public override void PreBeginPlay()
-        {
-            SetInitialState();
-            Debug.LogWarning("TODO find out how stats are loaded correctly");
-            base.PreBeginPlay();
-        }
-
         public EPawnStates GetState()
         {
             return mCurrentState;
@@ -268,75 +219,31 @@ namespace SBGame
             }
         }
 
-        public override void cl_OnInit()
+        public override void Initialize()
         {
-            Game_PlayerAppearance gpa;
-            base.cl_OnInit();
-            if (Appearance != null)
+            base.Initialize();
+            SetInitialState();
+            if (Appearance != null) Appearance.Initialize(this);
+            if (CharacterStats != null) CharacterStats.Initialize(this);
+            if (Character != null) Character.Initialize(this);
+            if (combatState != null) combatState.Initialize(this);
+            if (Skills != null) Skills.Initialize(this);
+            if (Effects != null) Effects.Initialize(this);
+            if (MiniGameProxy != null) MiniGameProxy.Initialize(this);
+            if (itemManager != null) itemManager.Initialize(this);
+            if (BodySlots != null) BodySlots.Initialize(this);
+            if (CombatStats != null) CombatStats.Initialize(this);
+            if (Emotes != null) Emotes.Initialize(this);
+            if (Looting != null) Looting.Initialize(this);
+            if (Trading != null) Trading.Initialize(this);
+            var gpa = BaseAppearance as Game_PlayerAppearance;
+            if (gpa != null)
             {
-                Appearance.cl_OnInit();
-            }
-            if (CharacterStats != null)
-            {
-                CharacterStats.cl_OnInit();
-            }
-            if (Character != null)
-            {
-                Character.cl_OnInit();
-            }
-            if (combatState != null)
-            {
-                combatState.cl_OnInit();
-            }
-            if (Skills != null)
-            {
-                Skills.cl_OnInit();
-            }
-            if (Effects != null)
-            {
-                Effects.cl_OnInit();
-            }
-            if (MiniGameProxy != null)
-            {
-                MiniGameProxy.cl_OnInit();
-            }
-            if (itemManager != null)
-            {
-                itemManager.cl_OnInit();
-            }
-            if (/*IsLocalPlayer()*/true)
-            {
-                if (BodySlots != null)
-                {
-                    BodySlots.cl_OnInit();
-                }
-                if (CombatStats != null)
-                {
-                    CombatStats.cl_OnInit();
-                }
-                if (Emotes != null)
-                {
-                    Emotes.cl_OnInit();
-                }
-                if (Looting != null)
-                {
-                    Looting.cl_OnInit();
-                }
-                if (Trading != null)
-                {
-                    Trading.cl_OnInit();
-                }
-            }
-            gpa = (BaseAppearance as Game_PlayerAppearance);
-            if (gpa != null/* && IsLocalPlayer()*/)
-            {
-                gpa.SetBaseAppearance(((Game_PlayerController)Controller).DBCharacter.AppearancePart1, ((Game_PlayerController)Controller).DBCharacter.AppearancePart2);
+                var pc = (Game_PlayerController)Controller;
+                gpa.SetBaseAppearance(pc.DBCharacter.AppearancePart1, pc.DBCharacter.AppearancePart2);
                 gpa.RepackLodDataAll();
             }
-            if (Appearance != null)
-            {
-                Appearance.DressUp();
-            }
+            if (Appearance != null) Appearance.DressUp();
         }
 
         public bool IsPlayerPawn()
@@ -358,9 +265,9 @@ namespace SBGame
                 HasPet = false;
                 ((Game_NPCController)Pet.Controller).sv_Despawn();
                 sv2clrel_RemovePet_CallStub();
-                if (BodySlots != null && CharacterStats != null && CharacterStats.GetCharacterClass() == 12)
+                if (BodySlots != null && CharacterStats != null && CharacterStats.GetCharacterClass() == (Content_API.EContentClass)12)
                 {
-                    BodySlots.sv_SetMode(1);
+                    BodySlots.sv_SetMode((Game_BodySlots.EBodySlotMode)1);
                 }
             }
         }
@@ -384,6 +291,13 @@ namespace SBGame
         //        cl_CombatLogMessage(/*Class'StringReferences'.default.EffectSourceText.Text*/, /*Class'StringReferences'.default.CombatSlainSourceText.Text*/, 0, 0, aKiller, aTarget);
         //    }
         //}
+
+        #region func
+        public void cl_PlayPawnEffect(EPawnEffectType aPET)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
 /*
@@ -810,84 +724,6 @@ fxEvent.FX.Emitter = FSkill_EffectClass_AudioVisual_Emitter(Class'SBDBSync'.GetR
 if (fxEvent.FX.Emitter != None) {                                           
 cl_RunNoSkillEvent(fxEvent);                                              
 goto jl0063;                                                              
-}
-}
-function cl_PlayPawnEffect(byte aPET) {
-local export editinline FSkill_EffectClass_AudioVisual_CameraShake fxCS;
-local export editinline FSkill_EffectClass_AudioVisual_Emitter fxE;
-local export editinline FSkill_EffectClass_AudioVisual_Sound fxS;
-local export editinline FSkill_EffectClass_AudioVisual_ColorModifier fxFade;
-local export editinline FSkill_Event_FX fxEvent;
-local float FadeTime;
-switch (aPET) {                                                             
-case 7 :                                                                  
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.PetSpawn.PetSpawnEmitter",fxS,"EffectsPlayerAVGP.PetSpawn.PetSpawnSound",fxCS,"","PetSpawn");
-break;                                                                  
-case 8 :                                                                  
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.PetDespawn.PetDespawnEmitter",fxS,"EffectsPlayerAVGP.PetDespawn.PetDespawnSound",fxCS,"","PetDespawn");
-break;                                                                  
-case 9 :                                                                  
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.ShapeShift.ShapeShiftEmitter",fxS,"EffectsPlayerAVGP.ShapeShift.ShapeShiftSound",fxCS,"","ShapeShift");
-break;                                                                  
-case 10 :                                                                 
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.ShapeUnshift.ShapeUnshiftEmitter",fxS,"EffectsPlayerAVGP.ShapeUnshift.ShapeUnshiftSound",fxCS,"","ShapeUnshift");
-break;                                                                  
-case 0 :                                                                  
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.LevelUp.LevelUpEmitter",fxS,"EffectsPlayerAVGP.LevelUp.LevelUpSound",fxCS,"","LevelUp");
-break;                                                                  
-case 1 :                                                                  
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.RankUp.RankUpEmitter",fxS,"EffectsPlayerAVGP.RankUp.RankUpSound",fxCS,"","RankUp");
-break;                                                                  
-case 11 :                                                                 
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.Arena.Team0Emitter",fxS,"",fxCS,"","ArenaTeam0");
-break;                                                                  
-case 12 :                                                                 
-cl_LoadEffects(fxE,"EffectsPlayerAVGP.Arena.Team1Emitter",fxS,"",fxCS,"","ArenaTeam1");
-break;                                                                  
-case 13 :                                                                 
-cl_LoadEffects(fxE,"",fxS,"",fxCS,"EffectsPlayerAVGP.TrialCaves.SimpleCameraShake","SimpleCameraShake");
-break;                                                                  
-case 3 :                                                                  
-case 5 :                                                                  
-if (Effects != None) {                                                  
-if (aPET == 3) {                                                      
-FadeTime = 2.00000000;                                              
-} else {                                                              
-FadeTime = 0.00000000;                                              
-}
-if (mFadeOutEffectHandle == 0) {                                      
-fxFade = FSkill_EffectClass_AudioVisual_ColorModifier(static.DynamicLoadObject("EffectsNPCTypeAVGP.Fading.Fade_To_Transparent",Class'FSkill_EffectClass_AudioVisual_ColorModifier',True));
-Effects.cl_Start(fxFade,0,0.00000000,0.00000000,0.00000000,FadeTime);
-} else {                                                              
-Effects.cl_Stop(mFadeOutEffectHandle,FadeTime);                     
-mFadeOutEffectHandle = 0;                                           
-}
-}
-return;                                                                 
-case 4 :                                                                  
-case 6 :                                                                  
-if (Effects != None) {                                                  
-if (aPET == 4) {                                                      
-FadeTime = 2.00000000;                                              
-} else {                                                              
-FadeTime = 0.00000000;                                              
-}
-if (mFadeOutEffectHandle == 0) {                                      
-fxFade = FSkill_EffectClass_AudioVisual_ColorModifier(static.DynamicLoadObject("EffectsNPCTypeAVGP.Fading.Fade_To_Transparent",Class'FSkill_EffectClass_AudioVisual_ColorModifier',True));
-mFadeOutEffectHandle = Effects.cl_Start(fxFade,0,0.00000000,FadeTime,Class'FSkill_EffectClass_AudioVisual'.-1.00000000);
-}
-}
-return;                                                                 
-default:                                                                  
-}
-if (fxCS != None || fxE != None || fxS != None) {                           
-fxEvent = new Class'FSkill_Event_FX';                                     
-fxEvent.FX.Sound = fxS;                                                   
-fxEvent.FX.Emitter = fxE;                                                 
-fxEvent.FX.CameraShake = fxCS;                                            
-fxEvent.EmitterLocation = 1;                                              
-cl_RunNoSkillEvent(fxEvent);                                              
-goto jl0666;                                                              
 }
 }
 private function cl_LoadEffects(export out editinline FSkill_EffectClass_AudioVisual_Emitter outEmitter,string fxName,export out editinline FSkill_EffectClass_AudioVisual_Sound outSound,string sndName,export out editinline FSkill_EffectClass_AudioVisual_CameraShake outShake,string csName,string Tag) {

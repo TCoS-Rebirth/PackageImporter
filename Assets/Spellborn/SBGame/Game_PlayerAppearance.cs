@@ -6,15 +6,10 @@ namespace SBGame
 {
     [Serializable] public class Game_PlayerAppearance : Game_EquippedAppearance
     {
-        private byte mLowestReceivedLOD;
-
-        public List<byte> mLODData0 = new List<byte>();
-
-        public List<byte> mLODData1 = new List<byte>();
-
-        public List<byte> mLODData2 = new List<byte>();
-
-        public List<byte> mLODData3 = new List<byte>();
+        [NonSerialized] public List<byte> mLODData0 = new List<byte>();
+        [NonSerialized] public List<byte> mLODData1 = new List<byte>();
+        [NonSerialized] public List<byte> mLODData2 = new List<byte>();
+        [NonSerialized] public List<byte> mLODData3 = new List<byte>();
 
         public void SetBaseAppearance(int aAppearancePart1, int aAppearancePart2)
         {
@@ -38,7 +33,10 @@ namespace SBGame
                 out mVoice);
         }
 
-        public void RepackLodDataAll() { throw new NotImplementedException(); }
+        public void RepackLodDataAll()
+        {
+            Debug.LogWarning("RepackLodDataAll is not implemented");
+        }
     }
 }
 /*

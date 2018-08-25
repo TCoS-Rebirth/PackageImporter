@@ -59,10 +59,9 @@ namespace Database
         [Button()]
         void Load()
         {
-            var res = FindObjectOfType<GameResources>();
+            var res = GameResources.Instance;
             var sets = res.FindResource<Appearance_Set>(set => true);
-            var fields = GetType().GetFields(BindingFlags.Instance|BindingFlags.Public);
-            foreach (var field in fields)
+            foreach (var field in GetType().GetFields(BindingFlags.Instance|BindingFlags.Public))
             {
                 var list = field.GetValue(this) as IList;
                 list.Clear();
@@ -81,7 +80,7 @@ namespace Database
             }
         }
 
-        T ResolveItem<T>(Appearance_Base app, IGameResources res) where T: Item_Type
+        T ResolveItem<T>(Appearance_Base app, GameResources res) where T: Item_Type
         {
             if (app == null) return null;
             return res.FindResource<T>(type =>

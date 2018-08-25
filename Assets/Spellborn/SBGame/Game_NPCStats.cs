@@ -7,10 +7,6 @@ namespace SBGame
     {
         [FieldConst()]
         public float mAggroLostHealthRestore;
-
-        public Game_NPCStats()
-        {
-        }
     }
 }
 /*

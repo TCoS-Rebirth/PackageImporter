@@ -5,10 +5,6 @@ namespace SBGame
     [Serializable] public class Game_PlayerConversation : Game_Conversation
     {
         public Game_ConversationState Conversation;
-
-        public Game_PlayerConversation()
-        {
-        }
     }
 }
 /*

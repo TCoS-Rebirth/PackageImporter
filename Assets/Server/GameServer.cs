@@ -2,7 +2,6 @@
 using User;
 using Database;
 using SBBase;
-using SBGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using World;
@@ -20,14 +19,11 @@ public class GameServer : MonoBehaviour
 
     WorldServer worldServer;
     LoginServer loginServer;
-    [SerializeField] GameResources resources;
 
     [SerializeField] TransientDatabase database;
 
     void Awake()
     {
-        if (resources == null) resources = GetComponent<GameResources>();
-        ServiceContainer.AddService<IGameResources>(resources);
         ServiceContainer.AddService<IDatabase>(database);
         sessionHandler = new SessionHandler();
         ServiceContainer.AddService<ISessionHandler>(sessionHandler);
@@ -58,16 +54,18 @@ public class GameServer : MonoBehaviour
     {
         Process.Start(@"C:\Program Files (x86)\The Chronicles of Spellborn\bin\client\Sb_client.exe", "--show_console --packet_log --world 1");
     }
-    #endif
+#endif
 
+    [SerializeField] bool devLoadHawksmouthOnly = true;
     void LoadPersistentWorlds()
     {
         Debug.Log("Loading persistent worlds");
         var loadingStartTime = Time.realtimeSinceStartup;
-        foreach (var sbWorld in resources.Universe.Worlds)
+        foreach (var sbWorld in GameResources.Instance.Universe.Worlds)
         {
             if (sbWorld.WorldFile.Contains("\\")) continue;
-            if (sbWorld.WorldType == SBWorld.eZoneWorldTypes.ZWT_PERSISTENT) mapHandler.LoadPersistentMap(sbWorld.worldID);
+            if (devLoadHawksmouthOnly && sbWorld.worldID != MapIDs.PT_HAWKSMOUTH) continue;
+            if (sbWorld.WorldType == SBWorld.eZoneWorldTypes.ZWT_PERSISTENT) mapHandler.LoadPersistentMap(sbWorld);
         }
         Debug.Log("Loading persistent worlds finished in " + (Time.realtimeSinceStartup - loadingStartTime).ToString("0.0") + "s");
     }

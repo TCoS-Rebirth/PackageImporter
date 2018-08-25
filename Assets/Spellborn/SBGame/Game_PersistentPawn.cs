@@ -3,19 +3,17 @@ using UnityEngine;
 
 namespace SBGame
 {
-    [Serializable] public class Game_PersistentPawn : Game_Pawn
+    [Serializable]
+    public class Game_PersistentPawn: Game_Pawn
     {
-        [NonSerialized, HideInInspector]
-        public float NextPositionStoreTime;
-
         [NonSerialized, HideInInspector]
         public Game_PersistentData mPersistentData;
 
-        public override void OnCreateComponents() {
-            base.OnCreateComponents();                                                 
-            //if (IsClient()) {                                                           
-                //mPersistentData = new (self) Class'Game_PersistentData';                  
-            //}
+        public override void Initialize()
+        {
+            base.Initialize();
+            Debug.LogWarning("TODO find out how relevant Game_PersistentData is (probably only clientside)");
+            //mPersistentData.Read();                                                     
         }
     }
 }
@@ -25,10 +23,6 @@ if (mPersistentData != None && IsLocalPlayer()) {
 mPersistentData.Write();                                                  
 }
 Super.cl_OnShutdown();                                                      
-}
-event cl_OnInit() {
-Super.cl_OnInit();                                                          
-mPersistentData.Read();                                                     
 }
 
 */

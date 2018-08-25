@@ -68,45 +68,32 @@ namespace SBGame
                         base.SBGotoState(aState);
                         break;
                 }
-                //if (IsServer())
-                //{
                 mNetState = mCurrentState;
                 if (ControllerInitialized)
                 {
                     //sv2cl_UpdateNetState_CallStub(mNetState);
                     Debug.LogWarning("TODO Update client with netstate");
                 }
-                //}
             }
         }
 
-        public override void OnCreateComponents()
-        {
-            base.OnCreateComponents();
-
-            Pawn.OnCreateComponents();
-        }
-
-        public override void PreBeginPlay()
+        public override void Initialize()
         {
             SetInitialState();
-            base.PreBeginPlay();
+            if (Chat != null) Chat.Initialize(this);
+            if (Travel != null) Travel.Initialize(this);
+            if (Mail != null) Mail.Initialize(this);
+            Pawn.Initialize();
+            if (GroupingFriends != null) GroupingFriends.Initialize(this);
+            if (GroupingTeams != null) GroupingTeams.Initialize(this);
+            if (GroupingGuilds != null) GroupingGuilds.Initialize(this);
             CalculateMovementSpeed();
-            mNetState = EControllerStates.CPS_PAWN_ALIVE; //TODO insert real value
-            Pawn.PreBeginPlay();
         }
 
         public override void BeginPlay()
         {
             base.BeginPlay();
             Pawn.BeginPlay();
-        }
-
-        public override void PostBeginPlay()
-        {
-            base.PostBeginPlay();
-
-            Pawn.PostBeginPlay();
         }
 
         public override void WriteLoginStream(IPacketWriter writer)

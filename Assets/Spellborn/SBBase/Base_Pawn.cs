@@ -8,8 +8,6 @@ namespace SBBase
     {
         public const float IDEAL_JUMP_SPEED_FOR_ANIM = 350F;
 
-        public virtual void cl_OnInit() { }
-
         public bool sv_CanReplicate()
         {
             Debug.LogWarning("TODO test for real CanReplicate");

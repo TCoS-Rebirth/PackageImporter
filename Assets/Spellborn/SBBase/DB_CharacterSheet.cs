@@ -21,10 +21,6 @@ namespace SBBase
 
         public byte ExtraFocusPoints;
 
-        public DB_CharacterSheet()
-        {
-        }
-
         public void Write(IPacketWriter writer)
         {
             writer.WriteInt32(ClassId);

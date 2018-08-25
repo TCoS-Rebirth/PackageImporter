@@ -2,15 +2,14 @@
 
 namespace SBGame
 {
-    [Serializable] public class NPC_Equipment : Content_API
+    [Serializable]
+    public class NPC_Equipment: Content_API
     {
-        public NPC_Equipment()
+        public virtual void ApplyToAppearance(Game_EquippedAppearance app) { throw new NotImplementedException(); }
+
+        public virtual void Apply(Game_Pawn aPawn)
         {
+            throw new NotImplementedException();
         }
     }
 }
-/*
-event Apply(Game_Pawn aPawn) {
-}
-native function ApplyToAppearance(export editinline Game_EquippedAppearance app);
-*/

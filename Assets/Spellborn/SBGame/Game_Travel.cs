@@ -1,49 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using SBBase;
 
 namespace SBGame
 {
-    [Serializable] public class Game_Travel : Base_Component
+    [Serializable]
+    public class Game_Travel: Base_Component
     {
-        public int mTravelTimeOut;
+        [NonSerialized] public int mTravelTimeOut;
 
-        //public delegate<OnTravelResult> @__OnTravelResult__Delegate;
-
-        public Game_Travel()
-        {
-        }
-
-        [Serializable] public struct TravelDestination
+        [Serializable]
+        public struct TravelDestination
         {
             public string RouteName;
-
             public string ShardName;
-
             public string ExteriorMesh;
-
             public bool AllowRentACabin;
-
             public int CrewCost;
-
             public int CabinCost;
+        }
+
+        public bool cl_CheckRequirements(List<Content_Requirement> aRequirement, Game_Pawn aPawn)
+        {
+            for (int i = 0; i < aRequirement.Count; i++)
+            {
+                if (aRequirement[i] != null && aRequirement[i].cl_IsValidFor(aPawn) && !aRequirement[i].CheckPawn(aPawn))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
 /*
-private final native function bool sv_CheckRequirements(array<Content_Requirement> aRequirement,Game_Pawn aPawn);
-private event bool cl_CheckRequirements(array<Content_Requirement> aRequirement,Game_Pawn aPawn) {
-local int i;
-i = 0;                                                                      
-while (i < aRequirement.Length) {                                           
-if (aRequirement[i] != None
-&& aRequirement[i].cl_IsValidFor(aPawn)
-&& !aRequirement[i].CheckPawn(aPawn)) {
-return False;                                                           
-}
-i++;                                                                      
-}
-return True;                                                                
-}
 protected native function sv2cl_TravelResult_CallStub();
 event sv2cl_TravelResult(int Reason) {
 OnTravelResult(Reason);                                                     

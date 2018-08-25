@@ -1,192 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
+using Engine;
 using SBBase;
+using UnityEngine;
 
 namespace SBGame
 {
     [Serializable] public class Game_PlayerGuilds : Base_Component
     {
         public const int GRR_GUILD_TOURNAMENTS_SIGN_UP = 524288;
-
         public const int GRR_ACCEPT_GUILD_QUESTS = 262144;
-
         public const int GRR_ACCESS_GUILD_VAULT = 131072;
-
         public const int GRR_ADD_CHEST_TO_GUILD_VAULT = 65536;
-
         public const int GRR_BUY_TROHPY_SLOTS = 32768;
-
         public const int GRR_OTHER_PLAYERS_TROPHY_REMOVE = 16384;
-
         public const int GRR_SET_EVENT_PRIO = 8192;
-
         public const int GRR_EDIT_GUILD_EVENTS = 4096;
-
         public const int GRR_REMOVE_GUILD_EVENTS = 2048;
-
         public const int GRR_ADD_GUILD_EVENTS = 1024;
-
         public const int GRR_SET_MOTD = 32;
-
         public const int GRR_ALL_RIGHTS = -1;
-
         public const int GRR_MANAGE_RANKS = 2097152;
-
         public const int GRR_FIGHT_RANKED_FIGHTS = 1048576;
-
         public const int GRR_OFFICERS_DESCRIPTION_W = 512;
-
         public const int GRR_OFFICERS_DESCRIPTION_R = 256;
-
         public const int GRR_OTHER_PLAYERS_DESCRIPTION_W = 128;
-
         public const int GRR_SET_PLAYER_RANK = 64;
-
         public const int GRR_INVITE_PLAYERS = 16;
-
         public const int GRR_OFFICERS_CHAT_W = 8;
-
         public const int GRR_OFFICERS_CHAT_R = 4;
-
         public const int GRR_GUILD_CHAT_W = 2;
-
         public const int GRR_GUILD_CHAT_R = 1;
-
         public const int CREATE_GUILD_COST = 5000;
 
-        public bool mInGuild;
-
-        public int mGuildID;
-
-        public string mGuildName = string.Empty;
-
-        public byte mGuildLogoID;
-
-        public byte mGuildColor1;
-
-        public byte mGuildColor2;
-
-        public string mGuildMOTD = string.Empty;
-
-        public int mGuildRanking;
-
-        public int mGuildYourRank;
-
-        public EventNotification mGuildChanged;
-
-        public List<ranks> mRanks = new List<ranks>();
-
-        public List<SBGuildMember> mGuildMembers = new List<SBGuildMember>();
-
-        //public delegate<OnGuildListRefresh> @__OnGuildListRefresh__Delegate;
-
-        //public delegate<OnGuildRanksRefresh> @__OnGuildRanksRefresh__Delegate;
-
-        //public delegate<OnGuildOnline> @__OnGuildOnline__Delegate;
-
-        //public delegate<OnGuildInviteReq> @__OnGuildInviteReq__Delegate;
-
-        public Game_PlayerGuilds()
-        {
-        }
+        [NonSerialized] public bool mInGuild;
+        [NonSerialized] public int mGuildID;
+        [NonSerialized] public string mGuildName = string.Empty;
+        [NonSerialized] public byte mGuildLogoID;
+        [NonSerialized] public byte mGuildColor1;
+        [NonSerialized] public byte mGuildColor2;
+        [NonSerialized] public string mGuildMOTD = string.Empty;
+        [NonSerialized] public int mGuildRanking;
+        [NonSerialized] public int mGuildYourRank;
+        [NonSerialized] public EventNotification mGuildChanged;
+        [NonSerialized] public List<ranks> mRanks = new List<ranks>();
+        [NonSerialized] public List<SBGuildMember> mGuildMembers = new List<SBGuildMember>();
 
         [Serializable] public struct ranks
         {
             public int Level;
-
             public string Name;
-
             public int Rights;
         }
 
         public enum eGuildRequestResult
         {
             GRR_NONE,
-
             GRR_BUSY,
-
             GRR_ACCEPT,
-
             GRR_DECLINE,
-
             GRR_INVITE_SUCCESS,
-
             GRR_MEMBER_IN_OTHER_GUILD,
-
             GRR_MEMBER_ON_TRAVELING,
-
             GRR_IGNORED_ME,
-
             GRR_INSUFFICIENT_RIGHTS,
-
             GRR_INCORRECT_INVITER,
-
             GRR_UNKNOWN_CHARACTER,
-
             GRR_UNKNOWN_MEMBER_WORLD,
-
             GRR_UNKNOWN_GUILD,
-
             GRR_EMPTY_GUILD,
-
             GRR_UNKNOWN_RANK,
-
             GRR_DEFAULT_RANK,
-
             GRR_CREATE_FAILED,
-
             GRR_NOT_ENOUGH_COST,
-
             GRR_ALREADY_EXIST_GUILD_NAME,
-
             GRR_DISBAND_FAILED,
-
             GRR_ADD_MEMBER_FAILED,
-
             GRR_REMOVE_MEMBER_FAILED,
-
             GRR_MEMBER_RANK_SET_FAILED,
-
             GRR_INVITE_FAILED,
-
             GRR_KICK_FAILED,
-
             GRR_LEAVE_FAILED,
-
             GRR_PROMOTE_FAILED,
-
             GRR_DEMOTE_FAILED,
-
             GRR_RANK_SET_FAILED,
-
             GRR_RANK_UPDATE_FAILED,
-
             GRR_RANK_DELETE_FAILED,
-
             GRR_RANK_RIGHTS_FAILED,
-
             GRR_SET_MOTD_FAILED,
-
             GRR_GET_GUILD_INFO_FAILED,
-
             GRR_GUILD_DATA_DB_FAILED,
-
             GRR_GUILD_RANK_DB_FAILED,
-
             GRR_GUILD_MEMBER_DB_FAILED,
         }
 
         public enum eGuildRemoveMemberCode
         {
             GRMC_NONE,
-
             GRMC_KICK,
-
             GRMC_LEAVE,
-
             GRMC_REMOVE_CHARACTER,
-
             GRMC_DISBAND,
+        }
+
+        public override void Initialize(Actor outer)
+        {
+            base.Initialize(outer);
+            GetGuildInfo();
+        }
+
+        void GetGuildInfo()
+        {
+            Debug.LogWarning("TODO retrieve guild info");
         }
     }
 }
@@ -642,7 +567,6 @@ function int GetPlayerCharacterID() {
 return Game_Pawn(Outer.Pawn).GetCharacterID();                              
 }
 native function GuildInviteAck(int guildID,string fromPawnName,int fromUserID,int responseCode);
-native function GetGuildInfo();
 native function GuildSetMOTD(string motd);
 native function GuildRankSetRights(int RankLevel,int rightsFlag);
 native function GuildRankDelete(int RankLevel);
@@ -657,12 +581,5 @@ native function GuildCreate(string guildName,int LogoId,int col1,int col2);
 function cl_OnShutdown() {
 Super.cl_OnShutdown();                                                      
 mGuildChanged.Delete();                                                     
-}
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-GetGuildInfo();                                                             
-}
-function Init() {
-mGuildChanged = new Class'EventNotification';                               
 }
 */

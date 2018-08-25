@@ -7,39 +7,22 @@ namespace SBGame
     [Serializable]
     public class Game_CombatState: Base_Component
     {
-        public ECombatMode mCombatMode;
-
-        public int mMainWeapon;
-
-        public int mOffhandWeapon;
-
-        public bool mDrawing;
-
-        public bool mReDraw;
-
-        public bool mSheathing;
-
-        public bool mReSheathe;
-
-        public byte mReDrawMode;
-
-        public int mReDrawNewMainWeapon;
-
-        public int mReDrawNewOffhandWeapon;
-
-        public float mDrawSheatheTimer;
-
-        [FieldConst()]
-        public float cDrawSheatheTime;
-
-        public byte mWeaponFlag;
-
+        [NonSerialized] public ECombatMode mCombatMode;
+        [NonSerialized] public int mMainWeapon;
+        [NonSerialized] public int mOffhandWeapon;
+        [NonSerialized] public bool mDrawing;
+        [NonSerialized] public bool mReDraw;
+        [NonSerialized] public bool mSheathing;
+        [NonSerialized] public bool mReSheathe;
+        [NonSerialized] public byte mReDrawMode;
+        [NonSerialized] public int mReDrawNewMainWeapon;
+        [NonSerialized] public int mReDrawNewOffhandWeapon;
+        [NonSerialized] public float mDrawSheatheTimer;
+        [NonSerialized] public float cDrawSheatheTime;
+        [NonSerialized] public byte mWeaponFlag;
         private bool mExecutingBodySlotSkill;
-
         private bool mPreparedBonusGiven;
-
-        [FieldConst()]
-        public bool CombatCollision;
+        [NonSerialized] public bool CombatCollision;
 
         public enum ECombatMode
         {
@@ -450,8 +433,4 @@ mSheathing = False;
 }
 }
 private final native function Init();
-function cl_OnInit() {
-Super.cl_OnInit();                                                          
-Init();                                                                     
-}
 */
